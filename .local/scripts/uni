@@ -1,0 +1,4 @@
+#!/bin/bash
+
+chromium --new-window "https://raco.fib.upc.edu/home/portada/sergio.sanz.martinez"
+emacsclient -c "~/uni/3q1/"
