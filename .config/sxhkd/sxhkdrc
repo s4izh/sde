@@ -1,0 +1,50 @@
+super + w
+    firefox
+
+super + u: {k,m,s,l,r,c,u}
+	{dmenukblayout, dmenumonitor, dmenusys, dmenuopgg, dmenuraco, dmenuconfig, dmenuopen}
+
+super + r
+    dmenuremote
+
+super + shift + t
+    alacritty -e themeselector
+
+XF86AudioRaiseVolume
+	amixer set Master 5%+
+
+XF86AudioLowerVolume
+	amixer set Master 5%-
+
+XF86AudioMute
+	amixer set Master toggle
+
+super + shift + s
+	maim-ss
+
+shift + Print
+	maim-ss
+
+Print
+    maim-wiki
+
+XF86MonBrightnessUp
+	brightnessctl set +10%
+
+XF86MonBrightnessDown
+	brightnessctl set 10%
+
+super + n
+	redshift -O 5000
+
+super + shift + n
+	redshift -x
+
+super + alt + s
+    feh --bg-fill $(find ~/pix/wall -type f | shuf -n 1)
+
+super + e
+    emacsclient -c || emacs --daemon && twmnc -t emacs -c "server started  "
+
+super + shift + e
+    killall emacs && twmnc -t emacs -c "killed all emacs instances  "
