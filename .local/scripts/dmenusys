@@ -1,0 +1,9 @@
+#!/bin/bash
+
+CHOICE=$(echo -e "lock\nshutdown\nreboot" | dmenu -p "system menu")
+
+case "$CHOICE" in
+	shutdown) systemctl poweroff ;;
+	reboot) systemctl reboot ;;
+	lock) i3lock -i ~/pix/system-wallpaper.png ;;
+esac

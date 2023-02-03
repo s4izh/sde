@@ -1,0 +1,54 @@
+#!/bin/bash
+CHOICE=$(echo -e "dracula\neverforest\ngruvbox\nnord\npywal\nrose-pine\ntokyonight" | dmenu -p theme:)
+
+ALACRITTY_DIR=~/.config/alacritty
+NVIM_THEME_FILE="$XDG_CONFIG_HOME/nvim/after/plugin/colors.lua"
+
+case "$CHOICE" in
+    'dracula')
+        NVIM_THEME=dracula
+        ALACRITTY_THEME=dracula
+    ;;
+    'gruvbox')
+        NVIM_THEME=gruvbox
+        ALACRITTY_THEME=gruvbox
+    ;;
+    'tokyonight')
+        NVIM_THEME=tokyonight-night
+        ALACRITTY_THEME=tokyo-night
+    ;;
+    'everforest')
+        NVIM_THEME=everforest
+        ALACRITTY_THEME=everforest
+        ln -sf ~/.config/x11/themes/everforest ~/.Xresources
+        xrdb ~/.Xresources
+        xrdb -merge ~/.config/x11/font
+        echo "vim.opt.termguicolors = true" > "$NVIM_THEME_FILE"
+        echo "vim.cmd [[let g:everforest_background = 'hard']]" >> "$NVIM_THEME_FILE"
+        echo "vim.cmd.colorscheme(\"everforest\")" >> "$NVIM_THEME_FILE"
+    ;;
+    'nord')
+        NVIM_THEME=nord
+        ALACRITTY_THEME=nord
+    ;;
+    'pywal')
+        echo "vim.cmd.colorscheme(\"wal\")" > "$NVIM_THEME_FILE"
+        ALACRITTY_THEME=pywal
+        wal -i ~/pix/*.*
+    ;;
+    'rose-pine')
+        NVIM_THEME=rose-pine
+        ALACRITTY_THEME=rose-pine
+        ln -sf ~/.config/x11/themes/rose-pine ~/.Xresources
+        xrdb ~/.Xresources
+        xrdb -merge ~/.config/x11/font
+        echo "vim.opt.termguicolors = true" > "$NVIM_THEME_FILE"
+        echo "vim.cmd.colorscheme(\"rose-pine\")" >> "$NVIM_THEME_FILE"
+    ;;
+esac
+
+if [ -n $CHOICE ]; then
+    # color="vim.cmd(\"colorscheme $NVIM_THEME\")"
+    # echo $color > $NVIM_DIR/lua/colorscheme.lua
+    ln -sf $ALACRITTY_DIR/themes/$ALACRITTY_THEME.yml $ALACRITTY_DIR/theme.yml
+fi

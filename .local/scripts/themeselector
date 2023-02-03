@@ -1,0 +1,98 @@
+#!/bin/bash
+# CHOICE=$(echo -e "default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\ntomorrow-night" | dmenu -p theme:)
+CHOICE=$(echo -e "default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\nspaceway\ntomorrow-night" | fzf)
+
+ALACRITTY_DIR="$HOME/.config/alacritty"
+DWM_DIR="$HOME/.local/src/dwm"
+DMENU_DIR="$HOME/.local/src/dmenu"
+NVIM_THEME_FILE="$XDG_CONFIG_HOME/nvim/after/plugin/colors.lua"
+
+WALLPAPER=0
+
+case "$CHOICE" in
+    'default')
+        NVIM_THEME=default
+        WALLPAPER=1
+        [ -e $ALACRITTY_DIR/theme.yml ] && rm $ALACRITTY_DIR/theme.yml
+        rm $DWM_DIR/theme.h
+        rm $DMENU_DIR/theme.h
+    ;;
+    'gruvbox')
+        WALLPAPER=1
+        NVIM_THEME=gruvbox
+        ln -sf $DWM_DIR/themes/gruvbox.h $DWM_DIR/theme.h
+        ln -sf $DMENU_DIR/themes/gruvbox.h $DMENU_DIR/theme.h
+        ln -sf $ALACRITTY_DIR/themes/gruvbox.yml $ALACRITTY_DIR/theme.yml
+        emacsclient --eval "(load-theme 'doom-gruvbox t)"
+    ;;
+    'gruvbox-light')
+        WALLPAPER=1
+        NVIM_THEME=gruvbox
+        ln -sf $DWM_DIR/themes/gruvbox-light.h $DWM_DIR/theme.h
+        ln -sf $DMENU_DIR/themes/gruvbox-light.h $DMENU_DIR/theme.h
+        ln -sf $ALACRITTY_DIR/themes/gruvbox-light.yml $ALACRITTY_DIR/theme.yml
+        emacsclient --eval "(load-theme 'doom-gruvbox-light t)"
+    ;;
+    'modus-operandi')
+        WALLPAPER=1
+        ln -sf $DWM_DIR/themes/modus-operandi.h $DWM_DIR/theme.h
+        ln -sf $DMENU_DIR/themes/modus-operandi.h $DMENU_DIR/theme.h
+        ln -sf $ALACRITTY_DIR/themes/modus-operandi.yml $ALACRITTY_DIR/theme.yml
+        emacsclient --eval "(load-theme 'modus-operandi t)"
+    ;;
+    'modus-vivendi')
+        WALLPAPER=1
+        ln -sf $DWM_DIR/themes/modus-vivendi.h $DWM_DIR/theme.h
+        ln -sf $DMENU_DIR/themes/modus-vivendi.h $DMENU_DIR/theme.h
+        ln -sf $ALACRITTY_DIR/themes/modus-vivendi.yml $ALACRITTY_DIR/theme.yml
+        emacsclient --eval "(load-theme 'modus-vivendi t)"
+    ;;
+    'nord')
+        WALLPAPER=1
+        ln -sf $DWM_DIR/themes/nord.h $DWM_DIR/theme.h
+        ln -sf $DMENU_DIR/themes/nord.h $DMENU_DIR/theme.h
+        ln -sf $ALACRITTY_DIR/themes/nord.yml $ALACRITTY_DIR/theme.yml
+        emacsclient --eval "(load-theme 'doom-nord t)"
+    ;;
+    'solarized-dark')
+        NVIM_THEME=solarized
+        WALLPAPER=1
+        ln -sf $DWM_DIR/themes/solarized-dark.h $DWM_DIR/theme.h
+        ln -sf $DMENU_DIR/themes/solarized-dark.h $DMENU_DIR/theme.h
+        ln -sf $ALACRITTY_DIR/themes/solarized-dark.yml $ALACRITTY_DIR/theme.yml
+        emacsclient --eval "(load-theme 'doom-solarized-dark t)"
+    ;;
+    'spaceway')
+        NVIM_THEME=solarized
+        WALLPAPER=1
+        ln -sf $DWM_DIR/themes/spaceway.h $DWM_DIR/theme.h
+        ln -sf $DMENU_DIR/themes/spaceway.h $DMENU_DIR/theme.h
+        ln -sf $ALACRITTY_DIR/themes/spaceway.yml $ALACRITTY_DIR/theme.yml
+        emacsclient --eval "(load-theme 'spaceway t)"
+    ;;
+    'tomorrow-night')
+        WALLPAPER=1
+        NVIM_THEME=default
+        [ -e $ALACRITTY_DIR/theme.yml ] && rm $ALACRITTY_DIR/theme.yml
+        ln -sf $DWM_DIR/themes/tomorrow-night.h $DWM_DIR/theme.h
+        ln -sf $DMENU_DIR/themes/tomorrow-night.h $DMENU_DIR/theme.h
+        emacsclient --eval "(load-theme 'doom-tomorrow-night t)"
+    ;;
+esac
+
+
+if [ -n $CHOICE ]; then
+   # if [ "$CHOICE" != "default" ]; then
+   #      ln -sf $DWM_DIR/themes/$CHOICE.h $DWM_DIR/theme.h
+   #      ln -sf $DMENU_DIR/themes/$CHOICE.h $DMENU_DIR/theme.h
+   #      ln -sf $ALACRITTY_DIR/themes/$CHOICE.yml $ALACRITTY_DIR/theme.yml
+   # fi
+   cd $DWM_DIR && sudo make clean install
+   cd $DMENU_DIR && sudo make clean install
+fi
+
+if [ "$WALLPAPER" -eq "1" ]; then
+    rm $HOME/pix/system-wallpaper
+    feh --bg-fill $HOME/pix/wall/themes/$CHOICE.jpg || feh --bg-fill $HOME/pix/wall/themes/$CHOICE.png
+    cp $HOME/pix/wall/themes/$CHOICE.jpg $HOME/pix/system-wallpaper || cp $HOME/pix/wall/themes/$CHOICE.png $HOME/pix/system-wallpaper
+fi
