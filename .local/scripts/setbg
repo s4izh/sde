@@ -9,6 +9,13 @@ wal -i $wal
 sed -i 'N;$!P;D' $HOME/.cache/wal/colors-wal-dwm.h
 sed -i '3s/.*/static const char norm_border[] = \"#222222\";/g' $HOME/.cache/wal/colors-wal-dwm.h
 
+ln -sf $HOME/.cache/wal/colors-wal-dwm.h $HOME/.local/src/dwm/theme.h
+ln -sf $HOME/.cache/wal/colors-wal-dmenu.h $HOME/.local/src/dmenu/theme.h
+ln -sf $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
+
+xrdb $HOME/.Xresources
+# xrdb -merge 
+
 (cd $HOME/.local/src/dwm && sudo make clean install)
 (cd $HOME/.local/src/dmenu && sudo make clean install)
 
