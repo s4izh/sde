@@ -23,12 +23,15 @@ tlp: ## tlp package for better power management
 	systemctl enable tlp.service
 	systemctl enable tlp-sleep.service
 
-x11: xinitrc
+x11: xinitrc sxhkd
 	$(LN) $(PWD)/.config/x11 $(HOME)/.config/x11
 
 xinitrc:
 	$(LN) $(PWD)/.xinitrc $(HOME)/.xinitrc
 	$(LN) $(PWD)/.local/autostart.sh $(HOME)/.local/autostart.sh
+
+sxhkd:
+	$(LN) $(PWD)/.config/sxhkd $(HOME)/.config/sxhkd
 
 shell:
 	$(LN) $(PWD)/.config/shell $(HOME)/.config/shell
