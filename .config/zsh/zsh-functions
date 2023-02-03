@@ -1,0 +1,126 @@
+# Function to source files if they exist
+function zsh_add_file() {
+    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+}
+
+function zsh_add_plugin() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then
+        # For plugins
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+    fi
+}
+
+function zsh_add_completion() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then
+        # For completions
+		completion_file_path=$(ls $ZDOTDIR/plugins/$PLUGIN_NAME/_*)
+		fpath+="$(dirname "${completion_file_path}")"
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+		fpath+=$(ls $ZDOTDIR/plugins/$PLUGIN_NAME/_*)
+        [ -f $ZDOTDIR/.zccompdump ] && $ZDOTDIR/.zccompdump
+    fi
+	completion_file="$(basename "${completion_file_path}")"
+	if [ "$2" = true ] && compinit "${completion_file:1}"
+}
+
+# function mach_java_mode() {
+    #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+#    export SDKMAN_DIR="$HOME/.sdkman"
+#    [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+#}
+
+function mkt(){
+	mkdir {nmap,content,exploits,scripts}
+}
+
+function man() {
+      env \
+      LESS_TERMCAP_mb=$'\e[01;31m' \
+      LESS_TERMCAP_md=$'\e[01;31m' \
+      LESS_TERMCAP_me=$'\e[0m' \
+      LESS_TERMCAP_se=$'\e[0m' \
+      LESS_TERMCAP_so=$'\e[01;44;33m' \
+      LESS_TERMCAP_ue=$'\e[0m' \
+      LESS_TERMCAP_us=$'\e[01;32m' \
+      man "$@"
+}
+
+function fzf-lovely(){
+
+	if ["$1" = "h"]; then
+		fzf -m --reverse --preview-window down:20 --preview '[[ $(file --mime {}) =~ binary ]] &&
+ 	                echo {} is a binary file ||
+	                 (bat --style=numbers --color=always {} ||
+	                  highlight -O ansi -l {} ||
+	                  coderay {} ||
+	                  rougify {} ||
+	                  cat {}) 2> /dev/null | head -500'
+
+	else
+	        fzf -m --preview '[[ $(file --mime {}) =~ binary ]] &&
+	                         echo {} is a binary file ||
+	                         (bat --style=numbers --color=always {} ||
+	                          highlight -O ansi -l {} ||
+	                          coderay {} ||
+	                          rougify {} ||
+	                          cat {}) 2> /dev/null | head -500'
+	fi
+}
+
+function za() {
+    zathura "$@" &
+}
+
+function uni() {
+	cd ~/vault/uni/$1/
+	ranger
+}
+
+function cdf() { cd "$(find -type d | fzf)" }
+
+function openf() { xdg-open "$(find -type f | fzf)" }
+
+function open() { xdg-open $1 & }
+
+function se() {
+    local current_dir=$PWD
+    cd ~/.local/scripts/
+    nvim $(fzf)
+    cd $current_dir
+}
+
+function dwmc() {
+    cd ~/.local/src/dwm
+    sudo make clean install
+}
+
+function chedit() {
+    nvim ~/.local/share/cheat/$1.sh
+}
+
+function vif() {
+    local fname
+    local current_dir=$PWD
+    cd ~/.dotfiles
+    fname=$(fzf) || return
+    vim "$fname"
+    cd $current_dir
+}
+# https://jdhao.github.io/2019/06/13/zsh_bind_keys/
+bindkey -s '^o' 'vif^M'
+
+wk() {
+    cd ~/vimwiki/notes/
+    nvim $(fzf)
+}
+
+workon() {
+    tmux-$1
+}
