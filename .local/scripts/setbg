@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# wal=$(readlink -f "$1")
+wal=$(realpath "$1")
+
+wal -i $wal
+# ln -sf $wal ~/pix/$(basename "$wal")
+
+sed -i 'N;$!P;D' $HOME/.cache/wal/colors-wal-dwm.h
+sed -i '3s/.*/static const char norm_border[] = \"#222222\";/g' $HOME/.cache/wal/colors-wal-dwm.h
+
+(cd $HOME/.local/src/dwm && sudo make clean install)
+(cd $HOME/.local/src/dmenu && sudo make clean install)
+
+alacritty-pywall $HOME/.config/alacritty/themes/pywal.yml
+
+# this is for autostart
+echo "wal -i $wal" > ~/pix/wallpaper.sh

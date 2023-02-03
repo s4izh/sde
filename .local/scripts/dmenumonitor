@@ -1,0 +1,37 @@
+#!/bin/bash
+CHOICE=$(echo -e "laptop\nexternal\ndual\narandr" | dmenu -p monitor)
+
+# case "$CHOICE" in
+# 	laptop) xrandr --output eDP --primary --mode 1920x1080 --output HDMI-A-0 --off &; sed -i 's/size: 12/size: 9'/ ~/.config/alacritty/alacritty.yml & ;;
+# 	external) bash ./monitormenuscripts/external & ;;
+# 	dual) xrandr --output HDMI-A-0 --primary --mode 1920x1080 --output eDP --mode 1920x1080 --left-of HDMI-A-0 & ;;
+# 	arandr) arandr & disown;;
+# esac
+
+case "$CHOICE" in
+    'laptop')
+ 		xrandr --output eDP --primary --mode 1920x1080 --output HDMI-A-0 --off
+		sed -i 's/size: 12/size: 9'/ ~/.config/alacritty/alacritty.yml
+    ;;
+    'external')
+		xrandr --output HDMI-A-0 --primary --mode 1920x1080 --output eDP --off
+		sed -i 's/size: 9/size: 12'/ ~/.config/alacritty/alacritty.yml
+    ;;
+    '[MainLeft]')
+        xrandr --output LVDS1 --mode 1366x768 --left-of VGA1 --primary
+        xrandr --output VGA1 --mode 1920x1080
+    ;;
+    '[MainRight]')
+        xrandr --output LVDS1 --mode 1366x768 --right-of VGA1 --primary
+        xrandr --output VGA1 --mode 1920x1080
+    ;;
+    '[ARandR]')
+        arandr & disown
+    ;;
+    # *'On'*)
+    #     xset dpms force on
+    # ;;
+    # *'Off'*)
+    #     xset dpms force off
+    # ;;
+esac

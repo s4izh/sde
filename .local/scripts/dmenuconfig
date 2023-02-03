@@ -1,0 +1,33 @@
+#!/bin/bash
+CHOICE=$(ls -1 ~/.config | dmenu -p "change config:")
+
+# case "$CHOICE" in
+# 	laptop) xrandr --output eDP --primary --mode 1920x1080 --output HDMI-A-0 --off &; sed -i 's/size: 12/size: 9'/ ~/.config/alacritty/alacritty.yml & ;;
+# 	external) bash ./monitormenuscripts/external & ;;
+# 	dual) xrandr --output HDMI-A-0 --primary --mode 1920x1080 --output eDP --mode 1920x1080 --left-of HDMI-A-0 & ;;
+# 	arandr) arandr & disown;;
+# esac
+
+case "$CHOICE" in
+    'alacritty')
+        alacritty --working-directory ~/.config/alacritty -e nvim .
+    ;;
+    'libvirt')
+        alacritty --working-directory ~/.config/libvirt -e nvim .
+    ;;
+    'nvim')
+        alacritty --working-directory ~/.config/nvim -e nvim .
+    ;;
+    'sxhkd')
+        alacritty --working-directory ~/.config/sxhkd -e nvim .
+    ;;
+    'si')
+        arandr & disown
+    ;;
+    # *'On'*)
+    #     xset dpms force on
+    # ;;
+    # *'Off'*)
+    #     xset dpms force off
+    # ;;
+esac

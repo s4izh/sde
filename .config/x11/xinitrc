@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ -f "$HOME/.Xresources" ] && xrdb -merge "$userresources"
+[ -f "$XDG_CONFIG_HOME/x11/font" ] && xrdb -merge "$XDG_CONFIG_HOME/x11/font"
+
+$HOME/.local/autostart.sh
+
+while true; do
+    dwm >/dev/null 2>&1
+done

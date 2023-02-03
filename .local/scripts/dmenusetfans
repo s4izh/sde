@@ -1,0 +1,10 @@
+#!bin/bash
+
+SPEED=$(echo -e "off\nmin\nmed\nmax" | dmenu -p setfans)
+
+case "$SPEED" in
+	off) setfans 0 & ;;
+	min) setfans 1299 & ;;
+	med) setfans 3000 & ;;
+	max) setfans 6199 & ;;
+esac
