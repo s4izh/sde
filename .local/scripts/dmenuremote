@@ -1,0 +1,50 @@
+#!/bin/bash
+
+CHOICE=$(echo -e "sistemes\nraspberry" | dmenu -p remote)
+
+function launch_sistemes () {
+    SESSION_NAME="zeos"
+    status=$(virsh list | grep sistemes | wc -l)
+    if [ "$status" -eq "0" ]; then
+        virsh start sistemes
+        echo "Waiting for the VM to boot..."
+        while true; do
+            ssh -q alumne@sistemes exit
+            if [ $? -eq 0 ]; then
+                sshfs alumne@sistemes:/home/alumne/zeos $SOA/zeos
+                notify-send "machine is ready"
+                break
+            fi
+            sleep 1
+        done
+    else
+        action=$(echo -e "connect\nshutdown" | dmenu -p "action")
+        if [ "$action" == "shutdown" ]; then
+            tmux kill-session -t zeos
+            virsh shutdown sistemes
+            exit
+        fi
+    fi
+
+    tmux has-session -t $SESSION_NAME 2>/dev/null
+    if [ $? != 0 ]          # si no hay sesion se crea
+    then
+        tmux new-session -s $SESSION_NAME -d
+        tmux send-keys -t $SESSION_NAME "ssh sistemes" C-m
+        tmux send-keys -t $SESSION_NAME "cd zeos" C-m
+        tmux send-keys -t $SESSION_NAME "clear" C-m
+    fi
+
+    if [ -z $TMUX ]; then   # si estamos fuera de tmux hacemos attach
+        alacritty -e tmux attach -t $SESSION_NAME:1 &
+    else                    # si estamos dentro solo cambiamos el cliente
+        alacritty -e tmux switch-client -t $SESSION_NAME:1 &
+    fi
+
+    emacsclient -c "$SOA/zeos" &
+}
+
+case "$CHOICE" in
+	sistemes) launch_sistemes ;;
+	raspberry) alacritty -e ssh rp ;;
+esac

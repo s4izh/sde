@@ -1,0 +1,5 @@
+#!/bin/bash
+# script to get all screenshots from
+# the screenshot folder to the current directory
+
+mv ~/pictures/screenshots/* .

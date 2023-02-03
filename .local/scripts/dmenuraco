@@ -1,0 +1,17 @@
+#!/bin/bash
+
+CHOICE=$(echo -e "aso\npar\npi\nprop\nsi" | dmenu -p "racó:")
+
+
+case "$CHOICE" in
+	aso) ASIG=270120 ;;
+	par) ASIG=270020 ;;
+	pi) ASIG=270121 ;;
+	prop) ASIG=270017 ;;
+	si) ASIG=270123 ;;
+esac
+
+
+if [ -n "$CHOICE" ]; then
+    firefox https://raco.fib.upc.edu/home/assignatura?espai=$ASIG &
+fi
