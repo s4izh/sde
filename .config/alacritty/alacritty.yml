@@ -7,6 +7,7 @@
 # to the user's home directory starting with `~/`.
 import:
   - ~/.config/alacritty/theme.yml
+  - ~/.config/alacritty/font.yml
 
 #env:
 # TERM variable
@@ -41,7 +42,7 @@ import:
 # by DPI and the specified value is always added at both opposing sides.
 window:
     padding:
-      x: 4
+      x: 2
       y: 2
 
 # Spread additional padding evenly around the terminal content.
@@ -103,22 +104,22 @@ window:
 #multiplier: 3
 
 # Font configuration
-font:
-  normal:
-    family: JetBrainsMono NerdFont
-    style: Regular
-  bold:
-    family: JetBrainsMono NerdFont
-    style: Bold
-  italic:
-    family: JetBrainsMono NerdFont
-    style: Italic
-  bold_italic:
-    family: JetBrainsMono NerdFont
-    style: Bold Italic
+# font:
+#   normal:
+#     family: JetBrainsMono NerdFont
+#     style: Regular
+#   bold:
+#     family: JetBrainsMono NerdFont
+#     style: Bold
+#   italic:
+#     family: JetBrainsMono NerdFont
+#     style: Italic
+#   bold_italic:
+#     family: JetBrainsMono NerdFont
+#     style: Bold Italic
 
-  # Point size
-  size: 11.2
+#   # Point size
+#   size: 11.2
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
