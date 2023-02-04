@@ -23,10 +23,10 @@ tlp: ## tlp package for better power management
 	systemctl enable tlp.service
 	systemctl enable tlp-sleep.service
 
-x11: xinitrc sxhkd
+x11: xinitrc sxhkd ## xasdf
 	$(LN) $(PWD)/.config/x11 $(HOME)/.config/x11
 
-xinitrc:
+xinitrc: ## xinitrc
 	$(LN) $(PWD)/.xinitrc $(HOME)/.xinitrc
 	$(LN) $(PWD)/.local/autostart.sh $(HOME)/.local/autostart.sh
 
@@ -34,14 +34,17 @@ sxhkd:
 	$(LN) $(PWD)/.config/sxhkd $(HOME)/.config/sxhkd
 
 shell:
+	rm -f $(XDG_CONFIG_HOME)/shell $(HOME)/.zprofile $(HOME)/.profile
 	$(LN) $(PWD)/.config/shell $(HOME)/.config/shell
-	$(LN) $(PWD)/.config/shell/profile $(HOME)/.zprofile
-	$(LN) $(PWD)/.config/shell/profile $(HOME)/.profile
+	$(LN) $(HOME)/.config/shell/profile $(HOME)/.zprofile
+	$(LN) $(HOME)/.config/shell/profile $(HOME)/.profile
 
 zsh: shell
+	rm -f $(XDG_CONFIG_HOME)/zsh
 	$(LN) $(PWD)/.config/zsh $(HOME)/.config/zsh
 
 scripts:
+	rm -f $(HOME)/.local/scripts
 	$(LN) $(PWD)/.local/scripts $(HOME)/.local/scripts
 
 dwm:
@@ -51,35 +54,35 @@ dwm:
 
 alacritty:
 	rm -f $(XDG_CONFIG_HOME)/alacritty
-	$(LN) $(PWD)/.config/alacritty $(HOME)/.config/alacritty
+	$(LN) $(PWD)/.config/alacritty $(XDG_CONFIG_HOME)/alacritty
 
 nvim:
+	rm -f $(XDG_CONFIG_HOME)/nvim
 	$(LN) $(PWD)/.config/nvim $(HOME)/.config/nvim
 
 tmux:
+	rm -f $(XDG_CONFIG_HOME)/tmux
 	$(LN) $(PWD)/.config/tmux $(HOME)/.config/tmux
 
 zathura:
+	rm -f $(XDG_CONFIG_HOME)/zathura
 	$(LN) $(PWD)/.config/zathura $(HOME)/.config/zathura
 
 picom:
+	rm -f $(XDG_CONFIG_HOME)/picom
 	$(LN) $(PWD)/.config/picom $(HOME)/.config/picom
 
 ranger:
+	rm -f $(XDG_CONFIG_HOME)/ranger
 	$(LN) $(PWD)/.config/ranger $(HOME)/.config/ranger
 
-common: x11 zathura picom
+portatil: alacritty
+	$(LN) $(XDG_CONFIG_HOME)/alacritty/fonts/laptop.yml $(XDG_CONFIG_HOME)/alacritty/font.yml
 
-init: xinitrc x11 shell nvim tmux zathura picom ranger ## deploy all dotfiles
+pc: alacritty
+	$(LN) $(XDG_CONFIG_HOME)/alacritty/fonts/pc.yml $(XDG_CONFIG_HOME)/alacritty/font.yml
 
-clean:
-	rm -f $(XDG_CONFIG_HOME)/alacritty\
-		$(XDG_CONFIG_HOME)/nvim\
-		$(XDG_CONFIG_HOME)/zathura\
-		$(XDG_CONFIG_HOME)/ranger\
-		$(XDG_CONFIG_HOME)/picom\
-		$(XDG_CONFIG_HOME)/picom\
-		$(XDG_CONFIG_HOME)/picom\
-		$(XDG_CONFIG_HOME)/picom\
+fzf:
 
-
+server: ## setup server dotfiles, zsh, vimrc
+	$(LN) $(PWD)/.vimrc $(HOME)/.vimrc
