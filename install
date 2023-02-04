@@ -1,0 +1,32 @@
+#!/bin/bash
+
+DF=$HOME/dots
+
+function main () {
+    $1
+}
+
+function install_dot_config () {
+    rm -f $HOME/.config/$1
+    ln -vsf $DF/.config/$1 $HOME/.config/$1
+}
+
+function dwm () {
+    mkdir -p ~/.local/src
+	git clone git@github.com:s4izh/dwm.git ~/.local/src/dwm
+	cd ~/.local/src/dwm
+	sudo make clean install
+}
+
+function x11 () {
+    rm -f $HOME/.config/x11
+    ln -vsf $DF/.config/x11 $HOME/.config/x11
+}
+
+function shell () {
+    rm -f $HOME/.config/shell
+	ln -vsf $DF/.config/shell $HOME/.config/shell
+	cp -d $DF/.zprofile $HOME/.zprofile
+}
+
+main
