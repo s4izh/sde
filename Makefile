@@ -45,12 +45,12 @@ scripts:
 	$(LN) $(PWD)/.local/scripts $(HOME)/.local/scripts
 
 dwm:
-	cd ~/.local/src
-	git clone git@github.com:s4izh/dwm.git
-	cd dwm
+	git clone git@github.com:s4izh/dwm.git ~/.local/src/dwm
+	cd ~/.local/src/dwm
 	sudo make clean install
 
 alacritty:
+	rm -f $(XDG_CONFIG_HOME)/alacritty
 	$(LN) $(PWD)/.config/alacritty $(HOME)/.config/alacritty
 
 nvim:
@@ -71,3 +71,15 @@ ranger:
 common: x11 zathura picom
 
 init: xinitrc x11 shell nvim tmux zathura picom ranger ## deploy all dotfiles
+
+clean:
+	rm -f $(XDG_CONFIG_HOME)/alacritty\
+		$(XDG_CONFIG_HOME)/nvim\
+		$(XDG_CONFIG_HOME)/zathura\
+		$(XDG_CONFIG_HOME)/ranger\
+		$(XDG_CONFIG_HOME)/picom\
+		$(XDG_CONFIG_HOME)/picom\
+		$(XDG_CONFIG_HOME)/picom\
+		$(XDG_CONFIG_HOME)/picom\
+
+
