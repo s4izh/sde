@@ -21,13 +21,13 @@ sxhkd &
 # emacs daemon
 /usr/bin/emacs --daemon
 
+# host specific configuration
 hostname=$(cat /etc/hostname)
 
 case "$hostname" in
     'zen') # laptop
-        if [ "$(xinput | wc -l)" == "13"]; then
-            xinput --set-prop 11 290 1
-        fi
+        # xinput --set-prop 11 290 1
+        # xinput --set-prop 10 298 1
     ;;
     'arch') # casa
         # TODO
