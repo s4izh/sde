@@ -24,13 +24,16 @@ tlp: ## tlp package for better power management
 	systemctl enable tlp-sleep.service
 
 x11: xinitrc sxhkd ## xasdf
+	rm -f $(XDG_CONFIG_HOME)/x11
 	$(LN) $(PWD)/.config/x11 $(HOME)/.config/x11
 
 xinitrc: ## xinitrc
+	rm -f $(HOME)/.xinitrc $(HOME)/.local/x_autostart.sh
 	$(LN) $(PWD)/.xinitrc $(HOME)/.xinitrc
-	$(LN) $(PWD)/.local/autostart.sh $(HOME)/.local/autostart.sh
+	$(LN) $(PWD)/.local/x_autostart.sh $(HOME)/.local/x_autostart.sh
 
 sxhkd:
+	rm -f $(XDG_CONFIG_HOME)/sxhkd
 	$(LN) $(PWD)/.config/sxhkd $(HOME)/.config/sxhkd
 
 shell:
@@ -86,3 +89,5 @@ fzf:
 
 server: ## setup server dotfiles, zsh, vimrc
 	$(LN) $(PWD)/.vimrc $(HOME)/.vimrc
+
+deploy: x11 zsh scripts alacritty nvim tmux zathura picom ranger
