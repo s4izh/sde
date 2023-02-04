@@ -1,0 +1,16 @@
+font:
+  normal:
+    family: JetBrainsMono NerdFont
+    style: Regular
+  bold:
+    family: JetBrainsMono NerdFont
+    style: Bold
+  italic:
+    family: JetBrainsMono NerdFont
+    style: Italic
+  bold_italic:
+    family: JetBrainsMono NerdFont
+    style: Bold Italic
+
+  # Point size
+  size: 11.0
