@@ -44,6 +44,12 @@ zsh: shell
 scripts:
 	$(LN) $(PWD)/.local/scripts $(HOME)/.local/scripts
 
+dwm:
+	cd ~/.local/src
+	git clone git@github.com:s4izh/dwm.git
+	cd dwm
+	sudo make clean install
+
 alacritty:
 	$(LN) $(PWD)/.config/alacritty $(HOME)/.config/alacritty
 
