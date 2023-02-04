@@ -1,6 +1,6 @@
 #!/bin/bash
-# CHOICE=$(echo -e "default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\ntomorrow-night" | dmenu -p theme:)
-CHOICE=$(echo -e "default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\nspaceway\ntomorrow-night" | fzf)
+CHOICE=$(echo -e "default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\ntomorrow-night" | dmenu -p theme:)
+# CHOICE=$(echo -e "default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\nspaceway\ntomorrow-night" | fzf)
 
 ALACRITTY_DIR="$HOME/.config/alacritty"
 DWM_DIR="$HOME/.local/src/dwm"
@@ -96,3 +96,5 @@ if [ "$WALLPAPER" -eq "1" ]; then
     feh --bg-fill $HOME/pix/wall/themes/$CHOICE.jpg || feh --bg-fill $HOME/pix/wall/themes/$CHOICE.png
     cp $HOME/pix/wall/themes/$CHOICE.jpg $HOME/pix/system-wallpaper || cp $HOME/pix/wall/themes/$CHOICE.png $HOME/pix/system-wallpaper
 fi
+
+killall dwm
