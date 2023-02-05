@@ -30,7 +30,7 @@ case "$hostname" in
         # xinput --set-prop 10 298 1
     ;;
     'arch') # casa
-        # TODO
+        xinput --set-prop 9 295 0 1
         # resolution settings
         # xrandr --output HDMI-0 --off --output DP-0 --mode 3440x1440
     ;;
