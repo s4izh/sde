@@ -1,5 +1,8 @@
 #!/bin/bash
-CHOICE=$(echo -e "default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\ntomorrow-night" | dmenu -p theme:)
+
+THEMES="default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\nspaceway\ntomorrow-night"
+
+CHOICE=$(echo -e $THEMES | dmenu -p theme:)
 # CHOICE=$(echo -e "default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\nspaceway\ntomorrow-night" | fzf)
 
 ALACRITTY_DIR="$HOME/.config/alacritty"
@@ -78,6 +81,9 @@ case "$CHOICE" in
         ln -sf $DMENU_DIR/themes/tomorrow-night.h $DMENU_DIR/theme.h
         emacsclient --eval "(load-theme 'doom-tomorrow-night t)"
     ;;
+    *)
+        exit
+        ;;
 esac
 
 
