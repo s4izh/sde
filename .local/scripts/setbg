@@ -14,12 +14,16 @@ ln -sf $HOME/.cache/wal/colors-wal-dmenu.h $HOME/.local/src/dmenu/theme.h
 ln -sf $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
 
 xrdb $HOME/.Xresources
-# xrdb -merge 
+# xrdb -merge
 
 (cd $HOME/.local/src/dwm && sudo make clean install)
 (cd $HOME/.local/src/dmenu && sudo make clean install)
 
-alacritty-pywall $HOME/.config/alacritty/themes/pywal.yml
+alacrittycolors=$HOME/.cache/wal/colors-wal-alacritty.yml
+
+[ ! -f $alacrittycolors ] && touch $alacrittycolors
+alacritty-pywall $alacrittycolors
+ln -sf $alacrittycolors $HOME/.config/alacritty/theme.yml
 
 # this is for autostart
-echo "wal -i $wal" > ~/pix/wallpaper.sh
+# echo "wal -i $wal" > ~/pix/wallpaper.sh
