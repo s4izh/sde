@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THEMES="default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\nspaceway\ntomorrow-night"
+THEMES="default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\npywal\nsolarized-dark\nspaceway\ntomorrow-night"
 
 CHOICE=$(echo -e $THEMES | dmenu -p theme:)
 # CHOICE=$(echo -e "default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\nspaceway\ntomorrow-night" | fzf)
@@ -56,6 +56,11 @@ case "$CHOICE" in
         ln -sf $DMENU_DIR/themes/nord.h $DMENU_DIR/theme.h
         ln -sf $ALACRITTY_DIR/themes/nord.yml $ALACRITTY_DIR/theme.yml
         emacsclient --eval "(load-theme 'doom-nord t)"
+    ;;
+    'pywal')
+        # WALLPAPER=1
+        ln -sf $HOME/.cache/wal/colors-wal-dwm.h $DWM_DIR/theme.h
+        ln -sf $HOME/.cache/wal/colors-wal-alacritty.yml $ALACRITTY_DIR/theme.yml
     ;;
     'solarized-dark')
         NVIM_THEME=solarized
