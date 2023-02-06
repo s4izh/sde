@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ -f "$HOME/.Xresources" ] && xrdb -merge "$userresources"
+[ -f "$HOME/.Xresources" ] && xrdb -merge "$HOME/.Xresources"
 [ -f "$XDG_CONFIG_HOME/x11/font" ] && xrdb -merge "$XDG_CONFIG_HOME/x11/font"
 
 [ -f "$HOME/.local/x_autostart.sh" ] && $HOME/.local/x_autostart.sh
