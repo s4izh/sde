@@ -79,6 +79,10 @@ ranger:
 	rm -f $(XDG_CONFIG_HOME)/ranger
 	$(LNDIR) $(PWD)/.config/ranger $(HOME)/.config/ranger
 
+libvirt:
+	rm -f $(XDG_CONFIG_HOME)/libvirt/libvirt.conf
+	$(LN) $(PWD)/.config/libvirt/libvirt.conf $(XDG_CONFIG_HOME)/libvirt/libvirt.conf
+
 portatil: alacritty
 	$(LN) $(XDG_CONFIG_HOME)/alacritty/fonts/laptop.yml $(XDG_CONFIG_HOME)/alacritty/font.yml
 
