@@ -98,6 +98,7 @@ if [ -n $CHOICE ]; then
    #      ln -sf $DMENU_DIR/themes/$CHOICE.h $DMENU_DIR/theme.h
    #      ln -sf $ALACRITTY_DIR/themes/$CHOICE.yml $ALACRITTY_DIR/theme.yml
    # fi
+   rm ~/.Xresources
    cd $DWM_DIR && sudo make clean install
    cd $DMENU_DIR && sudo make clean install
 fi
