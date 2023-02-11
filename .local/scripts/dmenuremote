@@ -1,6 +1,8 @@
 #!/bin/bash
 
-CHOICE=$(echo -e "sistemes\nraspberry" | dmenu -p remote)
+MACHINES="kali\nsistemes\nraspberry"
+
+CHOICE=$(echo -e $MACHINES | dmenu -p remote)
 
 function launch_sistemes () {
     SESSION_NAME="zeos"
@@ -11,19 +13,31 @@ function launch_sistemes () {
         while true; do
             ssh -q alumne@sistemes exit
             if [ $? -eq 0 ]; then
-                sshfs alumne@sistemes:/home/alumne/zeos $SOA/zeos
-                notify-send "machine is ready"
+                sshfs alumne@sistemes:/home/alumne/zeos $HOME/code/zeos
                 break
             fi
             sleep 1
         done
     else
-        action=$(echo -e "connect\nshutdown" | dmenu -p "action")
-        if [ "$action" == "shutdown" ]; then
-            tmux kill-session -t zeos
-            virsh shutdown sistemes
-            exit
-        fi
+        ACTIONS="editor\nshutdown\nterminal"
+        action=$(echo -e $ACTIONS | dmenu -p "action")
+        case "$action" in
+            editor)
+                emacsclient -c "$HOME/code/zeos" &
+                exit
+            ;;
+            shutdown)
+                tmux kill-session -t zeos
+                virsh shutdown sistemes
+                exit
+            ;;
+            terminal)
+                alacritty -e tmux attach -t $SESSION_NAME:1 &
+                exit
+            ;;
+            *) exit
+            ;;
+        esac
     fi
 
     tmux has-session -t $SESSION_NAME 2>/dev/null
@@ -35,6 +49,9 @@ function launch_sistemes () {
         tmux send-keys -t $SESSION_NAME "clear" C-m
     fi
 
+    notify-send "machine is ready"
+    exit
+
     if [ -z $TMUX ]; then   # si estamos fuera de tmux hacemos attach
         alacritty -e tmux attach -t $SESSION_NAME:1 &
     else                    # si estamos dentro solo cambiamos el cliente
@@ -44,7 +61,50 @@ function launch_sistemes () {
     emacsclient -c "$SOA/zeos" &
 }
 
+function launch_kali () {
+    SESSION_NAME="kali"
+    status=$(virsh list | grep kali | wc -l)
+    if [ "$status" -eq "0" ]; then
+        virsh start kali
+        echo "Waiting for the VM to boot..."
+        while true; do
+            ssh -q sergio@kali exit
+            if [ $? -eq 0 ]; then
+                notify-send "machine is ready"
+                break
+            fi
+            sleep 1
+        done
+    else
+        action=$(echo -e "connect\nshutdown" | dmenu -p "action")
+        if [ "$action" == "shutdown" ]; then
+            tmux kill-session -t kali
+            virsh shutdown kali
+            exit
+        fi
+    fi
+
+    tmux has-session -t $SESSION_NAME 2>/dev/null
+    if [ $? != 0 ]          # si no hay sesion se crea
+    then
+        tmux new-session -s $SESSION_NAME -d
+        tmux send-keys -t $SESSION_NAME "ssh kali" C-m
+        tmux send-keys -t $SESSION_NAME "clear" C-m
+        tmux new-window -n vpn -t $SESSION_NAME
+        tmux send-keys -t $SESSION_NAME:2 "ssh kali" C-m
+        tmux send-keys -t $SESSION_NAME:2 "cd dl" C-m
+        tmux send-keys -t $SESSION_NAME:2 "sudo openvpn starting_point_Saizh.ovpn" C-m
+    fi
+
+    if [ -z $TMUX ]; then   # si estamos fuera de tmux hacemos attach
+        alacritty -e tmux attach -t $SESSION_NAME:1 &
+    else                    # si estamos dentro solo cambiamos el cliente
+        alacritty -e tmux switch-client -t $SESSION_NAME:1 &
+    fi
+}
+
 case "$CHOICE" in
 	sistemes) launch_sistemes ;;
+	kali) launch_kali ;;
 	raspberry) alacritty -e ssh rp ;;
 esac
