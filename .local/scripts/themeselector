@@ -105,8 +105,8 @@ fi
 
 if [ "$WALLPAPER" -eq "1" ]; then
     rm $HOME/pix/system-wallpaper
-    feh --bg-fill $HOME/pix/wall/themes/$CHOICE.jpg || feh --bg-fill $HOME/pix/wall/themes/$CHOICE.png
-    cp $HOME/pix/wall/themes/$CHOICE.jpg $HOME/pix/system-wallpaper || cp $HOME/pix/wall/themes/$CHOICE.png $HOME/pix/system-wallpaper
+    feh --bg-fill $HOME/pix/wallpapers/themes/$CHOICE.jpg || feh --bg-fill $HOME/pix/wallpapers/themes/$CHOICE.png
+    cp $HOME/pix/wallpapers/themes/$CHOICE.jpg $HOME/pix/system-wallpapers || cp $HOME/pix/wallpapers/themes/$CHOICE.png $HOME/pix/system-wallpaper
 fi
 
 killall dwm
