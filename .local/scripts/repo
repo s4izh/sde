@@ -1,0 +1,49 @@
+#!/bin/bash
+
+UNI=$UNI_PATH
+NOTES="$HOME/notes"
+
+function push () {
+    cd $1
+    git add .
+    echo "Commiting $1 folder, write a commit message"
+    read MSG
+    git commit -m "$MSG"
+    git push
+}
+
+function pushall () {
+    push $UNI
+    push $NOTES
+}
+
+function pull () {
+    cd $UNI
+    git pull
+    cd $NOTES
+    git pull
+}
+
+case "$1" in
+     pull) ;;
+     push) ;;
+     *) exit ;;
+esac
+
+action=$1
+
+echo $#
+
+for arg in $#; do
+    if [ ! "$arg" != "$action" ]; then
+        echo "$arg"
+    fi
+done
+
+exit
+
+case "$action" in
+     pull) pullall ;;
+     push) pushall ;;
+     *) exit ;;
+esac
