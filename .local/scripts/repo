@@ -5,9 +5,10 @@ NOTES="$HOME/notes"
 
 function push () {
     cd $1
-    git add .
     echo "Commiting $1 folder, write a commit message"
+    git status
     read MSG
+    git add .
     git commit -m "$MSG"
     git push
 }
@@ -18,32 +19,23 @@ function pushall () {
 }
 
 function pull () {
-    cd $UNI
-    git pull
-    cd $NOTES
+    cd $1
     git pull
 }
 
-case "$1" in
-     pull) ;;
-     push) ;;
-     *) exit ;;
-esac
+function pullall () {
+    pull $UNI
+    pull $NOTES
+}
 
-action=$1
-
-echo $#
-
-for arg in $#; do
-    if [ ! "$arg" != "$action" ]; then
-        echo "$arg"
-    fi
-done
-
-exit
-
-case "$action" in
-     pull) pullall ;;
-     push) pushall ;;
-     *) exit ;;
-esac
+if [ "$1" == "pull" ] || [ "$1" == "push" ]; then
+    $1 $2
+else
+    OPTIONS="pushall\npullall"
+    CHOICE=$(echo -e $OPTIONS | fzf)
+    case "$CHOICE" in
+        pullall) pullall ;;
+        pushall) pushall ;;
+        *) exit ;;
+    esac
+fi

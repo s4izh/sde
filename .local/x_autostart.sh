@@ -21,6 +21,8 @@ sxhkd &
 # emacs daemon
 /usr/bin/emacs --daemon
 
+dunst &
+
 # host specific configuration
 hostname=$(cat /etc/hostname)
 
