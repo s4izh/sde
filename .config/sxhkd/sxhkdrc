@@ -10,6 +10,9 @@ super + r
 super + shift + t
     alacritty -e themeselector
 
+super + g
+    alacritty -e repo
+
 XF86AudioRaiseVolume
 	amixer set Master 5%+
 
