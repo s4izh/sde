@@ -1,0 +1,22 @@
+#!/bin/bash
+
+SESSION_NAME=sdx
+PROJECT_PATH='$SDX/seminar/1-chatty/chatty-source-files'
+
+tmux has-session -t $SESSION_NAME 2>/dev/null
+if [ $? != 0 ]          # si no hay sesion se crea
+then
+    tmux new-session -s $SESSION_NAME -d
+    tmux send-keys -t $SESSION_NAME "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME "clear" C-m
+    # tmux split-window -v -t $SESSION_NAME
+    tmux split-window -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME "clear" C-m
+fi
+
+if [ -z $TMUX ]; then   # si estamos fuera de tmux hacemos attach
+    tmux attach -t $SESSION_NAME:1
+else                    # si estamos dentro solo cambiamos el cliente
+    tmux switch-client -t $SESSION_NAME:1
+fi

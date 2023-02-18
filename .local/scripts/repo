@@ -5,7 +5,7 @@ NOTES="$HOME/notes"
 
 function push () {
     cd $1
-    echo "Commiting $1 folder, write a commit message"
+    echo "Commiting $1 folder, write a commit message:"
     git status
     read MSG
     git add .
@@ -19,6 +19,7 @@ function pushall () {
 }
 
 function pull () {
+    echo "Pulling $1 folder"
     cd $1
     git pull
 }
