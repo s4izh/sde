@@ -23,7 +23,7 @@ tlp: ## tlp package for better power management
 	systemctl enable tlp.service
 	systemctl enable tlp-sleep.service
 
-x11: xinitrc sxhkd ## xasdf
+x11: xinitrc sxhkd ## necessary x11 settings, includes xinitrc and sxhkd
 	rm -f $(XDG_CONFIG_HOME)/x11
 	$(LNDIR) $(PWD)/.config/x11 $(HOME)/.config/x11
 
