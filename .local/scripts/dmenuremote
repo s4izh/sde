@@ -6,6 +6,7 @@ CHOICE=$(echo -e $MACHINES | dmenu -p remote)
 
 function launch_sistemes () {
     SESSION_NAME="zeos"
+    virsh net-start default
     status=$(virsh list | grep sistemes | wc -l)
     if [ "$status" -eq "0" ]; then
         virsh start sistemes
@@ -19,11 +20,12 @@ function launch_sistemes () {
             sleep 1
         done
     else
-        ACTIONS="editor\nshutdown\nterminal"
+        ACTIONS="editor\nshutdown\nterminal\nviewer"
         action=$(echo -e $ACTIONS | dmenu -p "action")
         case "$action" in
             editor)
                 emacsclient -c "$HOME/code/zeos" &
+                zathura $SOA/documents/Zeos.pdf
                 exit
             ;;
             shutdown)
@@ -33,6 +35,10 @@ function launch_sistemes () {
             ;;
             terminal)
                 alacritty -e tmux attach -t $SESSION_NAME:1 &
+                exit
+            ;;
+            viewer)
+                virt-viewer sistemes &
                 exit
             ;;
             *) exit
