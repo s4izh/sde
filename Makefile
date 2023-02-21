@@ -19,7 +19,7 @@ backup: ## Backup arch linux packages
 
 tlp: ## tlp package for better power management
 	sudo pacman -S tlp powertop
-# sudo $(LN) $(PWD)/etc/default/tlp /etc/default/tlp
+	sudo $(LN) $(PWD)/etc/tlp.conf /etc/tlp.conf
 	systemctl enable tlp.service
 	systemctl enable tlp-sleep.service
 
