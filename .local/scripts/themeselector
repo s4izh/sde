@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THEMES="default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\npywal\nsolarized-dark\nspaceway\ntomorrow-night"
+THEMES="everforest\ndefault\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\npywal\nsolarized-dark\nspaceway\ntomorrow-night"
 
 CHOICE=$(echo -e $THEMES | dmenu -p theme:)
 # CHOICE=$(echo -e "default\ngruvbox\ngruvbox-light\nmodus-operandi\nmodus-vivendi\nnord\nsolarized-dark\nspaceway\ntomorrow-night" | fzf)
@@ -13,6 +13,13 @@ NVIM_THEME_FILE="$XDG_CONFIG_HOME/nvim/after/plugin/colors.lua"
 WALLPAPER=0
 
 case "$CHOICE" in
+    'everforest')
+        WALLPAPER=1
+        NVIM_THEME=everforest
+        ln -sf $DWM_DIR/themes/everforest.h $DWM_DIR/theme.h
+        ln -sf $DMENU_DIR/themes/everforest.h $DMENU_DIR/theme.h
+        ln -sf $ALACRITTY_DIR/themes/everforest.yml $ALACRITTY_DIR/theme.yml
+    ;;
     'default')
         NVIM_THEME=default
         WALLPAPER=1
