@@ -1,0 +1,25 @@
+#!/bin/bash
+
+status=$(bat-asus-battery status)
+capacity=$(bat-asus-battery capacity)
+
+# Check if the value is between 0 and 20
+if [[ $status == "Charging" ]]; then
+    icon=""
+elif [[ $capacity -ge 0 && $capacity -le 20 ]]; then
+    icon=" "
+elif [[ $capacity -gt 20 && $capacity -le 40 ]]; then
+    icon=" "
+elif [[ $capacity -gt 40 && $capacity -le 60 ]]; then
+    icon=" "
+elif [[ $capacity -gt 60 && $capacity -le 80 ]]; then
+    icon=" "
+elif [[ $capacity -gt 80 && $capacity -le 100 ]]; then
+    icon=" "
+fi
+
+if [[ $capacity -eq 79 ]]; then
+    icon=" "
+fi
+
+echo "$icon $capacity% $status"
