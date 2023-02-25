@@ -1,0 +1,11 @@
+#!/bin/bash
+
+file=$(find $HOME/pix -type f \( -name "*.jpg" -o -name "*.png" \) | \
+    sed "s~${HOME}/pix~~g" | $SYSTEM_MENU -p "select a wallpaper" -l 30)
+
+if [ -n "$file" ]; then
+    # notify-send "new wallpaper $file"
+    cp $HOME/pix/$file $HOME/pix/system-wallpaper
+    wbg $HOME/pix/system-wallpaper
+fi
+
