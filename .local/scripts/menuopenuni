@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# CURRENT_Q is an enviroment variable that should be setted up to be the current Q
+
+# echo $CURRENT_Q
+
+asignatura=$(ls "$UNI_PATH"/"$CURRENT_Q" | $SYSTEM_MENU -p "asignatura") || exit
+
+# file=$(find $UNI_PATH/$CURRENT_Q/$asignatura -type f -name "*.pdf" | \
+file=$(find $UNI_PATH/$CURRENT_Q/$asignatura -type f | \
+    sed "s~${UNI_PATH}/${CURRENT_Q}/${asignatura}~~g" | $SYSTEM_MENU -p "open" -l 30)
+
+echo $file
+
+if [ -n "$file" ]; then
+    xdg-open "$HOME/uni/$CURRENT_Q/$asignatura/$file"
+fi
+

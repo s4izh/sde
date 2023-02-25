@@ -2,7 +2,7 @@
 
 MACHINES="kali\nsistemes\nraspberry"
 
-CHOICE=$(echo -e $MACHINES | dmenu -p remote)
+CHOICE=$(echo -e $MACHINES | $SYSTEM_MENU -p "remote")
 
 function launch_sistemes () {
     SESSION_NAME="zeos"
@@ -21,11 +21,11 @@ function launch_sistemes () {
         done
     else
         ACTIONS="editor\nshutdown\nterminal\nviewer"
-        action=$(echo -e $ACTIONS | dmenu -p "action")
+        action=$(echo -e $ACTIONS | $SYSTEM_MENU -p "action")
         case "$action" in
             editor)
                 emacsclient -c "$HOME/code/zeos" &
-                zathura $SOA/documents/Zeos.pdf
+                zathura $soa/documents/Zeos.pdf
                 exit
             ;;
             shutdown)
@@ -82,7 +82,7 @@ function launch_kali () {
             sleep 1
         done
     else
-        action=$(echo -e "connect\nshutdown" | dmenu -p "action")
+        action=$(echo -e "connect\nshutdown" | $SYSTEM_MENU -p "action")
         if [ "$action" == "shutdown" ]; then
             tmux kill-session -t kali
             virsh shutdown kali
