@@ -4,4 +4,5 @@
 # password prompt if needed.
 
 # dmenu -P -p "$1" <&- && echo
-dmenu -P -p "$1"
+# dmenu -P -p "$1"
+echo ""| $SYSTEM_MENU -x -p "$1"
