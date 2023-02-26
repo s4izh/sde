@@ -53,7 +53,7 @@ vim.keymap.set("n", "<Leader>r", ":set wrap! linebreak!<cr>")
 
 vim.keymap.set("n", "<Leader>c", ":w | !compiler %<cr>")
 
-vim.keymap.set("n", "<Leader>wb", ":!~/vimwiki/scripts/backlinks.sh %<cr>")
+-- vim.keymap.set("n", "<Leader>wb", ":!~/vimwiki/scripts/backlinks.sh %<cr>")
 
 vim.keymap.set("n", "<Leader>la", ":LspStop<cr>")
 
