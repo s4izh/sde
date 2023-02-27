@@ -1,6 +1,6 @@
 #!/bin/sh
 
-clock=$(date '+%I')
+# clock=$(date '+%I')
 
 case "$clock" in
 	"00") icon="🕛" ;;
@@ -27,6 +27,8 @@ case $BLOCK_BUTTON in
 esac
 
 # output="📅 "$(date "+%Y %b %d (%a) $icon %I:%M%p")
-output=$(date "+%Y %b %d (%a) $icon %I:%M%p")
+# output=$(date "+%Y %b %d (%a) $icon %I:%M%p")
+
+output=$(date '+%b %d (%a) %I:%M%p')
 
 echo $output
