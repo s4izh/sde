@@ -29,14 +29,18 @@ function pullall () {
     pull $NOTES
 }
 
-if [ "$1" == "pull" ] || [ "$1" == "push" ]; then
-    $1 $2
-else
-    OPTIONS="pushall\npullall"
-    CHOICE=$(echo -e $OPTIONS | fzf)
-    case "$CHOICE" in
-        pullall) pullall ;;
-        pushall) pushall ;;
-        *) exit ;;
-    esac
-fi
+function main() {
+    if [ "$1" == "pull" ] || [ "$1" == "push" ]; then
+        $1 $2
+    else
+        OPTIONS="pushall\npullall"
+        CHOICE=$(echo -e $OPTIONS | fzf)
+        case "$CHOICE" in
+            pullall) pullall ;;
+            pushall) pushall ;;
+            *) exit ;;
+        esac
+    fi
+}
+
+main

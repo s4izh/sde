@@ -50,9 +50,11 @@ function launch_sistemes () {
     if [ $? != 0 ]          # si no hay sesion se crea
     then
         tmux new-session -s $SESSION_NAME -d
-        tmux send-keys -t $SESSION_NAME "ssh sistemes" C-m
-        tmux send-keys -t $SESSION_NAME "cd zeos" C-m
-        tmux send-keys -t $SESSION_NAME "clear" C-m
+        tmux send-keys -t $SESSION_NAME "cd ~/code/zeos && nvim ." C-m
+        tmux new-window -n ssh -t $SESSION_NAME
+        tmux send-keys -t $SESSION_NAME:2 "ssh sistemes" C-m
+        tmux send-keys -t $SESSION_NAME:2 "cd zeos" C-m
+        tmux send-keys -t $SESSION_NAME:2 "clear" C-m
     fi
 
     notify-send "machine is ready"
