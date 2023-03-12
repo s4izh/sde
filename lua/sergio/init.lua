@@ -1,4 +1,6 @@
 require("sergio.settings")
 require("sergio.keybinds")
+require("sergio.writting")
 require("sergio.lazy")
 require("sergio.colors")
+require("sergio.gtd")
