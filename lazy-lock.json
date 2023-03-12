@@ -33,11 +33,11 @@
   "undotree": { "branch": "master", "commit": "485f01efde4e22cb1ce547b9e8c9238f36566f21" },
   "vim-airline": { "branch": "master", "commit": "038e3a6ca59f11b3bb6a94087c1792322d1a1d5c" },
   "vim-commentary": { "branch": "master", "commit": "e87cd90dc09c2a203e13af9704bd0ef79303d755" },
+  "vim-fugitive": { "branch": "master", "commit": "5b52a0f395065d6cb7b65a00a5e17eaf9ebd64d5" },
   "vim-irblack": { "branch": "master", "commit": "59622caff32a7925181ab139701fad3eee54ae51" },
   "vim-markdown": { "branch": "master", "commit": "5d3d1b6cbdc4be0b4c6105c1ab1f769d76d3c68f" },
   "vim-ripgrep": { "branch": "master", "commit": "2bb2425387b449a0cd65a54ceb85e123d7a320b8" },
   "vim-table-mode": { "branch": "master", "commit": "9555a3e6e5bcf285ec181b7fc983eea90500feb4" },
-  "vimagit": { "branch": "master", "commit": "308650ddc1e9a94e49fae0ea04bbc1c45f23d4c4" },
   "vimwiki": { "branch": "dev", "commit": "34ceee8aaa760d2afc2b220916c8844575fd8d17" },
   "vscode.nvim": { "branch": "main", "commit": "471972c7584d6623777a8971633d31e35ca1648d" }
 }
