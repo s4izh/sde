@@ -1,27 +1,15 @@
 #!/bin/sh
 
 alias cfz='cd ~/.config/zsh && nvim .zshrc'
-alias cfv='nvim ~/.config/nvim/'
+alias cfv='cd ~/.config/nvim && nvim $(fzf)'
 alias qtilecf='cd ~/.config/qtile && nvim .'
 alias cfi='cd ~/.config/i3 && nvim config'
-alias cfd='cd ~/.local/src/dwm && nvim .'
+alias cfd='cd ~/.local/src/dwm && nvim config.h'
+alias cfdl='cd ~/.local/src/dwl && nvim config.h'
+alias cfh='cd ~/.config/hypr && nvim hyprland.conf'
 
 alias tn='tmux-notes'
 
-# Manual aliases
-# alias ll='lsd -lh --group-dirs=first'
-# alias la='lsd -a --group-dirs=first'
-# alias l='lsd --group-dirs=first'
-# alias lla='lsd -lha --group-dirs=first'
-# alias ls='lsd --group-dirs=first'
-alias ll='ls -lh --color=auto'
-alias la='ls -a --color=auto'
-alias lla='lsd -lha --color=auto'
-alias ls='ls --color=auto'
-
-alias j='z'
-alias f='zi'
-alias g='lazygit'
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 
 # get fastest mirrors
@@ -101,10 +89,19 @@ alias \
 	YT="youtube-viewer" \
 	sdn="shutdown -h now" \
 	e="$EDITOR" \
-	v="$EDITOR" \
-	z="zathura"
+	v="nvim" \
+	# za="zathura"
 
 alias lsmount="mount | column -t"
 alias extip="curl icanhazip.com"
 
 alias du1="du -h --max-depth=1"
+
+# tmux
+alias \
+    tks="tmux kill-session" \
+    tkS="tmux kill-server" \
+
+# alias blue="sudo systemctl enable bluetooth.service"
+alias sm="sudo make clean install"
+alias py="python"
