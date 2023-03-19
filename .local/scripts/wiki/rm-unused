@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# script to remove unused images in my wiki
+
+wikidir="$HOME/notes"
+
+for img in $(ls $wikidir/.img); do
+    present=$(rg "$img" $wikidir/* | wc -l )
+    if [ $present == 0 ]; then
+        echo "removing $img"
+        rm -f $wikidir/.img/$img
+    fi
+done
+

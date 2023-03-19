@@ -7,7 +7,7 @@ colors:
     foreground: '#CDCDCD'
   cursor:
     text: '#CDCDCD'
-    cursor: '#777777'
+    cursor: '#CC6666'
 
   vi_mode_cursor:
     text: CellBackground

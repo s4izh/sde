@@ -4,15 +4,17 @@
 
 # echo $CURRENT_Q
 
-asignatura=$(ls "$UNI_PATH"/"$CURRENT_Q" | $SYSTEM_MENU -p "asignatura") || exit
+bemenu_options=$(cat $HOME/.local/scripts/bemenu2)
 
-# file=$(find $UNI_PATH/$CURRENT_Q/$asignatura -type f -name "*.pdf" | \
-file=$(find $UNI_PATH/$CURRENT_Q/$asignatura -type f | \
-    sed "s~${UNI_PATH}/${CURRENT_Q}/${asignatura}~~g" | $SYSTEM_MENU -p "open" -l 30)
+asignatura=$(ls "$UNI"/"$CURRENT_Q" | $SYSTEM_MENU -p "asignatura") || exit
+
+file=$(find $UNI/$CURRENT_Q/$asignatura -type f -name "*.pdf" | \
+# file=$(find $UNI_PATH/$CURRENT_Q/$asignatura -type f | \
+    sed "s~${UNI}/${CURRENT_Q}/${asignatura}~~g" | $SYSTEM_MENU -p "open" -l 30)
 
 echo $file
 
 if [ -n "$file" ]; then
-    xdg-open "$HOME/uni/$CURRENT_Q/$asignatura/$file"
+    xdg-open "$UNI/$CURRENT_Q/$asignatura/$file"
 fi
 

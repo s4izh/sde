@@ -1,23 +1,20 @@
 #!/bin/bash
 
-SESSION_NAME=soa
-PROJECT_PATH="$UNI/3q2/soa"
-NOTES_PATH="$HOME/wiki/uni/soa"
+SESSION_NAME=pti
+PROJECT_PATH="$HOME/code/ptiproyecto"
 
 tmux has-session -t $SESSION_NAME 2>/dev/null
 if [ $? != 0 ]          # si no hay sesion se crea
 then
     tmux new-session -s $SESSION_NAME -d
-    tmux setenv ASIG=soa
-    tmux send-keys -t $SESSION_NAME "export ASIG=soa" C-m
     tmux send-keys -t $SESSION_NAME "cd $PROJECT_PATH" C-m
-    tmux send-keys -t $SESSION_NAME "cd zeos" C-m
     tmux send-keys -t $SESSION_NAME "nvim ." C-m
-    tmux new-window -n ssh -t $SESSION_NAME
+    tmux new-window -n term -t $SESSION_NAME
     tmux send-keys -t $SESSION_NAME:2 "cd $PROJECT_PATH" C-m
-    tmux send-keys -t $SESSION_NAME:2 "ssh sistemes" C-m
-    tmux send-keys -t $SESSION_NAME:2 "cd zeos" C-m
     tmux send-keys -t $SESSION_NAME:2 "clear" C-m
+    tmux new-window -n bacon -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME:3 "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME:3 "bacon" C-m
 fi
 
 if [ -z $TMUX ]; then   # si estamos fuera de tmux hacemos attach
