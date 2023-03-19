@@ -2,7 +2,7 @@ super + w
     firefox
 
 super + u: {k,m,s,l,r,c,u}
-	{dmenukblayout, dmenumonitor, dmenusys, dmenuopgg, dmenuraco, dmenuconfig, dmenuopen}
+	{dmenukblayout, dmenumonitor, dmenusys, dmenuopgg, dmenuraco, dmenuconfig, menuopenuni}
 
 super + r
     dmenuremote
@@ -35,7 +35,7 @@ XF86MonBrightnessUp
 	brightnessctl set +10%
 
 XF86MonBrightnessDown
-	brightnessctl set 10%
+	brightnessctl set 10%-
 
 super + n
 	redshift -O 5000

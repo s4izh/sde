@@ -1,0 +1,12 @@
+#!/bin/bash
+
+menu() {
+    wm=$(echo -e "dwm\ndwl" | fzf)
+    case "$wm" in
+        dwm) startx ;;
+        dwl) dwl -s somebar ;;
+        *) exit ;;
+    esac
+}
+
+dwl -s somebar

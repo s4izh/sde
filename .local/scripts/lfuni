@@ -1,0 +1,10 @@
+#!/bin/bash
+
+file_name=$(basename $1)
+file_no_ext="${file_name%.*}"
+
+if [ -d "$UNI/$CURRENT_Q/$file_no_ext" ]; then
+    lf "$UNI/$CURRENT_Q/$file_no_ext"
+# add it for projects
+# elif [ -d "$UNI/$CURRENT_Q/$file_no_ext" ]; then
+fi

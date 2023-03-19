@@ -1,7 +1,8 @@
 #!/bin/bash
 
-UNI=$UNI_PATH
+UNI=$UNI
 NOTES="$HOME/notes"
+# WIKI="$HOME/wiki"
 
 function push () {
     cd $1
@@ -16,6 +17,7 @@ function push () {
 function pushall () {
     push $UNI
     push $NOTES
+    # push $WIKI
 }
 
 function pull () {
@@ -27,6 +29,7 @@ function pull () {
 function pullall () {
     pull $UNI
     pull $NOTES
+    # pull $WIKI
 }
 
 function main() {

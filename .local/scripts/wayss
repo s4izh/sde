@@ -1,4 +1,29 @@
 #!/bin/bash
 
+case "$1" in
+    -w) 
+        name=$(echo "" | dmenu -p "ss name")
+        if [ -n $name ]; then
+            filename="$name"_"$(date +%Y%m%d%H%M%S).png"
+            grim -g "$(slurp)" ~/notes/.img/$filename
+            echo -e "![$filename](/.img/$filename)\n<!-- ~/notes/.img/$filename -->" | wl-copy
+            echo -e "![$filename](/.img/$filename)\n<!-- ~/notes/.img/$filename -->"
+        fi
+        exit
+    ;;
+    -a) 
+        name=$(echo "" | dmenu -p "ss name")
+        if [ -n $name ]; then
+            filename="$name"_"$(date +%Y%m%d%H%M%S).png"
+            grim -g "$(slurp)" ~/notes/uni/$ASIG/img/$filename
+            echo -e "![$filename](./img/$filename)\n<!-- ~/notes/uni/$ASIG/img$filename -->" | wl-copy
+            echo -e "![$filename](./img/$filename)\n<!-- ~/notes/uni/$ASIG/img/$filename -->"
+        fi
+        exit
+    ;;
+    *) echo default
+    ;;
+esac
+
 # grim -g "$(slurp)" ~/pix/screenshots/$(date +%Y%m%d%H%M%S).png
 grim -g "$(slurp)" - | wl-copy

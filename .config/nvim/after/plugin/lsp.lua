@@ -2,7 +2,7 @@
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "sumneko_lua", "rust_analyzer", "clangd", "pyright" }
+    ensure_installed = { "lua_ls", "rust_analyzer", "clangd", "pyright" }
 })
 
 -- LSP Diagnostics Options Setup
@@ -59,7 +59,7 @@ require 'lspconfig'.clangd.setup {
 }
 
 -- lua
-require 'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.lua_ls.setup {
     on_attach = on_attach
 }
 

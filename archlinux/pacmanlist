@@ -14,6 +14,7 @@ amd-ucode
 aom
 archlinux-keyring
 argon2
+asar
 asciiquarium
 at-spi2-core
 atkmm
@@ -28,11 +29,15 @@ base
 bash
 bashtop
 bat
+bemenu
+bemenu-wayland
 biber
 binutils
 bison
 bitwarden
 blackarch-keyring
+blueman
+bluez
 bluez-libs
 boost-libs
 box2d
@@ -51,6 +56,7 @@ cairo
 cairomm
 cantarell-fonts
 capstone
+catch2
 cdparanoia
 chrono-date
 clucene
@@ -88,7 +94,6 @@ e2fsprogs
 edk2-ovmf
 efibootmgr
 efivar
-electron
 electron19
 electron21
 ell
@@ -111,6 +116,9 @@ flac
 flex
 fmt
 fontconfig
+fortune-mod
+freeglut
+freeimage
 freetype2
 fribidi
 fuse-common
@@ -155,6 +163,7 @@ gpm
 graphene
 graphite
 grep
+grim
 groff
 gsettings-desktop-schemas
 gsm
@@ -407,7 +416,9 @@ iana-etc
 icu
 ijs
 imagemagick
+imath
 imlib2
+imv
 iniparser
 iproute2
 iptables-nft
@@ -416,6 +427,7 @@ iso-codes
 iw
 iwd
 jansson
+jasper
 java-environment-common
 java-runtime-common
 java11-openjfx
@@ -427,6 +439,7 @@ jre11-openjdk-headless
 json-c
 json-glib
 jsoncpp
+jxrlib
 kbd
 keyutils
 kmod
@@ -503,6 +516,7 @@ libgpg-error
 libgtop
 libgudev
 libheif
+libical
 libice
 libidn
 libidn2
@@ -510,6 +524,7 @@ libiec61883
 libimagequant
 libimobiledevice
 libindicator-gtk3
+libinih
 libinput
 libisl
 libisoburn
@@ -534,6 +549,7 @@ libmpdclient
 libmspack
 libmspub
 libmwaw
+libmysofa
 libndp
 libnet
 libnetfilter_conntrack
@@ -548,6 +564,7 @@ libnm
 libnma
 libnma-common
 libnotify
+libnsgif
 libnsl
 libnss_nis
 libnumbertext
@@ -564,6 +581,7 @@ libpcap
 libpciaccess
 libpgm
 libpipeline
+libpipewire
 libplacebo
 libplist
 libpng
@@ -572,6 +590,7 @@ libpsl
 libpulse
 libqxp
 libraqm
+libraw
 libraw1394
 libreoffice-fresh
 librest
@@ -702,6 +721,7 @@ m4
 mailcap
 maim
 make
+mako
 man-db
 md4c
 menu-cache
@@ -749,6 +769,7 @@ ocl-icd
 oniguruma
 openbsd-netcat
 opencore-amr
+openexr
 openjpeg2
 openmpi
 openpmix
@@ -1008,6 +1029,7 @@ rav1e
 rclone
 re2
 readline
+recode
 redland
 redshift
 reflector
@@ -1038,6 +1060,7 @@ shared-mime-info
 sl
 slang
 slop
+slurp
 smartmontools
 snappy
 sndio
@@ -1086,6 +1109,7 @@ texlive-publishers
 texlive-science
 thunar
 tinycompress
+tllist
 tlp
 tmux
 tpm2-tss
@@ -1104,6 +1128,7 @@ ttf-joypixels
 ttf-liberation
 ttf-linux-libertine-g
 twolame
+typescript
 tzdata
 uchardet
 ueberzug
@@ -1141,6 +1166,8 @@ wget
 which
 wireless_tools
 wireplumber
+wl-clipboard
+wlroots
 wlroots0.15
 woff2
 wofi

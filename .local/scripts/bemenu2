@@ -1,0 +1,10 @@
+#!/bin/bash
+
+bemenu -H 20 -i --fn "JetBrainsMono NerdFont 10" \
+    --tb "#000000" --tf "#31748f" --fb "#000000" \
+    --ff "#ffffff" --hb "#000000" --ab "#000000" \
+    --hf "#31748f" --nb "#000000" \
+    $1 $2 $3 $4
+
+# vim bindings pending, maybe compile from source
+    
