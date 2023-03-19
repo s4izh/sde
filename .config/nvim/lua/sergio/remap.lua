@@ -57,4 +57,7 @@ vim.keymap.set("n", "<Leader>wb", ":!~/vimwiki/scripts/backlinks.sh %<cr>")
 
 vim.keymap.set("n", "<Leader>la", ":LspStop<cr>")
 
+vim.keymap.set("n", "H", ":bp<cr>")
+vim.keymap.set("n", "L", ":bn<cr>")
+
 

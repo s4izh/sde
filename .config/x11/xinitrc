@@ -5,6 +5,10 @@
 
 [ -f "$HOME/.local/x_autostart.sh" ] && $HOME/.local/x_autostart.sh
 
-while true; do
-    dwm >/dev/null 2>&1
-done
+# while true; do
+#     dwm >/dev/null 2>&1
+# done
+
+export SYSTEM_MENU=dmenu
+
+exec dwm

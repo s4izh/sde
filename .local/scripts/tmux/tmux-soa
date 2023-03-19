@@ -1,47 +1,18 @@
 #!/bin/bash
 
-SESSION_NAME=zeos
-PROJECT_PATH='/tmp/soa'
-
-
-# function start_vm
-
-if [ "$1" == "--close" ]; then
-    fusermount3 -zu /tmp/soa
-    rmdir /tmp/soa
-    virsh shutdown sistemes || exit
-    echo "All umounted properly"
-    tmux kill-session -t zeos
-    exit
-fi
-
-! [ -d "/tmp/soa" ] && mkdir /tmp/soa
-
-status=$(virsh list | grep sistemes | wc -l)
-echo "The VM is [0] off [1] on"
-echo "$status"
-
-if [ "$status" -eq "0" ]; then
-    virsh start sistemes
-    echo "Waiting for the VM to boot..."
-    while true; do
-        ssh -q alumne@sistemes exit
-        if [ $? -eq 0 ]; then
-            break
-        fi
-        sleep 1
-    done
-fi
-
-sshfs alumne@sistemes:/home/alumne /tmp/soa
+SESSION_NAME=soa
+PROJECT_PATH="$UNI/3q2/soa"
+NOTES_PATH="$HOME/wiki/uni/soa"
 
 tmux has-session -t $SESSION_NAME 2>/dev/null
 if [ $? != 0 ]          # si no hay sesion se crea
 then
     tmux new-session -s $SESSION_NAME -d
+    tmux setenv ASIG=soa
+    tmux send-keys -t $SESSION_NAME "export ASIG=soa" C-m
     tmux send-keys -t $SESSION_NAME "cd $PROJECT_PATH" C-m
     tmux send-keys -t $SESSION_NAME "cd zeos" C-m
-    tmux send-keys -t $SESSION_NAME "$EDITOR ." C-m
+    tmux send-keys -t $SESSION_NAME "nvim ." C-m
     tmux new-window -n ssh -t $SESSION_NAME
     tmux send-keys -t $SESSION_NAME:2 "cd $PROJECT_PATH" C-m
     tmux send-keys -t $SESSION_NAME:2 "ssh sistemes" C-m

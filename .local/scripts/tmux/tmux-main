@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SESSION_NAME=default
+SESSION_NAME=main
 
 tmux has-session -t $SESSION_NAME 2>/dev/null
 

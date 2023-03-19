@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sdx="$UNI/3q2/sdx"
+
 reading_session() {
     cd "$sdx/reading"
     reading=$(ls -d */ | fzf)
@@ -11,9 +13,9 @@ reading_session() {
 }
 
 seminar_session() {
-    cd "$sdx/seminar"
+    cd "$sdx/github"
     seminar=$(ls -d */ | fzf)
-    PROJECT_PATH="$sdx/seminar/$seminar/*source-files"
+    PROJECT_PATH="$sdx/github/$seminar/src"
     cd $PROJECT_PATH
     firefox ../*.pdf &
     tmux new-session -s $SESSION_NAME -d
