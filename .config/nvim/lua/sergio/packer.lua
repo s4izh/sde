@@ -22,6 +22,9 @@ return require('packer').startup(function(use)
     use 'maxmx03/solarized.nvim'
     use 'squarefrog/tomorrow-night.vim'
     use 'wesgibbs/vim-irblack'
+    use 'ishan9299/modus-theme-vim'
+
+    use 'waycrate/swhkd-vim'
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
