@@ -1,0 +1,30 @@
+#!/bin/zsh
+
+usage() {
+  echo "Usage: $(basename $1)"
+  echo " \$1 = soa | cpd | pti | sdx | txc "
+  echo " \$1 can be empty too, in that case you will be prompted to select"
+}
+
+case "$1" in
+  soa|cpd|pti|sdx|txc)
+    choice=$1
+  ;;
+  "") 
+    cd ~/notes/uni
+    choice=$(ls -l | grep "^d" | awk '{print $9}' | fzf)
+    [ -z "$choice" ] && exit
+  ;;
+  -h)
+    usage $0
+    exit
+  ;;
+  *)
+    usage $0
+    exit
+  ;;
+esac
+
+export ASIG=$choice
+cd ~/notes
+nvim uni/$choice/resumen.md

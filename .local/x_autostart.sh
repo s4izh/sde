@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #keyboard settings
-setxkbmap es -option ctrl:nocaps
+# setxkbmap es -option ctrl:nocaps
+setxkbmap es -option caps:escape
 
 # set wallpaper
 feh --bg-fill $HOME/pix/system-wallpaper
@@ -19,7 +20,7 @@ dwmblocks &
 sxhkd &
 
 # emacs daemon
-/usr/bin/emacs --daemon
+# /usr/bin/emacs --daemon
 
 dunst &
 

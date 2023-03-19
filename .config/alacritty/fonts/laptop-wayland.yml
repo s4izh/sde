@@ -1,16 +1,16 @@
 font:
-  normal:
-    # family: Hack Nerd Font Mono
-    # style: Regular
+  # normal:
+  #   family: Hack Nerd Font Mono
+  #   style: Regular
   # bold:
-    # family: Hack Nerd Font Mono
-    # style: Bold
+  #   family: Hack Nerd Font Mono
+  #   style: Bold
   # italic:
-    # family: Hack Nerd Font Mono
-    # style: Italic
+  #   family: Hack Nerd Font Mono
+  #   style: Italic
   # bold_italic:
-    # family: Hack Nerd Font Mono
-    # style: Bold Italic
+  #   family: Hack Nerd Font Mono
+  #   style: Bold Italic
 
   normal:
     family: JetBrainsMono NerdFont

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 file=$(readlink -f "$1")
 dir=${file%/*}
 base="${file%.*}"
@@ -12,7 +13,7 @@ case "$ext" in
     cc) 	g++ "$file" -o "$base" && "$base" ;;
     cpp) 	g++ "$file" -o "$base" && "$base" ;;
     java) 	javac -d classes "$file" && java -cp classes "${1%.*}" ;;
-    md)		pandoc "$file" -o "$base".pdf ;;
+    md)		pandoc "$file" -o "$base".pdf --filter pandoc-crossref ;;
     org)    pandoc -s "$file" -V geometry:margin=1in -o "$base".pdf ;;
     rs) 	cargo run ;;
     tex) 	pdflatex "$file";;
