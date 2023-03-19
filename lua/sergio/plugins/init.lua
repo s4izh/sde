@@ -9,13 +9,16 @@ return {
     "rebelot/kanagawa.nvim",
     "Mofiqul/vscode.nvim",
     "folke/tokyonight.nvim",
+    "projekt0n/github-nvim-theme",
 
 	"tpope/vim-commentary",
     "junegunn/fzf.vim",
     "junegunn/fzf",
     "junegunn/goyo.vim",
     "vim-airline/vim-airline",
+    -- "nvim-lualine/lualine.nvim",
     "jremmen/vim-ripgrep",
+    -- 'luochen1990/rainbow'
 
     -- use 'tanvirtin/monokai.nvim'
     -- use 'dylanaraps/wal.vim'

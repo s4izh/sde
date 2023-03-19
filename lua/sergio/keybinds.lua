@@ -50,7 +50,7 @@ vim.keymap.set("n", "<Leader>z", "<cmd>Goyo<cr>")
 vim.keymap.set("n", "<Leader>o", ":!xdg-open <c-r><c-p> &<cr>")
 vim.keymap.set("n", "<Leader>L", ":!alacritty -e lfuni % &<cr>")
 
-vim.keymap.set("n", "<Leader>r", ":set wrap! linebreak!<cr>")
+vim.keymap.set("n", "<Leader>R", ":set wrap! linebreak!<cr>")
 
 vim.keymap.set("n", "<Leader>c", ":w | !compiler %<cr>")
 vim.keymap.set("n", "<Leader>O", ":!opout %<cr><cr>")
@@ -89,4 +89,19 @@ vim.keymap.set("n", "<Leader>Ca", ":set colorcolumn=0<cr>")
 
 -- Bind the function to a key
 -- vim.api.nvim_set_keymap('n', '<leader>p', ':lua open_pdf()<CR>', { noremap = true, silent = true })
+
+-- WRITTING
+vim.keymap.set("n", "<Leader>wsc", ":setlocal spell spelllang=ca<cr>")
+vim.keymap.set("n", "<Leader>wse", ":setlocal spell spelllang=es<cr>")
+vim.keymap.set("n", "<Leader>wsi", ":setlocal spell spelllang=en<cr>")
+
+vim.keymap.set("n", "<Leader>wt", ":Toch<cr>")
+
+-- resumen especifícos
+vim.keymap.set("n", "<Leader>rs", ":r! wayss -a <cr>")
+
+vim.keymap.set("n", "<Leader>wc0", ":set conceallevel=0<cr>")
+vim.keymap.set("n", "<Leader>wc2", ":set conceallevel=2<cr>")
+
+
 
