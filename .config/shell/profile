@@ -14,13 +14,14 @@ export PATH="$HOME/.local/scripts/statusbar:$PATH"
 unsetopt PROMPT_SP
 
 # Default programs:
-export EDITOR="emacsclient -nw"
+export EDITOR="nvim"
 export TERMINAL="alacritty"
-export TERMINAL_PROG="alacritty"
 export BROWSER="firefox"
+export READER="zathura"
+# export TERMINAL_PROG="alacritty"
 
-export UNI_PATH="$HOME/uni"
-[ -e "$UNI_PATH/.env" ] && source "$UNI_PATH/.env"
+export UNI="$HOME/uni"
+[ -e "$UNI/.env" ] && source "$UNI/.env"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -28,7 +29,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
-# export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
@@ -46,6 +47,7 @@ export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 export _JAVA_AWT_WM_NONREPARENTING=1
+export MOZ_ENABLE_WAYLAND=1
 
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
@@ -62,6 +64,12 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 # Other program settings:
 # export DICS="/usr/share/stardict/dic/"
 export SUDO_ASKPASS="$HOME/.local/scripts/dmenupass"
+
+# make bemenu work
+# export LD_LIBRARY_PATH="$HOME/.local/src/bemenu"
+# export BEMENU_RENDERERS="$HOME/.local/src/bemenu"
+
+export SYSTEM_MENU="bemenu2"
 
 # export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 # export LESS=-R
@@ -82,7 +90,7 @@ export SUDO_ASKPASS="$HOME/.local/scripts/dmenupass"
 
 # Start graphical server on user's current tty if not already running.
 # [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"
-[ "$(tty)" = "/dev/tty1" ] && exec startx
+[ "$(tty)" = "/dev/tty1" ] && exec dwl -s somebar
 
 # Switch escape and caps if tty and no passwd required:
 # sudo -n loadkeys ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/ttymaps.kmap 2>/dev/null

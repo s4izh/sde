@@ -12,10 +12,10 @@ gap=$((capacity/10))
 [[ $capacity -eq $maxbatterylevel ]] && gap=10
 
 case "$gap" in
-    0|1|2) icon=" " ;;
-    3|4) icon=" " ;;
-    5|6) icon=" " ;;
-    7|8) icon=" " ;;
+    0|1) icon=" " ;;
+    2|3) icon=" " ;;
+    4|5) icon=" " ;;
+    6|7|8) icon=" " ;;
     9|10) icon=" " ;;
     charging) icon="" ;;
     *) 

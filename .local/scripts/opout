@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -x
+
+file=$(readlink -f "$1")
+basename="${file%.*}"
+
+case "$1" in
+    *.tex|*.md|*.rmd|*.ms|*.me|*.mow) 
+        setsid $READER "$basename".pdf >/dev/null 2>&1 &
+        ;;
+    *.html) 
+        setsid "$BROWSER" --new--window "$basename".html >/dev/null 2>&1 &
+        ;;
+esac
+
