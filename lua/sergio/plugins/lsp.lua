@@ -14,6 +14,7 @@ return {
         { 'hrsh7th/cmp-path' }, -- Optional
         { 'saadparwaiz1/cmp_luasnip' }, -- Optional
         { 'hrsh7th/cmp-nvim-lua' }, -- Optional
+        { 'aspeddro/cmp-pandoc.nvim' },
 
         -- Snippets
         { 'L3MON4D3/LuaSnip' }, -- Required
@@ -79,6 +80,16 @@ return {
         lsp.setup()
         vim.diagnostic.config({
             virtual_text = true
+        })
+
+        lsp.setup_nvim_cmp({
+          sources = {
+            -- {name = 'path'},
+            -- {name = 'nvim_lsp'},
+            -- {name = 'buffer', keyword_length = 3},
+            -- {name = 'luasnip', keyword_length = 2},
+            -- {name = 'cmp_pandoc', keyword_length = 2},
+          }
         })
     end
 }
