@@ -18,6 +18,7 @@ return {
     "vim-airline/vim-airline",
     -- "nvim-lualine/lualine.nvim",
     "jremmen/vim-ripgrep",
+    "github/copilot.vim",
     -- 'luochen1990/rainbow'
 
     -- use 'tanvirtin/monokai.nvim'
