@@ -44,6 +44,7 @@ shell:
 
 zsh: shell
 	rm -f $(XDG_CONFIG_HOME)/zsh
+	mkdir $(XDG_CACHE_HOME)/zsh
 	$(LNDIR) $(PWD)/.config/zsh $(HOME)/.config/zsh
 
 scripts:

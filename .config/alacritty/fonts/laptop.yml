@@ -12,18 +12,18 @@ font:
   #   family: JetBrainsMono NerdFont
   #   style: Bold Italic
 
-  normal:
-    family: Hack Nerd Font Mono
-    style: Regular
-  bold:
-    family: Hack Nerd Font Mono
-    style: Bold
-  italic:
-    family: Hack Nerd Font Mono
-    style: Italic
-  bold_italic:
-    family: Hack Nerd Font Mono
-    style: Bold Italic
+  # normal:
+  #   family: Hack Nerd Font Mono
+  #   style: Regular
+  # bold:
+  #   family: Hack Nerd Font Mono
+  #   style: Bold
+  # italic:
+  #   family: Hack Nerd Font Mono
+  #   style: Italic
+  # bold_italic:
+  #   family: Hack Nerd Font Mono
+  #   style: Bold Italic
 
   # Point size
   size: 8.0
