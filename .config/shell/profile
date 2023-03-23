@@ -11,7 +11,7 @@
 export PATH="$HOME/.local/scripts:$PATH"
 export PATH="$HOME/.local/scripts/statusbar:$PATH"
 
-unsetopt PROMPT_SP
+# unsetopt PROMPT_SP
 
 # Default programs:
 export EDITOR="nvim"
@@ -69,7 +69,7 @@ export SUDO_ASKPASS="$HOME/.local/scripts/dmenupass"
 # export LD_LIBRARY_PATH="$HOME/.local/src/bemenu"
 # export BEMENU_RENDERERS="$HOME/.local/src/bemenu"
 
-export SYSTEM_MENU="bemenu2"
+export SYSTEM_MENU="dmenu"
 
 # export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 # export LESS=-R
@@ -90,7 +90,8 @@ export SYSTEM_MENU="bemenu2"
 
 # Start graphical server on user's current tty if not already running.
 # [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"
-[ "$(tty)" = "/dev/tty1" ] && exec dwl -s somebar
+# [ "$(tty)" = "/dev/tty1" ] && exec dwl -s somebar
+[ "$(tty)" = "/dev/tty1" ] && exec startx
 
 # Switch escape and caps if tty and no passwd required:
 # sudo -n loadkeys ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/ttymaps.kmap 2>/dev/null
