@@ -1,13 +1,15 @@
 #!/bin/bash
 
+folder="wiki"
+
 case "$1" in
     -w) 
         name=$(echo "" | dmenu -p "ss name")
         if [ -n $name ]; then
             filename="$name"_"$(date +%Y%m%d%H%M%S).png"
-            grim -g "$(slurp)" ~/notes/.img/$filename
-            echo -e "![$filename](/.img/$filename)\n<!-- ~/notes/.img/$filename -->" | wl-copy
-            echo -e "![$filename](/.img/$filename)\n<!-- ~/notes/.img/$filename -->"
+            grim -g "$(slurp)" ~/notes/img/$filename
+            echo -e "![$filename](/img/$filename)\n<!-- ~/wiki/img/$filename -->" | wl-copy
+            echo -e "![$filename](/img/$filename)\n<!-- ~/wiki/img/$filename -->"
         fi
         exit
     ;;
@@ -15,9 +17,9 @@ case "$1" in
         name=$(echo "" | dmenu -p "ss name")
         if [ -n $name ]; then
             filename="$name"_"$(date +%Y%m%d%H%M%S).png"
-            grim -g "$(slurp)" ~/notes/uni/$ASIG/img/$filename
-            echo -e "![$filename](./img/$filename)\n<!-- ~/notes/uni/$ASIG/img$filename -->" | wl-copy
-            echo -e "![$filename](./img/$filename)\n<!-- ~/notes/uni/$ASIG/img/$filename -->"
+            grim -g "$(slurp)" ~/$folder/uni/$ASIG/img/$filename
+            echo -e "![$filename](./img/$filename)\n<!-- ~/wiki/uni/$ASIG/img$filename -->" | wl-copy
+            echo -e "![$filename](./img/$filename)\n<!-- ~/wiki/uni/$ASIG/img/$filename -->"
         fi
         exit
     ;;

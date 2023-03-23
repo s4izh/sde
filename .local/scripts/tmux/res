@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 usage() {
   echo "Usage: $(basename $1)"
@@ -11,7 +11,7 @@ case "$1" in
     choice=$1
   ;;
   "") 
-    cd ~/notes/uni
+    cd ~/wiki/uni
     choice=$(ls -l | grep "^d" | awk '{print $9}' | fzf)
     [ -z "$choice" ] && exit
   ;;
@@ -26,5 +26,5 @@ case "$1" in
 esac
 
 export ASIG=$choice
-cd ~/notes
+cd ~/wiki
 nvim uni/$choice/resumen.md
