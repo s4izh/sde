@@ -33,6 +33,22 @@
             }
           ];
          };
+        zb = lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ 
+            ./configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                extraSpecialArgs = { inherit inputs; };
+                users.sergio.imports = [
+                  ./home/sergio/home.nix
+                ];
+              };
+            }
+          ];
+         };
       };
     };
 }
