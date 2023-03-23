@@ -106,3 +106,7 @@ alias \
 # alias blue="sudo systemctl enable bluetooth.service"
 alias sm="sudo make clean install"
 alias py="python"
+
+alias cfn="nvim /etc/nixos/configuration.nix"
+alias bn="sudo nixos-rebuild switch"
+alias bnf="sudo nixos-rebuild switch --flake . --impure"
