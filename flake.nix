@@ -33,10 +33,10 @@
             }
           ];
          };
-        zb = lib.nixosSystem {
+        zbk = lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ 
-            ./configuration.nix
+            ./machines/zbk/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
