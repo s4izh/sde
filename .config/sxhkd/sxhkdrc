@@ -2,7 +2,7 @@ super + w
     firefox
 
 super + u: {k,m,s,l,r,c,u}
-	{dmenukblayout, dmenumonitor, dmenusys, dmenuopgg, dmenuraco, dmenuconfig, menuopenuni}
+	{dmenukblayout, dmenumonitor, dmenusys, dmenuopgg, dmenuraco, dmenuconfig, dmenuopenuni}
 
 super + r
     dmenuremote
