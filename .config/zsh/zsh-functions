@@ -82,7 +82,9 @@ function open() { xdg-open $1 & }
 function se() {
     local current_dir=$PWD
     cd ~/.local/scripts/
-    nvim $(fzf)
+    choice=$(fzf)
+    # [ -z "$choice" ] && cd $current_dir && exit
+    nvim $choice
     cd $current_dir
 }
 

@@ -1,15 +1,28 @@
 font:
+  # normal:
+  #   family: JetBrainsMono NerdFont
+  #   style: Regular
+  # bold:
+  #   family: JetBrainsMono NerdFont
+  #   style: Bold
+  # italic:
+  #   family: JetBrainsMono NerdFont
+  #   style: Italic
+  # bold_italic:
+  #   family: JetBrainsMono NerdFont
+  #   style: Bold Italic
+
   normal:
-    family: JetBrainsMono NerdFont
+    family: Hack Nerd Font Mono
     style: Regular
   bold:
-    family: JetBrainsMono NerdFont
+    family: Hack Nerd Font Mono
     style: Bold
   italic:
-    family: JetBrainsMono NerdFont
+    family: Hack Nerd Font Mono
     style: Italic
   bold_italic:
-    family: JetBrainsMono NerdFont
+    family: Hack Nerd Font Mono
     style: Bold Italic
 
   # Point size
