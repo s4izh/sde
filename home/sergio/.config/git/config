@@ -1,5 +1,5 @@
 [user]
 	email = "sergiosanz234@gmail.com"
 	name = "s4izh"
-[main]
+[init]
   defaultBranch = "main"
