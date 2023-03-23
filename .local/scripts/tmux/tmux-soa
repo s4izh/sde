@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SESSION_NAME=soa
 PROJECT_PATH="$UNI/3q2/soa"
