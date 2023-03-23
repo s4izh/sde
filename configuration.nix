@@ -172,7 +172,7 @@
     fzf
     steamcmd
     steam-tui
-    emacs
+    # emacs
     feh
     gnome.gnome-calculator
     ripgrep
@@ -262,7 +262,6 @@
     # };
   # };
 
-  services.emacs.enable = true;
 
 
 }
