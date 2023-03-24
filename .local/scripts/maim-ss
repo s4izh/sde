@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # script to take a screenshots of a section save it at screenshots dir and pipe the image into the clipboard
 if [ "$1" == "--name-prompt" ]; then
