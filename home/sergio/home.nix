@@ -38,5 +38,33 @@
     '';
   };
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+      #package = pkgs.qogir-icon-theme;
+    };
+    cursorTheme = {
+      name = "Adwaita";
+      package = pkgs.gnome.adwaita-icon-theme;
+    };
+    font = {
+      name = "Liberation Mono";
+      #package = pkgs.rubik;
+      size = 11;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+  };
+
   home.stateVersion = "22.11";
 }
