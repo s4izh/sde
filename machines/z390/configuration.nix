@@ -180,6 +180,7 @@
     gnome.nautilus
     networkmanager_dmenu
     networkmanagerapplet
+    exa
     # st
   ];
 
