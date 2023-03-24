@@ -25,5 +25,18 @@ font:
   #   family: Hack Nerd Font Mono
   #   style: Bold Italic
 
+  normal:
+    family: Liberation Mono
+    style: Regular
+  bold:
+    family: Liberation Mono 
+    style: Bold
+  italic:
+    family: Liberation Mono
+    style: Italic
+  bold_italic:
+    family: Liberation Mono
+    style: Bold Italic
+
   # Point size
-  size: 11.5
+  size: 12
