@@ -161,8 +161,6 @@
     cargo
     gnumake
     fzf
-    steamcmd
-    steam-tui
     # emacs
     feh
     gnome.gnome-calculator
