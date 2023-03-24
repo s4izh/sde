@@ -21,6 +21,7 @@
           modules = [ 
             ./machines/z390/configuration.nix
             ./modules/gaming.nix
+            ./modules/virtualisation.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
