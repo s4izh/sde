@@ -33,10 +33,10 @@
             }
           ];
          };
-        zbk = lib.nixosSystem {
+        zen = lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ 
-            ./machines/zbk/configuration.nix
+            ./machines/zen/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
