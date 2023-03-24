@@ -19,7 +19,7 @@
         z390 = lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ 
-            ./configuration.nix
+            ./machines/z390/configuration.nix
             ./modules/gaming.nix
             home-manager.nixosModules.home-manager
             {
