@@ -17,13 +17,15 @@
 
   xdg.configFile."git/config".source = ./.config/git/config;
 
+  # xdg.configFile.<name>.recursive
+
   programs.ssh = {
     enable = true;
     matchBlocks = {
       "github.com" = {
         hostname = "github.com";
         user = "git";
-        identityFile = " ~/.ssh/github";
+        identityFile = "~/.ssh/github";
       };
     };
   };
