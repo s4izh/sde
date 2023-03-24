@@ -60,7 +60,7 @@
   nixpkgs.overlays = [
     (final: prev: {
       dwm = prev.dwm.overrideAttrs (old: { 
-	      src = /usr/local/src/dwm ;
+	      src = /home/sergio/dwm ;
           # src = pkgs.fetchFromGitHub {
             # owner = "s4izh";
             # repo = "dwm";
@@ -181,6 +181,8 @@
     networkmanager_dmenu
     networkmanagerapplet
     exa
+    xclip
+    maim
     # st
   ];
 
@@ -189,24 +191,20 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
-  # programs.steam = {
-    # enable = true;
-    # remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    # dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  # };
-
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
   ];
 
-  fonts = {
-    enableDefaultFonts = true;
-      fontconfig = {
-        defaultFonts = {
-          monospace = [ "Hack" ];
-        };
-      };
+  fonts.fontconfig = {
+    defaultFonts = {
+      #sansSerif = [ "Liberation Mono" ];
+      #serif = [ "Liberation Mono" ];
+      monospace = [ "Liberation Mono" ];
+    };
   };
+
+  programs.nm-applet.enable = true;
+  programs.nm-applet.indicator = true;
 
 # TODO GTK
 
