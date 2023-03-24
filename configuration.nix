@@ -178,6 +178,8 @@
     ripgrep
     nodejs
     gnome.nautilus
+    networkmanager_dmenu
+    networkmanagerapplet
     # st
   ];
 
