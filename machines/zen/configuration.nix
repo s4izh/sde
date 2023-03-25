@@ -167,6 +167,7 @@
     ripgrep
     nodejs
     gnome.nautilus
+    acpi
     # st
   ];
 
