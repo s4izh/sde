@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SESSION_NAME=zeos
 PROJECT_PATH="$HOME/code/zeos"
