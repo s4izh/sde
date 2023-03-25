@@ -16,6 +16,7 @@
     unzip
     zip
     cowsay
+    cargo
     nodejs
     libtool
     cmake
