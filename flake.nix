@@ -39,6 +39,9 @@
           modules = [ 
             ./machines/zen/configuration.nix
             ./modules/virtualisation.nix
+            ./modules/base.nix
+            ./modules/desktop.nix
+            ./modules/dwm.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
