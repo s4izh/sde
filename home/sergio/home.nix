@@ -27,6 +27,14 @@
         user = "git";
         identityFile = "~/.ssh/github";
       };
+      "sistemes" = {
+        hostname = "192.168.122.10";
+        user = "alumne";
+        identityFile = "~/.ssh/sistemes";
+        port = 22;
+        forwardX11 = true;
+        forwardX11Trusted = true;
+      };
     };
   };
 

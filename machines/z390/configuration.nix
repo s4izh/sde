@@ -141,9 +141,6 @@
     description = "sergio";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
-      kate
-    #  thunderbird
     ];
   };
 
@@ -170,8 +167,6 @@
     cargo
     gnumake
     fzf
-    steamcmd
-    steam-tui
     # emacs
     feh
     gnome.gnome-calculator
@@ -187,6 +182,7 @@
     libtool
     tmux
     zathura
+    firefox
     # st
   ];
 
