@@ -96,7 +96,10 @@
           accelProfile = "flat";
           middleEmulation = false;
         };
-        touchpad.accelProfile = "flat";
+        touchpad = {
+          accelProfile = "flat";
+          naturalScrolling = true;
+        };
       };
   };
 
@@ -168,6 +171,10 @@
     nodejs
     gnome.nautilus
     acpi
+    networkmanagerapplet
+    xclip
+    maim
+    cmake
     # st
   ];
 
