@@ -7,7 +7,9 @@
     dmenu
     w3m
     pavucontrol
+    zathura
     feh
+    fzf
     networkmanagerapplet
     gnome.gnome-calculator
     xclip
@@ -16,6 +18,7 @@
     unzip
     zip
     cowsay
+    gcc
     cargo
     nodejs
     libtool
