@@ -183,6 +183,8 @@
     exa
     xclip
     maim
+    cmake
+    libtool
     # st
   ];
 
