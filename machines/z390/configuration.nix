@@ -185,6 +185,8 @@
     maim
     cmake
     libtool
+    tmux
+    zathura
     # st
   ];
 
