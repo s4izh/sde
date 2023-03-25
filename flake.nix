@@ -38,6 +38,7 @@
           system = "x86_64-linux";
           modules = [ 
             ./machines/zen/configuration.nix
+            ./modules/virtualisation.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
