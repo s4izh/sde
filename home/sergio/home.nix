@@ -2,10 +2,10 @@
 {
   xdg = {
     enable = true;
-#    userDirs = {
-#      enable = true;
-#      createDirectories = true;
-  #  };
+    #userDirs = {
+    #  enable = true;
+    #  createDirectories = true;
+    #};
   };
 
   programs.git = {
