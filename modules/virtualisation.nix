@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     virt-manager
+    virt-viewer
   ];
 
   programs.dconf.enable = true;
