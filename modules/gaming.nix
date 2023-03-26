@@ -8,7 +8,8 @@
       # bottles
       # gamescope
       # oversteer
-      #obs-studio
+      obs-studio
+      kdenlive
       # webcord
   ];
 
