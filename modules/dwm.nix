@@ -10,6 +10,7 @@
     dwm
     dwmblocks
     dmenu
+    sxhkd
   ];
 
   nixpkgs.overlays = [
