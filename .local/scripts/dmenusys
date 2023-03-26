@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
 CHOICE=$(echo -e "lock\nshutdown\nreboot" | dmenu -p "system menu")
+
+[ -z "$CHOICE" ] && exit
 
 case "$CHOICE" in
 	shutdown) systemctl poweroff ;;
