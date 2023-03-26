@@ -19,15 +19,22 @@
     unzip
     zip
     cowsay
+    mpv
+    # compile tools
     gcc
     nodejs
     libtool
     cmake
+    # rust tooling
     cargo
     cargo-watch
     rustup
     rust-analyzer
     bacon
+    # python tooling
+    python3
+    # nix
+    rnix-lsp
   ];
 
 
@@ -36,16 +43,16 @@
     xkbVariant = "";
     xkbOptions = "caps:escape";
     libinput = {
-        enable = true;
-        mouse = {
-          accelProfile = "flat";
-          middleEmulation = false;
-        };
-        touchpad = {
-          accelProfile = "flat";
-          naturalScrolling = true;
-        };
+      enable = true;
+      mouse = {
+        accelProfile = "flat";
+        middleEmulation = false;
       };
+      touchpad = {
+        accelProfile = "flat";
+        naturalScrolling = true;
+      };
+    };
   };
 
   programs.npm.enable = true;
