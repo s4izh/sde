@@ -10,6 +10,7 @@
     zathura
     feh
     fzf
+    redshift
     networkmanagerapplet
     gnome.gnome-calculator
     xclip
@@ -19,10 +20,14 @@
     zip
     cowsay
     gcc
-    cargo
     nodejs
     libtool
     cmake
+    cargo
+    cargo-watch
+    rustup
+    rust-analyzer
+    bacon
   ];
 
 
