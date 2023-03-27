@@ -1,8 +1,26 @@
 {
   "nodes": {
+    "bochs-soa": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1679939691,
+        "narHash": "sha256-9lNZkK9YYPR2Kd4GbExykeZEQo6OgVBxLt0IrZwfQ2c=",
+        "owner": "Toomoch",
+        "repo": "SOA-ZeOS-fib-nix",
+        "rev": "45a54122dc0b39da7c900c5878ae42b1ded26881",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Toomoch",
+        "repo": "SOA-ZeOS-fib-nix",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "utils": "utils"
       },
       "locked": {
@@ -20,6 +38,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1679865578,
+        "narHash": "sha256-sYQmxxqIYL3QFsRYjW0AufhGur8qWfwoOGPGHRJZlGc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "4361baa782dc3d3b35fd455a1adc370681d9187c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1677932085,
         "narHash": "sha256-+AB4dYllWig8iO6vAiGGYl0NEgmMgGHpy9gzWJ3322g=",
         "owner": "nixos",
@@ -34,7 +68,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1679616449,
         "narHash": "sha256-E6Fvb13mDFa1ZY4lDbTpKbjvUOA4gbh23GWRf3ZzOOw=",
@@ -52,8 +86,9 @@
     },
     "root": {
       "inputs": {
+        "bochs-soa": "bochs-soa",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "utils": {
