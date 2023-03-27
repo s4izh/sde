@@ -20,6 +20,7 @@
     zip
     cowsay
     mpv
+    xdotool
     # compile tools
     gcc
     nodejs
