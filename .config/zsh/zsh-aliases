@@ -110,8 +110,8 @@ alias py="python"
 alias cfn="nvim /etc/nixos/configuration.nix"
 alias bn="sudo nixos-rebuild switch"
 alias bnf="sudo nixos-rebuild switch --flake . --impure"
-alias nr="cd ~/nixos && git add . && sudo nixos-rebuild switch --flake . --impure && cd -"
-alias nu="cd ~/nixos && git add . && sudo nix flake update && sudo nixos-rebuild switch --flake . --impure && cd -"
+alias nr="cd ~/nixos && sudo nixos-rebuild switch --flake . --impure && cd -"
+alias nu="cd ~/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake . --impure && cd -"
 
 alias sshgen="ssh-keygen -t ed25519 -C"
 
