@@ -15,6 +15,7 @@
     gnome.gnome-calculator
     xclip
     maim
+    imagemagick
     sshfs
     unzip
     zip
@@ -29,6 +30,7 @@
     # rust tooling
     cargo
     cargo-watch
+    cargo-make
     rustup
     rust-analyzer
     bacon
