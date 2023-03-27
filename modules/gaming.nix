@@ -10,6 +10,7 @@
       # oversteer
       obs-studio
       kdenlive
+      ffmpeg
       # webcord
   ];
 
