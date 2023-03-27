@@ -35,6 +35,7 @@
     gnumake
     ripgrep
     tmux
+    tree
   ];
 
   # Set your time zone.
