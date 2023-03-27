@@ -23,10 +23,12 @@
     mpv
     xdotool
     # compile tools
-    gcc
     nodejs
     libtool
+    # c tooling
+    gcc
     cmake
+    clang
     # rust tooling
     cargo
     cargo-watch
