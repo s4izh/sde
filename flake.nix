@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     #home.manager.url = "github:nix-community/home-manager";
     #home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    bochs-soa.url = "github:Toomoch/SOA-ZeOS-fib-nix";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
@@ -18,6 +19,7 @@
       nixosConfigurations = {
         z390 = lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
           modules = [ 
             ./machines/z390/configuration.nix
             ./modules/gaming.nix
@@ -25,6 +27,7 @@
             ./modules/base.nix
             ./modules/desktop.nix
             ./modules/dwm.nix
+            ./modules/soa.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
