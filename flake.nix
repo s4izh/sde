@@ -1,11 +1,11 @@
 {
-  description = "A very basic flake";
+  description = "Flake for my multisystem NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     #home.manager.url = "github:nix-community/home-manager";
     #home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    bochs-soa.url = "github:Toomoch/SOA-ZeOS-fib-nix";
+    #bochs-soa.url = "github:Toomoch/SOA-ZeOS-fib-nix";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
@@ -27,7 +27,6 @@
             ./modules/base.nix
             ./modules/desktop.nix
             ./modules/dwm.nix
-            ./modules/soa.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
