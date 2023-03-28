@@ -22,11 +22,11 @@
           specialArgs = { inherit inputs; };
           modules = [ 
             ./machines/z390/configuration.nix
-            ./modules/gaming.nix
-            ./modules/virtualisation.nix
             ./modules/base.nix
             ./modules/desktop.nix
             ./modules/dwm.nix
+            ./modules/gaming.nix
+            ./modules/virtualisation.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -43,10 +43,10 @@
           system = "x86_64-linux";
           modules = [ 
             ./machines/zen/configuration.nix
-            ./modules/virtualisation.nix
             ./modules/base.nix
             ./modules/desktop.nix
             ./modules/dwm.nix
+            ./modules/virtualisation.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
