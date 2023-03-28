@@ -40,6 +40,9 @@
     python3
     # nix
     rnix-lsp
+    # erlang
+    erlang
+    erlang-ls
   ];
 
 
