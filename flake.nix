@@ -27,6 +27,7 @@
             ./modules/dwm.nix
             ./modules/gaming.nix
             ./modules/virtualisation.nix
+            ./modules/database.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {

@@ -43,6 +43,10 @@
     # erlang
     erlang
     erlang-ls
+    # linux
+    man-pages
+    # dev
+    # postman
   ];
 
 
