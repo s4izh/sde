@@ -12,9 +12,9 @@ then
     tmux new-window -n term -t $SESSION_NAME
     tmux send-keys -t $SESSION_NAME:2 "cd $PROJECT_PATH" C-m
     tmux send-keys -t $SESSION_NAME:2 "clear" C-m
-    tmux new-window -n bacon -t $SESSION_NAME
-    tmux send-keys -t $SESSION_NAME:3 "cd $PROJECT_PATH" C-m
-    tmux send-keys -t $SESSION_NAME:3 "bacon" C-m
+    # tmux new-window -n bacon -t $SESSION_NAME
+    # tmux send-keys -t $SESSION_NAME:3 "cd $PROJECT_PATH" C-m
+    # tmux send-keys -t $SESSION_NAME:3 "bacon" C-m
 fi
 
 if [ -z $TMUX ]; then   # si estamos fuera de tmux hacemos attach
