@@ -29,6 +29,9 @@
     gcc
     cmake
     clang
+    clang-tools
+    # llvmPackages_15.libclang
+    # clang-wrapper
     # rust tooling
     cargo
     cargo-watch
@@ -36,6 +39,7 @@
     rustup
     rust-analyzer
     bacon
+    diesel-cli
     # python tooling
     python3
     # nix
@@ -46,8 +50,19 @@
     # linux
     man-pages
     # dev
+    starship
     # postman
+    gdb
+    cloc
+    pstree
+    # writting
+    pandoc
+    # pandoc-citeproc
+    texlive.combined.scheme-full
+    aspell
   ];
+
+  # programs.starship.enable = true;
 
 
   services.xserver = {
