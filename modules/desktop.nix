@@ -60,6 +60,7 @@
     # pandoc-citeproc
     texlive.combined.scheme-full
     aspell
+    rclone
   ];
 
   # programs.starship.enable = true;
