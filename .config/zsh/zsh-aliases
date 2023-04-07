@@ -9,6 +9,8 @@ alias cfdl='cd ~/.local/src/dwl && nvim config.h'
 alias cfh='cd ~/.config/hypr && nvim hyprland.conf'
 alias cff='nvim ~/.config/foot/foot.ini'
 
+alias em='emacsclient -nw'
+
 alias tn='tmux-notes'
 
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"

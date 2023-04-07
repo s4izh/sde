@@ -1,0 +1,28 @@
+# spaceway theme
+# created by @s3rgiosanz
+
+colors:
+  primary:
+    background: '#171717'
+    foreground: '#CDCDCD'
+  cursor:
+    text: '#CDCDCD'
+    cursor: '#CC6666'
+
+  vi_mode_cursor:
+    text: CellBackground
+    cursor: CellForeground
+
+  selection:
+    text: '#191919'
+    background: '#d8dee9'
+
+  normal:
+    black:   '#191919'
+    red:     '#CC6666'
+    green:   '#a1bf78'
+    yellow:  '#E5C078'
+    blue:    '#7D8FA3'
+    magenta: '#aa759f'
+    cyan:    '#009999'
+    white:   '#acadb1'
