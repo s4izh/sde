@@ -47,6 +47,9 @@
     # erlang
     erlang
     erlang-ls
+    #bash
+    #bash-language-server
+    nodePackages_latest.bash-language-server
     # linux
     man-pages
     # dev
@@ -61,6 +64,8 @@
     texlive.combined.scheme-full
     aspell
     rclone
+    # python
+    python39Packages.setuptools
   ];
 
   # programs.starship.enable = true;
@@ -69,7 +74,8 @@
   services.xserver = {
     layout = "es";
     xkbVariant = "";
-    xkbOptions = "caps:escape";
+    #xkbOptions = "caps:escape";
+    xkbOptions = "ctrl:nocaps";
     libinput = {
       enable = true;
       mouse = {
