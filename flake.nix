@@ -29,6 +29,7 @@
             ./modules/gaming.nix
             ./modules/virtualisation.nix
             ./modules/database.nix
+            ./modules/android.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
