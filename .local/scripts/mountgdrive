@@ -1,0 +1,5 @@
+#!/bin/sh
+
+rclone mount gd: /mnt/drive 
+ln -sf /mnt/drive /home/sergio/current_uni/drive
+
