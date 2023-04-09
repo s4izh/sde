@@ -63,6 +63,7 @@
     # pandoc-citeproc
     texlive.combined.scheme-full
     aspell
+    # libreoffice-fresh
     rclone
     # python
     python39Packages.setuptools
