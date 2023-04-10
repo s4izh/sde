@@ -162,5 +162,5 @@
 ;;   :config
 ;;   (auth-source-pass-enable))
 
-(load (concat user-emacs-directory
-              "lisp/guix.el"))
+;; (load (concat user-emacs-directory
+;;               "lisp/guix.el"))
