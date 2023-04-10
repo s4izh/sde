@@ -1,0 +1,174 @@
+(defun efs/org-mode-setup ()
+  ;; (variable-pitch-mode 1)
+  (org-indent-mode)
+  (visual-line-mode 1))
+
+(use-package org
+  :ensure t
+  ;; :hook (org-mode . efs/org-mode-setup)
+  :config
+  (setq org-src-window-setup 'current-window)
+  (setq org-ellipsis " ▾")
+  (setq org-hide-emphasis-markers t)
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-src-tab-acts-natively t)
+  (setq org-log-into-drawer t)
+  (setq org-startup-indented t)           ;; Indent according to section
+  (setq org-startup-with-inline-images t) ;; Display images in-buffer by default
+  (setq org-startup-folded t)
+  (setq org-capture-templates
+	'(("t" "Task" entry  (file+headline "~/notes/inbox.org" "Tasks") "** TODO %?\nContext: %a\n")
+	  ("i" "Idea" entry  (file+headline "~/notes/inbox.org" "Ideas") "** %?\nContext: %a\n")
+
+	  ("u" "Uni entries")
+	  ("uc" "CPD" entry  (file+headline "~/notes/uni/cpd.org" "Tasks") "** %?\n%a\n")
+	  ("us" "SOA" entry  (file+headline "~/notes/uni/soa.org" "Tasks") "** %?\n%a\n")
+	  ("ux" "SDX" entry  (file+headline "~/notes/uni/sdx.org" "Tasks") "** %?\n%a\n")
+	  ("ut" "TXC" entry  (file+headline "~/notes/uni/txc.org" "Tasks") "** %?\n%a\n")
+	  ("up" "PTI" entry  (file+headline "~/notes/uni/pti.org" "Tasks") "** %?\n%a\n")
+
+	  ("p" "Project entries")
+	  ("pz" "ZeOS" entry  (file+headline "~/notes/uni/soa.org" "ZeOS") "** %?\n%a\n")
+
+	  ("j" "Journal" entry (file+datetree "~/notes/journal.org")
+	   "* %?\nEntered on %U\n  %i\n  %a"))))
+
+;; when org-hide-emphasis-markers is on it shows
+;; the markup symbols when the cursor is place inside the word
+(use-package org-appear
+  :ensure t
+  :hook (org-mode . org-appear-mode))
+
+(defun ss/search-org-files ()
+  (interactive)
+  (counsel-rg "" "~/notes" nil "Search Notes: "))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook ((org-mode . evil-org-mode)
+	 (org-agenda-mode . evil-org-mode)
+	 (evil-org-mode . (lambda () (evil-org-set-key-theme '(navigation todo insert textobjects additional)))))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+(ss/leader-key-def
+ "o"   '(:ignore t :which-key "org mode")
+ "ol"  '(:ignore t :which-key "links")
+ "oli" '(org-insert-link :which-key "insert link")
+ "ols" '(org-store-link :which-key "store link")
+ "on"  '(org-toggle-narrow-to-subtree :which-key "toggle narrow")
+ "os"  '(ss/search-org-files :which-key "search notes")
+ "oI"  '(org-toggle-inline-images :which-key "toggle inline images")
+ "oS"  '(ss/org-screenshot-notes-img :which-key "screenshot")
+ "oD"  '(ss/remove-last-pkm-screenshot :which-key "remove-last-screenshot")
+ "oa"  '(org-agenda :which-key "status")
+ ;; "od"  '(org-agenda-day-view :which-key "agenda day view")
+ ;; "ou"  '(org-todo-list "uni" :which-key "uni tasks")
+ "ot"  '(org-todo-list :which-key "todos")
+ "oc"  '(org-capture t :which-key "capture")
+ "op"  '(org-latex-export-to-pdf t :which-key "export to pdf")
+ "oxx"  '(org-export-dispatch t :which-key "export")
+ "oxf"  '(ss/org-export-dispatch-with-folder :which-key "export choosing folder"))
+
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c C-l") 'org-insert-link)
+
+(use-package org-modern
+  :ensure t
+  :hook ((org-mode                 . org-modern-mode)
+	 (org-agenda-finalize-hook . org-modern-agenda))
+  :custom ((org-modern-todo t)
+	   (org-modern-table nil)
+	   (org-modern-variable-pitch nil)
+	   (org-modern-block-fringe nil))
+  :commands (org-modern-mode org-modern-agenda)
+  :init (global-org-modern-mode))
+
+  (use-package org-roam
+    :ensure t
+    :custom
+    (org-roam-directory "~/notes")
+    (org-roam-completion-everywhere t)
+    (org-roam-completion-system 'default)
+    (org-roam-db-autosync-mode)
+    (org-roam-capture-templates
+     '(("m" "main" plain
+        "%?"
+        :if-new (file+head "main/${slug}.org"
+                           "#+title: ${title}\n")
+        :immediate-finish t
+        :unnarrowed t)
+       ("u" "uni" plain
+        "%?"
+        :if-new (file+head "uni/${slug}.org"
+                           "#+title: ${title}\n#+filetags: uni\n\n* Info\n** Material\n** Tasks\n** Horari\n* Teoria")
+        :immediate-finish t
+        :unnarrowed t)
+       ("p" "project" plain "*Project info\n\n** Goals\n\n%?\n\n** Tasks\n\n**\n\n** Dates\n\n"
+        :if-new (file+head "projects/${slug}.org" "#+title: ${title}\n#+filetags: project")
+        :unnarrowed t)
+       ("n" "note" plain
+        "** %?\n%a"
+        :target (headline "* Captures")
+        :immediate-finish t
+        :unnarrowed t)
+       )))
+
+  (setq org-roam-node-display-template
+        (concat "${title:*} "
+                (propertize "${tags:10}" 'face 'org-tag)))
+
+  (ss/leader-key-def
+    ;; "or" '(ignore t :which-key "roam")
+    "rb" '(org-roam-buffer-toggle :which-key "buffer toggle")
+    "rc" '(org-roam-capture :which-key "roam capture")
+    "rf"  '(org-roam-node-find :which-key "node find")
+    "ri" '(org-roam-node-insert :which-key "node insert")
+    "rI" '(org-roam-node-insert-immediate :which-key "node insert immediate")
+    "ru"  '(org-roam-db-sync :which-key "sync roam db"))
+
+(use-package org-roam-ui
+  :after org-roam
+  :ensure t
+  ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+  ;;         a hookable mode anymore, you're advised to pick something yourself
+  ;;         if you don't care about startup time, use
+  ;;  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+	org-roam-ui-follow t
+	org-roam-ui-update-on-save t
+	org-roam-ui-open-on-start t))
+
+;; show folder on display
+(cl-defmethod org-roam-node-type ((node org-roam-node))
+    "Return the TYPE of NODE."
+    (condition-case nil
+        (file-name-nondirectory
+         (directory-file-name
+          (file-name-directory
+           (file-relative-name (org-roam-node-file node) org-roam-directory))))
+      (error "")))
+
+  (setq org-roam-node-display-template
+      (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+
+(custom-set-variables
+ '(org-agenda-files (list "~/notes/projects" "~/notes/uni" "~/notes/inbox.org")))
+(setq calendar-week-start-day 1)
+
+
+(defun ss/org-screenshot-notes-img ()
+  "Take a screenshot into a time stamped unique-named file in the
+    img directory under the org-buffer directory and insert a link to this file."
+  (interactive)
+  (setq img-dir (concat (getenv "HOME") "/notes/attachments/img"))
+  (unless (file-exists-p img-dir)
+    (make-directory img-dir))
+  (setq filename
+	(concat img-dir "/" (format-time-string "%Y%m%d_%H%M%S") ".png"))
+  (call-process "import" nil nil nil filename)
+  (insert (concat "[[" filename "]]")))

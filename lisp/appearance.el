@@ -10,7 +10,8 @@
 (setq ring-bell-function 'ignore)
 (display-battery-mode t)
 
-(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-12"))
+;; (add-to-list 'default-frame-alist '(font . "DejaVuSansMono-12"))
+(add-to-list 'default-frame-alist '(font . "LiberationMono-13"))
 (setq locale-coding-system 'utf-8)
 
 ;; THEME
@@ -57,3 +58,17 @@
 		woman-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+;; modus
+  (setq ;;modus-themes-mode-line '(accented borderless)
+        modus-themes-bold-constructs t
+        modus-themes-italic-constructs t
+        ;; modus-themes-fringes 'subtle
+        modus-themes-tabs-accented t
+        modus-themes-paren-match '(bold intense)
+        ;; modus-themes-prompts '(bold intense)
+        modus-themes-completions 'opinionated
+        modus-themes-org-blocks 'gray-background
+        ;; modus-themes-org-blocks 'tinted-background
+        ;; modus-themes-scale-headings t
+        modus-themes-region '(bg-only))

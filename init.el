@@ -17,6 +17,12 @@
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
 
+(use-package async
+  :ensure t
+  :defer t
+  :init
+  (dired-async-mode 1))
+
 (use-package undo-fu)
 
 (use-package undo-tree
@@ -25,7 +31,10 @@
   (setq undo-tree-auto-save-history nil)
   (global-undo-tree-mode 1))
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (global-set-key (kbd "C-M-u") 'universal-argument)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package evil
   :demand t
@@ -150,6 +159,12 @@
   :init
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(load (concat user-emacs-directory
+              "lisp/general.el"))
+
+(load (concat user-emacs-directory
+              "lisp/org.el"))
+
 ;;; PASS
 ;; (use-package password-store
 ;;   :commands (password-store-copy
@@ -164,3 +179,4 @@
 
 ;; (load (concat user-emacs-directory
 ;;               "lisp/guix.el"))
+
