@@ -16,6 +16,7 @@
 
 ;; THEME
 (use-package doom-themes
+  :disabled t
   :config
   (load-theme 'doom-sourcerer t))
 
