@@ -10,6 +10,8 @@
   environment.systemPackages = with pkgs; [
     dmenu
     sxhkd
+    stumpwm
+    # lisp-stumpwm
   ];
 
   nixpkgs.overlays = [
