@@ -4,3 +4,4 @@ elpa
 etc
 transient
 var
+custom-vars.el
