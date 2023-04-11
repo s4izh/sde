@@ -1,5 +1,10 @@
 (use-package undo-fu)
 
+(use-package undo-fu-session ; Persistant undo history
+  :ensure t
+  :demand t
+  :config (global-undo-fu-session-mode))
+
 (use-package undo-tree
   :disabled t
   :config
@@ -37,3 +42,9 @@
   :after evil
   :bind (:map evil-normal-state-map
               ("gc" . evil-commentary)))
+
+(use-package repeat
+  ;; :ensure t
+  :defer 10
+  :init
+  (repeat-mode +1))

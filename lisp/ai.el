@@ -1,3 +1,4 @@
+;; chatgpt
 (use-package chatgpt
   :straight (:host github :repo "joshcho/ChatGPT.el" :files ("dist" "*.el"))
   :init
@@ -17,7 +18,7 @@
 					;; your new prompt
 					("my-custom-type" . "My custom prompt.\n\n%s")))
 
-
+;; copilot
 (defun rk/copilot-tab ()
   "Tab command that will complet with copilot if a completion is
     available. Otherwise will try company, yasnippet or normal
@@ -81,8 +82,6 @@
 
 (defvar rk/copilot-enable-for-org nil
   "Should copilot be enabled for org-mode buffers?")
-
-
 
 (defun rk/copilot-enable-predicate ()
   ""

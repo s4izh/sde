@@ -16,12 +16,12 @@
 
 ;; THEME
 (use-package doom-themes
-  :disabled t
+  ;; :disabled t
   :config
   (load-theme 'doom-sourcerer t))
 
 (use-package spaceway-theme
-  ;; :disabled t
+  :disabled t
   :ensure nil
   :load-path "lisp/spaceway/"
   :config

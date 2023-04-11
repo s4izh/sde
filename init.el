@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
+(setq user-emacs-directory "~/.emacs.d/")
+
 (setq ss/is-guix
       (string-suffix-p "This is the GNU system.  Welcome."
 		       (string-trim (shell-command-to-string "cat /etc/issue"))))
@@ -16,6 +18,28 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	 'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Always use straight to install on systems other than Linux
+(setq straight-use-package-by-default (not (eq system-type 'gnu/linux)))
+
+;; Use straight.el for use-package expressions
+(straight-use-package 'use-package)
+
+;; Load the helper package for commands like `straight-x-clean-unused-repos'
+(require 'straight-x)
 
 (load (concat user-emacs-directory
               "lisp/evil.el"))
@@ -79,8 +103,8 @@
   ;; emacs 28
   (setq dired-kill-when-opening-new-dired-buffer t))
 
-(load (concat user-emacs-directory
-              "lisp/modeline.el"))
+;; (load (concat user-emacs-directory
+;;               "lisp/modeline.el"))
 
 ;;; COMPLETION
 (use-package vertico
@@ -123,11 +147,22 @@
   :init
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; remove trailing whitespaces
+(use-package ws-butler
+  :ensure t
+  :hook ((text-mode . ws-butler-mode)
+         (prog-mode . ws-butler-mode)))
+
 (load (concat user-emacs-directory
               "lisp/general.el"))
 
 (load (concat user-emacs-directory
               "lisp/org.el"))
+
+(load (concat user-emacs-directory
+              "lisp/ai.el"))
+
+(setq tramp-default-method "ssh")
 
 ;;; PASS
 ;; (use-package password-store
@@ -144,3 +179,43 @@
 ;; (load (concat user-emacs-directory
 ;;               "lisp/guix.el"))
 
+
+
+;;;; Code Completion
+(use-package corfu
+  ;; Optional customizations
+  :hook((emacs-lisp-mode . corfu-mode))
+  :custom
+  (corfu-cycle t)                 ; Allows cycling through candidates
+  (corfu-auto t)                  ; Enable auto completion
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.0)
+  (corfu-popupinfo-delay '(0.5 . 0.2))
+  (corfu-preview-current 'insert) ; Do not preview current candidate
+  (corfu-preselect-first nil)
+  (corfu-on-exact-match nil)      ; Don't auto expand tempel snippets
+
+  ;; Optionally use TAB for cycling, default is `corfu-complete'.
+  :bind (:map corfu-map
+              ("M-SPC"      . corfu-insert-separator)
+              ("TAB"        . corfu-next)
+              ([tab]        . corfu-next)
+              ("S-TAB"      . corfu-previous)
+              ([backtab]    . corfu-previous)
+              ;; ("S-<return>" . corfu-insert)
+              ("C-y" . corfu-complete)
+              ("RET"        . nil))
+
+  :init
+  (global-corfu-mode)
+  (corfu-history-mode)
+  (corfu-popupinfo-mode) ; Popup completion info
+  :config
+  (add-hook 'eshell-mode-hook
+            (lambda () (setq-local corfu-quit-at-boundary t
+                              corfu-quit-no-match t
+                              corfu-auto nil)
+              (corfu-mode))))
+
+(load (concat user-emacs-directory
+               "lisp/dev.el"))
