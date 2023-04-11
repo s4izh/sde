@@ -67,6 +67,7 @@
     rclone
     # python
     python39Packages.setuptools
+    # vimb
   ];
 
   # programs.starship.enable = true;
