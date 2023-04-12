@@ -159,27 +159,13 @@
 (load (concat user-emacs-directory
               "lisp/org.el"))
 
-(load (concat user-emacs-directory
-              "lisp/ai.el"))
+;; (load (concat user-emacs-directory
+;;               "lisp/ai.el"))
 
 (setq tramp-default-method "ssh")
 
-;;; PASS
-;; (use-package password-store
-;;   :commands (password-store-copy
-;;              password-store-insert
-;;              password-store-generate))
-
-;; Authenticte with auth-source-pass
-;; (use-package auth-source-pass
-;;   :after password-store
-;;   :config
-;;   (auth-source-pass-enable))
-
-;; (load (concat user-emacs-directory
-;;               "lisp/guix.el"))
-
-
+(load (concat user-emacs-directory
+               "lisp/dev.el"))
 
 ;;;; Code Completion
 (use-package corfu
@@ -217,5 +203,48 @@
                               corfu-auto nil)
               (corfu-mode))))
 
-(load (concat user-emacs-directory
-               "lisp/dev.el"))
+(use-package consult
+  :after vertico
+  :bind (("C-x b"       . consult-buffer)))
+         ;; ("C-x C-k C-k" . consult-kmacro)
+         ;; ("M-y"         . consult-yank-pop)
+         ;; ("M-g g"       . consult-goto-line)
+         ;; ("M-g M-g"     . consult-goto-line)
+         ;; ("M-g f"       . consult-flymake)
+         ;; ("M-g i"       . consult-imenu)
+         ;; ("M-s l"       . consult-line)
+         ;; ("M-s L"       . consult-line-multi)
+         ;; ("M-s u"       . consult-focus-lines)
+         ;; ("M-s g"       . consult-ripgrep)
+         ;; ("M-s M-g"     . consult-ripgrep)
+         ;; ("C-x C-SPC"   . consult-global-mark)
+         ;; ("C-x M-:"     . consult-complex-command)
+         ;; ("C-c n"       . consult-org-agenda)
+         ;; ("C-c m"       . my/notegrep)
+         ;; :map help-map
+         ;; ("a" . consult-apropos)
+         ;; :map minibuffer-local-map
+         ;; ("M-r" . consult-history))
+  ;; :custom
+  ;; (completion-in-region-function #'consult-completion-in-region)
+  ;; :config
+  ;; (defun my/notegrep ()
+  ;;   "Use interactive grepping to search my notes"
+  ;;   (interactive)
+  ;;   (consult-ripgrep org-directory))
+  ;; (recentf-mode t))
+
+;;; PASS
+;; (use-package password-store
+;;   :commands (password-store-copy
+;;              password-store-insert
+;;              password-store-generate))
+
+;; Authenticte with auth-source-pass
+;; (use-package auth-source-pass
+;;   :after password-store
+;;   :config
+;;   (auth-source-pass-enable))
+
+;; (load (concat user-emacs-directory
+;;               "lisp/guix.el"))

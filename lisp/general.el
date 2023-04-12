@@ -12,10 +12,11 @@
 (ss/leader-key-def
  "ff" '(project-find-file :which-key "find file")
  "," '(find-file :which-key "find file")
- "fg" '(counsel-rg :which-key "live grep")
+ "fg" '(consult-ripgrep :which-key "live grep")
+ "fG" '(consult-git-grep :which-key "live git grep")
  "t"  '(:ignore t :which-key "ui toggles")
  "jc"  '(:ignore t :which-key "config files")
- "tt" '(counsel-load-theme :which-key "choose theme")
+ "tt" '(consult-theme :which-key "choose theme")
  "bi"  '(ibuffer :which-key "go to ibuffer")
  "bb"  '(counsel-switch-buffer :which-key "counsel-switch-buffer")
  "bk"  '(kill-buffer :which-key "kill-buffer")

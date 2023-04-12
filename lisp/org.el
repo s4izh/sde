@@ -17,6 +17,12 @@
   (setq org-startup-indented t)           ;; Indent according to section
   (setq org-startup-with-inline-images t) ;; Display images in-buffer by default
   (setq org-startup-folded t)
+  ;; test
+  (setq org-return-follows-link t)
+  (setq org-mouse-1-follows-link t)
+
+  ;; Display links as the description provided
+  (setq org-descriptive-links t)
   (setq org-capture-templates
 	'(("t" "Task" entry  (file+headline "~/notes/inbox.org" "Tasks") "** TODO %?\nContext: %a\n")
 	  ("i" "Idea" entry  (file+headline "~/notes/inbox.org" "Ideas") "** %?\nContext: %a\n")
