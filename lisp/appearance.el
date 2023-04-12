@@ -72,6 +72,7 @@
                 shell-mode-hook
                 org-agenda-mode-hook
                 compilation-mode-hook
+                ;; dired-mode
 		woman-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))

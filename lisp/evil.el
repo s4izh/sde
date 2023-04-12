@@ -48,3 +48,9 @@
   :defer 10
   :init
   (repeat-mode +1))
+
+;; tab widths
+(setq-default tab-width 2)
+(setq-default evil-shift-width tab-width)
+;; spaces instead of tabs
+(setq-default indent-tabs-mode nil)
