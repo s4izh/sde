@@ -16,7 +16,7 @@
 
 ;; THEME
 (use-package doom-themes
-  ;; :disabled t
+  :disabled t
   :config
   (load-theme 'doom-sourcerer t))
 
@@ -63,6 +63,7 @@
   (setq ;;modus-themes-mode-line '(accented borderless)
         modus-themes-bold-constructs t
         modus-themes-italic-constructs t
+        modus-themes-mode-line t
         ;; modus-themes-fringes 'subtle
         modus-themes-tabs-accented t
         modus-themes-paren-match '(bold intense)
@@ -72,3 +73,5 @@
         ;; modus-themes-org-blocks 'tinted-background
         ;; modus-themes-scale-headings t
         modus-themes-region '(bg-only))
+
+(load-theme 'modus-vivendi)

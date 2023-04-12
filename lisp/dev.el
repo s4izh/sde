@@ -29,3 +29,6 @@
   (setq-local completion-styles '(orderless)
               completion-category-defaults nil))
 (add-hook 'lsp-mode-hook #'corfu-lsp-setup)
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
