@@ -14,9 +14,26 @@
 (add-to-list 'default-frame-alist '(font . "LiberationMono-13"))
 (setq locale-coding-system 'utf-8)
 
-;; THEME
+;; THEMES
+;; modus
+(setq ;;modus-themes-mode-line '(accented borderless)
+ modus-themes-bold-constructs t
+ modus-themes-italic-constructs t
+ modus-themes-mode-line t
+ ;; modus-themes-fringes 'subtle
+ modus-themes-tabs-accented t
+ modus-themes-paren-match '(bold intense)
+ ;; modus-themes-prompts '(bold intense)
+ modus-themes-completions 'opinionated
+ modus-themes-org-blocks 'gray-background
+ ;; modus-themes-org-blocks 'tinted-background
+ ;; modus-themes-scale-headings t
+ modus-themes-region '(bg-only))
+
+;; (load-theme 'modus-vivendi)
+
 (use-package doom-themes
-  :disabled t
+  ;; :disabled t
   :config
   (load-theme 'doom-sourcerer t))
 
@@ -59,19 +76,3 @@
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; modus
-  (setq ;;modus-themes-mode-line '(accented borderless)
-        modus-themes-bold-constructs t
-        modus-themes-italic-constructs t
-        modus-themes-mode-line t
-        ;; modus-themes-fringes 'subtle
-        modus-themes-tabs-accented t
-        modus-themes-paren-match '(bold intense)
-        ;; modus-themes-prompts '(bold intense)
-        modus-themes-completions 'opinionated
-        modus-themes-org-blocks 'gray-background
-        ;; modus-themes-org-blocks 'tinted-background
-        ;; modus-themes-scale-headings t
-        modus-themes-region '(bg-only))
-
-(load-theme 'modus-vivendi)
