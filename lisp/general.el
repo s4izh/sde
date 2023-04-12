@@ -16,7 +16,7 @@
  "fG" '(consult-git-grep :which-key "live git grep")
  "t"  '(:ignore t :which-key "ui toggles")
  "jc"  '(:ignore t :which-key "config files")
- "tt" '(consult-theme :which-key "choose theme")
+ "tt" '(load-theme :which-key "choose theme")
  "bi"  '(ibuffer :which-key "go to ibuffer")
  "bb"  '(counsel-switch-buffer :which-key "counsel-switch-buffer")
  "bk"  '(kill-buffer :which-key "kill-buffer")
