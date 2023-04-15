@@ -1,1 +1,3 @@
 set selection-clipboard clipboard
+set default-bg "#1b182c" #00
+set default-fg "#cbe3e7" #01
