@@ -3,43 +3,63 @@
   (org-indent-mode)
   (visual-line-mode 1))
 
-(use-package org
-  :ensure t
-  ;; :hook (org-mode . efs/org-mode-setup)
-  :config
-  (setq org-directory "~/notes")
-  (setq org-src-window-setup 'current-window)
-  (setq org-ellipsis " ▾")
-  (setq org-hide-emphasis-markers t)
-  (setq org-agenda-start-with-log-mode t)
-  (setq org-log-done 'time)
-  (setq org-src-tab-acts-natively t)
-  (setq org-log-into-drawer t)
-  ;; (setq org-startup-indented t)           ;; Indent according to section
-  (setq org-startup-with-inline-images t) ;; Display images in-buffer by default
-  (setq org-startup-folded t)
-  ;; test
-  (setq org-return-follows-link t)
-  (setq org-mouse-1-follows-link t)
+(defvar prot-org-custom-daily-agenda
+  ;; NOTE 2021-12-08: Specifying a match like the following does not
+  ;; work.
+  ;;
+  ;; tags-todo "+PRIORITY=\"A\""
+  ;;
+  ;; So we match everything and then skip entries with
+  ;; `org-agenda-skip-function'.
+  `((tags-todo "*"
+               ((org-agenda-skip-function '(org-agenda-skip-if nil '(timestamp)))
+                (org-agenda-skip-function
+                 `(org-agenda-skip-entry-if
+                   'notregexp ,(format "\\[#%s\\]" (char-to-string org-priority-highest))))
+                (org-agenda-block-separator nil)
+                (org-agenda-overriding-header "Important tasks without a date\n")))
+    (agenda "" ((org-agenda-span 1)
+                (org-deadline-warning-days 0)
+                (org-agenda-block-separator nil)
+                (org-scheduled-past-days 0)
+                ;; We don't need the `org-agenda-date-today'
+                ;; highlight because that only has a practical
+                ;; utility in multi-day views.
+                (org-agenda-day-face-function (lambda (date) 'org-agenda-date))
+                (org-agenda-format-date "%A %-e %B %Y")
+                (org-agenda-overriding-header "\nToday's agenda\n")))
+    (agenda "" ((org-agenda-start-on-weekday nil)
+                (org-agenda-start-day "+1d")
+                (org-agenda-span 3)
+                (org-deadline-warning-days 0)
+                (org-agenda-block-separator nil)
+                (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                (org-agenda-overriding-header "\nNext three days\n")))
+    (agenda "" ((org-agenda-time-grid nil)
+                (org-agenda-start-on-weekday nil)
+                ;; We don't want to replicate the previous section's
+                ;; three days, so we start counting from the day after.
+                (org-agenda-start-day "+4d")
+                (org-agenda-span 14)
+                (org-agenda-show-all-dates nil)
+                (org-deadline-warning-days 0)
+                (org-agenda-block-separator nil)
+                (org-agenda-entry-types '(:deadline))
+                (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n"))))
+  "Custom agenda for use in `org-agenda-custom-commands'.")
 
-  ;; Display links as the description provided
-  (setq org-descriptive-links t)
-  (setq org-capture-templates
-	'(("t" "Task" entry  (file+headline "~/notes/inbox.org" "Tasks") "** TODO %?\nContext: %a\n")
-	  ("i" "Idea" entry  (file+headline "~/notes/inbox.org" "Ideas") "** %?\nContext: %a\n")
-
-	  ("u" "Uni entries")
-	  ("uc" "CPD" entry  (file+headline "~/notes/uni/cpd.org" "Tasks") "** %?\n%a\n")
-	  ("us" "SOA" entry  (file+headline "~/notes/uni/soa.org" "Tasks") "** %?\n%a\n")
-	  ("ux" "SDX" entry  (file+headline "~/notes/uni/sdx.org" "Tasks") "** %?\n%a\n")
-	  ("ut" "TXC" entry  (file+headline "~/notes/uni/txc.org" "Tasks") "** %?\n%a\n")
-	  ("up" "PTI" entry  (file+headline "~/notes/uni/pti.org" "Tasks") "** %?\n%a\n")
-
-	  ("p" "Project entries")
-	  ("pz" "ZeOS" entry  (file+headline "~/notes/uni/soa.org" "ZeOS") "** %?\n%a\n")
-
-	  ("j" "Journal" entry (file+datetree "~/notes/journal.org")
-	   "* %?\nEntered on %U\n  %i\n  %a"))))
+(setq org-agenda-custom-commands
+      `(("A" "Daily agenda and top priority tasks"
+         ,prot-org-custom-daily-agenda)
+        ("P" "Plain text daily agenda and top priorities"
+         ,prot-org-custom-daily-agenda
+         ((org-agenda-with-colors nil
+          (org-agenda-prefix-format "%t %s")
+          (org-agenda-current-time-string ,(car (last org-agenda-time-grid)))
+          (org-agenda-fontify-priorities nil)
+          (org-agenda-remove-tags t))
+         ("agenda.txt"))))
 
 ;; when org-hide-emphasis-markers is on it shows
 ;; the markup symbols when the cursor is place inside the word
@@ -95,36 +115,36 @@
   :commands (org-modern-mode org-modern-agenda)
   :init (global-org-modern-mode))
 
-  (use-package org-roam
-    :ensure t
-    :custom
-    (org-roam-directory "~/notes")
-    (org-roam-completion-everywhere t)
-    (org-roam-completion-system 'default)
-    (org-roam-db-autosync-mode)
-    (org-roam-capture-templates
-     '(("m" "main" plain
-        "%?"
-        :if-new (file+head "main/${slug}.org"
-                           "#+title: ${title}\n#+date: [%Y-%m-%d %a %H:%M}]")
-;; :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-        :immediate-finish t
-        :unnarrowed t)
-       ("u" "uni" plain
-        "%?"
-        :if-new (file+head "uni/${slug}.org"
-                           "#+title: ${title}\n#+filetags: uni\n\n* Info\n** Material\n** Tasks\n** Horari\n* Teoria")
-        :immediate-finish t
-        :unnarrowed t)
-       ("p" "project" plain "*Project info\n\n** Goals\n\n%?\n\n** Tasks\n\n**\n\n** Dates\n\n"
-        :if-new (file+head "projects/${slug}.org" "#+title: ${title}\n#+filetags: project")
-        :unnarrowed t)
-       ("n" "note" plain
-        "** %?\n%a"
-        :target (headline "* Captures")
-        :immediate-finish t
-        :unnarrowed t)
-       )))
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory "~/notes")
+  (org-roam-completion-everywhere t)
+  (org-roam-completion-system 'default)
+  (org-roam-db-autosync-mode)
+  (org-roam-capture-templates
+   '(("m" "main" plain
+      "%?"
+      :if-new (file+head "main/${slug}.org"
+                         "#+title: ${title}\n#+date: [%Y-%m-%d %a %H:%M}]")
+      ;; :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :immediate-finish t
+      :unnarrowed t)
+     ("u" "uni" plain
+      "%?"
+      :if-new (file+head "uni/${slug}.org"
+                         "#+title: ${title}\n#+filetags: uni\n\n* Info\n** Material\n** Tasks\n** Horari\n* Teoria")
+      :immediate-finish t
+      :unnarrowed t)
+     ("p" "project" plain "*Project info\n\n** Goals\n\n%?\n\n** Tasks\n\n**\n\n** Dates\n\n"
+      :if-new (file+head "projects/${slug}.org" "#+title: ${title}\n#+filetags: project")
+      :unnarrowed t)
+     ("n" "note" plain
+      "** %?\n%a"
+      :target (headline "* Captures")
+      :immediate-finish t
+      :unnarrowed t)
+     )))
 
   (setq org-roam-node-display-template
         (concat "${title:*} "

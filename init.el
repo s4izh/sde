@@ -237,6 +237,15 @@
 (use-package embark
   :bind(("C-," . embark-act)))
 
+;; (use-package embark-consult
+;;   :ensure t
+;;   :after (:all embark consult)
+;;   :demand t
+;;   ;; if you want to have consult previews as you move around an
+;;   ;; auto-updating embark collect buffer
+;;   :hook
+;;   (embark-collect-mode . consult-preview-at-point-mode))
+
 ;;; PASS
 ;; (use-package password-store
 ;;   :commands (password-store-copy
