@@ -68,6 +68,8 @@
     # python
     python39Packages.setuptools
     # vimb
+    # vpn
+    openfortivpn
   ];
 
   # programs.starship.enable = true;
