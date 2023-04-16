@@ -188,8 +188,8 @@
               ([tab]        . corfu-next)
               ("S-TAB"      . corfu-previous)
               ([backtab]    . corfu-previous)
-              ;; ("S-<return>" . corfu-insert)
-              ("C-y" . corfu-complete)
+              ("<return>" . corfu-complete)
+              ;; ("C-y" . corfu-complete) ;; doesnt work idk why
               ("RET"        . nil))
 
   :init
