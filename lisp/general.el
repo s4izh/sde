@@ -33,3 +33,8 @@
  "jce" '(lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/init.el")) :which-key "emacs config"))
 
 (global-set-key (kbd "<f5>") #'recompile)
+
+
+(ss/leader-key-def
+  "g"  '(:ignore t :which-key "toggles")
+  "gs" '(magit-status :which-key "git status"))
