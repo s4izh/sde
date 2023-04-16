@@ -48,7 +48,8 @@
 
 (defun ss/search-org-files ()
   (interactive)
-  (counsel-rg "" "~/notes" nil "Search Notes: "))
+  ;; (consult-ripgrep  "~/notes" nil "Search Notes: "))
+  (consult-ripgrep  "~/notes"))
 
 (use-package evil-org
   :ensure t
@@ -104,7 +105,8 @@
      '(("m" "main" plain
         "%?"
         :if-new (file+head "main/${slug}.org"
-                           "#+title: ${title}\n")
+                           "#+title: ${title}\n#+date: [%Y-%m-%d %a %H:%M}]")
+;; :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
         :immediate-finish t
         :unnarrowed t)
        ("u" "uni" plain
@@ -178,3 +180,34 @@
 	(concat img-dir "/" (format-time-string "%Y%m%d_%H%M%S") ".png"))
   (call-process "import" nil nil nil filename)
   (insert (concat "[[" filename "]]")))
+
+
+
+  ;; (org-babel-do-load-languages
+  ;;    'org-babel-load-languages
+  ;;    '((haskell . t) (emacs-lisp . t) (shell . t) (python . t)
+  ;;      (C . t) (lua . t) (dot . t) (java . t)
+  ;;      (lisp . t) (clojure . t) (scheme . t)
+  ;;      (forth . t) (rust . t)))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)
+   (C . t)
+   (shell . t)))
+
+
+(setq org-confirm-babel-evaluate nil)
+(push '("conf-unix" . conf-unix) org-src-lang-modes)
+
+(use-package org-tempo
+  :ensure nil
+  :after org
+  :config
+  (let ((templates '(("sh"  . "src sh")
+                     ("el"  . "src emacs-lisp")
+                     ("vim" . "src vim")
+                     ("cpp" . "src C++ :includes <iostream>  :namespaces std"))))
+    (dolist (template templates)
+      (push template org-structure-template-alist))))
