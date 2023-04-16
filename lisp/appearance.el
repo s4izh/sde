@@ -30,10 +30,10 @@
  ;; modus-themes-scale-headings t
  modus-themes-region '(bg-only))
 
-;; (load-theme 'modus-vivendi)
+(load-theme 'modus-operandi)
 
 (use-package doom-themes
-  ;; :disabled t
+  :disabled t
   :config
   (load-theme 'doom-sourcerer t))
 
@@ -72,7 +72,7 @@
                 shell-mode-hook
                 org-agenda-mode-hook
                 compilation-mode-hook
-                ;; dired-mode
+                dired-mode-hook
 		woman-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
