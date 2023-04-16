@@ -51,3 +51,8 @@
   :bind ("C-c d" . docker))
 
 (use-package dockerfile-mode)
+
+(use-package vterm-toggle)
+
+(ss/leader-key-def
+  "k" '(vterm-toggle :which-key "toggle vterm"))
