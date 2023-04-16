@@ -6,6 +6,15 @@
   (lsp-enable-which-key-integration t)
   :custom (lsp-headerline-breadcrumb-enable nil))
 
+(use-package lsp-ui
+  :straight t
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (setq lsp-ui-sideline-enable t)
+  (setq lsp-ui-sideline-show-hover nil)
+  ;; (setq lsp-ui-doc-position 'bottom)
+  (lsp-ui-doc-show))
+
 (ss/leader-key-def
   "l"  '(:ignore t :which-key "lsp")
   "ld" 'xref-find-definitions
@@ -17,6 +26,8 @@
   ;; "le" 'lsp-ui-flycheck-list
   ;; "lS" 'lsp-ui-sideline-mode
   "la" 'lsp-execute-code-action)
+
+(use-package flycheck)
 
 (use-package rust-mode
   :ensure t
@@ -32,3 +43,11 @@
 
 (use-package nix-mode
   :mode "\\.nix\\'")
+
+(use-package yaml-mode
+  :mode "\\.yml\\'")
+
+(use-package docker
+  :bind ("C-c d" . docker))
+
+(use-package dockerfile-mode)
