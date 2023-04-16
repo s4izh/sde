@@ -30,10 +30,10 @@
  ;; modus-themes-scale-headings t
  modus-themes-region '(bg-only))
 
-(load-theme 'modus-operandi)
+;; (load-theme 'modus-operandi)
 
 (use-package doom-themes
-  :disabled t
+  ;; :disabled t
   :config
   (load-theme 'doom-sourcerer t))
 

@@ -7,6 +7,7 @@
   :ensure t
   ;; :hook (org-mode . efs/org-mode-setup)
   :config
+  (setq org-directory "~/notes")
   (setq org-src-window-setup 'current-window)
   (setq org-ellipsis " ▾")
   (setq org-hide-emphasis-markers t)
@@ -14,7 +15,7 @@
   (setq org-log-done 'time)
   (setq org-src-tab-acts-natively t)
   (setq org-log-into-drawer t)
-  (setq org-startup-indented t)           ;; Indent according to section
+  ;; (setq org-startup-indented t)           ;; Indent according to section
   (setq org-startup-with-inline-images t) ;; Display images in-buffer by default
   (setq org-startup-folded t)
   ;; test
