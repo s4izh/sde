@@ -16,13 +16,13 @@
   nixpkgs.overlays = [
     (final: prev: {
       dwm = prev.dwm.overrideAttrs (old: {
-	      src = /usr/local/src/dwm ;
+	      src = /home/sergio/.local/src/dwm ;
       });
       dmenu = prev.dmenu.overrideAttrs (old: {
-        src = /usr/local/src/dmenu ;
+        src = /home/sergio/.local/src/dmenu ;
       });
       dwmblocks = prev.dwmblocks.overrideAttrs (old: {
-        src = /usr/local/src/dwmblocks ;
+        src = /home/sergio/.local/src/dwmblocks ;
       });
   })
   ];
