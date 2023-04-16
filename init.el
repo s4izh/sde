@@ -234,6 +234,9 @@
   ;;   (consult-ripgrep org-directory))
   ;; (recentf-mode t))
 
+(use-package embark
+  :bind(("C-," . embark-act)))
+
 ;;; PASS
 ;; (use-package password-store
 ;;   :commands (password-store-copy
