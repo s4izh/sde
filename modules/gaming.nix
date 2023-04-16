@@ -2,16 +2,17 @@
 {
   environment.systemPackages = with pkgs; [
     legendary-gl
-      wineWowPackages.stable
-      # dxvk
-      heroic
-      # bottles
-      # gamescope
-      # oversteer
-      obs-studio
-      kdenlive
-      ffmpeg
-      # webcord
+    wineWowPackages.stable
+    # dxvk
+    heroic
+    # bottles
+    # gamescope
+    oversteer
+    obs-studio
+    kdenlive
+    ffmpeg
+    lutris
+    # webcord
   ];
 
   #Steam
