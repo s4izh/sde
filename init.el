@@ -1,10 +1,15 @@
 ;; -*- lexical-binding: t; -*-
 
+;; This file bootstraps the configuration, which is divided into
+;; a number of other files inside the `lisp' directory.
+
 (setq user-emacs-directory "~/.emacs.d/")
 
 (setq ss/is-guix
       (string-suffix-p "This is the GNU system.  Welcome."
 		       (string-trim (shell-command-to-string "cat /etc/issue"))))
+
+(setq ss/is-linux (eq system-type 'gnu/linux))
 
 (setq package-archives
   '(("melpa" . "https://melpa.org/packages/")
@@ -161,6 +166,9 @@
 
 ;; (load (concat user-emacs-directory
 ;;               "lisp/ai.el"))
+
+(load (concat user-emacs-directory
+              "lisp/ai2.el"))
 
 (setq tramp-default-method "ssh")
 
