@@ -37,6 +37,7 @@
     cargo-watch
     cargo-make
     rustup
+    rustfmt
     rust-analyzer
     bacon
     diesel-cli
