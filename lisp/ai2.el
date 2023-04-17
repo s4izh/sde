@@ -17,6 +17,9 @@
 (global-copilot-mode)
 
 (dolist (mode '(org-mode-hook
+                compilation-mode-hook
+                debugger-mode-hook
+                minibuffer-mode-hook
                 vterm-mode-hook
                 term-mode-hook
                 shell-mode-hook
