@@ -15,7 +15,7 @@
   (setq org-log-done 'time)
   (setq org-src-tab-acts-natively t)
   (setq org-log-into-drawer t)
-  ;; (setq org-startup-indented t)           ;; Indent according to section
+  (setq org-startup-indented t)           ;; Indent according to section
   (setq org-startup-with-inline-images t) ;; Display images in-buffer by default
   (setq org-startup-folded t)
   ;; test
