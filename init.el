@@ -213,7 +213,7 @@
 
 (use-package consult
   :after vertico
-  :bind (("C-x b"       . consult-buffer)))
+  :bind (("C-x b"       . consult-buffer))
          ;; ("C-x C-k C-k" . consult-kmacro)
          ;; ("M-y"         . consult-yank-pop)
          ;; ("M-g g"       . consult-goto-line)
@@ -233,14 +233,14 @@
          ;; ("a" . consult-apropos)
          ;; :map minibuffer-local-map
          ;; ("M-r" . consult-history))
-  ;; :custom
-  ;; (completion-in-region-function #'consult-completion-in-region)
-  ;; :config
-  ;; (defun my/notegrep ()
-  ;;   "Use interactive grepping to search my notes"
-  ;;   (interactive)
-  ;;   (consult-ripgrep org-directory))
-  ;; (recentf-mode t))
+  :custom
+  (completion-in-region-function #'consult-completion-in-region)
+  :config
+  (defun my/notegrep ()
+    "Use interactive grepping to search my notes"
+    (interactive)
+    (consult-ripgrep org-directory))
+  (recentf-mode t))
 
 (use-package embark
   :bind(("C-," . embark-act)))
