@@ -84,7 +84,11 @@
       `((".*" ,temporary-file-directory t))) (load custom-file 'noerror 'nomessage)
 
 (load (concat user-emacs-directory
+        "lisp/modeline.el"))
+
+(load (concat user-emacs-directory
 	      "lisp/appearance.el"))
+
 
 (use-package dired
   :ensure nil
@@ -107,9 +111,6 @@
   ;; prevent opening extra dired buffers
   ;; emacs 28
   (setq dired-kill-when-opening-new-dired-buffer t))
-
-;; (load (concat user-emacs-directory
-;;               "lisp/modeline.el"))
 
 ;;; COMPLETION
 (use-package vertico
