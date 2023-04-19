@@ -32,13 +32,13 @@
 
 ;; (load-theme 'modus-operandi)
 
-;; (use-package doom-themes
+(use-package doom-themes
   ;; :disabled t
-  ;; :config
-  ;; (load-theme 'doom-sourcerer t))
+  :config
+  (load-theme 'doom-sourcerer t))
 
 (use-package spaceway-theme
-  ;; :disabled t
+  :disabled t
   :ensure nil
   :load-path "lisp/spaceway/"
   :config
