@@ -36,9 +36,10 @@
     cargo
     cargo-watch
     cargo-make
+    rust-analyzer
     rustup
     rustfmt
-    rust-analyzer
+    rustc
     bacon
     diesel-cli
     # python tooling
@@ -71,6 +72,9 @@
     # vimb
     # vpn
     openfortivpn
+    # txc
+    gns3-gui
+    gns3-server
   ];
 
   # programs.starship.enable = true;
