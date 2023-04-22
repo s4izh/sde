@@ -13,7 +13,24 @@
     ffmpeg
     lutris
     # webcord
+    minecraft
+    prismlauncher
+    # openjdk8-bootstrap
+    jre8
+    jdk8
+    # xorg.libICE
+    # xorg.libxcb
+    # xorg.libXt
+    # visualvm
+    # haskellPackages.minecraft
   ];
+
+  # xdg.portal.enable = true;
+  # xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+  # services.flatpak.enable = true;
+
+  # services.logmein-hamachi.enable = true;
+  # programs.haguichi.enable = true;
 
   #Steam
   programs.steam = {
