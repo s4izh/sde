@@ -30,6 +30,7 @@
   (setq evil-want-Y-yank-to-eol t)
   :config
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  ;; (define-key evil-insert-state-map (kbd "C-y") 'corfu-complete)
   (evil-mode 1))
 
 (use-package evil-collection
