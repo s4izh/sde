@@ -56,9 +56,6 @@
   programs.emacs = {
     enable = true;
     package = pkgs.emacs;
-    extraConfig = ''
-      (setq user-emacs-directory "/home/sergio/.config/emacs/")
-    '';
   };
 
   gtk = {
