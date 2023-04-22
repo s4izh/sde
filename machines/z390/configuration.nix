@@ -19,6 +19,17 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 25565 ];
+  };
+
+  # networking = {
+  #   interfaces.eno2.ipv4.addresses = [{
+  #     address = "192.168.1.100";
+  #     prefixLength = 24;
+  #   }];
+  # };
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
