@@ -41,7 +41,7 @@
     rustfmt
     rustc
     rust-analyzer
-    bacon
+    # bacon
     diesel-cli
     # python tooling
     python3
