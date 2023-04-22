@@ -15,7 +15,7 @@
   (setq org-log-done 'time)
   (setq org-src-tab-acts-natively t)
   (setq org-log-into-drawer t)
-  (setq org-startup-indented t)           ;; Indent according to section
+  ;; (setq org-startup-indented t)           ;; Indent according to section
   (setq org-startup-with-inline-images t) ;; Display images in-buffer by default
   (setq org-startup-folded t)
   ;; test
@@ -79,13 +79,13 @@
                 ;; We don't want to replicate the previous section's
                 ;; three days, so we start counting from the day after.
                 (org-agenda-start-day "+4d")
-                (org-agenda-span 14)
+                (org-agenda-span 60)
                 (org-agenda-show-all-dates nil)
                 (org-deadline-warning-days 0)
                 (org-agenda-block-separator nil)
                 (org-agenda-entry-types '(:deadline))
                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                (org-agenda-overriding-header "\nUpcoming deadlines (+14d)\n"))))
+                (org-agenda-overriding-header "\nUpcoming deadlines (+60d)\n"))))
   "Custom agenda for use in `org-agenda-custom-commands'.")
 
 (setq org-agenda-custom-commands
@@ -144,6 +144,7 @@
 (global-set-key (kbd "C-c C-l") 'org-insert-link)
 
 (use-package org-modern
+  :disabled t
   :ensure t
   :hook ((org-mode                 . org-modern-mode)
 	 (org-agenda-finalize-hook . org-modern-agenda))
@@ -153,6 +154,15 @@
 	   (org-modern-block-fringe nil))
   :commands (org-modern-mode org-modern-agenda)
   :init (global-org-modern-mode))
+
+
+(use-package org-bullets
+  :disabled t
+  :ensure t
+  :hook (org-mode . org-bullets-mode)
+  ;; :custom
+  ;; (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+  )
 
   (use-package org-roam
     :ensure t
@@ -165,7 +175,7 @@
      '(("m" "main" plain
         "%?"
         :if-new (file+head "main/${slug}.org"
-                           "#+title: ${title}\n#+date: [%Y-%m-%d %a %H:%M}]")
+                           "#+title: ${title}\n}]")
 ;; :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
         :immediate-finish t
         :unnarrowed t)
@@ -225,7 +235,8 @@
       (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
 
 (custom-set-variables
- '(org-agenda-files (list "~/notes/projects" "~/notes/uni" "~/notes/inbox.org")))
+ ;; '(org-agenda-files (list "~/notes/projects" "~/notes/uni" "~/notes/inbox.org")))
+ '(org-agenda-files (list "~/notes/inbox.org")))
 (setq calendar-week-start-day 1)
 
 
@@ -242,6 +253,15 @@
   (insert (concat "[[" filename "]]")))
 
 
+(defun ss/org-export-dispatch-with-folder ()
+  (interactive)
+  (let ((out-dir (read-directory-name "Export to directory: ")))
+    (unless (file-exists-p out-dir)
+      (make-directory out-dir))
+    (let ((default-directory out-dir))
+      (org-export-dispatch))))
+
+
 
   ;; (org-babel-do-load-languages
   ;;    'org-babel-load-languages
@@ -249,6 +269,19 @@
   ;;      (C . t) (lua . t) (dot . t) (java . t)
   ;;      (lisp . t) (clojure . t) (scheme . t)
   ;;      (forth . t) (rust . t)))
+
+
+(use-package restclient
+  :ensure t
+  :mode ("\\.http\\'" . restclient-mode))
+
+(use-package ob-restclient
+  :ensure t
+  :after org
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((restclient . t))))
 
 (org-babel-do-load-languages
  'org-babel-load-languages
