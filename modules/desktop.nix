@@ -40,6 +40,7 @@
     rustup
     rustfmt
     rustc
+    rust-analyzer
     bacon
     diesel-cli
     # python tooling
@@ -56,6 +57,7 @@
     man-pages
     # dev
     starship
+    nmap
     # postman
     gdb
     cloc
@@ -70,6 +72,7 @@
     # python
     python39Packages.setuptools
     # vimb
+    pdftk
     # vpn
     openfortivpn
     # txc
