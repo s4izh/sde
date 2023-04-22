@@ -260,3 +260,8 @@
 
 ;; (load (concat user-emacs-directory
 ;;               "lisp/guix.el"))
+
+(use-package pdf-tools
+  :ensure t
+  :config
+  (pdf-tools-install))
