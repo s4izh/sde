@@ -8,9 +8,10 @@ if [ $? != 0 ]          # si no hay sesion se crea
 then
     tmux new-session -s $SESSION_NAME -d
     tmux send-keys -t $SESSION_NAME "cd $PROJECT_PATH" C-m
-    tmux send-keys -t $SESSION_NAME "nvim ." C-m
+    tmux send-keys -t $SESSION_NAME "cd backend && nvim ." C-m
     tmux new-window -n term -t $SESSION_NAME
     tmux send-keys -t $SESSION_NAME:2 "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME:2 "docker-compose run --service-ports backend" C-m
     tmux send-keys -t $SESSION_NAME:2 "clear" C-m
     # tmux new-window -n bacon -t $SESSION_NAME
     # tmux send-keys -t $SESSION_NAME:3 "cd $PROJECT_PATH" C-m
