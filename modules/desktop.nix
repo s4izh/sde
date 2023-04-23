@@ -58,6 +58,7 @@
     # dev
     starship
     nmap
+    jq
     # postman
     gdb
     cloc
