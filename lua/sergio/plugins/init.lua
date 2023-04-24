@@ -9,7 +9,8 @@ return {
     "rebelot/kanagawa.nvim",
     "Mofiqul/vscode.nvim",
     "folke/tokyonight.nvim",
-    "projekt0n/github-nvim-theme",
+    -- "projekt0n/github-nvim-theme",
+    "xero/sourcerer.vim",
 
 	"tpope/vim-commentary",
     "junegunn/fzf.vim",
