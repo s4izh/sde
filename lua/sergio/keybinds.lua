@@ -103,5 +103,7 @@ vim.keymap.set("n", "<Leader>rs", ":r! wayss -a <cr>")
 vim.keymap.set("n", "<Leader>wc0", ":set conceallevel=0<cr>")
 vim.keymap.set("n", "<Leader>wc2", ":set conceallevel=2<cr>")
 
+vim.keymap.set("i", "<C-g>", "<esc>")
+
 
 
