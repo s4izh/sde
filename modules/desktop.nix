@@ -38,7 +38,7 @@
     cargo-watch
     cargo-make
     rust-analyzer
-    rustup
+    # rustup esto no hace falta
     rustfmt
     rustc
     rust-analyzer
