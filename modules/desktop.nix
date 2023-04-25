@@ -41,7 +41,6 @@
     # rustup esto no hace falta
     rustfmt
     rustc
-    rust-analyzer
     # bacon
     diesel-cli
     # python tooling
