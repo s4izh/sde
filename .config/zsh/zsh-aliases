@@ -62,9 +62,6 @@ alias gc="git commit -m"
 alias gst="git status"
 alias ga="git add"
 
-# ssh par
-alias sshpar="ssh -X par4318@boada.ac.upc.edu"
-
 alias index="nvim index*"
 
 alias \
@@ -76,6 +73,7 @@ alias \
 	yta="yt -x -f bestaudio/best" \
 	ffmpeg="ffmpeg -hide_banner"
 
+
 # colorize commands when possible
 alias \
 	ls="ls --color=auto --group-directories-first" \
@@ -83,6 +81,10 @@ alias \
 	diff="diff --color=auto" \
 	ccat="highlight --out-format=ansi" \
 	ip="ip -color=auto"
+
+# alias ls="exa"
+
+alias ls="exa -g --group-directories-first" # --icons
 
 # abbreviated long commands
 alias \
@@ -110,8 +112,6 @@ alias sm="sudo make clean install"
 alias py="python"
 
 alias cfn="nvim /etc/nixos/configuration.nix"
-alias bn="sudo nixos-rebuild switch"
-alias bnf="sudo nixos-rebuild switch --flake . --impure"
 alias nr="cd ~/nixos && sudo nixos-rebuild switch --flake . --impure && cd -"
 alias nu="cd ~/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake . --impure && cd -"
 alias nd="nix develop"
