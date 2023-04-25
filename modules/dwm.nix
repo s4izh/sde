@@ -11,6 +11,7 @@
     dwmblocks
     dmenu
     sxhkd
+    xorg.xwininfo
   ];
 
   nixpkgs.overlays = [
