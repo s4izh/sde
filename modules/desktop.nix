@@ -22,6 +22,7 @@
     cowsay
     mpv
     xdotool
+    exa
     # compile tools
     nodejs
     libtool
