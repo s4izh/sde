@@ -20,7 +20,7 @@ _comp_options+=(globdots)		# Include hidden files.
 # edit current command in $EDITOR
 autoload edit-command-line
 zle -N edit-command-line
-bindkey '^X^E' edit-command-line
+bindkey '^x^x' edit-command-line # ctrl-x ctrl-x
 
 # Colors
 autoload -Uz colors && colors
