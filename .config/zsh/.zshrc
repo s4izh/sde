@@ -22,6 +22,8 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^x^x' edit-command-line # ctrl-x ctrl-x
 
+bindkey '^L' clear-screen
+
 # Colors
 autoload -Uz colors && colors
 
@@ -41,7 +43,7 @@ zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_completion "esc/conda-zsh-completion" false
 
 # Key-bindings
-bindkey -s '^o' 'ranger^M'
+# bindkey -s '^o' 'ranger^M'
 # bindkey -s '^a' 'tmux-default^M'
 # bindkey -s '^n' 'tmux-notes^M'
 bindkey '^R' history-incremental-search-backward
