@@ -94,6 +94,7 @@ vim.keymap.set("n", "<Leader>Ca", ":set colorcolumn=0<cr>")
 vim.keymap.set("n", "<Leader>wsc", ":setlocal spell spelllang=ca<cr>")
 vim.keymap.set("n", "<Leader>wse", ":setlocal spell spelllang=es<cr>")
 vim.keymap.set("n", "<Leader>wsi", ":setlocal spell spelllang=en<cr>")
+-- vim.keymap.set("n", "<Leader>wsn", ":set nospell")
 
 vim.keymap.set("n", "<Leader>wt", ":Toch<cr>")
 
@@ -104,6 +105,4 @@ vim.keymap.set("n", "<Leader>wc0", ":set conceallevel=0<cr>")
 vim.keymap.set("n", "<Leader>wc2", ":set conceallevel=2<cr>")
 
 vim.keymap.set("i", "<C-g>", "<esc>")
-
-
-
+vim.keymap.set("i", "kj", "<esc>")

@@ -37,3 +37,10 @@ vim.opt.splitbelow = true -- Place new window below the current one
 vim.cmd[[
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 ]]
+
+-- Show endline characters
+vim.opt.list = true
+-- vim.opt.listchars:append("eol:$")
+
+-- Show tab characters
+-- vim.opt.listchars:append("tab:>>")

@@ -12,7 +12,6 @@
   "friendly-snippets": { "branch": "main", "commit": "b1b78a6433268fc172adb5a843e165035e83861e" },
   "fzf": { "branch": "master", "commit": "65dd2bb42947d4ede31d160214f3a4c6fdc619e1" },
   "fzf.vim": { "branch": "master", "commit": "dc71692255b62d1f67dc55c8e51ab1aa467b1d46" },
-  "github-nvim-theme": { "branch": "main", "commit": "1a96bd061cc30ab2543461d279baf87a68857ffe" },
   "goyo.vim": { "branch": "master", "commit": "fa0263d456dd43f5926484d1c4c7022dfcb21ba9" },
   "gruvbox": { "branch": "master", "commit": "bf2885a95efdad7bd5e4794dd0213917770d79b7" },
   "kanagawa.nvim": { "branch": "master", "commit": "eb5f0fa724030ce6eec9bd20a0fd6f9ced39065c" },
@@ -35,6 +34,7 @@
   "tokyonight.nvim": { "branch": "main", "commit": "ab0ac67f4f32f44c3480f4b81ed90e11cb4f3763" },
   "undotree": { "branch": "master", "commit": "485f01efde4e22cb1ce547b9e8c9238f36566f21" },
   "vim-airline": { "branch": "master", "commit": "5891a3f7bedb5d0b23a546189a607836913814bb" },
+  "vim-code-dark": { "branch": "master", "commit": "7bf26b5432ca93309d08037b27fa9459e64a460c" },
   "vim-commentary": { "branch": "master", "commit": "e87cd90dc09c2a203e13af9704bd0ef79303d755" },
   "vim-fugitive": { "branch": "master", "commit": "e6651a79facf5cc2b7c554fdc19eb8a9fe89602c" },
   "vim-irblack": { "branch": "master", "commit": "59622caff32a7925181ab139701fad3eee54ae51" },
@@ -43,6 +43,7 @@
   "vim-pandoc-syntax": { "branch": "master", "commit": "4268535e1d33117a680a91160d845cd3833dfe28" },
   "vim-ripgrep": { "branch": "master", "commit": "2bb2425387b449a0cd65a54ceb85e123d7a320b8" },
   "vim-table-mode": { "branch": "master", "commit": "9555a3e6e5bcf285ec181b7fc983eea90500feb4" },
+  "vim-tmux-navigator": { "branch": "master", "commit": "cdd66d6a37d991bba7997d593586fc51a5b37aa8" },
   "vimwiki": { "branch": "dev", "commit": "7a48268d24614e74f8187856ade54cf03134e9d9" },
   "vscode.nvim": { "branch": "main", "commit": "dc5f37603ada51db13bc4009cbee628c5857a274" }
 }
