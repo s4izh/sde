@@ -8,6 +8,9 @@ alias cfd='cd ~/.local/src/dwm && nvim config.h'
 alias cfdl='cd ~/.local/src/dwl && nvim config.h'
 alias cfh='cd ~/.config/hypr && nvim hyprland.conf'
 alias cff='nvim ~/.config/foot/foot.ini'
+alias cft='nvim ~/.config/tmux/tmux.conf'
+
+alias cl='clear'
 
 alias em='emacsclient -nw'
 
@@ -112,8 +115,8 @@ alias sm="sudo make clean install"
 alias py="python"
 
 alias cfn="nvim /etc/nixos/configuration.nix"
-alias nr="cd ~/nixos && sudo -E nixos-rebuild switch --flake . --impure && cd -"
-alias nu="cd ~/nixos && sudo -E nix flake update && sudo nixos-rebuild switch --flake . --impure && cd -"
+alias nr="cd ~/nixos && sudo nixos-rebuild switch --flake . --impure && cd -"
+alias nu="cd ~/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake . --impure && cd -"
 alias nd="nix develop"
 
 alias sshgen="ssh-keygen -t ed25519 -C"

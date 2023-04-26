@@ -83,8 +83,6 @@ PROMPT+="\$vcs_info_msg_0_"
 PROMPT+=" %{$fg[white]%}
 "
 PROMPT+="%B%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
-# PROMPT+="%{$fg[white]%}>>"
-
 
 # mia
 # PROMPT="%F{blue}%1~%f%b% "
