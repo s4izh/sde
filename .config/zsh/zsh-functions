@@ -115,7 +115,7 @@ function vif() {
     cd $current_dir
 }
 # https://jdhao.github.io/2019/06/13/zsh_bind_keys/
-bindkey -s '^o' 'vif^M'
+# bindkey -s '^o' 'vif^M'
 
 wk() {
     cd ~/notes
