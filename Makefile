@@ -84,6 +84,11 @@ libvirt:
 	rm -f $(XDG_CONFIG_HOME)/libvirt/libvirt.conf
 	$(LN) $(PWD)/.config/libvirt/libvirt.conf $(XDG_CONFIG_HOME)/libvirt/libvirt.conf
 
+mime:
+	$(LN) $(PWD)/.config/mimeapps.list $(XDG_CONFIG_HOME)/mimeapps.list
+xdg-user-dirs:
+	$(LN) $(PWD)/.config/user-dirs.dirs $(XDG_CONFIG_HOME)/user-dirs.dirs
+
 portatil: alacritty
 	$(LN) $(XDG_CONFIG_HOME)/alacritty/fonts/laptop.yml $(XDG_CONFIG_HOME)/alacritty/font.yml
 
