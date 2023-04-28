@@ -22,7 +22,7 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^x^x' edit-command-line # ctrl-x ctrl-x
 
-bindkey '^L' clear-screen
+bindkey '^O' clear-screen
 
 # Colors
 autoload -Uz colors && colors
