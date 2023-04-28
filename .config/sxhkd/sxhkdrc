@@ -13,6 +13,9 @@ super + shift + t
 super + g
     alacritty -e repo
 
+super + v
+  alacritty --class volumen,volumen -e pulsemixer
+
 XF86AudioRaiseVolume
 	amixer set Master 5%+
 
