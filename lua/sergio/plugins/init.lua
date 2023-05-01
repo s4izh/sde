@@ -11,6 +11,8 @@ return {
   "folke/tokyonight.nvim",
   "xero/sourcerer.vim",
   "tomasiser/vim-code-dark",
+  -- "maxmx03/solarized.nvim",
+  -- "lifepillar/vim-solarized8",
 
   "tpope/vim-commentary",
   "junegunn/fzf.vim",
