@@ -24,7 +24,8 @@ then
     tmux new-window -n mariadb -t $SESSION_NAME
     tmux send-keys -t $SESSION_NAME:5 "cd $PROJECT_PATH" C-m
     tmux send-keys -t $SESSION_NAME:5 "clear" C-m
-    tmux send-keys -t $SESSION_NAME:5 "make docker-bd"
+    tmux send-keys -t $SESSION_NAME:5 "docker exec -ti mariadb mysql -U db -prust"
+    # tmux send-keys -t $SESSION_NAME:5 "make docker-bd"
     tmux new-window -n frontend -t $SESSION_NAME
     tmux send-keys -t $SESSION_NAME:6 "cd $PROJECT_PATH" C-m
     tmux send-keys -t $SESSION_NAME:6 "clear" C-m
