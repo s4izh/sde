@@ -1,4 +1,4 @@
-vim.opt.guicursor = ""
+-- vim.opt.guicursor = ""
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -39,7 +39,7 @@ vim.cmd[[
 ]]
 
 -- Show endline characters
-vim.opt.list = true
+-- vim.opt.list = true
 -- vim.opt.listchars:append("eol:$")
 
 -- Show tab characters
