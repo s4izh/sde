@@ -39,11 +39,12 @@ then
     tmux new-session -s $SESSION_NAME -d
     # tmux setenv ASIG=soa
     # tmux send-keys -t $SESSION_NAME "export ASIG=soa" C-m
-    tmux send-keys -t $SESSION_NAME "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME "cd $PROJECT_PATH/project" C-m
     tmux send-keys -t $SESSION_NAME "nvim ." C-m
     tmux new-window -n ssh -t $SESSION_NAME
-    tmux send-keys -t $SESSION_NAME:2 "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME:2 "cd $PROJECT_PATH/project" C-m
     tmux send-keys -t $SESSION_NAME:2 "nix develop" C-m
+    tmux send-keys -t $SESSION_NAME:2 "zsh" C-m
     tmux send-keys -t $SESSION_NAME:2 "clear" C-m
 fi
 
