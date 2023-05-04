@@ -54,8 +54,15 @@ scripts:
 
 dwm:
 	git clone git@github.com:s4izh/dwm.git ~/.local/src/dwm
-	cd ~/.local/src/dwm
-	sudo make clean install
+	cd ~/.local/src/dwm && sudo make clean install
+
+dwmblocks:
+	git clone git@github.com:s4izh/dwmblocks.git ~/.local/src/dwmblocks
+	cd ~/.local/src/dwmblocks && sudo make clean install
+
+dmenu:
+	git clone git@github.com:s4izh/dmenu.git ~/.local/src/dmenu
+	cd ~/.local/src/dmenu && sudo make clean install
 
 alacritty:
 	rm -f $(XDG_CONFIG_HOME)/alacritty
