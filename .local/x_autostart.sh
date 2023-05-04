@@ -2,7 +2,7 @@
 
 #keyboard settings
 # setxkbmap es -option ctrl:nocaps
-setxkbmap es -option caps:escape
+# setxkbmap es -option caps:escape
 
 # set wallpaper
 feh --bg-fill $HOME/pix/system-wallpaper
@@ -33,7 +33,7 @@ case "$hostname" in
         # xinput --set-prop 10 298 1
     ;;
     'arch') # casa
-	xinput --set-prop 14 293 0 1
+	# xinput --set-prop 14 293 0 1
         # resolution settings
         # xrandr --output HDMI-0 --off --output DP-0 --mode 3440x1440
     ;;
