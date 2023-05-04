@@ -66,6 +66,11 @@ dmenu:
 	cd ~/.local/src/dmenu && ln -sf themes/default.h theme.h
 	cd ~/.local/src/dmenu && sudo make clean install
 
+st:
+	git clone git@github.com:s4izh/st.git ~/.local/src/st
+	cd ~/.local/src/st && ln -sf themes/default.h theme.h
+	cd ~/.local/src/st && sudo make clean install
+
 alacritty:
 	rm -f $(XDG_CONFIG_HOME)/alacritty
 	$(LNDIR) $(PWD)/.config/alacritty $(XDG_CONFIG_HOME)/alacritty
