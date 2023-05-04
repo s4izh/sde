@@ -2,6 +2,7 @@ BASE=$(PWD)
 SCRIPTS=$(HOME)/.local/scripts
 MKDIR=mkdir -p
 LN=ln -vsf
+SUDO_LN=sudo -E ln -sf
 LNDIR=ln -vs
 PKGINSTALL=sudo pacman --noconfirm -S
 
@@ -99,5 +100,10 @@ fzf:
 
 server: ## setup server dotfiles, zsh, vimrc
 	$(LN) $(PWD)/.vimrc $(HOME)/.vimrc
+
+disp:
+	$(SUDO_LN) $(PWD)/etc/X11/xorg.conf.d/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
+	$(SUDO_LN) $(PWD)/etc/X11/xorg.conf.d/10-touchpad.conf /etc/X11/xorg.conf.d/10-touchpad.conf
+	$(SUDO_LN) $(PWD)/etc/X11/xorg.conf.d/50-mouse-acceleration.conf /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
 
 deploy: x11 zsh scripts alacritty nvim tmux zathura picom ranger
