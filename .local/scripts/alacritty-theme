@@ -1,6 +1,6 @@
 #!/bin/bash
 
-theme=$(ls "$HOME/.config/alacritty/themes"| bemenu2 -l 30)
+theme=$(ls "$HOME/.config/alacritty/themes"| $SYSTEM_MENU -l 30)
 
 cd $HOME/.config/alacritty/
 ln -sf themes/$theme theme.yml
