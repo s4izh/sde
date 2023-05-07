@@ -1,5 +1,5 @@
 #!/bin/bash
-CHOICE=$(ls -1 ~/.config | dmenu -p "change config:")
+CHOICE=$(ls -1 ~/.config | dmenu -l 20 -p "change config:")
 
 # case "$CHOICE" in
 # 	laptop) xrandr --output eDP --primary --mode 1920x1080 --output HDMI-A-0 --off &; sed -i 's/size: 12/size: 9'/ ~/.config/alacritty/alacritty.yml & ;;
@@ -30,4 +30,6 @@ case "$CHOICE" in
     # *'Off'*)
     #     xset dpms force off
     # ;;
+    *)
+        alacritty --working-directory ~/.config/$CHOICE -e nvim .
 esac
