@@ -117,6 +117,10 @@ function vif() {
 # https://jdhao.github.io/2019/06/13/zsh_bind_keys/
 # bindkey -s '^o' 'vif^M'
 
+gd() {
+  nvim -c ":Neogit"
+}
+
 wk() {
     cd ~/notes
     nvim --cmd "packloadall" -c "lua require('telescope.builtin').find_files({cwd = '.'})"
