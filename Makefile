@@ -83,6 +83,9 @@ tmux:
 	rm -f $(XDG_CONFIG_HOME)/tmux
 	$(LNDIR) $(PWD)/.config/tmux $(HOME)/.config/tmux
 
+git:
+	$(LNDIR) $(PWD)/.config/git $(HOME)/.config/git
+
 zathura:
 	rm -f $(XDG_CONFIG_HOME)/zathura
 	$(LNDIR) $(PWD)/.config/zathura $(HOME)/.config/zathura
