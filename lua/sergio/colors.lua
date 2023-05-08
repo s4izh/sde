@@ -12,5 +12,5 @@ end
 
 -- vim.opt.background = "light"
 
-ColorMyPencils("hipster")
+ColorMyPencils("onedark")
 
