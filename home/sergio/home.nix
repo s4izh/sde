@@ -36,10 +36,10 @@
         user = "git";
         identityFile = "~/.ssh/repofib";
       };
-      "vmfib" = {
+      "pti" = {
         hostname = "nattech.fib.upc.edu";
         user = "alumne";
-        port = 22044;
+        port = 22040;
       };
       "sistemes" = {
         hostname = "192.168.122.10";
