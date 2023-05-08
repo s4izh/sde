@@ -61,6 +61,7 @@ alias sz="source ~/.config/zsh/.zshrc"
 
 # git
 alias gm="git checkout main"
+alias gco="git checkout"
 alias gc="git commit -m"
 alias gst="git status"
 alias ga="git add"
