@@ -106,3 +106,17 @@ vim.keymap.set("n", "<Leader>wc2", ":set conceallevel=2<cr>")
 
 vim.keymap.set("i", "<C-g>", "<esc>")
 vim.keymap.set("i", "kj", "<esc>")
+
+
+-- Check if we're in a diff window
+if vim.opt.diff:get() then
+  -- Map <leader>1 to :diffget LOCAL<CR>
+  vim.api.nvim_set_keymap('n', '<leader>1', ':diffget LOCAL<CR>', { noremap = true, silent = true })
+
+  -- Map <leader>2 to :diffget BASE<CR>
+  vim.api.nvim_set_keymap('n', '<leader>2', ':diffget BASE<CR>', { noremap = true, silent = true })
+
+  -- Map <leader>3 to :diffget REMOTE<CR>
+  vim.api.nvim_set_keymap('n', '<leader>3', ':diffget REMOTE<CR>', { noremap = true, silent = true })
+end
+
