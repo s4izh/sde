@@ -1,0 +1,18 @@
+return {
+  "rose-pine/neovim",
+  "morhetz/gruvbox",
+  "sainnhe/everforest",
+  "wesgibbs/vim-irblack",
+  "shaunsingh/nord.nvim",
+  "gavinok/spaceway.vim",
+  "ishan9299/modus-theme-vim",
+  "rebelot/kanagawa.nvim",
+  "Mofiqul/vscode.nvim",
+  "folke/tokyonight.nvim",
+  "xero/sourcerer.vim",
+  "tomasiser/vim-code-dark",
+  "navarasu/onedark.nvim",
+  "tanvirtin/monokai.nvim",
+  -- "maxmx03/solarized.nvim",
+  -- "lifepillar/vim-solarized8",
+}
