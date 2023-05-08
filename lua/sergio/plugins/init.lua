@@ -1,18 +1,4 @@
 return {
-  "rose-pine/neovim",
-  "morhetz/gruvbox",
-  "sainnhe/everforest",
-  "wesgibbs/vim-irblack",
-  "shaunsingh/nord.nvim",
-  "gavinok/spaceway.vim",
-  "ishan9299/modus-theme-vim",
-  "rebelot/kanagawa.nvim",
-  "Mofiqul/vscode.nvim",
-  "folke/tokyonight.nvim",
-  "xero/sourcerer.vim",
-  "tomasiser/vim-code-dark",
-  -- "maxmx03/solarized.nvim",
-  -- "lifepillar/vim-solarized8",
 
   "tpope/vim-commentary",
   "junegunn/fzf.vim",
@@ -23,6 +9,12 @@ return {
   "jremmen/vim-ripgrep",
   "github/copilot.vim",
   "christoomey/vim-tmux-navigator",
+  "TimUntersberger/neogit",
+  -- "HiPhish/nvim-ts-rainbow2",
+  "lewis6991/gitsigns.nvim",
+  config = function()
+    require('gitsigns').setup()
+  end
   -- 'luochen1990/rainbow'
 
     -- use 'tanvirtin/monokai.nvim'
