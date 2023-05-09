@@ -7,6 +7,7 @@
     dmenu
     w3m
     pavucontrol
+    pulsemixer
     zathura
     feh
     fzf
@@ -23,6 +24,7 @@
     mpv
     xdotool
     exa
+    picom
     # compile tools
     nodejs
     libtool
