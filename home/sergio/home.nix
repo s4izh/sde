@@ -8,18 +8,18 @@
     #};
   };
 
-  programs.git = {
-    enable = true;
-    userName = "s4izh";
-    userEmail = "sergiosanz234@gmail.com";
-    extraConfig = {
-      init = {
-        defaultBranch = "main";
-      };
-    };
-  };
+  # programs.git = {
+  #   enable = true;
+  #   userName = "s4izh";
+  #   userEmail = "sergiosanz234@gmail.com";
+  #   extraConfig = {
+  #     init = {
+  #       defaultBranch = "main";
+  #     };
+  #   };
+  # };
 
-  # xdg.configFile."git/config".source = ./.config/git/config;
+  xdg.configFile."git/config".source = ./.config/git/config;
 
   # xdg.configFile.<name>.recursive
 
