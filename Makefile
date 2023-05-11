@@ -48,7 +48,10 @@ zsh: shell
 	mkdir $(XDG_CACHE_HOME)/zsh
 	$(LNDIR) $(PWD)/.config/zsh $(HOME)/.config/zsh
 
-scripts:
+share:
+	$(LNDIR) $(PWD)/.local/share/sergio $(HOME)/.local/share/sergio
+
+scripts: share
 	rm -f $(HOME)/.local/scripts
 	$(LNDIR) $(PWD)/.local/scripts $(HOME)/.local/scripts
 
