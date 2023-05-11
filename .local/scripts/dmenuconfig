@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+
 CHOICE=$(ls -1 ~/.config | dmenu -l 20 -p "change config:")
 
 # case "$CHOICE" in
