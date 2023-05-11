@@ -16,6 +16,9 @@ super + g
 super + v
   alacritty --class volumen,volumen -e pulsemixer
 
+super + shift + i
+  alacritty --class inbox,inbox -e nvim ~/wiki/index.md
+
 XF86AudioRaiseVolume
 	amixer set Master 5%+
 
