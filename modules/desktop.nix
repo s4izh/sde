@@ -52,6 +52,7 @@
     # erlang
     erlang
     erlang-ls
+    rebar3
     #bash
     #bash-language-server
     nodePackages_latest.bash-language-server
@@ -78,9 +79,6 @@
     pdftk
     # vpn
     openfortivpn
-    # txc
-    gns3-gui
-    gns3-server
   ];
 
   # programs.starship.enable = true;
@@ -126,6 +124,10 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  fonts.fonts = with pkgs; [
+    iosevka
+  ];
 
   fonts.fontconfig = {
     defaultFonts = {
