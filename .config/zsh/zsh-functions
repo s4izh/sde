@@ -91,7 +91,7 @@ function se() {
 function ne() {
     local current_dir=$PWD
     cd ~/nixos
-    choice=$(fzf)
+    choice=$(find . -not -path "./.git/*" -type f | fzf)
     # [ -z "$choice" ] && cd $current_dir && exit
     nvim $choice
     cd $current_dir
@@ -165,6 +165,15 @@ function sshclone () {
   git clone git@github.com:$1
 }
 
-function copy_zeos_flake() {
-  cp ~/code/zeos/{flake.nix,flake.lock} .
+function nix () {
+  if $*; then
+    actions=$(echo "rebuild update" | tr ' ' '\n')
+    action=$(echo $actions | fzf)
+  else
+    command nix "$@"
+  fi
+}
+
+function in () {
+  nvim ~/wiki/index.md
 }
