@@ -68,6 +68,8 @@
     pstree
     # writting
     pandoc
+    haskellPackages.pandoc-crossref
+    # pandoc-crossref
     # pandoc-citeproc
     texlive.combined.scheme-full
     aspell
@@ -79,6 +81,7 @@
     pdftk
     # vpn
     openfortivpn
+    groff
   ];
 
   # programs.starship.enable = true;
