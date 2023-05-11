@@ -28,7 +28,7 @@
             ./modules/stumpwm.nix
             ./modules/gaming.nix
             ./modules/virtualisation.nix
-            ./modules/database.nix
+            # ./modules/database.nix
             ./modules/android.nix
             home-manager.nixosModules.home-manager
             {
@@ -50,7 +50,7 @@
             ./modules/desktop.nix
             ./modules/dwm.nix
             ./modules/virtualisation.nix
-            ./modules/database.nix
+            # ./modules/database.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
