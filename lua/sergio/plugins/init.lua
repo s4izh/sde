@@ -1,8 +1,8 @@
 return {
 
   "tpope/vim-commentary",
-  "junegunn/fzf.vim",
-  "junegunn/fzf",
+  -- "junegunn/fzf.vim",
+  -- "junegunn/fzf",
   "junegunn/goyo.vim",
   "vim-airline/vim-airline",
   -- "nvim-lualine/lualine.nvim",
