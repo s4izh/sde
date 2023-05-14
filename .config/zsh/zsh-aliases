@@ -13,6 +13,7 @@ alias cft='nvim ~/.config/tmux/tmux.conf'
 alias cl='clear'
 
 alias em='emacsclient -nw'
+alias vim='nvim'
 
 alias tn='tmux-notes'
 
@@ -122,3 +123,4 @@ alias nd="nix develop --command zsh"
 
 alias sshgen="ssh-keygen -t ed25519 -C"
 
+alias nb="newsboat"
