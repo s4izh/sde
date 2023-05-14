@@ -47,7 +47,7 @@ vim.keymap.set("n", "<Leader>z", "<cmd>Goyo<cr>")
 
 -- vim.keymap.set("n", "<Leader>Z", "<cmd>!zathura <c-r><c-p> &<cr>")
 
-vim.keymap.set("n", "<Leader>o", ":!xdg-open <c-r><c-p> &<cr>")
+vim.keymap.set("n", "<Leader>o", ':!sh -c "xdg-open <c-r><c-p>"<cr>')
 vim.keymap.set("n", "<Leader>L", ":!alacritty -e lfuni % &<cr>")
 
 vim.keymap.set("n", "<Leader>R", ":set wrap! linebreak!<cr>")
@@ -120,3 +120,4 @@ if vim.opt.diff:get() then
   vim.api.nvim_set_keymap('n', '<leader>3', ':diffget REMOTE<CR>', { noremap = true, silent = true })
 end
 
+vim.keymap.set("n", "<Leader>V", ":source ~/.config/nvim/init.lua <cr>")
