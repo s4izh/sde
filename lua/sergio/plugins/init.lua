@@ -10,11 +10,8 @@ return {
   "github/copilot.vim",
   "christoomey/vim-tmux-navigator",
   "TimUntersberger/neogit",
+  "ThePrimeagen/harpoon"
   -- "HiPhish/nvim-ts-rainbow2",
-  "lewis6991/gitsigns.nvim",
-  config = function()
-    require('gitsigns').setup()
-  end
   -- 'luochen1990/rainbow'
 
     -- use 'tanvirtin/monokai.nvim'
