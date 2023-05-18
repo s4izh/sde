@@ -22,6 +22,7 @@
     zip
     cowsay
     mpv
+    yt-dlp
     xdotool
     exa
     picom
@@ -82,6 +83,10 @@
     # vpn
     openfortivpn
     groff
+    newsboat
+    dpkg
+    shellcheck
+    xdg-ninja
   ];
 
   # programs.starship.enable = true;
