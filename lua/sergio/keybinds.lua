@@ -28,7 +28,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
@@ -121,3 +121,5 @@ if vim.opt.diff:get() then
 end
 
 vim.keymap.set("n", "<Leader>V", ":source ~/.config/nvim/init.lua <cr>")
+
+vim.keymap.set("n", "<Leader>CC", ":!shellcheck %<cr>")
