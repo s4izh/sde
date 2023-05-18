@@ -50,6 +50,9 @@ font:
   # bold_italic:
   #   family: Liberation Mono
   #   style: Bold Italic
+  # normal:
+  #   family: Iosevka
+  #   style: Regular
 
   # Point size
   size: 12
