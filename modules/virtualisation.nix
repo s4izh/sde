@@ -3,6 +3,7 @@
   environment.systemPackages = with pkgs; [
     virt-manager
     virt-viewer
+    swtpm
     docker
     docker-compose
     kompose
