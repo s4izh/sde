@@ -9,7 +9,7 @@ ext="${file##*.}"
 
 handlebang() {
   bang=$(head -n 1 "$file")
-  echo $bang
+  echo "$bang"
   case "$bang" in
     *!/bin/sh|*!/bin/bash|*/bin/zsh) 
       echo "Running $file with $bang"
@@ -34,5 +34,5 @@ case "$ext" in
     rs)   cargo run ;;
     tex)  pdflatex "$file";;
     *) handlebang ;;
-    default) exit ;;
+    # default) exit ;;
 esac
