@@ -78,6 +78,11 @@ alacritty:
 	rm -f $(XDG_CONFIG_HOME)/alacritty
 	$(LNDIR) $(PWD)/.config/alacritty $(XDG_CONFIG_HOME)/alacritty
 
+foot:
+		# rm -f $(XDG_CONFIG_HOME)/foot
+	$(LNDIR) $(PWD)/.config/foot $(XDG_CONFIG_HOME)/foot
+
+
 nvim:
 	rm -f $(XDG_CONFIG_HOME)/nvim
 	$(LNDIR) $(PWD)/.config/nvim $(HOME)/.config/nvim
