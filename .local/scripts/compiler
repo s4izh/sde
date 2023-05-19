@@ -28,6 +28,7 @@ case "$ext" in
     c)    gcc "$file" -o "$base" && "$base" ;;
     cc)   g++ "$file" -o "$base" && "$base" ;;
     cpp)  g++ "$file" -o "$base" && "$base" ;;
+    go)   go run "$file" ;;
     java) javac -d classes "$file" && java -cp classes "${1%.*}" ;;
     md)   pandoc "$file" -o "$base".pdf --filter pandoc-crossref --citeproc;;
     org)  pandoc -s "$file" -V geometry:margin=1in -o "$base".pdf ;;
