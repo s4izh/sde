@@ -97,6 +97,15 @@ function ne() {
     cd $current_dir
 }
 
+# function cfv() {
+#     local current_dir=$PWD
+#     cd ~/.config/nvim
+#     choice=$(find . -not \(-path "./.git/*" -o "./colors/*" -o "./spell/*"\) -type f | fzf)
+#     # [ -z "$choice" ] && cd $current_dir && exit
+#     nvim $choice
+#     cd $current_dir
+# }
+
 function dwmc() {
     cd ~/.local/src/dwm
     sudo make clean install
