@@ -73,6 +73,8 @@ export SUDO_ASKPASS="$HOME/.local/scripts/dmenupass"
 
 export SYSTEM_MENU="dmenu"
 
+export LFS=/mnt/lfs
+
 # export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 # export LESS=-R
 # export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
