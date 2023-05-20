@@ -51,4 +51,4 @@ function SudoWrite(bang)
   expect(0, function() return vim.fn.delete(askpass) end, 'delete')
 end
 
-return write
+vim.cmd('command! -bang W lua SudoWrite("<bang>")')
