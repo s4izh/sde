@@ -210,5 +210,9 @@ default_border pixel 2
 
 gaps inner 10
 
+bindsym $mod+Shift+s exec wayss
+
 include /etc/sway/config.d/*
 include config.d/input
+
+
