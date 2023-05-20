@@ -4,6 +4,8 @@ require("sergio")
 
 vim.opt.signcolumn="no"
 
-vim.cmd('command! -bang W lua SudoWrite("<bang>")')
-
 -- require('lualine').setup()
+
+vim.cmd([[
+  autocmd BufNewFile,BufRead ~/.config/sway/config.d/* set filetype=swayconfig
+]])
