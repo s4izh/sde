@@ -82,6 +82,8 @@ foot:
 		# rm -f $(XDG_CONFIG_HOME)/foot
 	$(LNDIR) $(PWD)/.config/foot $(XDG_CONFIG_HOME)/foot
 
+sway:
+	$(LNDIR) $(PWD)/.config/sway $(XDG_CONFIG_HOME)/sway
 
 nvim:
 	rm -f $(XDG_CONFIG_HOME)/nvim
