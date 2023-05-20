@@ -186,3 +186,11 @@ function nix () {
 function in () {
   nvim ~/wiki/index.md
 }
+
+function cfs () {
+  local current_dir=$PWD
+  cd ~/.config/sway
+  choice=$(find . -not -path "./.git/*" -type f | fzf)
+  nvim $choice
+  cd $current_dir
+}
