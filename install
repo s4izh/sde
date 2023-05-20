@@ -51,7 +51,6 @@ function zsh () {
 function nvim() {
   [ -e "$HOME"/.config/nvim ] && rm -vf "$HOME"/.config/nvim
 	git clone git@github.com:s4izh/nvim.git ~/.config/nvim
-  ln -vsf "$DOTDIR"/.config/nvim "$HOME"/.config/nvim
 }
 
 function tmux() {
