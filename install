@@ -9,7 +9,7 @@ function help() {
   exit 1
 }
 
-function install_dot_config () {
+function xdg_config() {
   rm -f "$HOME"/.config/"$1"
   ln -vsf "$DOTDIR"/.config/"$1" "$HOME"/.config/"$1"
 }
