@@ -25,9 +25,9 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 300 'swaylock -f -c 000000 -i ~/pix/wallpapers/themes/spaceway.png' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep 'swaylock -f -c 000000 -i ~/pix/wallpapers/themes/spaceway.png'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -202,8 +202,20 @@ gaps inner 10
 bindsym $mod+Shift+s exec wayss
 bindsym $mod+Shift+u exec dmenuopenuni
 
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+
+# bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+# bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+# bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+# bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
 include /etc/sway/config.d/*
 include config.d/input
 include config.d/output
 
+exec $term --title Scratchpad
+for_window [title="Scratchpad"] move scratchpad
 
+bindsym $mod+n exec redshift -O 5000
+bindsym $mod+Shift+n exec redshift -x
