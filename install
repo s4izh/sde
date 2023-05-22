@@ -68,6 +68,13 @@ function scripts() {
   ln -vsf "$DOTDIR"/.local/scripts "$HOME"/.local/scripts
 }
 
+function etc_hosts() {
+  wget --progress=bar -O - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts | sudo bash -c "cat >> /etc/hosts"
+  # http://sbc.io/hosts/alternates/fakenews-gambling-porn-social/hosts
+  # wget -O /tmp/etc-hosts --progress=bar https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts
+  # sudo cat /tmp/etc-hosts >> /etc/hosts
+}
+
 function common() {
   shell
   zsh
