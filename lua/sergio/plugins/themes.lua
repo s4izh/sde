@@ -13,6 +13,7 @@ return {
   "tomasiser/vim-code-dark",
   "navarasu/onedark.nvim",
   "tanvirtin/monokai.nvim",
+  "dylanaraps/wal.vim",
   -- "maxmx03/solarized.nvim",
   -- "lifepillar/vim-solarized8",
 }
