@@ -24,6 +24,8 @@ sxhkd &
 
 dunst &
 
+unclutter -idle 5 &
+
 # host specific configuration
 hostname=$(cat /etc/hostname)
 
