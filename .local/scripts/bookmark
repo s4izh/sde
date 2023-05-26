@@ -4,6 +4,8 @@ bookmark="$(xclip -o)" # takes selected text (xorg)
 
 file="$HOME/.local/share/sergio/bookmarks"
 
+[ -f "$file" ] || touch "$file"
+
 if grep -q "^$bookmark$" "$HOME/.local/share/sergio/bookmarks" ; then
   notify-send "cuidado" "bookmark already exists"
   echo "Bookmark already exists"
