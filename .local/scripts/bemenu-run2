@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 bemenu-run -H 18 -i --fn "mono 10" \
     # --tb "#000000" --tf "#31748f" --fb "#000000" \
