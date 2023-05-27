@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 CHOICE=$(echo -e "es\nus\nus-int\ndvorak" | dmenu -p layout)
 

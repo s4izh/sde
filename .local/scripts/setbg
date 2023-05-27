@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # wal=$(readlink -f "$1")
 wal=$(realpath "$1")

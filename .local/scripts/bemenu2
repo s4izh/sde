@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 bemenu -H 20 -i --fn "JetBrainsMono NerdFont 10" \
     --tb "#000000" --tf "#31748f" --fb "#000000" \

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 CHOICE=$(echo -e "aso\npar\npi\nprop\nsi" | dmenu -p "racó:")
 
