@@ -1,7 +1,7 @@
 #!/bin/sh
 
 SESSION_NAME=hack
-PROJECT_PATH="$HOME/code/hackathon2023/"
+PROJECT_PATH="$HOME/personal/hackathon2023/"
 
 tmux has-session -t $SESSION_NAME 2>/dev/null
 if [ $? != 0 ]          # si no hay sesion se crea
