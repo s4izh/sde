@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 menu() {
     wm=$(echo -e "dwm\ndwl" | fzf)

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 file_name=$(basename $1)
 file_no_ext="${file_name%.*}"

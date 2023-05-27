@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 CHOICE=$(echo -e "laptop\nexternal\ndual\narandr" | dmenu -p monitor)
 
 # case "$CHOICE" in

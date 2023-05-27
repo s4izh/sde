@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 file=$(find $HOME/pix -type f \( -name "*.jpg" -o -name "*.png" \) | \
     sed "s~${HOME}/pix~~g" | $SYSTEM_MENU -p "select a wallpaper" -l 30)

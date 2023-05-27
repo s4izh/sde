@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 setxkbmap es -option caps:escape
 xinput --set-prop 10 295 0 1
