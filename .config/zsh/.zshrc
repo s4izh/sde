@@ -22,9 +22,13 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^x^x' edit-command-line # ctrl-x ctrl-x
 
-bindkey -s '^A' '~/.local/scripts/tmux/tmux-main^M'
-bindkey -s '^S' '~/.local/scripts/tmux/tmux-picker^M'
-bindkey -s '^F' '~/.local/scripts/tmux/tmux-sessionizer^M'
+# bindkey -s '^A' '~/.local/scripts/tmux/tmux-main^M'
+# bindkey -s '^S' '~/.local/scripts/tmux/tmux-picker^M'
+# bindkey -s '^F' '~/.local/scripts/tmux/tmux-sessionizer^M'
+
+alias tm='~/.local/scripts/tmux/tmux-main'
+alias tp='~/.local/scripts/tmux/tmux-picker'
+alias ts='~/.local/scripts/tmux/tmux-sessionizer'
 
 # Colors
 autoload -Uz colors && colors
