@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 theme=$(ls "$HOME/.config/alacritty/themes"| $SYSTEM_MENU -l 30)
 
