@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 CHOICE=$(echo -e "dracula\neverforest\ngruvbox\nnord\npywal\nrose-pine\ntokyonight" | dmenu -p theme:)
 
 ALACRITTY_DIR=~/.config/alacritty

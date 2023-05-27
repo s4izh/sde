@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # :!setsid autocomp % & to a vim keybind
 
