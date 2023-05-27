@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Simple screenshot script, dependencies: grim, bemenu, imv, jq, slurp
 # Choose directory to save screenshots and viewer
 
