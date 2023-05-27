@@ -64,12 +64,12 @@ function fzf-lovely(){
 	fi
 }
 
-function z() {
+function za() {
     zathura "$@" &
 }
 
 function uni() {
-	cd ~/vault/uni/$1/
+	cd ~/uni/$CURRENT_Q/$1/
 	ranger
 }
 
@@ -147,7 +147,7 @@ wo() {
 }
 
 fman() {
-    man -k . | fzf -i | awk '{print $1}' | xargs -r man
+  man -k . | fzf -i | awk '{print $2 $1}' | tr '(' ' ' | tr ')' ' ' | xargs -r man
 }
 
 # _edit_wo_executing() {
