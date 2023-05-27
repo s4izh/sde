@@ -22,7 +22,7 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^x^x' edit-command-line # ctrl-x ctrl-x
 
-bindkey '^O' clear-screen
+bindkey -s '^A' 'tmux-main^M'
 
 # Colors
 autoload -Uz colors && colors
