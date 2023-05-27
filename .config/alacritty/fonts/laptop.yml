@@ -24,6 +24,9 @@ font:
   # bold_italic:
   #   family: Hack Nerd Font Mono
   #   style: Bold Italic
+  # normal:
+  #   family: Iosevka
+  #   style: Regular
 
   # Point size
   size: 8.0
