@@ -99,6 +99,15 @@ export LFS=/mnt/lfs
 # export AWT_TOOLKIT="MToolkit wmname LG3D" # May have to install wmname
 # export _JAVA_AWT_WM_NONREPARENTING=1 # Fix for Java applications in dwm
 
+export MANPAGER='nvim +Man!'
+
+export PATH="$HOME/.local/bin":$PATH
+export PATH="$HOME/.local/scripts/tmux":$PATH
+
+export GOPATH=$HOME/.local/share/go
+export PATH="$HOME/.local/share/neovim/bin":$PATH
+export PATH="$HOME/.local/share/cargo/bin":$PATH
+
 # [ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ] && setsid shortcuts >/dev/null 2>&1
 
 # adb
