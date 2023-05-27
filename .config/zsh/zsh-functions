@@ -90,7 +90,7 @@ function se() {
 
 function ne() {
     local current_dir=$PWD
-    cd ~/nixos
+    cd ~/.local/src/nixos
     choice=$(find . -not -path "./.git/*" -type f | fzf)
     # [ -z "$choice" ] && cd $current_dir && exit
     nvim $choice
