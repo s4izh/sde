@@ -14,7 +14,7 @@ function launch_sistemes () {
         while true; do
             ssh -q alumne@sistemes exit
             if [ $? -eq 0 ]; then
-                sshfs alumne@sistemes:/home/alumne/zeos $HOME/code/zeos
+                sshfs alumne@sistemes:/home/alumne/zeos $HOME/personal/zeos
                 break
             fi
             sleep 1
@@ -24,7 +24,7 @@ function launch_sistemes () {
         action=$(echo -e $ACTIONS | $SYSTEM_MENU -p "action")
         case "$action" in
             editor)
-                emacsclient -c "$HOME/code/zeos" &
+                emacsclient -c "$HOME/personal/zeos" &
                 zathura $soa/documents/Zeos.pdf
                 exit
             ;;
@@ -50,7 +50,7 @@ function launch_sistemes () {
     if [ $? != 0 ]          # si no hay sesion se crea
     then
         tmux new-session -s $SESSION_NAME -d
-        tmux send-keys -t $SESSION_NAME "cd ~/code/zeos && nvim ." C-m
+        tmux send-keys -t $SESSION_NAME "cd ~/personal/zeos && nvim ." C-m
         tmux new-window -n ssh -t $SESSION_NAME
         tmux send-keys -t $SESSION_NAME:2 "ssh sistemes" C-m
         tmux send-keys -t $SESSION_NAME:2 "cd zeos" C-m
