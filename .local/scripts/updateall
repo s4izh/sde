@@ -14,5 +14,6 @@ fi
 if grep -q "arch" "$release"; then
     echo "Arch detected, updating"
     sudo pacman -Syu
+    paru
     exit 0
 fi
