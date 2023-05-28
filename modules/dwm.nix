@@ -12,6 +12,8 @@
     dmenu
     sxhkd
     xorg.xwininfo
+    # st
+    # harfbuzz
   ];
 
   nixpkgs.overlays = [
@@ -25,6 +27,9 @@
       dwmblocks = prev.dwmblocks.overrideAttrs (old: {
         src = /home/sergio/.local/src/dwmblocks ;
       });
+      # st = prev.st.overrideAttrs (old: {
+      #   src = /home/sergio/.local/src/st ;
+      # });
   })
   ];
 
