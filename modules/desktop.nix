@@ -89,21 +89,6 @@
     xdg-ninja
     mandoc
     man-db
-    dwl
-    somebar
-    foot
-    pkg-config
-  ];
-
-  nixpkgs.overlays = [
-    (final: prev: {
-      dwl = prev.dwl.overrideAttrs (old: {
-	      src = /home/sergio/.local/src/dwl ;
-      });
-      somebar = prev.somebar.overrideAttrs (old: {
-	      src = /home/sergio/.local/src/somebar ;
-      });
-  })
   ];
 
   # programs.starship.enable = true;
