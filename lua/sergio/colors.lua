@@ -12,5 +12,5 @@ end
 
 -- vim.opt.background = "light"
 
-ColorMyPencils("rose-pine")
+ColorMyPencils("spaceway")
 
