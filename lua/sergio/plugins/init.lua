@@ -4,13 +4,14 @@ return {
   -- "junegunn/fzf.vim",
   -- "junegunn/fzf",
   "junegunn/goyo.vim",
-  "vim-airline/vim-airline",
+  -- "vim-airline/vim-airline",
   -- "nvim-lualine/lualine.nvim",
-  "jremmen/vim-ripgrep",
+  "halkn/ripgrep.vim",
   "github/copilot.vim",
   "christoomey/vim-tmux-navigator",
   "TimUntersberger/neogit",
-  "ThePrimeagen/harpoon"
+  "ThePrimeagen/harpoon",
+  "ctrlpvim/ctrlp.vim",
   -- "HiPhish/nvim-ts-rainbow2",
   -- 'luochen1990/rainbow'
 
