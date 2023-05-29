@@ -13,6 +13,7 @@ return {
   "ThePrimeagen/harpoon",
   "xiyaowong/transparent.nvim",
   "ctrlpvim/ctrlp.vim",
+  "lewis6991/gitsigns.nvim",
   -- "HiPhish/nvim-ts-rainbow2",
   -- 'luochen1990/rainbow'
 
