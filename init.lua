@@ -16,3 +16,32 @@ vim.cmd([[
 vim.cmd([[
   TransparentEnable
 ]])
+
+local augroup = vim.api.nvim_create_augroup
+local SergioGroup = augroup('Sergio', {})
+
+local autocmd = vim.api.nvim_create_autocmd
+local yank_group = augroup('HighlightYank', {})
+
+-- function R(name)
+--     require("plenary.reload").reload_module(name)
+-- end
+
+-- highlight when yanking text
+autocmd('TextYankPost', {
+    group = yank_group,
+    pattern = '*',
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = 'IncSearch',
+            timeout = 40,
+        })
+    end,
+})
+
+-- remove trailing whitespace on save
+autocmd({"BufWritePre"}, {
+    group = SergioGroup,
+    pattern = "*",
+    command = [[%s/\s\+$//e]],
+})
