@@ -13,4 +13,3 @@ end
 -- vim.opt.background = "light"
 
 ColorMyPencils("spaceway")
-
