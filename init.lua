@@ -2,9 +2,11 @@ vim.g.mapleader = " "
 
 require("sergio")
 
-vim.opt.signcolumn="no"
+-- vim.opt.signcolumn="no"
 
 -- require('lualine').setup()
+
+require('gitsigns').setup()
 
 vim.cmd([[
   autocmd BufNewFile,BufRead ~/.config/sway/config.d/* set filetype=swayconfig
