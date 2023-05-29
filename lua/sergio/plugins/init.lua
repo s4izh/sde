@@ -11,6 +11,7 @@ return {
   "christoomey/vim-tmux-navigator",
   "TimUntersberger/neogit",
   "ThePrimeagen/harpoon",
+  "xiyaowong/transparent.nvim",
   "ctrlpvim/ctrlp.vim",
   -- "HiPhish/nvim-ts-rainbow2",
   -- 'luochen1990/rainbow'
