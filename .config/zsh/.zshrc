@@ -20,7 +20,7 @@ _comp_options+=(globdots)		# Include hidden files.
 # edit current command in $EDITOR
 autoload edit-command-line
 zle -N edit-command-line
-bindkey '^x^x' edit-command-line # ctrl-x ctrl-x
+bindkey '^x^e' edit-command-line # ctrl-x ctrl-e
 
 # bindkey -s '^A' '~/.local/scripts/tmux/tmux-main^M'
 # bindkey -s '^S' '~/.local/scripts/tmux/tmux-picker^M'
