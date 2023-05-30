@@ -127,7 +127,10 @@ function vif() {
 # bindkey -s '^o' 'vif^M'
 
 gd() {
-  nvim -c ":Neogit"
+  # nvim -c ":Neogit"
+  if git rev-parse --is-inside-work-tree; then
+    nvim -c ":Ge:"
+  fi
 }
 
 wk() {
