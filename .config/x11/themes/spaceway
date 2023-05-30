@@ -1,0 +1,46 @@
+*background: #000000
+*foreground: #cdcdcd
+
+! overlay + muted
+*color0: #26233a
+*color8: #6e6a86
+
+! red
+*color1: #eb6f92
+*color9: #eb6f92
+
+! green
+*color2: #a1bf78
+*color10: #a1bf78
+
+! yellow
+*color3: #e5c078
+*color11: #e5c078
+
+! blue
+*color4: #7d8fa3
+*color12: #7d8fa3
+
+! magenta
+*color5: #aa759f
+*color13: #aa759f
+
+! cyan
+*color6: #008888
+*color14: #008888
+
+! text
+*color7: #e0def4
+*color15: #e0def4
+
+dwm.normbordercolor: #444444
+dwm.normbgcolor: #000000
+dwm.normfgcolor: #cdcdcd
+dwm.selbordercolor: #cdcdcd
+dwm.selbgcolor: #000000
+dwm.selfgcolor: #7d8fa3
+
+dmenu.normbgcolor: #000000
+dmenu.normfgcolor: #cdcdcd
+dmenu.selbgcolor: #000000
+dmenu.selfgcolor: #7d8fa3
