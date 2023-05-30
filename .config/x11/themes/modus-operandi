@@ -3,36 +3,48 @@
 ! Foreground, background & cursor color
 *.foreground:   #000000
 *.background:   #ffffff
-*.cursorColor:  #000000
+*.cursorColor:  #505050
 
 ! white
 *.color0:       #ffffff
 *.color8:       #5C6370
 
 ! red
-*.color1:       #A60000
+*.color1:       #972500
 *.color9:       #A60000
 
 ! green
-*.color2:       #005E00
+*.color2:       #315b00
 *.color10:      #005E00
 
 ! yellow
-*.color3:       #813E00
+*.color3:       #70480f
 *.color11:      #813E00
 
 ! blue
-*.color4:       #0031A9
+*.color4:       #2544bb
 *.color12:      #0031A9
 
 ! magenta
-*.color5:       #721045
+*.color5:       #8f0075
 *.color13:      #721045
 
 ! cyan
-*.color6:       #00538B
+*.color6:       #30517f
 *.color14:      #00538B
 
 ! black
 *.color7:       #ffffff
 *.color15:      #ffffff
+
+dwm.normbordercolor: #444444
+dwm.normbgcolor: #ffffff
+dwm.normfgcolor: #000000
+dwm.selbordercolor: #0031a9
+dwm.selbgcolor: #eeeeee
+dwm.selfgcolor: #0031a9
+
+dmenu.normbgcolor: #ffffff
+dmenu.normfgcolor: #000000
+dmenu.selbgcolor: #dddddd
+dmenu.selfgcolor: #0031a9
