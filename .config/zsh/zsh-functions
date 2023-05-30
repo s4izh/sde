@@ -146,7 +146,12 @@ wks() {
 }
 
 wo() {
-    ~/.local/scripts/tmux/tmux-$1
+    [ -e ~/.local/scripts/tmux/tmux-$1 ] && ~/.local/scripts/tmux/tmux-$1 && exit
+    sessions=$(tmux list-sessions | awk '{print $1}' | sed 's/://')
+    echo $sessions
+    if printf $sessions | grep -qs $1$; then
+        tmux attach-session -t $1
+    fi
 }
 
 fman() {
