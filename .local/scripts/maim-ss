@@ -10,6 +10,14 @@ fi
 # maim --select | tee $HOME/pix/screenshots/$filename.png | xclip -selection clipboard -t image/png
 # maim --select | xclip -selection clipboard -t image/png
 
-maim -s | xclip -selection clipboard -t image/png -i
+maim -s | tee $home/pix/screenshots/$filename.png | xclip -selection clipboard -t image/png
 
-# maim --select | tee $HOME/pix/screenshots/$(date +%Y%m%d%H%M%S).png | xclip -selection clipboard -t image/png
+if [ file $home/pix/screenshots/$filename.png | grep -qs "empty" ]; then
+    rm $home/pix/screenshots/$filename.png
+else
+  notify-send "Screenshot saved" "$home/pix/screenshots/$filename.png" -a "maim-ss"
+fi
+
+if [ $XDG_SESSION_TYPE == "wayland" ]; then
+    # notify-send "Screenshot saved" "Screenshot saved at $home/pix/screenshots/$filename.png"
+fi
