@@ -1,0 +1,60 @@
+#!/bin/sh
+
+# dependencies for wayland: grim, slurp, wl-copy, wl-paste
+# dependencies for xorg: maim, xclip
+
+SCREENSHOT_DIR="$HOME/pix/screenshots"
+FILE=$(date +'%Y%m%d_%H%M%S').png
+
+if [ ! -d $SCREENSHOT_DIR ]; then
+  mkdir -p $SCREENSHOT_DIR
+fi
+
+function send_notification {
+  notify-send "Screenshot saved" "$SCREENSHOT_DIR/$FILE" -i $SCREENSHOT_DIR/$FILE
+}
+
+function xorg_screenshot() {
+  maim -s | tee $SCREENSHOT_DIR/$FILE | xclip -selection clipboard -t image/png
+
+  if [ file $SCREENSHOT_DIR/$FILE | grep -qs "empty" ]; then
+    rm $SCREENSHOT_DIR/$FILE
+  else
+    send_notification
+  fi
+}
+
+function wayland_screenshot() {
+  if [ "$1" == "area" ]; then
+    slurpout=$(slurp)
+    if [ -z "$slurpout" ]; then
+      exit
+    else
+      grim -g "$slurpout" - | wl-copy --type image/png && wl-paste > $SCREENSHOT_DIR/$FILE
+      send_notification
+    fi
+  fi
+}
+
+function screenshot() {
+  case $XDG_SESSION_TYPE in
+    wayland)
+      wayland_screenshot $*
+      ;;
+    xorg|*)
+      xorg_screenshot $*
+      ;;
+  esac
+}
+
+if [ -z "$1" ]; then
+  screenshot
+  exit
+fi
+
+case $1 in
+  area)
+    ;;
+  *)
+    ;;
+esac

@@ -29,10 +29,10 @@ XF86AudioMute
 	amixer set Master toggle
 
 super + shift + s
-	maim-ss
+	screenshot
 
 shift + Print
-	maim-ss
+	screenshot
 
 Print
     maim-wiki
