@@ -31,11 +31,8 @@ XF86AudioMute
 super + shift + s
 	screenshot
 
-shift + Print
-	screenshot
-
 Print
-    maim-wiki
+	screenshot --name-prompt
 
 XF86MonBrightnessUp
 	brightnessctl set +10%
