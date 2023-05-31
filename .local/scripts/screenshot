@@ -17,6 +17,9 @@ function send_notification {
 function xorg_screenshot() {
   maim -s | tee $SCREENSHOT_DIR/$FILE | xclip -selection clipboard -t image/png
 
+  # i dont know how to make this better
+  # img=$(maim -s) and checking if $img is empty doesnt work
+
   if [ file $SCREENSHOT_DIR/$FILE | grep -qs "empty" ]; then
     rm $SCREENSHOT_DIR/$FILE
   else
@@ -39,10 +42,10 @@ function wayland_screenshot() {
 function screenshot() {
   case $XDG_SESSION_TYPE in
     wayland)
-      wayland_screenshot $*
+      wayland_screenshot
       ;;
     xorg|*)
-      xorg_screenshot $*
+      xorg_screenshot
       ;;
   esac
 }
