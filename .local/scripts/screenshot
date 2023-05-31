@@ -12,6 +12,7 @@ fi
 
 function send_notification {
   notify-send "Screenshot saved" "$SCREENSHOT_DIR/$FILE" -i $SCREENSHOT_DIR/$FILE
+  # notify-send.sh "Screenshot saved" "$SCREENSHOT_DIR/$FILE" -i $SCREENSHOT_DIR/$FILE -d "feh $SCREENSHOT_DIR/$FILE"
 }
 
 function xorg_screenshot() {
@@ -39,7 +40,7 @@ function wayland_screenshot() {
   fi
 }
 
-function screenshot() {
+function _screenshot() {
   case $XDG_SESSION_TYPE in
     wayland)
       wayland_screenshot
@@ -51,12 +52,20 @@ function screenshot() {
 }
 
 if [ -z "$1" ]; then
-  screenshot
+  _screenshot
   exit
 fi
 
+set -x
+
 case $1 in
-  area)
+  --name-prompt|-n)
+    name=$(echo "" | dmenu -p "screenshot name:")
+    if [ -z "$name" ]; then
+      exit
+    fi
+    FILE=$name.png
+    _screenshot
     ;;
   *)
     ;;
