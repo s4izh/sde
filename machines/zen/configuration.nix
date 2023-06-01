@@ -40,5 +40,9 @@
     brightnessctl
   ];
 
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+  '';
+
   system.stateVersion = "22.11";
 }
