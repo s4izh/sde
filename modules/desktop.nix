@@ -89,6 +89,9 @@
     xdg-ninja
     mandoc
     man-db
+    dunst
+    libnotify
+    nil
   ];
 
   # programs.starship.enable = true;
