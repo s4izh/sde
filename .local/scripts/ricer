@@ -25,21 +25,21 @@ case "$CHOICE" in
         WALLPAPER=1
         NVIM_THEME=modus-operandi
         ln -sf $X_RESOURCES_FILE_DIR/modus-operandi ~/.Xresources
-        xrdb ~/.Xresources
+        xrdb -merge ~/.Xresources
         ln -sf $ALACRITTY_DIR/themes/modus-operandi.yml $ALACRITTY_DIR/theme.yml
     ;;
     'modus-vivendi')
         WALLPAPER=1
         NVIM_THEME=modus-vivendi
         ln -sf $X_RESOURCES_FILE_DIR/modus-vivendi ~/.Xresources
-        xrdb ~/.Xresources
+        xrdb -merge ~/.Xresources
         ln -sf $ALACRITTY_DIR/themes/modus-vivendi.yml $ALACRITTY_DIR/theme.yml
     ;;
     'spaceway')
         NVIM_THEME=spaceway
         WALLPAPER=1
         ln -sf $X_RESOURCES_FILE_DIR/spaceway ~/.Xresources
-        xrdb ~/.Xresources
+        xrdb -merge ~/.Xresources
         ln -sf $ALACRITTY_DIR/themes/spaceway.yml $ALACRITTY_DIR/theme.yml
     ;;
     *) exit
