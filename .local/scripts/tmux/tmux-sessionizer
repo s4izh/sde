@@ -3,11 +3,32 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/uni/"$CURRENT_Q" ~/personal ~/.local/src ~/.dotfiles/.local -mindepth 1 -maxdepth 1 -type d | fzf)
+    folders=$(find ~/uni/"$CURRENT_Q" ~/personal ~/.local/src -mindepth 1 -maxdepth 1 -type d)
+    # selected=$(find ~/uni/"$CURRENT_Q" ~/personal ~/.local/src ~/.dotfiles/.local -mindepth 1 -maxdepth 1 -type d | fzf)
+    # premade_session=$(ls -1 ~/.local/scripts/tmux)
+
+    scripts=~/.local/scripts
+    dotfiles=~/.dotfiles
+    notes=~/pkm
+
+    selected=$(printf "$folders\n$scripts\n$dotfiles\n$notes" | fzf)
 fi
 
 if [[ -z $selected ]]; then
     exit 0
+fi
+
+path=$(echo $selected | sed 's/\/home\/sergio\///g')
+script=$(grep "^PROJECT_PATH=\"\$HOME/$path\"" ~/.local/scripts/tmux/* | cut -d: -f1)
+
+if [[ -n $script ]]; then
+    sh $script
+    exit
+fi
+
+if [[ -e "$selected/.tmuxp.yaml" ]]; then
+    tmuxp load $selected/.tmuxp.yaml
+    exit
 fi
 
 if [[ -e "$selected/.tmux" ]]; then
