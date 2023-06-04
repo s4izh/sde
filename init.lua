@@ -63,3 +63,10 @@ endfunction
 let &statusline = Statusline_expr()
 set laststatus=2 "show statusbar
 ]])
+
+vim.g.slime_target = "tmux"
+
+vim.cmd([[
+  "let g:slime_paste_file = expand("$HOME/.slime_paste")
+  let g:slime_paste_file = tempname()
+]])
