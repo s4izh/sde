@@ -92,6 +92,9 @@
     dunst
     libnotify
     nil
+    go
+    gopls
+    cobra-cli
   ];
 
   # programs.starship.enable = true;
