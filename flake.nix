@@ -1,3 +1,4 @@
+# -*- compile-command: "sudo -A nixos-rebuild switch --flake . --impure && cd -" -*-
 {
   description = "Flake for my multisystem NixOS configuration";
 
