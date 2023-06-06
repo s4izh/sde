@@ -11,8 +11,9 @@
 (display-battery-mode t)
 
 ;; (add-to-list 'default-frame-alist '(font . "DejaVuSansMono-12"))
-(add-to-list 'default-frame-alist '(font . "LiberationMono-13"))
+;; (add-to-list 'default-frame-alist '(font . "LiberationMono-13"))
 (setq locale-coding-system 'utf-8)
+(set-face-attribute 'default nil :height 130)
 
 ;; THEMES
 ;; modus
@@ -38,13 +39,13 @@
   (load-theme 'doom-sourcerer t))
 
 (use-package spaceway-theme
-  :disabled t
+  ;; :disabled t
   :ensure nil
   :load-path "lisp/spaceway/"
   :config
   (global-hl-line-mode t)
-  (set-cursor-color "#dc322f")
-  (load-theme 'spaceway t))
+  (set-cursor-color "#dc322f"))
+  ;; (load-theme 'spaceway t))
 
 ;; smooth scrolling
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time

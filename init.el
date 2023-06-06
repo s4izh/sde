@@ -3,7 +3,7 @@
 ;; This file bootstraps the configuration, which is divided into
 ;; a number of other files inside the `lisp' directory.
 
-(setq user-emacs-directory "~/.emacs.d/")
+(setq user-emacs-directory "~/.config/emacs/")
 
 (setq ss/is-guix
       (string-suffix-p "This is the GNU system.  Welcome."
@@ -83,8 +83,8 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t))) (load custom-file 'noerror 'nomessage)
 
-(load (concat user-emacs-directory
-        "lisp/modeline.el"))
+;; (load (concat user-emacs-directory
+;;         "lisp/modeline.el"))
 
 (load (concat user-emacs-directory
 	      "lisp/appearance.el"))

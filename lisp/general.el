@@ -30,7 +30,7 @@
  "ji" '(lambda () (interactive) (find-file (expand-file-name "~/notes/inbox.org")))
  "jcd" '(lambda () (interactive) (find-file (expand-file-name "~/.local/src/dwm/config.h")) :which-key "dwm config")
  "jcn" '(lambda () (interactive) (find-file (expand-file-name "~/nixos/flake.nix")) :which-key "nix config")
- "jce" '(lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/init.el")) :which-key "emacs config"))
+ "jce" '(lambda () (interactive) (find-file (expand-file-name (concat user-emacs-directory "init.el"))) :which-key "emacs config"))
 
 (global-set-key (kbd "<f5>") #'recompile)
 
