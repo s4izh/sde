@@ -70,7 +70,7 @@ function za() {
 
 function uni() {
 	cd ~/uni/$CURRENT_Q/$1/
-	ranger
+	lf
 }
 
 function cdf() { cd "$(find -type d | fzf)" }
