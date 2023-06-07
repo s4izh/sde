@@ -10,18 +10,19 @@
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
-    let 
-      pkgs = import nixpkgs { 
+    let
+      pkgs = import nixpkgs {
         #inherit system;
         config.allowUnfree = true;
       };
       lib = nixpkgs.lib;
-    in {
+    in
+    {
       nixosConfigurations = {
         z390 = lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
-          modules = [ 
+          modules = [
             ./machines/z390/configuration.nix
             ./modules/base.nix
             ./modules/desktop.nix
@@ -42,10 +43,10 @@
               };
             }
           ];
-         };
+        };
         zen = lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ 
+          modules = [
             ./machines/zen/configuration.nix
             ./modules/base.nix
             ./modules/desktop.nix
@@ -64,8 +65,7 @@
               };
             }
           ];
-         };
+        };
       };
     };
 }
-    
