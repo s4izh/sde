@@ -1,5 +1,5 @@
 #!/bin/sh
-CHOICE=$(echo -e "laptop\nexternal\ndual\narandr" | dmenu -p monitor)
+CHOICE=$(echo -e "laptop\nexternal\nracing\ndual\narandr" | dmenu -p monitor)
 
 # case "$CHOICE" in
 # 	laptop) xrandr --output eDP --primary --mode 1920x1080 --output HDMI-A-0 --off &; sed -i 's/size: 12/size: 9'/ ~/.config/alacritty/alacritty.yml & ;;
@@ -16,6 +16,9 @@ case "$CHOICE" in
     'external')
 		xrandr --output HDMI-A-0 --primary --mode 1920x1080 --output eDP --off
 		sed -i 's/size: 9/size: 12'/ ~/.config/alacritty/alacritty.yml
+    ;;
+    'racing')
+		xrandr --output DP-4 --mode 2560x1080 --right-of DVI-D-0
     ;;
     '[MainLeft]')
         xrandr --output LVDS1 --mode 1366x768 --left-of VGA1 --primary
