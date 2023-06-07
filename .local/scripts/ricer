@@ -17,9 +17,10 @@ case "$CHOICE" in
         NVIM_THEME=default
         WALLPAPER=1
         [ -e $ALACRITTY_DIR/theme.yml ] && rm $ALACRITTY_DIR/theme.yml
-        rm ~/.Xresources
-        rm $DWM_DIR/theme.h
-        rm $DMENU_DIR/theme.h
+        ln -sf $X_RESOURCES_FILE_DIR/modus-vivendi ~/.Xresources
+        xrdb ~/.Xresources
+        # rm $DWM_DIR/theme.h
+        # rm $DMENU_DIR/theme.h
     ;;
     'modus-operandi')
         WALLPAPER=1
@@ -41,6 +42,13 @@ case "$CHOICE" in
         ln -sf $X_RESOURCES_FILE_DIR/spaceway ~/.Xresources
         xrdb -merge ~/.Xresources
         ln -sf $ALACRITTY_DIR/themes/spaceway.yml $ALACRITTY_DIR/theme.yml
+    ;;
+    'sourcerer')
+        NVIM_THEME=sourcerer
+        # WALLPAPER=1
+        ln -sf $X_RESOURCES_FILE_DIR/sourcerer ~/.Xresources
+        xrdb ~/.Xresources
+        ln -sf $ALACRITTY_DIR/themes/sourcerer.yml $ALACRITTY_DIR/theme.yml
     ;;
     *) exit
     ;;
