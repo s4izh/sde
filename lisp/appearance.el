@@ -40,7 +40,7 @@
   (load-theme 'doom-sourcerer t))
 
 (use-package spaceway-theme
-  ;; :disabled t
+  :disabled t
   :ensure nil
   :load-path "lisp/spaceway/"
   :config
@@ -61,6 +61,8 @@
 (global-display-line-numbers-mode)
 (setq display-line-numbers-type 'relative)
 (set-default 'truncate-lines t)
+;; line highlight
+(global-hl-line-mode t)
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook
@@ -83,4 +85,5 @@
 ;; run nerd-icons-install-fonts
 (use-package doom-modeline
   :config
-  (setq doom-modeline-height 22))
+  (setq doom-modeline-height 22)
+  :init (doom-modeline-mode 1))
