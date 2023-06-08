@@ -80,6 +80,7 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 
+;; run nerd-icons-install-fonts
 (use-package doom-modeline
   :config
   (setq doom-modeline-height 22))
