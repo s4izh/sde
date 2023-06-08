@@ -95,6 +95,7 @@
     go
     gopls
     cobra-cli
+    file
   ];
 
   # programs.starship.enable = true;
