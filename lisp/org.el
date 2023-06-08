@@ -304,3 +304,9 @@
                      ("cpp" . "src C++ :includes <iostream>  :namespaces std"))))
     (dolist (template templates)
       (push template org-structure-template-alist))))
+
+
+(use-package toc-org
+  :ensure t
+  :commands toc-org-enable
+  :init (add-hook 'org-mode-hook 'toc-org-enable))
