@@ -1,7 +1,8 @@
 #!/bin/sh
 
-# dependencies for wayland: grim, slurp, wl-copy, wl-paste
-# dependencies for xorg: maim, xclip
+# dependencies: file, notify-send
+# - wayland: grim, slurp, wl-copy, wl-paste
+# - xorg: maim, xclip
 
 SCREENSHOT_DIR="$HOME/pix/screenshots"
 FILE=$(date +'%Y%m%d_%H%M%S').png
@@ -20,8 +21,9 @@ function xorg_screenshot() {
 
   # i dont know how to make this better
   # img=$(maim -s) and checking if $img is empty doesnt work
+  #
 
-  if [ file $SCREENSHOT_DIR/$FILE | grep -qs "empty" ]; then
+  if $(file $SCREENSHOT_DIR/$FILE | grep -qs "empty"); then
     rm $SCREENSHOT_DIR/$FILE
   else
     send_notification
