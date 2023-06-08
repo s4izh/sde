@@ -121,6 +121,4 @@ alias nr="cd ~/.local/src/nixos && sudo nixos-rebuild switch --flake . --impure 
 alias nu="cd ~/.local/src/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake . --impure && cd -"
 alias nd="nix develop --command zsh"
 
-alias sshgen="ssh-keygen -t ed25519 -C"
-
 alias nb="newsboat"
