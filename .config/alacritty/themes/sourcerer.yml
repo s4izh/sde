@@ -7,7 +7,7 @@ colors:
     foreground: '#CDCDCD'
   cursor:
     text: '#CDCDCD'
-    cursor: '#CC6666'
+    cursor: '#87AFD7'
 
   vi_mode_cursor:
     text: CellBackground
@@ -19,10 +19,15 @@ colors:
 
   normal:
     black:   '#191919'
-    red:     '#CC6666'
-    green:   '#a1bf78'
-    yellow:  '#E5C078'
-    blue:    '#7D8FA3'
-    magenta: '#aa759f'
-    cyan:    '#009999'
+    red:     '#aa4450'
+    green:   '#87875f'
+    yellow:  '#cc8800'
+    blue:    '#6688aa'
+    magenta: '#8787AF'
+    cyan:    '#528b8b'
     white:   '#acadb1'
+  bright:
+    green:  '#719611'
+    blue:    '#8787AF'
+    cyan:    '#87ceeb'
+
