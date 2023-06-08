@@ -5,6 +5,8 @@
 
 (setq user-emacs-directory "~/.config/emacs/")
 
+(setq user-nixos-directory "~/.local/src/nixos")
+
 (setq ss/is-guix
       (string-suffix-p "This is the GNU system.  Welcome."
 		       (string-trim (shell-command-to-string "cat /etc/issue"))))
@@ -271,3 +273,5 @@
   (interactive "FSudo Find File: ")
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
+
+;; (setq projectile-project-search-path '("~/personal/" "~/uni/3q2" ("~/github" . 1)))

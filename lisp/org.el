@@ -144,7 +144,7 @@
 (global-set-key (kbd "C-c C-l") 'org-insert-link)
 
 (use-package org-modern
-  :disabled t
+  ;; :disabled t
   :ensure t
   :hook ((org-mode                 . org-modern-mode)
 	 (org-agenda-finalize-hook . org-modern-agenda))
