@@ -182,14 +182,14 @@ function sshclone () {
   git clone git@github.com:$1
 }
 
-function nix () {
-  if $*; then
-    actions=$(echo "rebuild update" | tr ' ' '\n')
-    action=$(echo $actions | fzf)
-  else
-    command nix "$@"
-  fi
-}
+# function nix () {
+#   if $*; then
+#     actions=$(echo "rebuild update" | tr ' ' '\n')
+#     action=$(echo $actions | fzf)
+#   else
+#     command nix "$@"
+#   fi
+# }
 
 function in () {
   nvim ~/wiki/index.md
@@ -202,3 +202,12 @@ function cfs () {
   nvim $choice
   cd $current_dir
 }
+
+function mygit () {
+    git clone git@github.com:s4izh/"$1" $2
+}
+
+function sshgen () {
+    ssh-keygen -t ed25519 -C "sergiosanz234@gmail.com" -f "$HOME"/.ssh/$1
+}
+
