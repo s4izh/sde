@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #keyboard settings
 # setxkbmap es -option ctrl:nocaps
