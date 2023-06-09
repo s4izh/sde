@@ -66,6 +66,8 @@ alias gco="git checkout"
 alias gc="git commit -m"
 alias gst="git status"
 alias ga="git add"
+alias gsu="git submodule update --init --recursive"
+alias gsr="git submodule update --recursive --remote"
 
 alias index="nvim index*"
 
@@ -117,8 +119,9 @@ alias sm="sudo make clean install"
 alias py="python"
 
 alias cfn="nvim /etc/nixos/configuration.nix"
-alias nr="cd ~/.local/src/nixos && sudo nixos-rebuild switch --flake . --impure && cd -"
-alias nu="cd ~/.local/src/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake . --impure && cd -"
+alias nr="cd ~/.local/src/nixos && sudo nixos-rebuild switch --flake . --impure; cd -"
+alias nt="cd ~/.local/src/nixos && sudo nixos-rebuild test --flake . --impure; cd -"
+alias nu="cd ~/.local/src/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake . --impure; cd -"
 alias nd="nix develop --command zsh"
 
 alias nb="newsboat"
