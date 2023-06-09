@@ -98,7 +98,6 @@
     cobra-cli
     file
     direnv
-    # manix
   ];
 
   # programs.starship.enable = true;
