@@ -73,6 +73,11 @@ function dunst() {
     ln -vsf "$DOTDIR"/.config/dunst "$HOME"/.config/dunst
 }
 
+function tmux() {
+    [ -e "$HOME"/.config/tmux ] && rm -vf "$HOME"/.config/tmux
+    ln -vsf "$DOTDIR"/.config/tmux "$HOME"/.config/tmux
+}
+
 function scripts() {
     [ -e "$HOME"/.local/scripts ] && rm -vf "$HOME"/.local/scripts
     ln -vsf "$DOTDIR"/.local/scripts "$HOME"/.local/scripts
@@ -118,6 +123,7 @@ for i in "$@"; do
         hosts) etc_hosts ;;
         picom) picom ;;
         dunst) dunst ;;
+        tmux) tmux ;;
         *) echo "Unknown option: $i" ;;
     esac
 done

@@ -9,9 +9,10 @@ else
 
     scripts=~/.local/scripts
     dotfiles=~/.dotfiles
+    nvim=~/.config/nvim
     notes=~/pkm
 
-    selected=$(printf "$folders\n$scripts\n$dotfiles\n$notes" | fzf)
+    selected=$(printf "$folders\n$scripts\n$dotfiles\n$notes\n$nvim" | fzf)
 fi
 
 if [[ -z $selected ]]; then
