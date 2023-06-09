@@ -27,12 +27,8 @@
             ./modules/base.nix
             ./modules/desktop.nix
             ./modules/dwm.nix
-            # ./modules/xfcei3.nix
-            # ./modules/stumpwm.nix
-            # ./modules/gnome.nix
             ./modules/gaming.nix
             ./modules/virtualisation.nix
-            # ./modules/database.nix
             ./modules/android.nix
             home-manager.nixosModules.home-manager
             {
@@ -53,9 +49,7 @@
             ./modules/base.nix
             ./modules/desktop.nix
             ./modules/dwm.nix
-            ./modules/dwl.nix
             ./modules/virtualisation.nix
-            # ./modules/database.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
