@@ -36,6 +36,11 @@
         user = "git";
         identityFile = "~/.ssh/repofib";
       };
+      "zen" = {
+        hostname = "192.168.1.137";
+        user = "sergio";
+        identityFile = "~/.ssh/zen";
+      };
       "pti" = {
         hostname = "nattech.fib.upc.edu";
         user = "alumne";
@@ -65,9 +70,9 @@
       package = pkgs.adw-gtk3;
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-      #package = pkgs.qogir-icon-theme;
+      name = "Qogir-dark";
+      # package = pkgs.papirus-icon-theme;
+      package = pkgs.qogir-icon-theme;
     };
     cursorTheme = {
       name = "Adwaita";
