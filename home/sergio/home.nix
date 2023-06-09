@@ -68,6 +68,8 @@
     theme = {
       name = "adw-gtk3-dark";
       package = pkgs.adw-gtk3;
+      # name = "Qogir";
+      # package = pkgs.qogir-theme;
     };
     iconTheme = {
       name = "Qogir-dark";
@@ -75,8 +77,8 @@
       package = pkgs.qogir-icon-theme;
     };
     cursorTheme = {
-      name = "Adwaita";
-      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Qogir";
+      package = pkgs.qogir-icon-theme;
     };
     font = {
       # name = "Liberation Mono";
@@ -92,9 +94,39 @@
     };
   };
 
+  programs.firefox = {
+    enable = true;
+    profiles.default.extraConfig = ''
+      user_pref("browser.fullscreen.autohide", false);
+      user_pref("browser.compactmode.show", true);
+    '';
+  };
+
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = true;
+      format = lib.strings.concatStrings [
+        "$os"
+        "$directory"
+        "$container"
+        "$git_branch$git_status"
+        "$nix_shell"
+        "$python"
+        "$nodejs"
+        "$lua"
+        "$rust"
+        "$java"
+        "$c"
+        "$golang"
+        "$status"
+        "\n$character"
+      ];
+    };
+  };
 
   # programs.direnv.enable = true;
   # programs.direnv.nix-direnv.enable = true;
 
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 }
