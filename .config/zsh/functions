@@ -218,3 +218,10 @@ function sshgen () {
     ssh-keygen -t ed25519 -C "sergiosanz234@gmail.com" -f "$HOME"/.ssh/$1
 }
 
+function gettemplate () {
+    local current_dir=$PWD
+    cd ~/templates
+    choice=$(find . -not -path "./.git/*" -type f | fzf)
+    cp $choice $current_dir
+    cd $current_dir
+}

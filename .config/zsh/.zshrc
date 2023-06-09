@@ -34,13 +34,13 @@ alias ts='~/.local/scripts/tmux/tmux-sessionizer'
 autoload -Uz colors && colors
 
 # Useful Functions
-source "$ZDOTDIR/zsh-functions"
+source "$ZDOTDIR/functions"
 
 # Normal files to source
-zsh_add_file "zsh-exports"
-zsh_add_file "zsh-vim-mode"
-zsh_add_file "zsh-aliases"
-# zsh_add_file "zsh-prompt"
+zsh_add_file "exports"
+zsh_add_file "vim-mode"
+zsh_add_file "aliases"
+# zsh_add_file "prompt"
 
 # Plugins
 # zsh_add_plugin "zsh-users/zsh-autosuggestions"
