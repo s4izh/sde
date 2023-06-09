@@ -40,7 +40,7 @@ source "$ZDOTDIR/zsh-functions"
 zsh_add_file "zsh-exports"
 zsh_add_file "zsh-vim-mode"
 zsh_add_file "zsh-aliases"
-zsh_add_file "zsh-prompt"
+# zsh_add_file "zsh-prompt"
 
 # Plugins
 # zsh_add_plugin "zsh-users/zsh-autosuggestions"
@@ -66,4 +66,5 @@ bindkey '^R' history-incremental-search-backward
 # zle -N up-line-or-beginning-search
 # zle -N down-line-or-beginning-search
 
-# eval "$(starship init zsh)"
+eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
