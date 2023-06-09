@@ -27,7 +27,9 @@
             ./modules/base.nix
             ./modules/desktop.nix
             ./modules/dwm.nix
-            ./modules/stumpwm.nix
+            # ./modules/xfcei3.nix
+            # ./modules/stumpwm.nix
+            # ./modules/gnome.nix
             ./modules/gaming.nix
             ./modules/virtualisation.nix
             # ./modules/database.nix
