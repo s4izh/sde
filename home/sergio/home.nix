@@ -74,7 +74,8 @@
       package = pkgs.gnome.adwaita-icon-theme;
     };
     font = {
-      name = "Liberation Mono";
+      # name = "Liberation Mono";
+      name = "JetBrains Mono";
       #package = pkgs.rubik;
       size = 11;
     };
@@ -85,6 +86,10 @@
       gtk-application-prefer-dark-theme = true;
     };
   };
+
+
+  # programs.direnv.enable = true;
+  # programs.direnv.nix-direnv.enable = true;
 
   home.stateVersion = "22.11";
 }
