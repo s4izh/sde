@@ -40,4 +40,6 @@
 
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   hardware.nvidia.modesetting.enable = true;
+
+  system.stateVersion = "23.05";
 }
