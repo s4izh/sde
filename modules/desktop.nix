@@ -14,6 +14,7 @@
     redshift
     networkmanagerapplet
     gnome.gnome-calculator
+    gnome.nautilus
     xclip
     maim
     imagemagick
@@ -31,7 +32,7 @@
     libtool
     # c tooling
     gcc
-    cmake
+    # cmake
     clang
     clang-tools
     # llvmPackages_15.libclang
@@ -49,7 +50,8 @@
     # python tooling
     python3
     # nix
-    rnix-lsp
+    nil
+    nixfmt
     # erlang
     erlang
     erlang-ls
@@ -91,11 +93,12 @@
     man-db
     dunst
     libnotify
-    nil
     go
     gopls
     cobra-cli
     file
+    direnv
+    # manix
   ];
 
   # programs.starship.enable = true;
@@ -144,17 +147,20 @@
 
   fonts.fonts = with pkgs; [
     iosevka
+    jetbrains-mono
   ];
 
   fonts.fontconfig = {
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
       #serif = [ "Liberation Mono" ];
-      monospace = [ "Liberation Mono" ];
+      # monospace = [ "Liberation Mono" ];
+      monospace = [ "JetBrains Mono" ];
     };
   };
 
-  documentation.man.generateCaches = true;
+  # va muy lento con esto
+  # documentation.man.generateCaches = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
