@@ -97,6 +97,13 @@ function ne() {
     cd $current_dir
 }
 
+function ne() {
+    local current_dir=$PWD
+    cd ~/.local/src/nixos
+    nvim --cmd "packloadall" -c "lua require('telescope.builtin').git_files({cwd = '.'})"
+    cd $current_dir
+}
+
 # function cfv() {
 #     local current_dir=$PWD
 #     cd ~/.config/nvim
