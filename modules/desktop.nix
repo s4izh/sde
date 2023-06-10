@@ -130,8 +130,17 @@
     };
   };
 
+  # fix java apps
+  environment.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
+
+
   programs.npm.enable = true;
   programs.thunar.enable = true;
+
+  # automounting
+  # services.gvfs.enable = true;
+  # services.dbus.enable = true;
+
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
