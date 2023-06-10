@@ -39,6 +39,7 @@
     tmux
     tree
     du-dust
+    tldr
   ];
 
   # Set your time zone.
