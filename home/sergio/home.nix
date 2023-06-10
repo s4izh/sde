@@ -111,13 +111,13 @@ in
     # };
   };
 
-  programs.firefox = {
-    enable = true;
-    profiles.default.extraConfig = ''
-      user_pref("browser.fullscreen.autohide", false);
-      user_pref("browser.compactmode.show", true);
-    '';
-  };
+  # programs.firefox = {
+  #   enable = true;
+  #   profiles.default.extraConfig = ''
+  #     user_pref("browser.fullscreen.autohide", false);
+  #     user_pref("browser.compactmode.show", true);
+  #   '';
+  # };
 
   programs.starship = {
     enable = true;
