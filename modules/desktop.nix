@@ -27,6 +27,7 @@
     xdotool
     exa
     picom
+    headsetcontrol
 
     # -- compile tools --
     nodejs
