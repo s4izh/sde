@@ -79,6 +79,7 @@
     cloc
     pstree
     shellcheck
+    shfmt
     xdg-ninja
 
     # -- writting --
@@ -111,6 +112,13 @@
 
   # programs.starship.enable = true;
 
+  programs.firefox = {
+    enable = true;
+    preferences = {
+      "browser.fullscreen.autohide" = false;
+      "browser.compactmode.show" = true;
+    };
+  };
 
   services.xserver = {
     layout = "es";
