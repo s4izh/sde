@@ -27,15 +27,18 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     neovim
+    vimv
     wget
     git
     pciutils
     usbutils
+    file
     neofetch
     gnumake
     ripgrep
     tmux
     tree
+    du-dust
   ];
 
   # Set your time zone.

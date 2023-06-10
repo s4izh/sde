@@ -27,17 +27,20 @@
     xdotool
     exa
     picom
-    # compile tools
+
+    # -- compile tools --
     nodejs
     libtool
-    # c tooling
+
+    # -- c tooling --
     gcc
     # cmake
     clang
     clang-tools
     # llvmPackages_15.libclang
     # clang-wrapper
-    # rust tooling
+
+    # -- rust tooling --
     cargo
     cargo-watch
     cargo-make
@@ -45,59 +48,65 @@
     # rustup esto no hace falta
     rustfmt
     rustc
-    # bacon
-    diesel-cli
-    # python tooling
+
+    # -- python tooling --
     python3
-    # nix
+
+    # -- nix --
     nil
     nixfmt
-    # erlang
+
+    # -- erlang --
     erlang
     erlang-ls
     rebar3
-    #bash
+
+    # -- bash --
     #bash-language-server
     nodePackages_latest.bash-language-server
-    # linux
+
+    # -- linux --
     man-pages
-    # dev
+    mandoc
+    man-db
+
+    # -- dev --
+    direnv
     starship
     nmap
     jq
-    # postman
     gdb
     cloc
     pstree
-    # writting
-    pandoc
-    haskellPackages.pandoc-crossref
-    # pandoc-crossref
-    # pandoc-citeproc
-    texlive.combined.scheme-full
-    aspell
-    # libreoffice-fresh
-    rclone
-    # python
-    python39Packages.setuptools
-    # vimb
-    pdftk
-    # vpn
-    openfortivpn
-    groff
-    newsboat
-    dpkg
     shellcheck
     xdg-ninja
-    mandoc
-    man-db
+
+    # -- writting --
+    pandoc
+    haskellPackages.pandoc-crossref
+    groff
+    texlive.combined.scheme-full
+    aspell
+
+    # libreoffice-fresh
+    rclone
+    # vimb
+    pdftk
+
+    # -- vpn --
+    openfortivpn
+
+    # -- notifications --
     dunst
     libnotify
+
+    # other
+    newsboat
+
+    # -- go --
     go
     gopls
     cobra-cli
-    file
-    direnv
   ];
 
   # programs.starship.enable = true;
