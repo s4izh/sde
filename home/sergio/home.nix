@@ -28,6 +28,10 @@ in
 
   xdg.configFile."git/config".source = "${dotfiles}/.config/git/config";
 
+  home.sessionVariables = {
+    HISTFILE = "{xdg.dataHome}/bash/bash_history";
+  };
+
 # xdg.configFile.<name>.recursive
 
   # home.file.".ssh/config".source = ./.ssh/config;
