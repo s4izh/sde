@@ -3,16 +3,16 @@
   description = "Flake for my multisystem NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    #home.manager.url = "github:nix-community/home-manager";
-    #home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    #bochs-soa.url = "github:Toomoch/SOA-ZeOS-fib-nix";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
+      system = "x86_64-linux";
       pkgs = import nixpkgs {
-        #inherit system;
+        inherit system;
         config.allowUnfree = true;
       };
       lib = nixpkgs.lib;
@@ -58,6 +58,21 @@
                 users.sergio.imports = [
                   ./home/sergio/home.nix
                 ];
+              };
+            }
+          ];
+        };
+      };
+      homeManagerConfigurations = {
+        sergio = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [
+            ./home/sergio/home.nix
+            {
+              home = {
+                username = "sergio";
+                homeDirectory = "/home/sergio";
+                stateVersion = "23.05";
               };
             }
           ];
