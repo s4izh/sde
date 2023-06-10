@@ -70,3 +70,5 @@ vim.cmd([[
   "let g:slime_paste_file = expand("$HOME/.slime_paste")
   let g:slime_paste_file = tempname()
 ]])
+
+require('telescope').load_extension('manix')

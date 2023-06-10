@@ -12,9 +12,13 @@ return {
   "TimUntersberger/neogit",
   "ThePrimeagen/harpoon",
   "xiyaowong/transparent.nvim",
-  "ctrlpvim/ctrlp.vim",
+  -- "ctrlpvim/ctrlp.vim",
   "lewis6991/gitsigns.nvim",
   "jpalardy/vim-slime",
+  'mrcjkb/telescope-manix',
+  -- "mhinz/vim-startify",
+  -- "startup-nvim/startup.nvim",
+
   -- "HiPhish/nvim-ts-rainbow2",
   -- 'luochen1990/rainbow'
 
