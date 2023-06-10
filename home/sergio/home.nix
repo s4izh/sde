@@ -1,27 +1,36 @@
 { config, pkgs, lib, ... }:
+let
+  dotfiles = /home/sergio/.dotfiles;
+in
 {
   xdg = {
     enable = true;
-    #userDirs = {
-    #  enable = true;
-    #  createDirectories = true;
-    #};
+#userDirs = {
+#  enable = true;
+#  createDirectories = true;
+#};
   };
 
-  # programs.git = {
-  #   enable = true;
-  #   userName = "s4izh";
-  #   userEmail = "sergiosanz234@gmail.com";
-  #   extraConfig = {
-  #     init = {
-  #       defaultBranch = "main";
-  #     };
-  #   };
-  # };
+  xdg.configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
+  # xdg.configFile."user-dirs.locale".source = "${dotfiles}/.config/user-dirs.locale";
+  xdg.configFile."mimeapps.list".source = "${dotfiles}/.config/mimeapps.list";
 
-  xdg.configFile."git/config".source = ./.config/git/config;
+# programs.git = {
+#   enable = true;
+#   userName = "s4izh";
+#   userEmail = "sergiosanz234@gmail.com";
+#   extraConfig = {
+#     init = {
+#       defaultBranch = "main";
+#     };
+#   };
+# };
 
-  # xdg.configFile.<name>.recursive
+  xdg.configFile."git/config".source = "${dotfiles}/.config/git/config";
+
+# xdg.configFile.<name>.recursive
+
+  # home.file.".ssh/config".source = ./.ssh/config;
 
   programs.ssh = {
     enable = true;
@@ -57,7 +66,6 @@
     };
   };
 
-
   programs.emacs = {
     enable = true;
     package = pkgs.emacs;
@@ -86,12 +94,21 @@
       #package = pkgs.rubik;
       size = 11;
     };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
+    gtk3.extraConfig = { gtk-application-prefer-dark-theme = true; };
+    gtk4.extraConfig = { gtk-application-prefer-dark-theme = true; };
+    gtk3.bookmarks = [
+      "file:///home/sergio/uni/3q2"
+      "file:///home/sergio/pkm"
+    ];
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
     };
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-    };
+    # "org/gnome/desktop/wm/preferences" = {
+    #   button-layout = "appmenu";
+    # };
   };
 
   programs.firefox = {
@@ -125,8 +142,8 @@
     };
   };
 
-  # programs.direnv.enable = true;
-  # programs.direnv.nix-direnv.enable = true;
+# programs.direnv.enable = true;
+# programs.direnv.nix-direnv.enable = true;
 
   home.stateVersion = "23.05";
 }
