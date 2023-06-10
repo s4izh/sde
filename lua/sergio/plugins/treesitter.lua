@@ -3,7 +3,7 @@ return {
   build = ":TSUpdate",
   config = function()
     require'nvim-treesitter.configs'.setup {
-      ensure_installed = { "vimdoc", "javascript", "c", "lua", "rust" },
+      ensure_installed = { "javascript", "c", "lua", "rust" }, -- vimdoc doesn't work on my nix yet
       sync_install = false,
       auto_install = true,
       highlight = {
