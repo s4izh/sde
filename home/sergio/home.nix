@@ -5,15 +5,17 @@ in
 {
   xdg = {
     enable = true;
-#userDirs = {
-#  enable = true;
-#  createDirectories = true;
-#};
+    configFile."git/config".source = "${dotfiles}/.config/git/config";
+    configFile."dunst/dunstrc".source = "${dotfiles}/.config/dunst/dunstrc";
+    configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
+    configFile."mimeapps.list".source = "${dotfiles}/.config/mimeapps.list";
+    # xdg.configFile."user-dirs.locale".source = "${dotfiles}/.config/user-dirs.locale";
+    # userDirs = {
+    #   enable = true;
+    #   createDirectories = true;
+    # };
   };
 
-  xdg.configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
-  # xdg.configFile."user-dirs.locale".source = "${dotfiles}/.config/user-dirs.locale";
-  xdg.configFile."mimeapps.list".source = "${dotfiles}/.config/mimeapps.list";
 
 # programs.git = {
 #   enable = true;
@@ -26,11 +28,15 @@ in
 #   };
 # };
 
-  xdg.configFile."git/config".source = "${dotfiles}/.config/git/config";
-
   home.sessionVariables = {
     HISTFILE = "{xdg.dataHome}/bash/bash_history";
   };
+
+
+  # services.dunst = {
+  #   enable = true;
+  #   dunst.configFile = "${dotfiles}/.config/dunst/dunstrc";
+  # };
 
 # xdg.configFile.<name>.recursive
 
