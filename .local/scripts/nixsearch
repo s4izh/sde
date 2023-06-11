@@ -1,11 +1,10 @@
 #!/bin/sh
 
 type=$(echo -e "packages\noptions" | dmenu -r -p "search type")
-query=$(dmenu -p "search" | sed 's/ /+/g')
+[ -z "$type" ] && exit 0
 
-if [ -z "$query" ]; then
-    exit 0
-fi
+query=$(dmenu -p "search" | sed 's/ /+/g')
+[ -z "$query" ] && exit 0
 
 case "$type" in
     packages)
@@ -14,6 +13,6 @@ case "$type" in
     options)
         xdg-open "https://search.nixos.org/options?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=$settings"
         ;;
-    *) exit
+    *) exit 0
         ;;
 esac
