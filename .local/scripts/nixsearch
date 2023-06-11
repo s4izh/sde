@@ -1,9 +1,19 @@
 #!/bin/sh
 
+type=$(echo -e "packages\noptions" | dmenu -r -p "search type")
 query=$(dmenu -p "search" | sed 's/ /+/g')
 
 if [ -z "$query" ]; then
     exit 0
 fi
 
-firefox "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=$query"
+case "$type" in
+    packages)
+        xdg-open "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=$query"
+        ;;
+    options)
+        xdg-open "https://search.nixos.org/options?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=$settings"
+        ;;
+    *) exit
+        ;;
+esac
