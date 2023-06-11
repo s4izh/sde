@@ -64,4 +64,4 @@ if [ -n "$NVIM_THEME" ]; then
   echo "vim.cmd('colorscheme $NVIM_THEME')" > $NVIM_THEME_FILE
 fi
 
-killall dwm
+pkill dwm
