@@ -1,3 +1,4 @@
+# vi: set ft=zsh :
 #!/bin/sh
 
 HISTFILE="$XDG_CACHE_HOME/zsh/history"
