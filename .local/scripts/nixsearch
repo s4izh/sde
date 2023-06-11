@@ -11,7 +11,7 @@ case "$type" in
         xdg-open "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=$query"
         ;;
     options)
-        xdg-open "https://search.nixos.org/options?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=$settings"
+        xdg-open "https://search.nixos.org/options?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=$query"
         ;;
     *) exit 0
         ;;
