@@ -22,6 +22,7 @@ in
     enable = true;
     configFile."git/config".source = "${dotfiles}/.config/git/config";
     configFile."dunst/dunstrc".source = "${dotfiles}/.config/dunst/dunstrc";
+    configFile."sxhkd/sxhkdrc".source = "${dotfiles}/.config/sxhkd/sxhkdrc";
     configFile."mimeapps.list".source = "${dotfiles}/.config/mimeapps.list";
     configFile."libvirt/libvirt.conf".source = "${dotfiles}/.config/libvirt/libvirt.conf";
     configFile."tmux/tmux.conf".source = "${dotfiles}/.config/tmux/tmux.conf";
