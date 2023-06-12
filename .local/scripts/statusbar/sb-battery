@@ -1,25 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 
-status=$(bat-asus-battery status)
-capacity=$(bat-asus-battery capacity)
+which acpi > /dev/null 2>&1
 
-# make it equal to the max battery level of your device
-maxbatterylevel=79
+if [ $? -eq 1 ]; then
+    echo "acpi not found"
+    exit 1
+fi
 
-gap=$((capacity/10))
+info=$(acpi | cut -d: -f2)
+status=$(echo $info | cut -d, -f1)
+capacity=$(echo $info | cut -d, -f2)
+# capacity=${capacity%?}
 
-[[ $status == "Charging" ]] && gap=charging
-[[ $capacity -eq $maxbatterylevel ]] && gap=10
-
-case "$gap" in
-    0|1) icon=" " ;;
-    2|3) icon=" " ;;
-    4|5) icon=" " ;;
-    6|7|8) icon=" " ;;
-    9|10) icon=" " ;;
-    charging) icon="" ;;
-    *) 
-    ;;
-esac
-
-echo "$icon $capacity% $status"
+echo $status $capacity
