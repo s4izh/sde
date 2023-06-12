@@ -1,0 +1,14 @@
+*background: #000000
+*foreground: #bbbbbb
+
+dwm.normbordercolor: #444444
+dwm.normbgcolor: #222222
+dwm.normfgcolor: #bbbbbb
+dwm.selbordercolor: #005577
+dwm.selbgcolor: #005577
+dwm.selfgcolor: #eeeeee
+
+dmenu.normbgcolor: #222222
+dmenu.normfgcolor: #bbbbbb
+dmenu.selbgcolor: #005577
+dmenu.selfgcolor: #eeeeee
