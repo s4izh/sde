@@ -1,7 +1,11 @@
 #!/bin/sh
 
-type=$(echo -e "packages\noptions" | dmenu -r -p "search type")
+type=$(echo -e "packages\noptions\nhome-manager" | dmenu -r -p "search type")
 [ -z "$type" ] && exit 0
+
+if [ "$type" = "home-manager" ]; then
+    xdg-open https://nix-community.github.io/home-manager/options.html
+fi
 
 query=$(dmenu -p "search" | sed 's/ /+/g')
 [ -z "$query" ] && exit 0
