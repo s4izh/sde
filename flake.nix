@@ -1,4 +1,3 @@
-# -*- compile-command: "sudo -A nixos-rebuild switch --flake . --impure && cd -" -*-
 {
   description = "Flake for my multisystem NixOS configuration";
 
@@ -50,6 +49,26 @@
             ./modules/desktop.nix
             ./modules/dwm.nix
             ./modules/virtualisation.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                extraSpecialArgs = { inherit inputs; };
+                users.sergio.imports = [
+                  ./home/sergio/home.nix
+                ];
+              };
+            }
+          ];
+        };
+        # TODO specific vm config
+        vm = lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./machines/zen/configuration.nix
+            ./modules/base.nix
+            ./modules/desktop.nix
+            ./modules/dwm.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
