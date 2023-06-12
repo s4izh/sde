@@ -10,7 +10,7 @@
     pulsemixer
     zathura
     feh
-    fzf
+    # fzf
     redshift
     networkmanagerapplet
     gnome.gnome-calculator
