@@ -1,5 +1,7 @@
 .DEFAULT_GOAL := help
 
+
+DOTFILES := $(HOME)/.dotfiles
 SRC_DIR := $(HOME)/.local/src
 
 help:
@@ -11,7 +13,7 @@ repl: ## Start a nix repl with the flake loaded
 	nix repl --expr 'builtins.getFlake (toString ./.)'
 test: ## Test the flake
 	sudo nixos-rebuild test --flake .# --impure
-switch: src-dependencies ## Switch to the flake
+switch: src-dependencies create-softlinks ## Switch to the flake
 	sudo nixos-rebuild switch --flake .# --impure
 update: ## Update the flake
 	nix flake update
@@ -24,3 +26,6 @@ src-dependencies: ## clone src repos
 	@if [ ! -d $(SRC_DIR)/dwm ]; then git clone https://github.com/s4izh/dwm.git $(SRC_DIR)/dwm; fi
 	@if [ ! -d $(SRC_DIR)/dmenu ]; then git clone https://github.com/s4izh/dmenu.git $(SRC_DIR)/dmenu; fi
 	@if [ ! -d $(SRC_DIR)/dwmblocks ]; then git clone https://github.com/s4izh/dwmblocks.git $(SRC_DIR)/dwmblocks; fi
+create-softlinks:
+	@if [ ! -h $(HOME)/.config/alacritty ]; then ln -s $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
+	@if [ ! -h $(HOME)/templates ]; then ln -s $(DOTFILES)/templates $(HOME)/templates; fi
