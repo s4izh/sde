@@ -1,0 +1,58 @@
+font:
+  # normal:
+  #   family: JetBrainsMono NerdFont
+  #   style: Regular
+  # bold:
+  #   family: JetBrainsMono NerdFont
+  #   style: Bold
+  # italic:
+  #   family: JetBrainsMono NerdFont
+  #   style: Italic
+  # bold_italic:
+  #   family: JetBrainsMono NerdFont
+  #   style: Bold Italic
+
+  # normal:
+  #   family: JetBrains Mono
+  #   style: Regular
+  # bold:
+  #   family: JetBrains Mono
+  #   style: Bold
+  # italic:
+  #   family: JetBrains Mono
+  #   style: Italic
+  # bold_italic:
+  #   family: JetBrains Mono
+  #   style: Bold Italic
+
+  # normal:
+  #   family: Hack Nerd Font Mono
+  #   style: Regular
+  # bold:
+  #   family: Hack Nerd Font Mono
+  #   style: Bold
+  # italic:
+  #   family: Hack Nerd Font Mono
+  #   style: Italic
+  # bold_italic:
+  #   family: Hack Nerd Font Mono
+  #   style: Bold Italic
+
+  # normal:
+  #   family: Liberation Mono
+  #   style: Regular
+  # bold:
+  #   family: Liberation Mono 
+  #   style: Bold
+  # italic:
+  #   family: Liberation Mono
+  #   style: Italic
+  # bold_italic:
+  #   family: Liberation Mono
+  #   style: Bold Italic
+  # normal:
+  #   family: Iosevka
+  #   style: Regular
+
+  # Point size
+  size: 12
