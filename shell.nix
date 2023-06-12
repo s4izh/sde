@@ -5,6 +5,7 @@ pkgs.mkShell {
     git
     git-crypt
     nixFlakes
+    gnumake
   ];
 
   shellHook = ''
