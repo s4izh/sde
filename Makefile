@@ -20,7 +20,7 @@ user: ## Switch to the flake as a user
 	./result/activate
 	rm -rf result
 src-dependencies: ## clone src repos
-	if [ ! -d $(SRC_DIR) ]; then mkdir -p $(SRC_DIR); fi
-	if [ ! -d $(SRC_DIR)/dwm ]; then git clone https://github.com/s4izh/dwm.git $(SRC_DIR)/dwm; fi
-	if [ ! -d $(SRC_DIR)/dmenu ]; then git clone https://github.com/s4izh/dmenu.git $(SRC_DIR)/dmenu; fi
-	if [ ! -d $(SRC_DIR)/dwmblocks ]; then git clone https://github.com/s4izh/dwmblocks.git $(SRC_DIR)/dwmblocks; fi
+	@if [ ! -d $(SRC_DIR) ]; then mkdir -p $(SRC_DIR); fi
+	@if [ ! -d $(SRC_DIR)/dwm ]; then git clone https://github.com/s4izh/dwm.git $(SRC_DIR)/dwm; fi
+	@if [ ! -d $(SRC_DIR)/dmenu ]; then git clone https://github.com/s4izh/dmenu.git $(SRC_DIR)/dmenu; fi
+	@if [ ! -d $(SRC_DIR)/dwmblocks ]; then git clone https://github.com/s4izh/dwmblocks.git $(SRC_DIR)/dwmblocks; fi
