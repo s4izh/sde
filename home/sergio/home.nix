@@ -7,15 +7,23 @@ in
     enable = true;
     configFile."git/config".source = "${dotfiles}/.config/git/config";
     configFile."dunst/dunstrc".source = "${dotfiles}/.config/dunst/dunstrc";
-    configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
     configFile."mimeapps.list".source = "${dotfiles}/.config/mimeapps.list";
-    # xdg.configFile."user-dirs.locale".source = "${dotfiles}/.config/user-dirs.locale";
-    # userDirs = {
-    #   enable = true;
-    #   createDirectories = true;
-    # };
+    configFile."libvirt/libvirt.conf".source = "${dotfiles}/.config/libvirt/libvirt.conf";
+    # configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
+    # configFile."user-dirs.locale".source = "${dotfiles}/.config/user-dirs.locale";
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+      desktop = "${config.home.homeDirectory}/dt";
+      download = "${config.home.homeDirectory}/dl";
+      documents = "${config.home.homeDirectory}/docs";
+      pictures = "${config.home.homeDirectory}/pix";
+      templates = "${config.home.homeDirectory}/templates";
+      videos = "${config.home.homeDirectory}/media/vids";
+      music = "${config.home.homeDirectory}/media/music";
+      publicShare = "${config.home.homeDirectory}/media/pub";
+    };
   };
-
 
 # programs.git = {
 #   enable = true;
@@ -32,6 +40,14 @@ in
     HISTFILE = "{xdg.dataHome}/bash/bash_history";
   };
 
+  # services.dwm-status = {
+  #   enable = true;
+  #   order = [
+  #     "audio"
+  #     "battery"
+  #     "cpu_load"
+  #   ];
+  # };
 
   # services.dunst = {
   #   enable = true;
