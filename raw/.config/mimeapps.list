@@ -1,0 +1,16 @@
+[Default Applications]
+text/rust=nvim.desktop
+application/json=nvim.desktop
+text/plain=nvim.desktop
+application/pdf=org.pwmt.zathura.desktop
+text/markdown=nvim.desktop
+image/png=sxiv.desktop;
+image/jpeg=sxiv.desktop;
+image/gif=sxiv.desktop;
+
+[Added Associations]
+text/rust=code.desktop;nvim.desktop;
+application/json=nvim.desktop;
+text/plain=nvim.desktop;
+application/pdf=com.github.xournalpp.xournalpp.desktop;
+application/x-shellscript=nvim.desktop;
