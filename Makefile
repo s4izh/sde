@@ -25,6 +25,7 @@ src-dependencies:
 	@if [ ! -d $(SRC_DIR)/dwm ]; then git clone https://github.com/s4izh/dwm.git $(SRC_DIR)/dwm; fi
 	@if [ ! -d $(SRC_DIR)/dmenu ]; then git clone https://github.com/s4izh/dmenu.git $(SRC_DIR)/dmenu; fi
 	@if [ ! -d $(SRC_DIR)/dwmblocks ]; then git clone https://github.com/s4izh/dwmblocks.git $(SRC_DIR)/dwmblocks; fi
+	@if [ ! -d $(HOME)/.config/nvim ]; then git clone https://github.com/s4izh/nvim.git $(SRC_DIR)/nvim; fi
 create-softlinks:
 	@if [ ! -h $(HOME)/.config/alacritty ]; then\
 		ln -s $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
