@@ -185,6 +185,12 @@
     };
   };
 
+  # system.userActivationScripts.alacrittyLink.text = ''
+  #   if [[ ! -h "$HOME/.config/alacritty" ]]; then
+  #     ln -s "$HOME/.dotfiles/.config/alacritty" "$HOME/.config/alacritty"
+  #   fi
+  # '';
+
   # va muy lento con esto
   # documentation.man.generateCaches = true;
 
