@@ -41,6 +41,9 @@ XF86MonBrightnessDown
 	brightnessctl set 10%-
 
 super + n
+    nixsearch
+
+super + ctrl + n
 	redshift -O 5000
 
 super + shift + n
