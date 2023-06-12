@@ -65,7 +65,8 @@
       };
       homeManagerConfigurations = {
         sergio = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+          # pkgs = nixpkgs.legacyPackages.${system};
+          inherit pkgs;
           modules = [
             ./home/sergio/home.nix
             {
