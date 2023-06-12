@@ -1,1 +1,0 @@
--- vim.cmd("au FileType vimwiki set filetype=vimwiki.markdown")
