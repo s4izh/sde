@@ -1,0 +1,234 @@
+# vi: set ft=zsh :
+# Function to source files if they exist
+
+function zsh_add_file() {
+    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+}
+
+function zsh_add_plugin() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then
+        # For plugins
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+    fi
+}
+
+function zsh_add_completion() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then
+        # For completions
+		completion_file_path=$(ls $ZDOTDIR/plugins/$PLUGIN_NAME/_*)
+		fpath+="$(dirname "${completion_file_path}")"
+        zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+		fpath+=$(ls $ZDOTDIR/plugins/$PLUGIN_NAME/_*)
+        [ -f $ZDOTDIR/.zccompdump ] && $ZDOTDIR/.zccompdump
+    fi
+	completion_file="$(basename "${completion_file_path}")"
+	if [ "$2" = true ] && compinit "${completion_file:1}"
+}
+
+function man() {
+      env \
+      LESS_TERMCAP_mb=$'\e[01;31m' \
+      LESS_TERMCAP_md=$'\e[01;31m' \
+      LESS_TERMCAP_me=$'\e[0m' \
+      LESS_TERMCAP_se=$'\e[0m' \
+      LESS_TERMCAP_so=$'\e[01;44;33m' \
+      LESS_TERMCAP_ue=$'\e[0m' \
+      LESS_TERMCAP_us=$'\e[01;32m' \
+      man "$@"
+}
+
+function fzf-lovely(){
+
+	if ["$1" = "h"]; then
+		fzf -m --reverse --preview-window down:20 --preview '[[ $(file --mime {}) =~ binary ]] &&
+ 	                echo {} is a binary file ||
+	                 (bat --style=numbers --color=always {} ||
+	                  highlight -O ansi -l {} ||
+	                  coderay {} ||
+	                  rougify {} ||
+	                  cat {}) 2> /dev/null | head -500'
+
+	else
+	        fzf -m --preview '[[ $(file --mime {}) =~ binary ]] &&
+	                         echo {} is a binary file ||
+	                         (bat --style=numbers --color=always {} ||
+	                          highlight -O ansi -l {} ||
+	                          coderay {} ||
+	                          rougify {} ||
+	                          cat {}) 2> /dev/null | head -500'
+	fi
+}
+
+function za() {
+    zathura "$@" &
+}
+
+function uni() {
+	cd ~/uni/$CURRENT_Q/$1/
+	lf
+}
+
+function cdf() { cd "$(find -type d | fzf)" }
+
+function openf() { xdg-open "$(find -type f | fzf)" }
+
+function open() { xdg-open $1 & }
+
+function se() {
+    local current_dir=$PWD
+    cd ~/.local/scripts/
+    choice=$(fzf)
+    # [ -z "$choice" ] && cd $current_dir && exit
+    nvim $choice
+    cd $current_dir
+}
+
+function ne() {
+    local current_dir=$PWD
+    cd ~/.local/src/nixos
+    choice=$(find . -not -path "./.git/*" -type f | fzf)
+    # [ -z "$choice" ] && cd $current_dir && exit
+    nvim $choice
+    cd $current_dir
+}
+
+function ne() {
+    local current_dir=$PWD
+    cd ~/.local/src/nixos
+    nvim --cmd "packloadall" -c "lua require('telescope.builtin').git_files({cwd = '.'})"
+    cd $current_dir
+}
+
+# function cfv() {
+#     local current_dir=$PWD
+#     cd ~/.config/nvim
+#     choice=$(find . -not \(-path "./.git/*" -o "./colors/*" -o "./spell/*"\) -type f | fzf)
+#     # [ -z "$choice" ] && cd $current_dir && exit
+#     nvim $choice
+#     cd $current_dir
+# }
+
+function dwmc() {
+    cd ~/.local/src/dwm
+    sudo make clean install
+}
+
+function chedit() {
+    nvim ~/.local/share/cheat/$1.sh
+}
+
+function vif() {
+    local fname
+    local current_dir=$PWD
+    cd ~/.dotfiles
+    fname=$(fzf) || return
+    vim "$fname"
+    cd $current_dir
+}
+# https://jdhao.github.io/2019/06/13/zsh_bind_keys/
+# bindkey -s '^o' 'vif^M'
+
+gd() {
+  # nvim -c ":Neogit"
+  if git rev-parse --is-inside-work-tree; then
+    nvim -c ":Ge:"
+  fi
+}
+
+wk() {
+    cd ~/notes
+    nvim --cmd "packloadall" -c "lua require('telescope.builtin').find_files({cwd = '.'})"
+    # nvim $(fzf)
+}
+
+wks() {
+    cd ~/notes
+    nvim --cmd "packloadall" -c "lua require('telescope.builtin').live_grep({cwd = '.'})"
+    # nvim $(fzf)
+}
+
+wo() {
+    [ -e ~/.local/scripts/tmux/tmux-$1 ] && ~/.local/scripts/tmux/tmux-$1 && exit
+    sessions=$(tmux list-sessions | awk '{print $1}' | sed 's/://')
+    echo $sessions
+    if printf $sessions | grep -qs $1$; then
+        tmux attach-session -t $1
+    fi
+}
+
+fman() {
+  man -k . | fzf -i | awk '{print $2 $1}' | tr '(' ' ' | tr ')' ' ' | xargs -r man
+}
+
+# _edit_wo_executing() {
+#     local editor="${EDITOR:-nano}"
+#     tmpf="$(mktemp)"
+#     printf '%s\n' "$READLINE_LINE" > "$tmpf"
+#     "$editor" "$tmpf"
+#     READLINE_LINE="$(<"$tmpf")"
+#     READLINE_POINT="${#READLINE_LINE}"
+#     rm -f "$tmpf"  # -f for those who have alias rm='rm -i'
+# }
+
+# bind -x '"\C-x\C-e":_edit_wo_executing'
+
+# res () {
+#   cd ~/notes/uni
+#   choice=$(ls | fzf)
+#   export ASIG=$choice
+#   cd ~/notes
+#   nvim uni/$choice/resumen.md
+# }
+
+function sshclone () {
+  git clone git@github.com:$1
+}
+
+# function nix () {
+#   if $*; then
+#     actions=$(echo "rebuild update" | tr ' ' '\n')
+#     action=$(echo $actions | fzf)
+#   else
+#     command nix "$@"
+#   fi
+# }
+
+function in () {
+  nvim ~/wiki/index.md
+}
+
+function cfs () {
+  local current_dir=$PWD
+  cd ~/.config/sway
+  choice=$(find . -not -path "./.git/*" -type f | fzf)
+  nvim $choice
+  cd $current_dir
+}
+
+function mygit () {
+    git clone git@github.com:s4izh/"$1" $2
+}
+
+function sshgen () {
+    ssh-keygen -t ed25519 -C "sergiosanz234@gmail.com" -f "$HOME"/.ssh/$1
+}
+
+function gettemplate () {
+    local current_dir=$PWD
+    cd ~/templates
+    choice=$(find . -not -path "./.git/*" -type f | fzf)
+    cp $choice $current_dir
+    cd $current_dir
+}
+
+function ghp () {
+    repo=$(cat .git/config | grep url | cut -d : -f2)
+    firefox https://github.com/$repo
+}
