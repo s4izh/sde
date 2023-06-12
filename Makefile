@@ -1,6 +1,5 @@
 .DEFAULT_GOAL := help
 
-
 DOTFILES := $(HOME)/.dotfiles
 SRC_DIR := $(HOME)/.local/src
 
@@ -21,11 +20,17 @@ user: ## Switch to the flake as a user
 	nix build ".#homeManagerConfigurations.sergio.activationPackage" --impure
 	./result/activate
 	rm -rf result
-src-dependencies: ## clone src repos
+src-dependencies:
 	@if [ ! -d $(SRC_DIR) ]; then mkdir -p $(SRC_DIR); fi
 	@if [ ! -d $(SRC_DIR)/dwm ]; then git clone https://github.com/s4izh/dwm.git $(SRC_DIR)/dwm; fi
 	@if [ ! -d $(SRC_DIR)/dmenu ]; then git clone https://github.com/s4izh/dmenu.git $(SRC_DIR)/dmenu; fi
 	@if [ ! -d $(SRC_DIR)/dwmblocks ]; then git clone https://github.com/s4izh/dwmblocks.git $(SRC_DIR)/dwmblocks; fi
 create-softlinks:
-	@if [ ! -h $(HOME)/.config/alacritty ]; then ln -s $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
-	@if [ ! -h $(HOME)/templates ]; then ln -s $(DOTFILES)/templates $(HOME)/templates; fi
+	@if [ ! -h $(HOME)/.config/alacritty ]; then\
+		ln -s $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
+	@if [ ! -h $(HOME)/templates ]; then\
+		ln -s $(DOTFILES)/templates $(HOME)/templates; fi
+	@if [ ! -h $(HOME)/.config/zsh ]; then\
+		ln -s $(DOTFILES)/.config/zsh $(HOME)/.config/zsh; fi
+	@if [ ! -h $(HOME)/.zprofile ]; then\
+		ln -s $(DOTFILES)/.config/shell/nix_profile $(HOME)/.zprofile; fi

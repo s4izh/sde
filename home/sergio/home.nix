@@ -1,14 +1,30 @@
 { config, pkgs, lib, ... }:
 let
   dotfiles = /home/sergio/.dotfiles;
+  scripts = /home/sergio/.local/scripts;
 in
 {
+  home.packages = with pkgs; [
+    tmux
+    fzf
+    neovim
+    nixfmt
+    nil
+    shellcheck
+    shfmt
+    gnumake
+    dunst
+    libnotify
+    direnv
+  ];
+
   xdg = {
     enable = true;
     configFile."git/config".source = "${dotfiles}/.config/git/config";
     configFile."dunst/dunstrc".source = "${dotfiles}/.config/dunst/dunstrc";
     configFile."mimeapps.list".source = "${dotfiles}/.config/mimeapps.list";
     configFile."libvirt/libvirt.conf".source = "${dotfiles}/.config/libvirt/libvirt.conf";
+    configFile."tmux/tmux.conf".source = "${dotfiles}/.config/tmux/tmux.conf";
     # configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
     # configFile."user-dirs.locale".source = "${dotfiles}/.config/user-dirs.locale";
     userDirs = {
@@ -36,9 +52,34 @@ in
 #   };
 # };
 
-  home.sessionVariables = {
-    HISTFILE = "{xdg.dataHome}/bash/bash_history";
-  };
+  # home.sessionVariables = {
+  #   HISTFILE = "{xdg.dataHome}/bash/bash_history";
+  # };
+
+  # home.sessionVariables = {
+  #   EDITOR = "nvim";
+  #   TERMINAL = "alacritty";
+  #   BROWSER = "firefox";
+  #   READER = "zathura";
+  #   SUDO_ASKPASS = "dmenupass";
+  #   MANPAGER = "nvim +Man!";
+  # };
+
+  # home.shellAliases = {
+  #   ts = "${scripts}/tmux/tmux-sessionizer";
+  # };
+
+  # programs.zsh = {
+  #   enable = true;
+  #   dotDir = ".config/zsh";
+  #   enableCompletion = true;
+  #   enableSyntaxHighlighting = true;
+  #   # defaultKeymap = "vicmd";
+  #   history.path = "$ZDOTDIR/zsh/zsh_history";
+  # };
+
+  # xdg.configFile."zsh/alias".source = "${dotfiles}/.config/zsh/alias";
+  # xdg.configFile."zsh/functions".source = "${dotfiles}/.config/zsh/functions";
 
   # services.dwm-status = {
   #   enable = true;
