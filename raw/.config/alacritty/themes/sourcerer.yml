@@ -1,0 +1,33 @@
+# sourcerer theme
+# ported by @s4izh
+
+colors:
+  primary:
+    background: '#171717'
+    foreground: '#CDCDCD'
+  cursor:
+    text: '#CDCDCD'
+    cursor: '#87AFD7'
+
+  vi_mode_cursor:
+    text: CellBackground
+    cursor: CellForeground
+
+  selection:
+    text: '#191919'
+    background: '#d8dee9'
+
+  normal:
+    black:   '#191919'
+    red:     '#aa4450'
+    green:   '#87875f'
+    yellow:  '#cc8800'
+    blue:    '#6688aa'
+    magenta: '#8787AF'
+    cyan:    '#528b8b'
+    white:   '#acadb1'
+  bright:
+    green:  '#719611'
+    blue:    '#8787AF'
+    cyan:    '#87ceeb'
+
