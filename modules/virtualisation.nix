@@ -7,6 +7,7 @@
     docker
     docker-compose
     kompose
+    win-virtio
   ];
 
   virtualisation.docker.enable = true;
