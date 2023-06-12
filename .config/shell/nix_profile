@@ -20,6 +20,7 @@ export SUDO_ASKPASS="$HOME/.local/scripts/dmenupass"
 export MANPAGER='nvim +Man!'
 
 export PATH="$HOME/.local/bin":$PATH
-export PATH="$HOME/.local/scripts/tmux":$PATH
+export PATH="$HOME/.local/scripts":$PATH
+export PATH="$HOME/.local/scripts/statusbar":$PATH
 
 [ "$(tty)" = "/dev/tty1" ] && exec startx
