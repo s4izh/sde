@@ -35,7 +35,7 @@
 
     # -- c tooling --
     gcc
-    # cmake
+    cmake
     clang
     clang-tools
     # llvmPackages_15.libclang
