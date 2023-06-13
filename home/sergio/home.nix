@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  home = /home/sergio;
-  dotfiles = home + /.local/src/rde/.dotfiles;
+  dotfiles = /home/sergio/.dotfiles;
 in
 {
   home.packages = with pkgs; [
