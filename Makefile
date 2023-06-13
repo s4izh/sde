@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
-NIX_DIR := $(HOME)/.local/src/rde
-DOTFILES := $(NIX_DIR)/.dotfiles
+NIX_DIR := $(HOME)/.local/src/nixos
+DOTFILES := $(HOME)/.dotfiles
 SRC_DIR := $(HOME)/.local/src
 
 help:
