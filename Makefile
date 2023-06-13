@@ -1,6 +1,7 @@
 .DEFAULT_GOAL := help
 
-DOTFILES := $(HOME)/.dotfiles
+NIX_DIR := $(HOME)/.local/src/rde
+DOTFILES := $(NIX_DIR)/.dotfiles
 SRC_DIR := $(HOME)/.local/src
 
 help:
