@@ -22,5 +22,6 @@ export MANPAGER='nvim +Man!'
 export PATH="$HOME/.local/bin":$PATH
 export PATH="$HOME/.local/scripts":$PATH
 export PATH="$HOME/.local/scripts/statusbar":$PATH
+export PATH="$HOME/.local/scripts/tmux":$PATH
 
 [ "$(tty)" = "/dev/tty1" ] && exec startx
