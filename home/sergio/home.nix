@@ -12,9 +12,11 @@ in
     shellcheck
     shfmt
     gnumake
+    sxhkd
     dunst
     libnotify
     direnv
+    git
   ];
 
   xdg = {
