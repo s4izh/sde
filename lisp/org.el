@@ -1,5 +1,5 @@
 (defun efs/org-mode-setup ()
-  ;; (variable-pitch-mode 1)
+  (variable-pitch-mode 1)
   (org-indent-mode)
   (visual-line-mode 1))
 
@@ -144,7 +144,7 @@
 (global-set-key (kbd "C-c C-l") 'org-insert-link)
 
 (use-package org-modern
-  ;; :disabled t
+  :disabled t
   :ensure t
   :hook ((org-mode                 . org-modern-mode)
 	 (org-agenda-finalize-hook . org-modern-agenda))

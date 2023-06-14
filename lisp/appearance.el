@@ -28,7 +28,6 @@
  ;; modus-themes-prompts '(bold intense)
  modus-themes-completions 'opinionated
  modus-themes-org-blocks 'gray-background
- ;; modus-themes-org-blocks 'tinted-background
  ;; modus-themes-scale-headings t
  modus-themes-region '(bg-only))
 
@@ -62,7 +61,7 @@
 (setq display-line-numbers-type 'relative)
 (set-default 'truncate-lines t)
 ;; line highlight
-(global-hl-line-mode t)
+;; (global-hl-line-mode t)
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook

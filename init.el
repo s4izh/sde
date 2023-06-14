@@ -85,8 +85,8 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t))) (load custom-file 'noerror 'nomessage)
 
-;; (load (concat user-emacs-directory
-;;         "lisp/modeline.el"))
+(load (concat user-emacs-directory
+        "lisp/modeline.el"))
 
 (load (concat user-emacs-directory
 	      "lisp/appearance.el"))
@@ -200,7 +200,7 @@
               ("S-TAB"      . corfu-previous)
               ([backtab]    . corfu-previous)
               ("<return>" . corfu-complete)
-              ;; ("C-y" . corfu-complete) ;; doesnt work idk why
+              ("C-y" . corfu-complete) ;; doesnt work idk why
               ("RET"        . nil))
 
   :init

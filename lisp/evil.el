@@ -18,7 +18,7 @@
 
 (use-package evil
   :demand t
-  ;:bind (("‹escape›" . keyboard-escape-quit))
+  :bind (("‹escape›" . keyboard-escape-quit))
   :init
   (setq evil-search-module 'evil-search)
   (setq evil-want-keybinding nil)
@@ -32,6 +32,12 @@
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   ;; (define-key evil-insert-state-map (kbd "C-y") 'corfu-complete)
   (evil-mode 1))
+
+(with-eval-after-load 'evil
+  (define-key evil-normal-state-map (kbd "C-y") nil)
+  (define-key evil-visual-state-map (kbd "C-y") nil)
+  (define-key evil-insert-state-map (kbd "C-y") nil)
+  (define-key evil-motion-state-map (kbd "C-y") nil))
 
 (use-package evil-collection
   :after evil
