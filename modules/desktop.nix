@@ -185,6 +185,8 @@
     };
   };
 
+  networking.extraHosts = builtins.readFile /home/sergio/.dotfiles/etc/hosts;
+
   # system.userActivationScripts.alacrittyLink.text = ''
   #   if [[ ! -h "$HOME/.config/alacritty" ]]; then
   #     ln -s "$HOME/.dotfiles/.config/alacritty" "$HOME/.config/alacritty"
