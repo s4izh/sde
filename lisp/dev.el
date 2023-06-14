@@ -56,3 +56,8 @@
 
 (ss/leader-key-def
   "k" '(vterm-toggle :which-key "toggle vterm"))
+
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))

@@ -35,18 +35,18 @@
 ;; (load-theme 'modus-operandi)
 
 (use-package doom-themes
-  ;; :disabled t
+  :disabled t
   :config
   (load-theme 'doom-sourcerer t))
 
 (use-package spaceway-theme
-  :disabled t
+  ;; :disabled t
   :ensure nil
   :load-path "lisp/spaceway/"
   :config
   (global-hl-line-mode t)
-  (set-cursor-color "#dc322f"))
-  ;; (load-theme 'spaceway t))
+  (set-cursor-color "#dc322f")
+  (load-theme 'spaceway t))
 
 ;; smooth scrolling
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -84,6 +84,7 @@
 
 ;; run nerd-icons-install-fonts
 (use-package doom-modeline
+  :disabled t
   :config
   (setq doom-modeline-height 22)
   :init (doom-modeline-mode 1))
