@@ -17,7 +17,7 @@
   nixpkgs.overlays = [
     (final: prev: {
       dmenu = prev.dmenu.overrideAttrs (old: {
-        src = /usr/local/src/dmenu ;
+        src = /home/sergio/.local/src/dmenu;
       });
   })
   ];
