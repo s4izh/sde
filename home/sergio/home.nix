@@ -43,6 +43,8 @@ in
     };
   };
 
+  home.file.".editorconfig".source = "${dotfiles}/.editorconfig";
+
 # programs.git = {
 #   enable = true;
 #   userName = "s4izh";
@@ -179,14 +181,6 @@ in
     #   button-layout = "appmenu";
     # };
   };
-
-  # programs.firefox = {
-  #   enable = true;
-  #   profiles.default.extraConfig = ''
-  #     user_pref("browser.fullscreen.autohide", false);
-  #     user_pref("browser.compactmode.show", true);
-  #   '';
-  # };
 
   programs.starship = {
     enable = true;
