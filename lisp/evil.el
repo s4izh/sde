@@ -18,11 +18,11 @@
 
 (use-package evil
   :demand t
-  :bind (("‹escape›" . keyboard-escape-quit))
+  ;; :bind (("<escape>" . keyboard-escape-quit))
   :init
   (setq evil-search-module 'evil-search)
   (setq evil-want-keybinding nil)
-  (setq evil-want-minibuffer nil)
+  (setq evil-want-minibuffer t)
   (setq evil-undo-system 'undo-fu)
   ;;(setq evil-undo-system 'undo-tree)
   (setq evil-want-C-u-scroll t)
@@ -30,6 +30,7 @@
   (setq evil-want-Y-yank-to-eol t)
   :config
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-normal-state-map (kbd "<escape>") 'abort-minibuffers)
   ;; (define-key evil-insert-state-map (kbd "C-y") 'corfu-complete)
   (evil-mode 1))
 
