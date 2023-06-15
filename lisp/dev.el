@@ -61,3 +61,8 @@
   :ensure t
   :config
   (direnv-mode))
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))

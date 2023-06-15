@@ -17,7 +17,7 @@
   (setq org-log-into-drawer t)
   (setq org-startup-indented t)           ;; Indent according to section
   (setq org-startup-with-inline-images t) ;; Display images in-buffer by default
-  (setq org-startup-folded t)
+  ;; (setq org-startup-folded t)
   ;; test
   (setq org-return-follows-link t)
   (setq org-mouse-1-follows-link t)
@@ -157,7 +157,7 @@
 
 
 (use-package org-bullets
-  :disabled t
+  ;; :disabled t
   :ensure t
   :hook (org-mode . org-bullets-mode)
   ;; :custom
