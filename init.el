@@ -199,7 +199,7 @@
               ([tab]        . corfu-next)
               ("S-TAB"      . corfu-previous)
               ([backtab]    . corfu-previous)
-              ("<return>" . corfu-complete)
+              ;; ("<return>" . corfu-complete)
               ("C-y" . corfu-complete) ;; doesnt work idk why
               ("RET"        . nil))
 
