@@ -31,14 +31,19 @@
   :config
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-normal-state-map (kbd "<escape>") 'abort-minibuffers)
-  ;; (define-key evil-insert-state-map (kbd "C-y") 'corfu-complete)
+  (define-key evil-insert-state-map (kbd "C-n") 'vertico-next)
+  (define-key evil-insert-state-map (kbd "C-p") 'vertico-previous)
+  (define-key evil-insert-state-map (kbd "C-y") 'corfu-complete)
   (evil-mode 1))
+
 
 (with-eval-after-load 'evil
   (define-key evil-normal-state-map (kbd "C-y") nil)
   (define-key evil-visual-state-map (kbd "C-y") nil)
   (define-key evil-insert-state-map (kbd "C-y") nil)
   (define-key evil-motion-state-map (kbd "C-y") nil))
+  ;; (define-key minibuffer-local-map (kbd "C-n") 'vertico-next)
+  ;; (define-key minibuffer-local-map (kbd "C-p") 'vertico-previous))
 
 (use-package evil-collection
   :after evil
