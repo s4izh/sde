@@ -175,7 +175,7 @@
      '(("m" "main" plain
         "%?"
         :if-new (file+head "main/${slug}.org"
-                           "#+title: ${title}\n}]")
+                           "#+title: ${title}\n#+date: %<%Y-%m-%d>\n")
 ;; :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
         :immediate-finish t
         :unnarrowed t)
