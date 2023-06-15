@@ -90,7 +90,7 @@
     texlive.combined.scheme-full
     aspell
 
-    # libreoffice-fresh
+    libreoffice-fresh
     rclone
     # vimb
     pdftk
