@@ -167,7 +167,7 @@
   (use-package org-roam
     :ensure t
     :custom
-    (org-roam-directory "~/notes")
+    (org-roam-directory org-directory)
     (org-roam-completion-everywhere t)
     (org-roam-completion-system 'default)
     (org-roam-db-autosync-mode)
@@ -236,7 +236,7 @@
 
 (custom-set-variables
  ;; '(org-agenda-files (list "~/notes/projects" "~/notes/uni" "~/notes/inbox.org")))
- '(org-agenda-files (list "~/notes/inbox.org")))
+ '(org-agenda-files (list (concat org-directory "/inbox.org"))))
 (setq calendar-week-start-day 1)
 
 
@@ -244,7 +244,7 @@
   "Take a screenshot into a time stamped unique-named file in the
     img directory under the org-buffer directory and insert a link to this file."
   (interactive)
-  (setq img-dir (concat (getenv "HOME") "/notes/attachments/img"))
+  (setq img-dir (concat org-directory "/attachments/img"))
   (unless (file-exists-p img-dir)
     (make-directory img-dir))
   (setq filename
