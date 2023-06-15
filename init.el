@@ -147,6 +147,11 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+(use-package magit-delta
+  :disabled t
+  :ensure t
+  :hook (magit-mode . magit-delta-mode))
+
 ;;; parenthesis
 (use-package smartparens
   :hook (prog-mode . smartparens-mode))

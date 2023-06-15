@@ -13,6 +13,7 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+
 (global-set-key (kbd "C-M-u") 'universal-argument)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -42,7 +43,7 @@
   (define-key evil-visual-state-map (kbd "C-y") nil)
   (define-key evil-insert-state-map (kbd "C-y") nil)
   (define-key evil-motion-state-map (kbd "C-y") nil))
-  ;; (define-key minibuffer-local-map (kbd "C-n") 'vertico-next)
+  ;; (define-key minibuffer-local-completion-map (kbd "C-n") 'vertico-next))
   ;; (define-key minibuffer-local-map (kbd "C-p") 'vertico-previous))
 
 (use-package evil-collection
