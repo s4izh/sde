@@ -28,6 +28,53 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 }
 
 zstyle ':vcs_info:*' check-for-changes true
+PROMPT="%F{yellow}%n%F{green}[%m] %F{blue}%~%f%b% "
+zstyle ':vcs_info:git:*' formats " %{$fg[magenta]%}*%{$fg[magenta]%}%b"
+PROMPT+="\$vcs_info_msg_0_"
+PROMPT+=" %{$fg[white]%}
+"
+PROMPT+="%B%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
+
+PROMPT="%F{green}(%m) "
+PROMPT="%F{blue}%~%f%b% "
+PROMPT+="\$vcs_info_msg_0_"
+PROMPT+="$name
+"
+PROMPT+="%F{white}ᛋ "
+
+# setopt prompt_substfunction getCluster() {
+#   export CLUSTER=$(kubectl config current-context)
+#   PS1="%F{208}% [rees] %F{155}[%W]%F{111} [${CLUSTER}]%F{152} %B%~  %F{255}%b"
+# }
+
+# typeset -a precmd_functions
+# precmd_functions=(getCluster)
+
+# typeset -a precmd_functions
+# precmd_functions=(nix_check)
+
+# mia
+# PROMPT="%F{blue}%1~%f%b% "
+# PROMPT+="\$vcs_info_msg_0_"
+# PROMPT+="%B%(?.%F{grey}.%F{red}) %(!.#.$)%f%b "
+
+# minimal with :
+# PROMPT="%F{blue}%1~%f%b% "
+# PROMPT+="%{$reset_color%}:%: "
+
+# complete prompt
+# user@host(~)[git]
+# $
+
+# PROMPT="%{$fg[yellow]%}%n%{$fg[green]%} @ %{$fg[blue]%}%M %{$fg[white]%}%(%{$fg[cyan]%}~"
+# zstyle ':vcs_info:git:*' formats "%{$fg[cyan]%}%m%u%c%{$fg[yellow]%}%b"
+# PROMPT="%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M%{$fg[white]%}(%{$fg[red]%}%~%{$fg[white]%})"
+# PROMPT+="%{$fg[white]%}["
+# PROMPT+="\$vcs_info_msg_0_"
+# PROMPT+="%{$fg[white]%}]
+# "
+# PROMPT+="%B%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
+
 # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
 # zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%})"
 # zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%}%b%{$fg[blue]%})"
@@ -77,31 +124,3 @@ zstyle ':vcs_info:*' check-for-changes true
 # gerry style
 # user[host] ~ *git
 # $
-PROMPT="%F{yellow}%n%F{green}[%m] %F{blue}%~%f%b% "
-zstyle ':vcs_info:git:*' formats " %{$fg[magenta]%}*%{$fg[magenta]%}%b"
-PROMPT+="\$vcs_info_msg_0_"
-PROMPT+=" %{$fg[white]%}
-"
-PROMPT+="%B%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
-
-# mia
-# PROMPT="%F{blue}%1~%f%b% "
-# PROMPT+="\$vcs_info_msg_0_"
-# PROMPT+="%B%(?.%F{grey}.%F{red}) %(!.#.$)%f%b "
-
-# minimal with :
-# PROMPT="%F{blue}%1~%f%b% "
-# PROMPT+="%{$reset_color%}:%: "
-
-# complete prompt
-# user@host(~)[git]
-# $
-
-# PROMPT="%{$fg[yellow]%}%n%{$fg[green]%} @ %{$fg[blue]%}%M %{$fg[white]%}%(%{$fg[cyan]%}~"
-# zstyle ':vcs_info:git:*' formats "%{$fg[cyan]%}%m%u%c%{$fg[yellow]%}%b"
-# PROMPT="%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M%{$fg[white]%}(%{$fg[red]%}%~%{$fg[white]%})"
-# PROMPT+="%{$fg[white]%}["
-# PROMPT+="\$vcs_info_msg_0_"
-# PROMPT+="%{$fg[white]%}]
-# "
-# PROMPT+="%B%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
