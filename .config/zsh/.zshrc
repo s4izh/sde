@@ -45,13 +45,17 @@ zsh_add_file "prompt"
 # check if inside emacs vterm
 if [[ "$TERM" != "xterm-256color" ]]; then
     zsh_add_file "vim-mode"
+else
+    export MANPAGER='cat'
 fi
 
 # check if inside emacs vterm
 if [[ "$TERM" != "dumb" ]]; then
-    zsh_add_file "prompt"
-    eval "$(starship init zsh)"
+    # zsh_add_file "prompt"
+    # eval "$(starship init zsh)"
     zsh_add_file "vim-mode"
+else
+    export MANPAGER='cat'
 fi
 
 # Plugins
