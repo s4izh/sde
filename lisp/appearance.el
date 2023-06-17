@@ -39,7 +39,7 @@
   (load-theme 'doom-sourcerer t))
 
 (use-package spaceway-theme
-  ;; :disabled t
+  :disabled t
   :ensure nil
   :load-path "lisp/spaceway/"
   :config
@@ -87,3 +87,8 @@
   :config
   (setq doom-modeline-height 22)
   :init (doom-modeline-mode 1))
+
+;; (use-package color-theme-modern)
+
+(use-package ef-themes
+  :config(load-theme 'ef-duo-light))

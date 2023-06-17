@@ -3,9 +3,37 @@
 ;; This file bootstraps the configuration, which is divided into
 ;; a number of other files inside the `lisp' directory.
 
-(setq user-emacs-directory "~/.config/emacs/")
+;;; MY STUFF
+(use-package custom-variables
+  :ensure nil
+  :no-require t
+  :demand t
+  :init
+  (defvar my/is-termux
+    (string-suffix-p
+     "Android" (string-trim (shell-command-to-string "uname -a")))
+    "Truthy value indicating if Emacs is currently running in termux.")
+  (defvar my/is-terminal
+    (not window-system)
+    "Truthy value indicating if Emacs is currently running in a terminal.")
+  (defvar my/my-system
+    (if (string-equal user-login-name "sergio")
+        t
+      nil)
+    "Non-nil value if this is my system.")
+  (defvar my/is-nixos
+    (string-suffix-p
+     "NixOS" (string-trim (shell-command-to-string "cat /etc/issue")))
+    "Truthy value indicating if Emacs is currently running on NixOS.")
+  (defvar my/nixos-directory
+        "~/.local/src/nixos"
+    "Path to my nixos configuration."))
 
-(setq user-nixos-directory "~/.local/src/nixos")
+(setenv "EDITOR" "emacsclient")
+(setenv "PAGER" "cat")
+(setenv "READER" "emacsclient")
+
+(setq user-emacs-directory "~/.config/emacs/")
 
 (setq ss/is-guix
       (string-suffix-p "This is the GNU system.  Welcome."
@@ -47,6 +75,27 @@
 
 ;; Load the helper package for commands like `straight-x-clean-unused-repos'
 (require 'straight-x)
+
+(use-package undo-fu
+  :bind (("C-x u"   . undo-fu-only-undo)
+         ("C-/"     . undo-fu-only-undo)
+         ("C-z"     . undo-fu-only-undo)
+         ("C-S-z"   . undo-fu-only-redo)
+         ("C-x C-u" . undo-fu-only-redo)
+         ("C-?"     . undo-fu-only-redo)))
+
+(use-package undo-fu-session ; Persistant undo history
+  :ensure t
+  :demand t
+  :config (global-undo-fu-session-mode))
+
+(use-package undo-tree
+  :disabled t
+  :config
+  (setq undo-tree-auto-save-history nil)
+  (global-undo-tree-mode 1))
+
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (load (concat user-emacs-directory
               "lisp/evil.el"))
@@ -147,9 +196,9 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(use-package forge
-  :ensure t
-  :after magit)
+;; (use-package forge
+;;   :ensure t
+;;   :after magit)
 
 (use-package magit-delta
   :disabled t
@@ -225,7 +274,7 @@
 
 (use-package consult
   :after vertico
-  :bind (("C-x b"       . consult-buffer))
+  :bind (("C-x b"       . consult-buffer)
          ;; ("C-x C-k C-k" . consult-kmacro)
          ;; ("M-y"         . consult-yank-pop)
          ;; ("M-g g"       . consult-goto-line)
@@ -240,7 +289,7 @@
          ;; ("C-x C-SPC"   . consult-global-mark)
          ;; ("C-x M-:"     . consult-complex-command)
          ;; ("C-c n"       . consult-org-agenda)
-         ;; ("C-c m"       . my/notegrep)
+         ("C-c m"       . my/notegrep))
          ;; :map help-map
          ;; ("a" . consult-apropos)
          ;; :map minibuffer-local-map
@@ -253,6 +302,13 @@
     (interactive)
     (consult-ripgrep org-directory))
   (recentf-mode t))
+
+(use-package consult-dir
+  :ensure t
+  :bind (("C-x C-j" . consult-dir)
+         ;; :map minibuffer-local-completion-map
+         :map vertico-map
+         ("C-x C-j" . consult-dir)))
 
 (use-package embark
   :bind(("C-," . embark-act)))
@@ -284,3 +340,46 @@
     (find-file tramp-file-name)))
 
 ;; (setq projectile-project-search-path '("~/personal/" "~/uni/3q2" ("~/github" . 1)))
+
+(use-package popper
+  :ensure t ; or :straight t
+  :bind (("C-`"   . popper-toggle-latest)
+         ("M-`"   . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode))
+  (popper-mode +1)
+  (popper-echo-mode +1))                ; For echo area hints
+
+(use-package vterm
+  :bind (("C-x t" . vterm)
+         :map vterm-mode-map
+         ("M-p" . vterm-send-up)
+         ("M-n" . vterm-send-down))
+
+  :commands vterm
+  :custom (vterm-max-scrollback 10000)
+  :init (when my/my-system
+          (setq term-prompt-regexp ".*ᛋ")))
+
+(use-package eshell
+  :bind ("C-x E" . eshell))
+
+(use-package em-alias
+  :ensure nil
+  :after eshell
+  :config
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (eshell/alias "e" "find-file $1")
+              (eshell/alias "ee" "find-file-other-window $1")
+              (eshell/alias "v" "view-file $1")
+              (eshell/alias "o" "crux-open-with $1"))))
+
+;; (load (concat user-emacs-directory
+;;               "lisp/exwm-config.el"))
