@@ -3,6 +3,15 @@
     enable = true;
     windowManager.dwm.enable = true;
     displayManager.startx.enable = true;
+    # displayManager.session = [
+    #   {
+    #   manage = "desktop";
+    #   name = "dwm";
+    #   start = ''exec startx'';
+    #   }
+    # ];
+    # displayManager.defaultSession = "dwm";
+    # desktopManager.xterm.enable = false;
   };
 
   environment.systemPackages = with pkgs; [
@@ -14,6 +23,7 @@
     # st
     # harfbuzz
   ];
+
 
   nixpkgs.overlays = [
     (final: prev: {
