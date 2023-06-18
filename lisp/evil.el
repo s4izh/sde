@@ -7,7 +7,7 @@
   :init
   (setq evil-search-module 'evil-search)
   (setq evil-want-keybinding nil)
-  (setq evil-want-minibuffer t)
+  ;; (setq evil-want-minibuffer t)
   (setq evil-undo-system 'undo-fu)
   ;;(setq evil-undo-system 'undo-tree)
   (setq evil-want-C-u-scroll t)
@@ -18,9 +18,9 @@
   (define-key evil-normal-state-map (kbd "<escape>") 'abort-minibuffers)
   ;; (define-key evil-normal-state-map (kbd "/") 'consult-line)
   ;; (define-key evil-normal-state-map (kbd "?") 'consult-line)
-  (define-key evil-insert-state-map (kbd "C-n") 'vertico-next)
-  (define-key evil-insert-state-map (kbd "C-p") 'vertico-previous)
-  (define-key evil-insert-state-map (kbd "C-y") 'corfu-complete)
+  ;; (define-key evil-insert-state-map (kbd "C-n") 'vertico-next)
+  ;; (define-key evil-insert-state-map (kbd "C-p") 'vertico-previous)
+  ;; (define-key evil-insert-state-map (kbd "C-y") 'corfu-complete)
   (evil-mode 1))
 
 
