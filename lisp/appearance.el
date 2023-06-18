@@ -78,6 +78,7 @@
                 dired-mode-hook
                 pdf-view-mode-hook
                 woman-mode-hook
+                eww-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
