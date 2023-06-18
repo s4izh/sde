@@ -3,7 +3,7 @@
 ;; This file bootstraps the configuration, which is divided into
 ;; a number of other files inside the `lisp' directory.
 
-;;; MY STUFF
+;;; my own stuff
 (use-package custom-variables
   :ensure nil
   :no-require t
@@ -12,19 +12,30 @@
   (defvar my/is-termux
     (string-suffix-p
      "Android" (string-trim (shell-command-to-string "uname -a")))
-    "Truthy value indicating if Emacs is currently running in termux.")
+    "Value indicating if Emacs is currently running in termux.")
   (defvar my/is-terminal
     (not window-system)
-    "Truthy value indicating if Emacs is currently running in a terminal.")
+    "Value indicating if Emacs is currently running in a terminal.")
   (defvar my/my-system
     (if (string-equal user-login-name "sergio")
         t
       nil)
     "Non-nil value if this is my system.")
+  (defvar my/is-linux
+    (if (eq system-type 'gnu-linux)
+    t nil)
+    "Value indicating if running on linux")
+  (defvar my/is-guix
+    (if (string-suffix-p "This is the GNU system. Welcome."
+                         (string-trim (shell-command-to-string "cat /etc/issue")))
+        t nil)
+    "Value indicating if Emacs is currently running on Guix.")
   (defvar my/is-nixos
-    (string-suffix-p
-     "NixOS" (string-trim (shell-command-to-string "cat /etc/issue")))
-    "Truthy value indicating if Emacs is currently running on NixOS.")
+    (if (string-search
+         "NixOS" (string-trim (shell-command-to-string "cat /etc/issue")))
+        t
+      nil)
+    "Value indicating if Emacs is currently running on NixOS.")
   (defvar my/nixos-directory
         "~/.local/src/nixos"
     "Path to my nixos configuration."))
@@ -35,12 +46,6 @@
 
 (setq user-emacs-directory "~/.config/emacs/")
 
-(setq ss/is-guix
-      (string-suffix-p "This is the GNU system.  Welcome."
-		       (string-trim (shell-command-to-string "cat /etc/issue"))))
-
-(setq ss/is-linux (eq system-type 'gnu/linux))
-
 (setq package-archives
   '(("melpa" . "https://melpa.org/packages/")
     ("org" . "https://orgmode.org/elpa/")
@@ -48,7 +53,11 @@
 
 (package-initialize)
 
-(setq use-package-always-ensure t)
+(unless my/is-guix
+  (setq use-package-always-ensure t))
+
+;; (setq use-package-always-ensure t)
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -350,9 +359,9 @@
   (setq popper-reference-buffers
         '("\\*Messages\\*"
           "Output\\*$"
-          "\\*Async Shell Command\\*"
-          help-mode
-          compilation-mode))
+          "\\*Async Shell Command\\*"))
+          ;; help-mode
+          ;; compilation-mode))
   (popper-mode +1)
   (popper-echo-mode +1))                ; For echo area hints
 
