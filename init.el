@@ -392,3 +392,16 @@
 
 ;; (load (concat user-emacs-directory
 ;;               "lisp/exwm-config.el"))
+
+(defun my/compiler-select (file)
+  (interactive "f")
+  (start-process-shell-command "test" "*test*" (format "compiler %s" file)))
+
+(defun my/compiler ()
+  (interactive)
+  (start-process-shell-command "my/compiler" "*my/compiler*" (format "compiler %s" buffer-file-name)))
+
+(defun my/compiler-hook ()
+  (interactive)
+  (make-local-variable 'after-save-hook)
+  (add-hook 'after-save-hook 'my/compiler))
