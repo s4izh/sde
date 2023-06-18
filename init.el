@@ -36,9 +36,12 @@
         t
       nil)
     "Value indicating if Emacs is currently running on NixOS.")
+  (defvar my/guix-directory
+        "~/.config/guix"
+    "Path to my GNU Guix configuration.")
   (defvar my/nixos-directory
         "~/.local/src/nixos"
-    "Path to my nixos configuration."))
+    "Path to my NixOS configuration."))
 
 (setenv "EDITOR" "emacsclient")
 (setenv "PAGER" "cat")
@@ -360,7 +363,7 @@
         '("\\*Messages\\*"
           "Output\\*$"
           "\\*Async Shell Command\\*"))
-          ;; help-mode
+          ;; help-mode))
           ;; compilation-mode))
   (popper-mode +1)
   (popper-echo-mode +1))                ; For echo area hints
