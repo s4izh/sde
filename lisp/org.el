@@ -31,6 +31,7 @@
   (setq org-capture-templates
         '(("t" "Task" entry  (file+headline "~/notes/inbox.org" "Tasks") "** TODO %?\nContext: %a\n")
           ("i" "Idea" entry  (file+headline "~/notes/inbox.org" "Ideas") "** %?\nContext: %a\n")
+          ("e" "Emacs" entry  (file+headline "~/notes/inbox.org" "Emacs") "** TODO %?\nContext: %a\n")
 
           ("u" "Uni entries")
           ("uc" "CPD" entry  (file+headline "~/notes/uni/cpd.org" "Tasks") "** %?\n%a\n")
