@@ -76,7 +76,8 @@
                 org-agenda-mode-hook
                 compilation-mode-hook
                 dired-mode-hook
-		woman-mode-hook
+                pdf-view-mode-hook
+                woman-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
