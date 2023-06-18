@@ -53,7 +53,7 @@ fi
 if [[ "$TERM" != "dumb" ]]; then
     # zsh_add_file "prompt"
     # eval "$(starship init zsh)"
-    zsh_add_file "vim-mode"
+    # zsh_add_file "vim-mode"
 else
     export MANPAGER='cat'
 fi
