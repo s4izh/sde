@@ -1,8 +1,15 @@
 { config, pkgs, lib, ... }: {
   services.xserver = {
     enable = true;
-    windowManager.exwm.enable = true;
+    # windowManager.exwm.enable = true;
     displayManager.lightdm.enable = true;
+    displayManager.session = [
+      {
+      manage = "desktop";
+      name = "exwm";
+      start = ''sh /home/sergio/.config/emacs/exwm-start.sh'';
+      }
+    ];
   };
 
   environment.systemPackages = with pkgs; [
