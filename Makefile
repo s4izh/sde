@@ -29,10 +29,10 @@ src-dependencies:
 	@if [ ! -d $(HOME)/.config/nvim ]; then git clone https://github.com/s4izh/nvim.git $(SRC_DIR)/nvim; fi
 create-softlinks:
 	@if [ ! -h $(HOME)/.config/alacritty ]; then\
-		ln -s $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
+		ln -sf $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
 	@if [ ! -h $(HOME)/templates ]; then\
-		ln -s $(DOTFILES)/templates $(HOME)/templates; fi
+		ln -sf $(DOTFILES)/templates $(HOME)/templates; fi
 	@if [ ! -h $(HOME)/.config/zsh ]; then\
-		ln -s $(DOTFILES)/.config/zsh $(HOME)/.config/zsh; fi
+		ln -sf $(DOTFILES)/.config/zsh $(HOME)/.config/zsh; fi
 	@if [ ! -h $(HOME)/.zprofile ]; then\
-		ln -s $(DOTFILES)/.config/shell/nix_profile $(HOME)/.zprofile; fi
+		ln -sf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.zprofile; fi
