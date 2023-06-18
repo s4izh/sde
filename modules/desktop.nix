@@ -171,16 +171,23 @@
     #media-session.enable = true;
   };
 
+  # check the names with fc-list
   fonts.fonts = with pkgs; [
-    iosevka
-    jetbrains-mono
+    iosevka # Iosevka
+    jetbrains-mono # JetBrains Mono
+    source-code-pro # Source Code Pro
+    source-serif-pro # Source Serif Pro
+    unifont # Unifont
+    fantasque-sans-mono # Fantasque Sans Mono
   ];
 
   fonts.fontconfig = {
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
       #serif = [ "Liberation Mono" ];
-      monospace = [ "Liberation Mono" ];
+      # monospace = [ "Liberation Mono" ];
+      serif = [ "Source Serif Pro" ];
+      monospace = [ "Source Code Pro"];
       # monospace = [ "JetBrains Mono" ];
     };
   };
