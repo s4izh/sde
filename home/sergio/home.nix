@@ -171,6 +171,7 @@ in
     gtk3.bookmarks = [
       "file:///home/sergio/uni/3q2"
       "file:///home/sergio/pkm"
+      "file:///mnt"
     ];
   };
 
