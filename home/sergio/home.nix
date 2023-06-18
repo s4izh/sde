@@ -17,6 +17,7 @@ in
     libnotify
     direnv
     git
+    delta
   ];
 
   xdg = {
