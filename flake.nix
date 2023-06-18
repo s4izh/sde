@@ -48,6 +48,7 @@
             ./modules/base.nix
             ./modules/desktop.nix
             ./modules/dwm.nix
+            # ./modules/exwm.nix
             ./modules/virtualisation.nix
             home-manager.nixosModules.home-manager
             {
