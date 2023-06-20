@@ -33,19 +33,33 @@
 
 ;; (load-theme 'modus-operandi)
 
-(use-package doom-themes
-  :disabled t
-  :config
-  (load-theme 'doom-sourcerer t))
+(use-package doom-themes)
 
 (use-package spaceway-theme
-  :disabled t
+  ;; :disabled t
   :ensure nil
   :load-path "lisp/spaceway/"
   :config
   (global-hl-line-mode t)
-  (set-cursor-color "#dc322f")
-  (load-theme 'spaceway t))
+  (set-cursor-color "#dc322f"))
+  ;; (load-theme 'spaceway t))
+
+(use-package ef-themes)
+
+(setq my/current-theme 'spaceway)
+(setq custom-safe-themes t)
+
+(defun my/load-theme (theme)
+  (interactive
+   (list
+    (intern (completing-read "Load custom theme: "
+                             (mapcar #'symbol-name
+                                     (custom-available-themes))))))
+  (disable-theme my/current-theme)
+  (setq my/current-theme theme)
+  (load-theme theme t))
+
+(my/load-theme my/current-theme)
 
 ;; smooth scrolling
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -61,7 +75,7 @@
 (setq display-line-numbers-type 'relative)
 (set-default 'truncate-lines t)
 ;; line highlight
-;; (global-hl-line-mode t)
+(global-hl-line-mode t)
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook
@@ -79,6 +93,7 @@
                 pdf-view-mode-hook
                 woman-mode-hook
                 eww-mode-hook
+                treemacs-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -92,5 +107,4 @@
 
 ;; (use-package color-theme-modern)
 
-(use-package ef-themes
-  :config(load-theme 'ef-duo-light))
+(use-package keycast)
