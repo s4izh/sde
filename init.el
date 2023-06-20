@@ -149,10 +149,10 @@
       `((".*" ,temporary-file-directory t))) (load custom-file 'noerror 'nomessage)
 
 (load (concat user-emacs-directory
-        "lisp/modeline.el"))
+              "lisp/modeline.el"))
 
 (load (concat user-emacs-directory
-	      "lisp/appearance.el"))
+              "lisp/appearance.el"))
 
 
 (use-package dired
@@ -410,3 +410,5 @@
   (interactive)
   (make-local-variable 'after-save-hook)
   (add-hook 'after-save-hook 'my/compiler))
+
+(use-package stumpwm-mode)
