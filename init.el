@@ -23,12 +23,14 @@
     "Non-nil value if this is my system.")
   (defvar my/is-linux
     (if (eq system-type 'gnu-linux)
-    t nil)
+        t
+      nil)
     "Value indicating if running on linux")
   (defvar my/is-guix
     (if (string-suffix-p "This is the GNU system. Welcome."
                          (string-trim (shell-command-to-string "cat /etc/issue")))
-        t nil)
+        t
+      nil)
     "Value indicating if Emacs is currently running on Guix.")
   (defvar my/is-nixos
     (if (string-search
