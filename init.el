@@ -168,9 +168,30 @@
   (setq dired-bind-jump nil)
   :config
   (setq dired-listing-switches "-aghoA --group-directories-first")
+  ;; (setq dired-listing-switches "--group-directories-first")
   ;;;;; Hide . and .. in dired
   (setq dired-omit-files
         (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..*$"))
+
+  ;; When there are two Dired buffers side-by-side make Emacs
+  ;; automatically suggest the other one as the target of copy or rename
+  ;; operations.  Remember that you can always use M-p and M-n in the
+  ;; minibuffer to cycle through the history, regardless of what this
+  ;; does.  (The "dwim" stands for "Do What I Mean".)
+  (setq dired-dwim-target t)
+
+  ;; Teach Dired to use a specific external program with either the
+  ;; `dired-do-shell-command' or `dired-do-async-shell-command' command
+  ;; (with the default keys, those are bound to `!' `&', respectively).
+  ;; The first string is a pattern match against file names.  The
+  ;; remaining strings are external programs that Dired will provide as
+  ;; suggestions.  Of course, you can always type an arbitrary program
+  ;; despite these defaults.
+  (setq dired-guess-shell-alist-user
+        '(("\\.\\(png\\|jpe?g\\|tiff\\)" "feh" "xdg-open")
+          ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\)" "mpv" "xdg-open")
+          (".*" "xdg-open")))
+
   ;;;;; xdg-open integration
   (require 'dired-x)
   ;; prevent opening extra dired buffers
