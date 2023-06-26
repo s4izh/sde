@@ -28,6 +28,7 @@
     exa
     picom
     headsetcontrol
+    sxiv
 
     # -- compile tools --
     nodejs
