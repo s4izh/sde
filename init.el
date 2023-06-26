@@ -3,52 +3,6 @@
 ;; This file bootstraps the configuration, which is divided into
 ;; a number of other files inside the `lisp' directory.
 
-;;; my own stuff
-(use-package custom-variables
-  :ensure nil
-  :no-require t
-  :demand t
-  :init
-  (defvar my/is-termux
-    (string-suffix-p
-     "Android" (string-trim (shell-command-to-string "uname -a")))
-    "Value indicating if Emacs is currently running in termux.")
-  (defvar my/is-terminal
-    (not window-system)
-    "Value indicating if Emacs is currently running in a terminal.")
-  (defvar my/my-system
-    (if (string-equal user-login-name "sergio")
-        t
-      nil)
-    "Non-nil value if this is my system.")
-  (defvar my/is-linux
-    (if (eq system-type 'gnu-linux)
-        t
-      nil)
-    "Value indicating if running on linux")
-  (defvar my/is-guix
-    (if (string-suffix-p "This is the GNU system. Welcome."
-                         (string-trim (shell-command-to-string "cat /etc/issue")))
-        t
-      nil)
-    "Value indicating if Emacs is currently running on Guix.")
-  (defvar my/is-nixos
-    (if (string-search
-         "NixOS" (string-trim (shell-command-to-string "cat /etc/issue")))
-        t
-      nil)
-    "Value indicating if Emacs is currently running on NixOS.")
-  (defvar my/guix-directory
-        "~/.config/guix"
-    "Path to my GNU Guix configuration.")
-  (defvar my/nixos-directory
-        "~/.local/src/nixos"
-    "Path to my NixOS configuration."))
-
-(setenv "EDITOR" "emacsclient")
-(setenv "PAGER" "cat")
-(setenv "READER" "emacsclient")
-
 (setq user-emacs-directory "~/.config/emacs/")
 
 (setq package-archives
@@ -89,6 +43,54 @@
 
 ;; Load the helper package for commands like `straight-x-clean-unused-repos'
 (require 'straight-x)
+
+;;; my own stuff
+(use-package custom-variables
+  :ensure nil
+  :no-require t
+  :demand t
+  :init
+  (defvar my/is-termux
+    (string-suffix-p
+     "Android" (string-trim (shell-command-to-string "uname -a")))
+    "Value indicating if Emacs is currently running in termux.")
+  (defvar my/is-terminal
+    (not window-system)
+    "Value indicating if Emacs is currently running in a terminal.")
+  (defvar my/my-system
+    (if (string-equal user-login-name "sergio")
+        t
+      nil)
+    "Non-nil value if this is my system.")
+  (defvar my/is-linux
+    (if (eq system-type 'gnu-linux)
+        t
+      nil)
+    "Value indicating if running on linux")
+  (defvar my/is-guix
+    (if (string-suffix-p "This is the GNU system. Welcome."
+                         (string-trim (shell-command-to-string "cat /etc/issue")))
+        t
+      nil)
+    "Value indicating if Emacs is currently running on Guix.")
+  (defvar my/is-nixos
+    (if (string-search
+         "NixOS" (string-trim (shell-command-to-string "cat /etc/issue")))
+        t
+      nil)
+    "Value indicating if Emacs is currently running on NixOS.")
+  (defvar my/guix-directory
+    "~/.config/guix"
+    "Path to my GNU Guix configuration.")
+  (defvar my/nixos-directory
+    "~/.local/src/nixos"
+    "Path to my NixOS configuration."))
+
+(setenv "EDITOR" "emacsclient")
+(setenv "PAGER" "cat")
+(setenv "READER" "emacsclient")
+
+
 
 (use-package undo-fu
   :bind (("C-x u"   . undo-fu-only-undo)

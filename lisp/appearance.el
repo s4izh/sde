@@ -14,7 +14,7 @@
 ;; (add-to-list 'default-frame-alist '(font . "LiberationMono-13"))
 ;; (add-to-list 'default-frame-alist '(font . "FantasqueSansM Nerd Font Mono-15"))
 (setq locale-coding-system 'utf-8)
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 135)
 
 ;; THEMES
 ;; modus
