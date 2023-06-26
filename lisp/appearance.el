@@ -40,7 +40,7 @@
   :ensure nil
   :load-path "lisp/spaceway/"
   :config
-  (global-hl-line-mode t)
+  ;; (global-hl-line-mode t)
   (set-cursor-color "#dc322f"))
   ;; (load-theme 'spaceway t))
 
@@ -93,9 +93,14 @@
                 pdf-view-mode-hook
                 woman-mode-hook
                 eww-mode-hook
+                message-mode-hook
                 treemacs-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+(dolist (mode '(special-mode-hook
+                message-mode-hook))
+  (add-hook mode (lambda () (visual-line-mode 0))))
 
 
 ;; run nerd-icons-install-fonts
