@@ -18,11 +18,15 @@
     # openjdk8-bootstrap
     jre8
     jdk8
+    protonup-qt
+    protontricks
     # xorg.libICE
     # xorg.libxcb
     # xorg.libXt
     # visualvm
     # haskellPackages.minecraft
+    obs-studio
+    # obs-cli
   ];
 
   # xdg.portal.enable = true;
