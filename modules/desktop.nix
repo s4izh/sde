@@ -185,11 +185,8 @@
   fonts.fontconfig = {
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
-      #serif = [ "Liberation Mono" ];
-      # monospace = [ "Liberation Mono" ];
-      serif = [ "Source Serif Pro" ];
-      monospace = [ "Source Code Pro"];
-      # monospace = [ "JetBrains Mono" ];
+      serif = [ "Iosevka" ];
+      monospace = [ "Iosevka" ];
     };
   };
 
