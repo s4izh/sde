@@ -12,9 +12,6 @@
 
 (package-initialize)
 
-(unless my/is-guix
-  (setq use-package-always-ensure t))
-
 ;; (setq use-package-always-ensure t)
 
 (unless (package-installed-p 'use-package)
@@ -85,6 +82,9 @@
   (defvar my/nixos-directory
     "~/.local/src/nixos"
     "Path to my NixOS configuration."))
+
+(unless my/is-guix
+  (setq use-package-always-ensure t))
 
 (setenv "EDITOR" "emacsclient")
 (setenv "PAGER" "cat")
