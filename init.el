@@ -96,7 +96,8 @@
 (setenv "PAGER" "cat")
 (setenv "READER" "emacsclient")
 
-
+(load (concat user-emacs-directory
+              "lisp/system.el"))
 
 (use-package undo-fu
   :bind (("C-x u"   . undo-fu-only-undo)
