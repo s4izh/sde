@@ -52,6 +52,8 @@
 
 (use-package dockerfile-mode)
 
+(use-package systemd)
+
 (use-package vterm-toggle)
 
 (ss/leader-key-def
