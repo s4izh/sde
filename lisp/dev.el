@@ -3,15 +3,15 @@
   ;; :hook((lsp-mode . corfu-mode))
   :config
   (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
-  (lsp-enable-which-key-integration t)
-  :custom (lsp-headerline-breadcrumb-enable nil))
+  (lsp-enable-which-key-integration t))
+  ;; :custom (lsp-headerline-breadcrumb-enable nil))
 
 (use-package lsp-ui
   :straight t
   :hook (lsp-mode . lsp-ui-mode)
   :config
   (setq lsp-ui-sideline-enable t)
-  (setq lsp-ui-sideline-show-hover nil)
+  ;; (setq lsp-ui-sideline-show-hover nil)
   ;; (setq lsp-ui-doc-position 'bottom)
   (lsp-ui-doc-show))
 

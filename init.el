@@ -3,7 +3,7 @@
 ;; This file bootstraps the configuration, which is divided into
 ;; a number of other files inside the `lisp' directory.
 
-(setq user-emacs-directory "~/.config/emacs/")
+(setq user-emacs-directory "~/.emacs.d/")
 
 (setq package-archives
   '(("melpa" . "https://melpa.org/packages/")
@@ -76,6 +76,12 @@
         t
       nil)
     "Value indicating if Emacs is currently running on NixOS.")
+  (defvar my/is-ubuntu
+    (if (string-search
+         "Ubuntu" (string-trim (shell-command-to-string "cat /etc/issue")))
+        t
+      nil)
+    "Value indicating if Emacs is currently running on Ubuntu.")
   (defvar my/guix-directory
     "~/.config/guix"
     "Path to my GNU Guix configuration.")
@@ -262,11 +268,9 @@
 (load (concat user-emacs-directory
               "lisp/org.el"))
 
-;; (load (concat user-emacs-directory
-;;               "lisp/ai.el"))
-
-(load (concat user-emacs-directory
-              "lisp/ai2.el"))
+(unless my/is-ubuntu
+  (load (concat user-emacs-directory
+                "lisp/ai2.el")))
 
 (setq tramp-default-method "ssh")
 

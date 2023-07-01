@@ -29,6 +29,7 @@
  "js" '(lambda () (interactive) (find-file "~/.local/scripts"))
  "ju" '(lambda () (interactive) (find-file (expand-file-name "~/uni/3q1")))
  "ji" '(lambda () (interactive) (find-file (expand-file-name "~/notes/inbox.org")))
+ "jw" '(lambda () (interactive) (find-file (expand-file-name "~/notes/work/inbox.org")))
  "jcd" '(lambda () (interactive) (find-file (expand-file-name "~/.local/src/dwm/config.h")) :which-key "dwm config")
  "jcn" '(lambda () (interactive) (find-file (expand-file-name my/nixos-directory)) :which-key "nix config")
  "jce" '(lambda () (interactive) (find-file (expand-file-name (concat user-emacs-directory "init.el"))) :which-key "emacs config"))
