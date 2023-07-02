@@ -65,8 +65,8 @@
       nil)
     "Value indicating if running on linux")
   (defvar my/is-guix
-    (if (string-suffix-p "This is the GNU system. Welcome."
-                         (string-trim (shell-command-to-string "cat /etc/issue")))
+    (if (string-search 
+	  "GNU system" (string-trim (shell-command-to-string "cat /etc/issue")))
         t
       nil)
     "Value indicating if Emacs is currently running on Guix.")
@@ -108,7 +108,6 @@
          ("C-?"     . undo-fu-only-redo)))
 
 (use-package undo-fu-session ; Persistant undo history
-  :ensure t
   :demand t
   :config (global-undo-fu-session-mode))
 
@@ -124,7 +123,6 @@
               "lisp/evil.el"))
 
 (use-package async
-  :ensure t
   :defer t
   :init
   (dired-async-mode 1))
@@ -141,8 +139,7 @@
 
 ;; no littering
 ;; (setq user-emacs-directory "~/.cache/emacs")
-(use-package no-littering
-  :ensure t)
+(use-package no-littering)
 
 ;; no-littering doesn't set this by default so we must place
 ;; auto save files in the same path as it uses for sessions
@@ -371,7 +368,6 @@
 ;;               "lisp/guix.el"))
 
 (use-package pdf-tools
-  :ensure t
   :config
   (pdf-tools-install))
 
@@ -384,7 +380,7 @@
 ;; (setq projectile-project-search-path '("~/personal/" "~/uni/3q2" ("~/github" . 1)))
 
 (use-package popper
-  :ensure t ; or :straight t
+  ;;:ensure t ; or :straight t
   :bind (("C-`"   . popper-toggle-latest)
          ("M-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
@@ -408,6 +404,11 @@
   :custom (vterm-max-scrollback 10000)
   :init (when my/my-system
           (setq term-prompt-regexp ".*ᛋ")))
+
+(use-package vterm-toggle)
+
+(ss/leader-key-def
+  "k" '(vterm-toggle :which-key "toggle vterm"))
 
 (use-package eshell
   :bind ("C-x E" . eshell))

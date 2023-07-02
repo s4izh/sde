@@ -4,7 +4,7 @@
   (visual-line-mode 1))
 
 (use-package org
-  :ensure t
+  ;; :ensure t
   ;; :hook (org-mode . efs/org-mode-setup)
   :bind (("C-c a" . org-agenda)
          ("C-c c" . org-capture)
@@ -109,7 +109,7 @@
 ;; when org-hide-emphasis-markers is on it shows
 ;; the markup symbols when the cursor is place inside the word
 (use-package org-appear
-  :ensure t
+  ;;:ensure t
   :hook (org-mode . org-appear-mode))
 
 (defun my/search-org-files ()
@@ -118,7 +118,7 @@
   (consult-ripgrep  "~/notes"))
 
 (use-package evil-org
-  :ensure t
+  ;;:ensure t
   :after org
   :hook ((org-mode . evil-org-mode)
          (org-agenda-mode . evil-org-mode)
@@ -151,7 +151,7 @@
 
 (use-package org-modern
   :disabled t
-  :ensure t
+  ;;:ensure t
   :hook ((org-mode                 . org-modern-mode)
          (org-agenda-finalize-hook . org-modern-agenda))
   :custom ((org-modern-todo t)
@@ -164,14 +164,14 @@
 
 (use-package org-bullets
   ;; :disabled t
-  :ensure t
+  ;;:ensure t
   :hook (org-mode . org-bullets-mode)
   ;; :custom
   ;; (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
   )
 
 (use-package org-roam
-  :ensure t
+  ;;:ensure t
   :bind (("C-c r l" . org-roam-buffer-toggle)
          ("C-c r f" . org-roam-node-find)
          ("C-c r i" . org-roam-node-insert)
@@ -225,7 +225,7 @@
 
 (use-package org-roam-ui
   :after org-roam
-  :ensure t
+  ;;:ensure t
   ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
   ;;         a hookable mode anymore, you're advised to pick something yourself
   ;;         if you don't care about startup time, use
@@ -288,11 +288,9 @@
 
 
 (use-package restclient
-  :ensure t
   :mode ("\\.http\\'" . restclient-mode))
 
 (use-package ob-restclient
-  :ensure t
   :after org
   :config
   (org-babel-do-load-languages
@@ -323,6 +321,5 @@
 
 
 (use-package toc-org
-  :ensure t
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))

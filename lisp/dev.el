@@ -7,7 +7,7 @@
   ;; :custom (lsp-headerline-breadcrumb-enable nil))
 
 (use-package lsp-ui
-  :straight t
+  ;;:straight t
   :hook (lsp-mode . lsp-ui-mode)
   :config
   (setq lsp-ui-sideline-enable t)
@@ -30,7 +30,6 @@
 (use-package flycheck)
 
 (use-package rust-mode
-  :ensure t
   :hook ((rust-mode . flycheck-mode)
          (rust-mode . lsp-deferred))
   :init (setq rust-format-on-save t))
@@ -54,17 +53,10 @@
 
 (use-package systemd)
 
-(use-package vterm-toggle)
-
-(ss/leader-key-def
-  "k" '(vterm-toggle :which-key "toggle vterm"))
-
 (use-package direnv
-  :ensure t
   :config
   (direnv-mode))
 
 (use-package editorconfig
-  :ensure t
   :config
   (editorconfig-mode 1))

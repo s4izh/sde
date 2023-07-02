@@ -4,6 +4,6 @@
  default-frame-alist
  '((tool-bar-lines . 0)
    (menu-bar-lines . 0)
-   (undecorated . t)
+   ;;(undecorated . t)
    (vertical-scroll-bars . nil)
    (horizontal-scroll-bars . nil)))

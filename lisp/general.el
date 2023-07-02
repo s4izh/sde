@@ -1,5 +1,4 @@
 (use-package general
-  :ensure t
   :config
   (general-evil-setup t)
   (general-create-definer ss/leader-key-def
