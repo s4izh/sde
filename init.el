@@ -83,10 +83,10 @@
       nil)
     "Value indicating if Emacs is currently running on Ubuntu.")
   (defvar my/guix-directory
-    "~/.config/guix"
+    "~/.config/guix/"
     "Path to my GNU Guix configuration.")
   (defvar my/nixos-directory
-    "~/.local/src/nixos"
+    "~/.local/src/nixos/"
     "Path to my NixOS configuration."))
 
 (unless my/is-guix
