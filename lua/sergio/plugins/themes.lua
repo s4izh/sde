@@ -1,6 +1,7 @@
 return {
   "rose-pine/neovim",
-  "morhetz/gruvbox",
+  -- "morhetz/gruvbox",
+  "ellisonleao/gruvbox.nvim",
   "sainnhe/everforest",
   "wesgibbs/vim-irblack",
   "shaunsingh/nord.nvim",
@@ -14,6 +15,8 @@ return {
   "navarasu/onedark.nvim",
   "tanvirtin/monokai.nvim",
   "dylanaraps/wal.vim",
+  "phha/zenburn.nvim",
+  "ishan9299/nvim-solarized-lua"
   -- "maxmx03/solarized.nvim",
   -- "lifepillar/vim-solarized8",
 }
