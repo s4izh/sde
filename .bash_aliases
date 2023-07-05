@@ -103,3 +103,9 @@ alias \
 alias \
     tks="tmux kill-session" \
     tkS="tmux kill-server" \
+
+alias \
+    tm='~/.local/scripts/tmux/tmux-main' \
+    tp='~/.local/scripts/tmux/tmux-picker' \
+    ts='~/.local/scripts/tmux/tmux-sessionizer' \
+    tw='~/.local/scripts/tmux/tmux-notes2' \
