@@ -16,6 +16,7 @@ return {
   "lewis6991/gitsigns.nvim",
   "jpalardy/vim-slime",
   'mrcjkb/telescope-manix',
+  "editorconfig/editorconfig-vim",
   -- "mhinz/vim-startify",
   -- "startup-nvim/startup.nvim",
 
