@@ -1,23 +1,43 @@
 #!/bin/bash
 
+DOTFILES="$HOME/.dotfiles"
+SRC_DIR="$HOME/.local/src"
+
 # function general () {
 #     sudo apt install \
 #         xclip
 # }
 
-function nvim () {
-    sudo apt-get install ninja-build gettext cmake unzip curl
-    git clone https://github.com/neovim/neovim ~/.local/src/neovim
-    cd ~/.local/src/neovim
+# poner $HOME/.cargo/bin en el path
+function _alacritty () {
+    sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+    # git clone https://github.com/alacritty/alacritty.git $SRC_DIR/alacritty
+    # cd $SRC_DIR/alacritty
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    rustup override set stable
+    rustup update stable
+    cargo install alacritty
+    [ -e $HOME/.config/alacritty ] || ln -sf $DOTFILES/.config/alacritty $HOME/.config/alacritty
+    # cargo build --release
+    # [ -e $HOME/.local/bin ] || mkdir $HOME/.local/bin
+    # ln -sf ~/.local/src/alacritty/target/release/alacritty ~/.local/bin/alacritty
+}
+
+function _nvim () {
+    sudo apt-get install ninja-build gettext cmake unzip curl ripgrep
+    git clone https://github.com/neovim/neovim $SRC_DIR/neovim
+    cd $SRC_DIR/neovim
+    git checkout stable
     make CMAKE_BUILD_TYPE=Release
     sudo make install
+    git clone https://github.com/s4izh/nvim ~/.config/nvim
 }
 
 function _zsh () {
     if [[ $(which zsh) ]]; then
         echo "zsh already installed"
     else
-        sudo apt-get install zsh
+        sudo apt-get install zsh curl
     fi
 
     current_shell=$(echo $SHELL | rev | cut -d / -f 1 | rev)
@@ -29,11 +49,26 @@ function _zsh () {
     fi
 
     # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+    ln -sf $DOTFILES/.zprofile $HOME/.zprofile
+    ln -sf $DOTFILES/ubuntu/.zshrc $HOME/.zshrc
+    ln -sf $DOTFILES/.config/zsh $HOME/.config/zsh
 }
 
-for i in "$@"; do
+function _font () {
+    sudo apt-get install fonts-liberation
+    # change /etc/fonts/fonts.conf
+    # monospace to Liberation Mono
+}
+
+selected=$(echo "alacritty font nvim zsh" | tr ' ' '\n' | fzf -m)
+
+for i in $selected; do
     case $i in
+        alacritty) _alacritty ;;
         zsh) _zsh ;;
+        nvim) _nvim ;;
+        font) _font ;;
         *) echo "Unknown option: $i" ;;
     esac
 done
