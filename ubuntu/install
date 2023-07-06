@@ -13,11 +13,24 @@ function _alacritty () {
     sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
     # git clone https://github.com/alacritty/alacritty.git $SRC_DIR/alacritty
     # cd $SRC_DIR/alacritty
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    rustup override set stable
-    rustup update stable
-    cargo install alacritty
+    if [[ $(which rustc) ]];
+        echo "rust toolchain already installed"
+    else
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        rustup override set stable
+        rustup update stable
+    fi
+
+    if [[ $(which alacritty) ]];
+        echo "alacritty already installed"
+    else
+        cargo install alacritty
+    fi
+
     [ -e $HOME/.config/alacritty ] || ln -sf $DOTFILES/.config/alacritty $HOME/.config/alacritty
+    ln -sf $HOME/.config/alacritty/fonts/pc-ubuntu.yml \
+        $HOME/.config/alacritty/font.yml
+
     # cargo build --release
     # [ -e $HOME/.local/bin ] || mkdir $HOME/.local/bin
     # ln -sf ~/.local/src/alacritty/target/release/alacritty ~/.local/bin/alacritty
