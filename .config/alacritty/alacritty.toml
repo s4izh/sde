@@ -1,0 +1,5 @@
+import = ["/home/sergio/.config/alacritty/theme.toml", "/home/sergio/.config/alacritty/font.toml"]
+
+[window.padding]
+x = 2
+y = 2
