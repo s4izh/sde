@@ -1,0 +1,29 @@
+#!/bin/sh
+
+function nvim () {
+    sudo apt-get install ninja-build gettext cmake unzip curl
+    git clone https://github.com/neovim/neovim ~/.local/src/neovim
+    cd ~/.local/src/neovim
+    make CMAKE_BUILD_TYPE=Release
+    sudo make install
+}
+
+function zsh () {
+    if [[ $(which zsh) ]]; then
+        echo "zsh already installed"
+    else
+        sudo apt-get install zsh
+    fi
+
+    current_shell=$(echo $SHELL | rev | cut -d / -f 1 | rev)
+
+    if [[ "$current_shell" != "zsh" ]]; then
+        chsh -s $(which zsh)
+    else
+        echo "zsh already default shell"
+    fi
+
+    # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+}
+
+zsh
