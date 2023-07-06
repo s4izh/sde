@@ -1,0 +1,18 @@
+[font]
+size = 9
+
+[font.bold]
+family = "mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "mono"
+style = "Italic"
+
+[font.normal]
+family = "mono"
+style = "Regular"
