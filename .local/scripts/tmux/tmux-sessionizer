@@ -3,9 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    folders=$(find ~/uni/"$CURRENT_Q" ~/personal ~/.local/src -mindepth 1 -maxdepth 1 -type d)
-    # selected=$(find ~/uni/"$CURRENT_Q" ~/personal ~/.local/src ~/.dotfiles/.local -mindepth 1 -maxdepth 1 -type d | fzf)
-    # premade_session=$(ls -1 ~/.local/scripts/tmux)
+    folders=$(find ~/uni/"$CURRENT_Q" ~/devel ~/personal ~/.local/src -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
 
     scripts=~/.local/scripts
     dotfiles=~/.dotfiles
