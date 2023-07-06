@@ -46,6 +46,11 @@ function _nvim () {
     git clone https://github.com/s4izh/nvim ~/.config/nvim
 }
 
+function _scripts () {
+    sudo apt-get install scrot xclip xdotool fzf
+    ln -sf $DOTFILES/.local/scripts $HOME/.local/scripts
+}
+
 function _zsh () {
     if [[ $(which zsh) ]]; then
         echo "zsh already installed"
@@ -74,14 +79,15 @@ function _font () {
     # monospace to Liberation Mono
 }
 
-selected=$(echo "alacritty font nvim zsh" | tr ' ' '\n' | fzf -m)
+selected=$(echo "alacritty font nvim scripts zsh" | tr ' ' '\n' | fzf -m)
 
 for i in $selected; do
     case $i in
         alacritty) _alacritty ;;
-        zsh) _zsh ;;
-        nvim) _nvim ;;
         font) _font ;;
+        nvim) _nvim ;;
+        scripts) _scripts ;;
+        zsh) _zsh ;;
         *) echo "Unknown option: $i" ;;
     esac
 done
