@@ -91,7 +91,7 @@ alias \
 
 # alias ls="exa"
 
-alias ls="exa -g --group-directories-first" # --icons
+# alias ls="exa -g --group-directories-first" # --icons
 
 # abbreviated long commands
 alias \

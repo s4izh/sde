@@ -41,25 +41,26 @@ zsh_add_file "exports"
 # zsh_add_file "vim-mode"
 zsh_add_file "aliases"
 zsh_add_file "prompt"
+zsh_add_file "vim-mode"
 
 # check if inside emacs vterm
-if [[ "$TERM" != "xterm-256color" ]]; then
-    zsh_add_file "vim-mode"
-else
-    export MANPAGER='cat'
-fi
+# if [[ "$TERM" != "xterm-256color" ]]; then
+#     zsh_add_file "vim-mode"
+# else
+#     export MANPAGER='cat'
+# fi
 
 # check if inside emacs vterm
-if [[ "$TERM" != "dumb" ]]; then
+# if [[ "$TERM" != "dumb" ]]; then
     # zsh_add_file "prompt"
     # eval "$(starship init zsh)"
     # zsh_add_file "vim-mode"
-else
-    export MANPAGER='cat'
-fi
+# else
+    # export MANPAGER='cat'
+# fi
 
 # Plugins
-# zsh_add_plugin "zsh-users/zsh-autosuggestions"
+zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_completion "esc/conda-zsh-completion" false
@@ -81,5 +82,7 @@ bindkey '^R' history-incremental-search-backward
 # autoload -U down-line-or-beginning-search
 # zle -N up-line-or-beginning-search
 # zle -N down-line-or-beginning-search
+
+[ -e /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 eval "$(direnv hook zsh)"
