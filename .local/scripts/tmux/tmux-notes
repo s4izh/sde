@@ -1,7 +1,7 @@
 #!/bin/sh
 
-SESSION_NAME="pkm"
-PROJECT_PATH="$HOME/pkm"
+SESSION_NAME="notes"
+PROJECT_PATH="$HOME/notes"
 
 tmux has-session -t $SESSION_NAME 2>/dev/null
 

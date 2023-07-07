@@ -8,7 +8,7 @@ else
     scripts=~/.local/scripts
     dotfiles=~/.dotfiles
     nvim=~/.config/nvim
-    notes=~/pkm
+    notes=~/notes
 
     selected=$(printf "$folders\n$scripts\n$dotfiles\n$notes\n$nvim" | fzf)
 fi
