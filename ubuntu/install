@@ -3,6 +3,10 @@
 DOTFILES="$HOME/.dotfiles"
 SRC_DIR="$HOME/.local/src"
 
+if ! [[ -d $SRC_DIR ]]; then
+    mkdir -p $SRC_DIR
+fi
+
 # function general () {
 #     sudo apt install \
 #         xclip
@@ -13,15 +17,16 @@ function _alacritty () {
     sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
     # git clone https://github.com/alacritty/alacritty.git $SRC_DIR/alacritty
     # cd $SRC_DIR/alacritty
-    if [[ $(which rustc) ]];
+    if [[ $(which rustc) ]]; then
         echo "rust toolchain already installed"
     else
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
         rustup override set stable
         rustup update stable
+        . "$HOME/.cargo/env"
     fi
 
-    if [[ $(which alacritty) ]];
+    if [[ $(which alacritty) ]]; then
         echo "alacritty already installed"
     else
         cargo install alacritty
