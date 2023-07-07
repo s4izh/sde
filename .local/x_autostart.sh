@@ -20,7 +20,6 @@ dwmblocks &
 sxhkd &
 
 # emacs daemon
-emacs --daemon &
 
 dunst &
 
