@@ -234,5 +234,5 @@ function ghp () {
 }
 
 function lncf () {
-    ln -sf ~/.dotfiles/.config/$1 ~/.config/$1
+    ln -svf ~/.dotfiles/.config/$1 ~/.config/$1
 }
