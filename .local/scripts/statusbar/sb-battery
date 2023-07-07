@@ -3,7 +3,6 @@
 which acpi > /dev/null 2>&1
 
 if [ $? -eq 1 ]; then
-    echo "acpi not found"
     exit 1
 fi
 
