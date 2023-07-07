@@ -232,3 +232,7 @@ function ghp () {
     repo=$(cat .git/config | grep url | cut -d : -f2)
     firefox https://github.com/$repo
 }
+
+function lncf () {
+    ln -sf ~/.dotfiles/.config/$1 ~/.config/$1
+}
