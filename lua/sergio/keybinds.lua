@@ -96,7 +96,7 @@ vim.keymap.set("n", "<Leader>wsc", ":setlocal spell spelllang=ca<cr>")
 vim.keymap.set("n", "<Leader>wse", ":setlocal spell spelllang=es<cr>")
 vim.keymap.set("n", "<Leader>wsi", ":setlocal spell spelllang=en<cr>")
 vim.keymap.set("n", "<Leader>wS", ":setlocal nospell<cr>")
-vim.keymap.set("n", "<Leader>wT", ":r!~/pkm/src/template %<cr>ggdd")
+vim.keymap.set("n", "<Leader>wT", ":r!~/notes/src/template %<cr>ggdd")
 -- vim.keymap.set("n", "<Leader>wn", ":set nospell")
 
 vim.keymap.set("n", "<Leader>wf", ":set ft=")
