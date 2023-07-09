@@ -56,17 +56,18 @@ function _dwm () {
 }
 
 function _nvim () {
-    sudo apt-get install ninja-build gettext cmake unzip curl ripgrep
+    sudo apt-get install ninja-build gettext cmake unzip curl
     git clone https://github.com/neovim/neovim $SRC_DIR/neovim
     cd $SRC_DIR/neovim
     git checkout stable
     make CMAKE_BUILD_TYPE=Release
     sudo make install
+    sudo apt-get install ripgrep # runtime dependency (add node if using copilot)
     git clone https://github.com/s4izh/nvim ~/.config/nvim
 }
 
 function _scripts () {
-    sudo apt-get install scrot xclip xdotool fzf
+    sudo apt-get install scrot xclip xdotool fzf ripgrep
     ln -sf $DOTFILES/.local/scripts $HOME/.local/scripts
 }
 
