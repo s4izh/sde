@@ -41,6 +41,20 @@ function _alacritty () {
     # ln -sf ~/.local/src/alacritty/target/release/alacritty ~/.local/bin/alacritty
 }
 
+function _dmenu () {
+    sudo apt-get install libx11-dev libxft-dev
+    git clone https://github.com/s4izh/dmenu $SRC_DIR/dmenu
+    cd $SRC_DIR/dmenu
+    sudo make clean install
+}
+
+function _dwm () {
+    sudo apt-get install libx11-dev libxft-dev libxinerama-dev
+    git clone https://github.com/s4izh/dwm $SRC_DIR/dwm
+    cd $SRC_DIR/dwm
+    sudo make clean install
+}
+
 function _nvim () {
     sudo apt-get install ninja-build gettext cmake unzip curl ripgrep
     git clone https://github.com/neovim/neovim $SRC_DIR/neovim
@@ -89,6 +103,8 @@ selected=$(echo "alacritty font nvim scripts zsh" | tr ' ' '\n' | fzf -m)
 for i in $selected; do
     case $i in
         alacritty) _alacritty ;;
+        dmenu) _dmenu ;;
+        dwm) _dwm ;;
         font) _font ;;
         nvim) _nvim ;;
         scripts) _scripts ;;
