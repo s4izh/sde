@@ -125,8 +125,8 @@
   services.xserver = {
     layout = "es";
     xkbVariant = "";
-    #xkbOptions = "caps:escape";
-    xkbOptions = "ctrl:nocaps";
+    xkbOptions = "caps:escape";
+    # xkbOptions = "ctrl:nocaps";
     libinput = {
       enable = true;
       mouse = {
