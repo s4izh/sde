@@ -13,6 +13,7 @@
 nm-applet --indicator &
 dwmblocks &
 dunst &
+sxhkd &
 unclutter -idle 5 &
 
 export SYSTEM_MENU=dmenu
