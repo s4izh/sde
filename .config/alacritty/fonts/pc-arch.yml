@@ -13,17 +13,17 @@ font:
   #   style: Bold Italic
 
   normal:
-    family: mono
+    family: monospace
     style: Regular
   bold:
-    family: mono
+    family: monospace
     style: Bold
   italic:
-    family: mono
+    family: monospace
     style: Italic
   bold_italic:
-    family: mono
+    family: monospace
     style: Bold Italic
 
   # Point size
-  size: 10
+  size: 11

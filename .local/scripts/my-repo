@@ -1,7 +1,7 @@
 #!/bin/sh
 
-UNI=$notes
-PKM="$HOME/notes"
+UNI=$UNI
+PKM="$HOME/pkm"
 # WIKI="$HOME/wiki"
 
 function push () {

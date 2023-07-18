@@ -10,6 +10,12 @@
 #     dwm >/dev/null 2>&1
 # done
 
+nm-applet --indicator &
+dwmblocks &
+dunst &
+sxhkd &
+unclutter -idle 5 &
+
 export SYSTEM_MENU=dmenu
 
 while true; do
