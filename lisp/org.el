@@ -44,6 +44,12 @@
           ("p" "Project entries")
           ("pz" "ZeOS" entry  (file+headline "~/notes/uni/soa.org" "ZeOS") "** %?\n%a\n")
 
+          ("w" "Work entries")
+          ("wi" "Inbox" entry  (file+headline "~/notes/work/inbox.org" "Captures") "** %?\n%a\n")
+          ("wc" "Concept" entry  (file+headline "~/notes/work/concepts.org" "Concepts") "** %?\n%a\n")
+          ("wd" "Daily" entry  (file+olp+datetree "~/notes/work/daily.org")
+           "* %?\nEntered on %U\n  %i\n  %a")
+
           ("j" "Journal" entry (file+olp+datetree "~/notes/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a"))))
 
@@ -172,15 +178,15 @@
 
 (use-package org-roam
   ;;:ensure t
-  :bind (("C-c r l" . org-roam-buffer-toggle)
-         ("C-c r f" . org-roam-node-find)
-         ("C-c r i" . org-roam-node-insert)
-         ("C-c r c" . org-roam-capture)
-         ("C-c r g" . org-roam-graph)
-         ("C-c r u" . org-roam-db-sync)
-         ;; ("C-c r r" . org-roam-ref-find)
-         ;; ("C-c r b" . org-roam-switch-to-buffer)
-         ("C-c r d" . org-roam-dailies-capture-today))
+  ;; :bind (("C-c r l" . org-roam-buffer-toggle)
+  ;;        ("C-c r f" . org-roam-node-find)
+  ;;        ("C-c r i" . org-roam-node-insert)
+  ;;        ("C-c r c" . org-roam-capture)
+  ;;        ("C-c r g" . org-roam-graph)
+  ;;        ("C-c r u" . org-roam-db-sync)
+  ;;        ;; ("C-c r r" . org-roam-ref-find)
+  ;;        ;; ("C-c r b" . org-roam-switch-to-buffer)
+  ;;        ("C-c r d" . org-roam-dailies-capture-today))
   :custom
   (org-roam-directory org-directory)
   (org-roam-completion-everywhere t)
@@ -203,6 +209,9 @@
      ("p" "project" plain "*Project info\n\n** Goals\n\n%?\n\n** Tasks\n\n**\n\n** Dates\n\n"
       :if-new (file+head "projects/${slug}.org" "#+title: ${title}\n#+filetags: project")
       :unnarrowed t)
+     ("w" "work" plain ""
+      :if-new (file+head "work/${slug}.org" "#+title: ${title}\n#+filetags: project")
+      :unnarrowed t)
      ("n" "note" plain
       "** %?\n%a"
       :target (headline "* Captures")
@@ -214,14 +223,14 @@
       (concat "${title:*} "
               (propertize "${tags:10}" 'face 'org-tag)))
 
-;; (ss/leader-key-def
-;;   ;; "or" '(ignore t :which-key "roam")
-;;   "rb" '(org-roam-buffer-toggle :which-key "buffer toggle")
-;;   "rc" '(org-roam-capture :which-key "roam capture")
-;;   "rf"  '(org-roam-node-find :which-key "node find")
-;;   "ri" '(org-roam-node-insert :which-key "node insert")
-;;   "rI" '(org-roam-node-insert-immediate :which-key "node insert immediate")
-;;   "ru"  '(org-roam-db-sync :which-key "sync roam db"))
+(ss/leader-key-def
+  ;; "or" '(ignore t :which-key "roam")
+  "rb" '(org-roam-buffer-toggle :which-key "buffer toggle")
+  "rc" '(org-roam-capture :which-key "roam capture")
+  "rf" '(org-roam-node-find :which-key "node find")
+  "ri" '(org-roam-node-insert :which-key "node insert")
+  "rI" '(org-roam-node-insert-immediate :which-key "node insert immediate")
+  "ru" '(org-roam-db-sync :which-key "sync roam db"))
 
 (use-package org-roam-ui
   :after org-roam
