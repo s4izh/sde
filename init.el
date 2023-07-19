@@ -154,8 +154,8 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t))) (load custom-file 'noerror 'nomessage)
 
-(load (concat user-emacs-directory
-              "lisp/modeline.el"))
+;; (load (concat user-emacs-directory
+;;               "lisp/modeline.el"))
 
 (load (concat user-emacs-directory
               "lisp/appearance.el"))

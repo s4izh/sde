@@ -13,6 +13,7 @@
 ;; (add-to-list 'default-frame-alist '(font . "DejaVuSansMono-12"))
 ;; (add-to-list 'default-frame-alist '(font . "LiberationMono-13"))
 ;; (add-to-list 'default-frame-alist '(font . "FantasqueSansM Nerd Font Mono-15"))
+(add-to-list 'default-frame-alist '(font . "UbuntuMono Nerd Font-14"))
 (setq locale-coding-system 'utf-8)
 (set-face-attribute 'default nil :height 135)
 
@@ -46,7 +47,7 @@
 
 (use-package ef-themes)
 
-(setq my/current-theme 'spaceway)
+(setq my/current-theme 'doom-sourcerer)
 (setq custom-safe-themes t)
 
 (defun my/load-theme (theme)
@@ -110,6 +111,10 @@
   :config
   (setq doom-modeline-height 22)
   :init (doom-modeline-mode 1))
+
+(use-package mood-line
+  :config
+  (mood-line-mode))
 
 ;; (use-package color-theme-modern)
 
