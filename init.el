@@ -95,6 +95,7 @@
 (setenv "EDITOR" "emacsclient")
 (setenv "PAGER" "cat")
 (setenv "READER" "emacsclient")
+(setenv "EMACS" "yes")
 
 (load (concat user-emacs-directory
               "lisp/system.el"))

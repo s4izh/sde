@@ -322,6 +322,7 @@
   :after org
   :config
   (let ((templates '(("sh"  . "src sh")
+                     ("ash" . "src sh :async")
                      ("el"  . "src emacs-lisp")
                      ("vim" . "src vim")
                      ("cpp" . "src C++ :includes <iostream>  :namespaces std"))))
@@ -332,3 +333,5 @@
 (use-package toc-org
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
+
+(use-package ob-async)
