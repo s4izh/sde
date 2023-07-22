@@ -453,3 +453,9 @@
   (interactive "DDirectory: ")
   (shell-command
    (format "ctags -f TAGS -e -R %s" (directory-file-name dir-name))))
+
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (shell-command
+   (format "find . -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.hpp' | xargs etags" (directory-file-name dir-name))))
