@@ -263,6 +263,11 @@
  '(org-agenda-files (list (concat org-directory "/inbox.org"))))
 (setq calendar-week-start-day 1)
 
+(if my/work
+    (custom-set-variables
+     '(org-agenda-files (list (concat org-directory "/work"))))
+    (custom-set-variables
+     '(org-agenda-files (list (concat org-directory "/inbox.org")))))
 
 (defun my/org-screenshot-notes-img ()
   "Take a screenshot into a time stamped unique-named file in the

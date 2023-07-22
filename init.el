@@ -87,7 +87,12 @@
     "Path to my GNU Guix configuration.")
   (defvar my/nixos-directory
     "~/.local/src/nixos/"
-    "Path to my NixOS configuration."))
+    "Path to my NixOS configuration.")
+  (defvar my/work
+    (if (string-equal "work" (shell-command-to-string "cat /etc/hostname"))
+        t
+      nil)
+    "Non-nil value if this is my work system."))
 
 (unless my/is-guix
   (setq use-package-always-ensure t))
