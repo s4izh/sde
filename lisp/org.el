@@ -258,9 +258,9 @@
 (setq org-roam-node-display-template
       (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
 
-(custom-set-variables
+;; (custom-set-variables
  ;; '(org-agenda-files (list "~/notes/projects" "~/notes/uni" "~/notes/inbox.org")))
- '(org-agenda-files (list (concat org-directory "/inbox.org"))))
+ ;; '(org-agenda-files (list (concat org-directory "/inbox.org"))))
 (setq calendar-week-start-day 1)
 
 (if my/work
