@@ -34,10 +34,9 @@ source "$ZDOTDIR/functions"
 
 # Normal files to source
 zsh_add_file "exports"
-# zsh_add_file "vim-mode"
 zsh_add_file "aliases"
 zsh_add_file "prompt"
-zsh_add_file "vim-mode"
+# zsh_add_file "vim-mode"
 
 # check if inside emacs vterm
 # if [[ "$TERM" != "xterm-256color" ]]; then
@@ -54,6 +53,15 @@ zsh_add_file "vim-mode"
 # else
     # export MANPAGER='cat'
 # fi
+
+if [[ -n $EMACS ]]; then
+    export MANPAGER='cat'
+else
+    zsh_add_file "vim-mode"
+#     zsh_add_file "prompt"
+#     eval "$(starship init zsh)"
+#     zsh_add_file "vim-mode"
+fi
 
 # Plugins
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
