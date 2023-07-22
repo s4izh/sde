@@ -26,7 +26,7 @@
             ./modules/base.nix
             ./modules/desktop.nix
             ./modules/dwm.nix
-            ./modules/stumpwm.nix
+            # ./modules/stumpwm.nix
             ./modules/gaming.nix
             ./modules/virtualisation.nix
             ./modules/android.nix
