@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }:
 {
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     firefox
     alacritty
@@ -186,7 +188,8 @@
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
       serif = [ "Source Serif Pro" ];
-      monospace = [ "Source Code Pro" ];
+      # monospace = [ "Liberation Mono" ];
+      monospace = [ "JetBrains Mono" ];
     };
   };
 
