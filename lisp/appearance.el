@@ -47,7 +47,7 @@
 
 (use-package ef-themes)
 
-(setq my/current-theme 'doom-sourcerer)
+(setq my/current-theme 'ef-night)
 (setq custom-safe-themes t)
 
 (defun my/load-theme (theme)
