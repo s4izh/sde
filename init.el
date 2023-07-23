@@ -459,3 +459,11 @@
   (interactive "DDirectory: ")
   (shell-command
    (format "find . -name '*.c' -o -name '*.h' -o -name '*.cpp' -o -name '*.hpp' | xargs etags" (directory-file-name dir-name))))
+
+(defun my/kill-current-buffer ()
+  "Kill the current buffer without prompting."
+  (interactive)
+  (kill-buffer (current-buffer)))
+
+(global-set-key (kbd "C-x k") 'my/kill-current-buffer)
+(keymap-global-set "C-x k" 'my/kill-current-buffer)
