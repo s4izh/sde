@@ -16,6 +16,7 @@
   :config
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-normal-state-map (kbd "<escape>") 'abort-minibuffers)
+  (evil-define-key 'normal 'global "K" 'man)
   ;; (define-key evil-normal-state-map (kbd "/") 'consult-line)
   ;; (define-key evil-normal-state-map (kbd "?") 'consult-line)
   ;; (define-key evil-insert-state-map (kbd "C-n") 'vertico-next)
