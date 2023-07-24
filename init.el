@@ -95,7 +95,7 @@
     "~/.local/src/nixos/"
     "Path to my NixOS configuration.")
   (defvar my/work
-    (if (string-trim "work" (shell-command-to-string "cat /etc/hostname"))
+    (if (string-search "work" (shell-command-to-string "cat /etc/hostname"))
         t
       nil)
     "Non-nil value if this is my work system."))

@@ -3,6 +3,8 @@
   (org-indent-mode)
   (visual-line-mode 1))
 
+(setq org-directory "~/notes")
+
 (use-package org
   ;; :ensure t
   ;; :hook (org-mode . efs/org-mode-setup)
@@ -11,7 +13,6 @@
          ("C-c l" . org-store-link))
   ;; ("C-c b" . org-switchb))
   :config
-  (setq org-directory "~/notes")
   (setq org-src-window-setup 'current-window)
   (setq org-ellipsis " ▾")
   (setq org-hide-emphasis-markers t)
@@ -33,13 +34,14 @@
           ("i" "Idea" entry  (file+headline "~/notes/inbox.org" "Ideas") "** %?\nContext: %a\n")
           ("e" "Emacs" entry  (file+headline "~/notes/inbox.org" "Emacs") "** TODO %?\nContext: %a\n")
           ("w" "Work" entry  (file+headline "~/notes/work/inbox.org" "Tasks") "* TODO %?\nContext: %a\n")
+          ("u" "Uni" entry  (file+headline "~/notes/inbox.org" "Uni") "** %?\nContext: %a\n")
 
-          ("u" "Uni entries")
-          ("uc" "CPD" entry  (file+headline "~/notes/uni/cpd.org" "Tasks") "** %?\n%a\n")
-          ("us" "SOA" entry  (file+headline "~/notes/uni/soa.org" "Tasks") "** %?\n%a\n")
-          ("ux" "SDX" entry  (file+headline "~/notes/uni/sdx.org" "Tasks") "** %?\n%a\n")
-          ("ut" "TXC" entry  (file+headline "~/notes/uni/txc.org" "Tasks") "** %?\n%a\n")
-          ("up" "PTI" entry  (file+headline "~/notes/uni/pti.org" "Tasks") "** %?\n%a\n")
+          ;; ("u" "Uni entries")
+          ;; ("uc" "CPD" entry  (file+headline "~/notes/uni/cpd.org" "Tasks") "** %?\n%a\n")
+          ;; ("us" "SOA" entry  (file+headline "~/notes/uni/soa.org" "Tasks") "** %?\n%a\n")
+          ;; ("ux" "SDX" entry  (file+headline "~/notes/uni/sdx.org" "Tasks") "** %?\n%a\n")
+          ;; ("ut" "TXC" entry  (file+headline "~/notes/uni/txc.org" "Tasks") "** %?\n%a\n")
+          ;; ("up" "PTI" entry  (file+headline "~/notes/uni/pti.org" "Tasks") "** %?\n%a\n")
 
           ("p" "Project entries")
           ("pz" "ZeOS" entry  (file+headline "~/notes/uni/soa.org" "ZeOS") "** %?\n%a\n")
@@ -53,6 +55,9 @@
           ("j" "Journal" entry (file+olp+datetree "~/notes/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a"))))
 
+(if my/work
+    (setq org-agenda-files (list (concat org-directory "/work")))
+  (setq org-agenda-files (list (concat org-directory "/inbox.org"))))
 
 (defvar prot-org-custom-daily-agenda
   ;; NOTE 2021-12-08: Specifying a match like the following does not
@@ -262,12 +267,6 @@
  ;; '(org-agenda-files (list "~/notes/projects" "~/notes/uni" "~/notes/inbox.org")))
  ;; '(org-agenda-files (list (concat org-directory "/inbox.org"))))
 (setq calendar-week-start-day 1)
-
-(if my/work
-    (custom-set-variables
-     '(org-agenda-files (list (concat org-directory "/work"))))
-    (custom-set-variables
-     '(org-agenda-files (list (concat org-directory "/inbox.org")))))
 
 (defun my/org-screenshot-notes-img ()
   "Take a screenshot into a time stamped unique-named file in the
