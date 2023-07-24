@@ -23,7 +23,9 @@
     (add-to-list 'default-frame-alist '(font . "JetBrains Mono-12")))
 
 (if my/is-arch
-    (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12")))
+    (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12"))
+    ;; (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-12")) ;; arch
+)
 
 (setq locale-coding-system 'utf-8)
 (set-face-attribute 'default nil :height 120)
