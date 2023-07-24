@@ -64,9 +64,15 @@
         t
       nil)
     "Value indicating if running on linux")
+  (defvar my/is-arch
+    (if (string-search
+         "Arch Linux" (string-trim (shell-command-to-string "cat /etc/issue")))
+        t
+      nil)
+    "Value indicating if Emacs is currently running on Arch Linux.")
   (defvar my/is-guix
     (if (string-search 
-	  "GNU system" (string-trim (shell-command-to-string "cat /etc/issue")))
+         "GNU system" (string-trim (shell-command-to-string "cat /etc/issue")))
         t
       nil)
     "Value indicating if Emacs is currently running on Guix.")
