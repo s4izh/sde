@@ -13,8 +13,18 @@
 ;; (add-to-list 'default-frame-alist '(font . "DejaVuSansMono-12"))
 ;; (add-to-list 'default-frame-alist '(font . "LiberationMono-13"))
 ;; (add-to-list 'default-frame-alist '(font . "FantasqueSansM Nerd Font Mono-15"))
-(add-to-list 'default-frame-alist '(font . "JetBrains Mono-12"))
-;; (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-14"))
+;; (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-14")) ;; ubuntu
+;; (add-to-list 'default-frame-alist '(font . "UbuntuMono Nerd Font-14")) ;; arch
+;; (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-12")) ;; arch
+;; (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12"))
+;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12"))
+
+(if my/is-ubuntu
+    (add-to-list 'default-frame-alist '(font . "JetBrains Mono-12")))
+
+(if my/is-arch
+    (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12")))
+
 (setq locale-coding-system 'utf-8)
 (set-face-attribute 'default nil :height 120)
 
