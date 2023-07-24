@@ -13,9 +13,10 @@
 ;; (add-to-list 'default-frame-alist '(font . "DejaVuSansMono-12"))
 ;; (add-to-list 'default-frame-alist '(font . "LiberationMono-13"))
 ;; (add-to-list 'default-frame-alist '(font . "FantasqueSansM Nerd Font Mono-15"))
-(add-to-list 'default-frame-alist '(font . "UbuntuMono Nerd Font-14"))
+(add-to-list 'default-frame-alist '(font . "JetBrains Mono-12"))
+;; (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-14"))
 (setq locale-coding-system 'utf-8)
-(set-face-attribute 'default nil :height 135)
+(set-face-attribute 'default nil :height 120)
 
 ;; THEMES
 ;; modus
