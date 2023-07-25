@@ -20,7 +20,9 @@
 ;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12"))
 
 (if my/is-ubuntu
-    (add-to-list 'default-frame-alist '(font . "JetBrains Mono-12")))
+    ;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono-12"))
+    (add-to-list 'default-frame-alist '(font . "Liberation Mono-12"))
+  )
 
 (if my/is-arch
     (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12"))
