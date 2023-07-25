@@ -23,6 +23,7 @@
  "n"  '(next-buffer :which-key "next-buffer")
  "C"  '(compile :which-key "compile")
  "c"  '(recompile :which-key "recompile")
+ "R"  '(visual-line-mode :which-key "visual line mode")
  "s"  '(sudo-find-file :which-key "sudo find file")
  "d" '(lambda () (interactive) (find-file (expand-file-name ".")))
  "js" '(lambda () (interactive) (find-file "~/.local/scripts"))
