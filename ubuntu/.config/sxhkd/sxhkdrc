@@ -1,0 +1,5 @@
+super + e
+      emacsclient -c -a emacs
+
+super + shift + s
+      screenshot
