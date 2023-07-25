@@ -53,7 +53,7 @@ super + alt + s
     feh --bg-fill $(find ~/pix/wall -type f | shuf -n 1)
 
 super + e
-    emacsclient -c || emacs --daemon && twmnc -t emacs -c "server started  "
+    emacsclient -c -a emacs
 
 super + shift + e
     killall emacs && twmnc -t emacs -c "killed all emacs instances  "
