@@ -6,6 +6,9 @@
   (lsp-enable-which-key-integration t))
   ;; :custom (lsp-headerline-breadcrumb-enable nil))
 
+(setq c-default-style "linux"
+          c-basic-offset 4)
+
 (use-package lsp-ui
   ;;:straight t
   :hook (lsp-mode . lsp-ui-mode)
