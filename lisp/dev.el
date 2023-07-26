@@ -33,8 +33,8 @@
 (use-package flycheck)
 
 (use-package rust-mode
-  :hook ((rust-mode . flycheck-mode)
-         (rust-mode . lsp-deferred))
+  :hook ((rust-mode . flycheck-mode))
+         ;; (rust-mode . lsp-deferred))
   :init (setq rust-format-on-save t))
 
 (setq lsp-completion-provider :none)
@@ -48,6 +48,10 @@
 
 (use-package yaml-mode
   :mode "\\.yml\\'")
+
+(use-package toml-mode)
+
+(use-package json-mode)
 
 (use-package docker
   :bind ("C-c d" . docker))
@@ -91,4 +95,13 @@
 (setq multi-compile-alist '(
                                ("*scratch*" . (("print-hello" . "echo 'hello'")
                                                   ("otra cosa" . "echo 'otra cosa'")))
+                               (rust-mode . (("rust-run" . "cargo run")
+                                                ("rust-clippy" . "cargo clippy")
+                                                ("rust-check" . "cargo check")
+                                                ("rust-test" . "cargo test")
+                                                ("rust-release" . "cargo run --release")))
+                               ("\\.*" . (("compiler" . "compiler %file-name")))
                                ))
+
+(use-package yasnippet)
+(use-package yasnippet-snippets)
