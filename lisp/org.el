@@ -310,10 +310,15 @@
    'org-babel-load-languages
    '((restclient . t))))
 
+(use-package ob-rust) ;; cargo install rust-script too
+
+(use-package ob-async)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    (python . t)
+   (rust . t)
    (C . t)
    (shell . t)))
 
@@ -329,6 +334,7 @@
                      ("ash" . "src sh :async")
                      ("el"  . "src emacs-lisp")
                      ("vim" . "src vim")
+                     ("r" 	. "src rust")
                      ("cpp" . "src C++ :includes <iostream>  :namespaces std"))))
     (dolist (template templates)
       (push template org-structure-template-alist))))
@@ -337,5 +343,3 @@
 (use-package toc-org
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
-
-(use-package ob-async)
