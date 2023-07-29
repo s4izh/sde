@@ -1,4 +1,6 @@
-return {
+-- local augroup = vim.api.nvim_create_augroup("LspFormat", {})
+
+local opts = {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v1.x',
     dependencies = {
@@ -27,6 +29,7 @@ return {
             -- 'tsserver',
             'rust_analyzer',
             'lua_ls',
+            'clangd',
         })
         -- Fix Undefined global 'vim'
         lsp.configure('lua-language-server', {
@@ -76,6 +79,18 @@ return {
             vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
             vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+            -- if client.supports_method('textDocument/formatting') then
+            --     vim.api.nvim_clear_autocmds({
+            --         group = augroup,
+            --         buffer = bufnr,
+            --     })
+            --     vim.api.nvim_create_autocmd("BufWritePre", {
+            --         group = augroup,
+            --         buffer = bufnr,
+            --         callback = function()
+            --             vim.lsp.buf.format({ bufnr = bufnr })
+            --         end,
+            --     })
         end)
         lsp.setup()
         vim.diagnostic.config({
@@ -93,3 +108,5 @@ return {
         })
     end
 }
+
+return opts
