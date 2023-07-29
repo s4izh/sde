@@ -28,7 +28,7 @@ vim.opt.updatetime = 50
 
 -- vim.opt.colorcolumn = "80"
 
--- vim.o.cursorline = true
+vim.o.cursorline = true
 
 vim.o.mouse = "a"
 
