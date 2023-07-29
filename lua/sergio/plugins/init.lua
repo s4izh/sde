@@ -17,6 +17,7 @@ return {
   "jpalardy/vim-slime",
   'mrcjkb/telescope-manix',
   "editorconfig/editorconfig-vim",
+  "lukas-reineke/indent-blankline.nvim",
   -- "mhinz/vim-startify",
   -- "startup-nvim/startup.nvim",
 
