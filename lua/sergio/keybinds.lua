@@ -132,6 +132,6 @@ vim.keymap.set("n", "<Leader>CC", ":!shellcheck %<cr>")
 
 vim.keymap.set("n", "<Leader>db", ":DapToggleBreakpoint <cr>")
 vim.keymap.set("n", "<Leader>dr", ":DapContinue <cr>")
-vim.keymap.set("n", "<Leader>ds", ":DapStepover <cr>")
+vim.keymap.set("n", "<Leader>ds", ":DapStepOver <cr>")
 vim.keymap.set("n", "<Leader>di", ":DapStepInto <cr>")
 vim.keymap.set("n", "<Leader>do", ":DapStepOut <cr>")
