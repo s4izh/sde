@@ -4,7 +4,7 @@ return {
   -- "junegunn/fzf.vim",
   -- "junegunn/fzf",
   "junegunn/goyo.vim",
-  -- "vim-airline/vim-airline",
+  "vim-airline/vim-airline",
   -- "nvim-lualine/lualine.nvim",
   "halkn/ripgrep.vim",
   "github/copilot.vim",
