@@ -10,10 +10,17 @@ else
     nvim=~/.config/nvim
     notes=~/notes
 
-    selected=$(printf "$folders\n$scripts\n$dotfiles\n$notes\n$nvim" | fzf)
+    selected=$(printf "$folders\n$scripts\n$dotfiles\n$notes\n$nvim\nnew" | fzf)
 fi
 
 if [[ -z $selected ]]; then
+    exit 0
+fi
+
+if [[ $selected == "new" ]]; then
+    project_name=$(echo "" | fzf --print-query)
+    mkdir -p ~/personal/$project_name
+    tmux-sessionizer ~/personal/$project_name
     exit 0
 fi
 
