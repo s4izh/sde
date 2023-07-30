@@ -29,7 +29,7 @@ local opts = {
             -- 'tsserver',
             'rust_analyzer',
             'lua_ls',
-            'clangd',
+            -- 'clangd',
         })
         -- Fix Undefined global 'vim'
         lsp.configure('lua-language-server', {
