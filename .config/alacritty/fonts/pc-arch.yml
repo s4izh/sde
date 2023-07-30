@@ -25,4 +25,5 @@ font:
     family: monospace
     style: Bold Italic
 
-  size: 13
+  # Point size
+  size: 12
