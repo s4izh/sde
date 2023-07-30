@@ -11,6 +11,9 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<leader>n", ":noh<cr>")
 
+vim.keymap.set("n", "H", ":bp<cr>");
+vim.keymap.set("n", "L", ":bn<cr>");
+
 -- vim.keymap.set("n", "<leader>vwm", function()
 --     require("vim-with-me").StartVimWithMe()
 -- end)
