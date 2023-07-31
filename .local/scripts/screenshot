@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # dependencies: file, notify-send
 # - wayland: grim, slurp, wl-copy, wl-paste
@@ -6,69 +6,86 @@
 
 SCREENSHOT_DIR="$HOME/pix/screenshots"
 FILE=$(date +'%Y%m%d_%H%M%S').png
+SCREENSHOT_PATH=$SCREENSHOT_DIR/$FILE
 
 if [ ! -d $SCREENSHOT_DIR ]; then
-  mkdir -p $SCREENSHOT_DIR
+    mkdir -p $SCREENSHOT_DIR
 fi
 
 function send_notification {
-  notify-send "Screenshot saved" "$SCREENSHOT_DIR/$FILE" -i $SCREENSHOT_DIR/$FILE
-  # notify-send.sh "Screenshot saved" "$SCREENSHOT_DIR/$FILE" -i $SCREENSHOT_DIR/$FILE -d "feh $SCREENSHOT_DIR/$FILE"
+    notify-send "Screenshot saved" "$SCREENSHOT_PATH" -i $SCREENSHOT_PATH
+    # notify-send.sh "Screenshot saved" "$SCREENSHOT_PATH" -i $SCREENSHOT_PATH -d "feh $SCREENSHOT_PATH"
 }
 
 function xorg_screenshot() {
-  maim -s | tee $SCREENSHOT_DIR/$FILE | xclip -selection clipboard -t image/png
+    maim -s | tee $SCREENSHOT_PATH | xclip -selection clipboard -t image/png
 
   # i dont know how to make this better
   # img=$(maim -s) and checking if $img is empty doesnt work
   #
 
-  if $(file $SCREENSHOT_DIR/$FILE | grep -qs "empty"); then
-    rm $SCREENSHOT_DIR/$FILE
+  if $(file $SCREENSHOT_PATH | grep -qs "empty"); then
+      rm $SCREENSHOT_PATH
   else
-    send_notification
+      send_notification
   fi
 }
 
 function wayland_screenshot() {
-  if [ "$1" == "area" ]; then
-    slurpout=$(slurp)
-    if [ -z "$slurpout" ]; then
-      exit
-    else
-      grim -g "$slurpout" - | wl-copy --type image/png && wl-paste > $SCREENSHOT_DIR/$FILE
-      send_notification
+    if [ "$1" == "area" ]; then
+        slurpout=$(slurp)
+        if [ -z "$slurpout" ]; then
+            exit
+        else
+            grim -g "$slurpout" - | wl-copy --type image/png && wl-paste > $SCREENSHOT_PATH
+            send_notification
+        fi
     fi
-  fi
 }
 
 function _screenshot() {
-  case $XDG_SESSION_TYPE in
-    wayland)
-      wayland_screenshot
-      ;;
-    xorg|*)
-      xorg_screenshot
-      ;;
-  esac
+    case $XDG_SESSION_TYPE in
+        wayland)
+            wayland_screenshot
+            ;;
+        xorg|*)
+            xorg_screenshot
+            ;;
+    esac
 }
 
 if [ -z "$1" ]; then
-  _screenshot
-  exit
-fi
-
-set -x
-
-case $1 in
-  --name-prompt|-n)
-    name=$(echo "" | dmenu -p "screenshot name:")
-    if [ -z "$name" ]; then
-      exit
-    fi
-    FILE=$name.png
     _screenshot
-    ;;
-  *)
-    ;;
-esac
+    exit
+else
+    for i in "$@"; do
+        case $i in
+            --name-prompt|-n)
+                name=$(echo "" | dmenu -p "screenshot name:")
+                if [ -z "$name" ]; then
+                    exit
+                fi
+                FILE=$name.png
+                shift
+                ;;
+            --dir=*)
+                SCREENSHOT_DIR="${i#*=}"
+                shift
+                ;;
+            --name=*)
+                FILE="${i#*=}"
+                shift
+                ;;
+            -*|--*)
+                echo "Unknown option $i"
+                exit 1
+                ;;
+            *)
+                exit
+                ;;
+        esac
+    done
+
+    SCREENSHOT_PATH=$SCREENSHOT_DIR/$FILE
+    _screenshot
+fi
