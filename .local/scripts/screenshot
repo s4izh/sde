@@ -24,11 +24,11 @@ function xorg_screenshot() {
   # img=$(maim -s) and checking if $img is empty doesnt work
   #
 
-  if file "$SCREENSHOT_PATH" | grep -qs "empty"; then
-      rm "$SCREENSHOT_PATH"
-  else
-      send_notification
-  fi
+    if file "$SCREENSHOT_PATH" | grep -qs "empty"; then
+        rm "$SCREENSHOT_PATH"
+    else
+        send_notification
+    fi
 }
 
 function wayland_screenshot() {
