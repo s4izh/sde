@@ -16,7 +16,8 @@ return {
   "tanvirtin/monokai.nvim",
   "dylanaraps/wal.vim",
   "phha/zenburn.nvim",
-  "ishan9299/nvim-solarized-lua"
+  "ishan9299/nvim-solarized-lua",
+  "AlexvZyl/nordic.nvim",
   -- "maxmx03/solarized.nvim",
   -- "lifepillar/vim-solarized8",
 }

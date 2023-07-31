@@ -4,7 +4,7 @@ return {
   -- "junegunn/fzf.vim",
   -- "junegunn/fzf",
   "junegunn/goyo.vim",
-  "vim-airline/vim-airline",
+  -- "vim-airline/vim-airline",
   -- "nvim-lualine/lualine.nvim",
   "halkn/ripgrep.vim",
   "github/copilot.vim",
@@ -18,6 +18,7 @@ return {
   'mrcjkb/telescope-manix',
   "editorconfig/editorconfig-vim",
   "lukas-reineke/indent-blankline.nvim",
+  "norcalli/nvim-colorizer.lua",
   -- "mhinz/vim-startify",
   -- "startup-nvim/startup.nvim",
 
