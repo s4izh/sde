@@ -2,8 +2,8 @@
 *foreground: #cdcdcd
 
 ! overlay + muted
-*color0: #26233a
-*color8: #6e6a86
+*color0: #000000
+*color8: #212121
 
 ! red
 *color1: #eb6f92
