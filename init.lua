@@ -7,6 +7,7 @@ require("sergio")
 -- require('lualine').setup()
 
 require('gitsigns').setup()
+require('colorizer').setup()
 
 vim.cmd([[
   autocmd BufNewFile,BufRead ~/.config/sway/config.d/* set filetype=swayconfig
