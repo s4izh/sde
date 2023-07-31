@@ -8,38 +8,36 @@ SCREENSHOT_DIR="$HOME/pix/screenshots"
 FILE=$(date +'%Y%m%d_%H%M%S').png
 SCREENSHOT_PATH=$SCREENSHOT_DIR/$FILE
 
-if [ ! -d $SCREENSHOT_DIR ]; then
-    mkdir -p $SCREENSHOT_DIR
+if [ ! -d "$SCREENSHOT_DIR" ]; then
+    mkdir -p "$SCREENSHOT_DIR"
 fi
 
 function send_notification {
-    notify-send "Screenshot saved" "$SCREENSHOT_PATH" -i $SCREENSHOT_PATH
+    notify-send "Screenshot saved" "$SCREENSHOT_PATH" -i "$SCREENSHOT_PATH"
     # notify-send.sh "Screenshot saved" "$SCREENSHOT_PATH" -i $SCREENSHOT_PATH -d "feh $SCREENSHOT_PATH"
 }
 
 function xorg_screenshot() {
-    maim -s | tee $SCREENSHOT_PATH | xclip -selection clipboard -t image/png
+    maim -s | tee "$SCREENSHOT_PATH" | xclip -selection clipboard -t image/png
 
   # i dont know how to make this better
   # img=$(maim -s) and checking if $img is empty doesnt work
   #
 
-  if $(file $SCREENSHOT_PATH | grep -qs "empty"); then
-      rm $SCREENSHOT_PATH
+  if file "$SCREENSHOT_PATH" | grep -qs "empty"; then
+      rm "$SCREENSHOT_PATH"
   else
       send_notification
   fi
 }
 
 function wayland_screenshot() {
-    if [ "$1" == "area" ]; then
-        slurpout=$(slurp)
-        if [ -z "$slurpout" ]; then
-            exit
-        else
-            grim -g "$slurpout" - | wl-copy --type image/png && wl-paste > $SCREENSHOT_PATH
-            send_notification
-        fi
+    slurpout=$(slurp)
+    if [ -z "$slurpout" ]; then
+        exit
+    else
+        grim -g "$slurpout" - | wl-copy --type image/png && wl-paste > "$SCREENSHOT_PATH"
+        send_notification
     fi
 }
 
@@ -69,7 +67,7 @@ else
             --stdout)
                 STDOUT=true
                 ;;
-            -*|--*)
+            --*|-*)
                 echo "Unknown option $i"
                 exit 1
                 ;;
@@ -80,7 +78,7 @@ else
     _screenshot
 
     if [ "$STDOUT" == "true" ]; then
-        echo $SCREENSHOT_PATH
+        echo "$SCREENSHOT_PATH"
         echo -e "![$FILE](.img/$FILE)\n<!-- $SCREENSHOT_PATH -->"
     fi
 
