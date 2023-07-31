@@ -60,32 +60,28 @@ if [ -z "$1" ]; then
 else
     for i in "$@"; do
         case $i in
-            --name-prompt|-n)
-                name=$(echo "" | dmenu -p "screenshot name:")
-                if [ -z "$name" ]; then
-                    exit
-                fi
-                FILE=$name.png
-                shift
-                ;;
             --dir=*)
                 SCREENSHOT_DIR="${i#*=}"
-                shift
                 ;;
             --name=*)
                 FILE="${i#*=}"
-                shift
+                ;;
+            --stdout)
+                STDOUT=true
                 ;;
             -*|--*)
                 echo "Unknown option $i"
                 exit 1
-                ;;
-            *)
-                exit
                 ;;
         esac
     done
 
     SCREENSHOT_PATH=$SCREENSHOT_DIR/$FILE
     _screenshot
+
+    if [ "$STDOUT" == "true" ]; then
+        echo $SCREENSHOT_PATH
+        echo -e "![$FILE](.img/$FILE)\n<!-- $SCREENSHOT_PATH -->"
+    fi
+
 fi
