@@ -20,8 +20,8 @@ export BROWSER="firefox"
 export READER="zathura"
 # export TERMINAL_PROG="alacritty"
 
-export EDITOR="emacsclient -r -a emacs"
-export VISUAL="emacsclient -r -c -a emacs"
+# export EDITOR="emacsclient -r -a emacs"
+# export VISUAL="emacsclient -r -c -a emacs"
 
 export UNI="$HOME/uni"
 [ -e "$UNI/.env" ] && source "$UNI/.env"
