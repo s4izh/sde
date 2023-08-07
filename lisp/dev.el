@@ -105,3 +105,7 @@
 
 (use-package yasnippet)
 (use-package yasnippet-snippets)
+
+(use-package eldoc-box)
+
+(use-package dts-mode)
