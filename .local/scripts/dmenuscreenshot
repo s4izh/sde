@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# dmenu wrapper for my screenshot script
+
+# tratar caso --from=%s
+
+actions="custom default name select-directory"
+action=$(echo -e "$actions" | dmenu -p "screenshot action:")
+
+[[ -e "/tmp/$(whoami)/current_screenshot_dir" ]] && custom_current_dir=$(cat "/tmp/$(whoami)/current_screenshot_dir")
+
+function _custom() {
+    if [ -z "$custom_current_dir" ]; then
+        custom_current_dir=$(dmenu -p "screenshot directory:")
+    fi
+}
+
+function _name_prompt() {
+    name=$(echo "" | dmenu -p "screenshot name:")
+    if [ -z "$name" ]; then
+        exit
+    fi
+    FILE=$name.png
+}
+
+for i in "$@"; do
+    case $i in
+        --from=*)
+            FROM="${i#*=}"
+            ;;
+        --name)
+            _name_prompt
+            ;;
+        --no-interactive*)
+            NO_INTERACTIVE=1
+            ;;
+        *)
+            ;;
+    esac
+done
+
+# only do the case when no interactive isnt set
+
+if [ -z "$NO_INTERACTIVE" ]; then
+    case $action in
+        custom) _custom
+            ;;
+        default)
+            ;;
+        name)
+            _name_prompt
+            ;;
+        select-directory)
+            DIR=$(dmenu -p "screenshot directory:")
+            ;;
+    esac
+fi
