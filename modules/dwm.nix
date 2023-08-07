@@ -18,10 +18,9 @@
     dwm
     dwmblocks
     dmenu
+    st
     sxhkd
     xorg.xwininfo
-    # st
-    # harfbuzz
   ];
 
 
@@ -33,11 +32,13 @@
       });
       dmenu = prev.dmenu.overrideAttrs (old: {
         src = /home/sergio/.local/src/dmenu ;
-        # src = fetchGit { url = "https://github.com/s4izh/dmenu"; };
       });
       dwmblocks = prev.dwmblocks.overrideAttrs (old: {
         src = /home/sergio/.local/src/dwmblocks ;
-        # src = fetchGit { url = "https://github.com/s4izh/dwmblocks"; };
+      });
+      st = prev.st.overrideAttrs (old: {
+        src = /home/sergio/.local/src/st ;
+        buildInputs = old.buildInputs ++ [ pkgs.harfbuzz ];
       });
     })
   ];
