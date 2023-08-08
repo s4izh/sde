@@ -188,8 +188,7 @@
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
       serif = [ "Source Serif Pro" ];
-      # monospace = [ "Liberation Mono" ];
-      monospace = [ "JetBrains Mono" ];
+      monospace = [ "Liberation Mono" ];
     };
   };
 
