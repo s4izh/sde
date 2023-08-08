@@ -22,24 +22,7 @@
         z390 = lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
-          modules = [
-            ./machines/z390/configuration.nix
-            ./modules/base.nix
-            ./modules/desktop.nix
-            ./modules/dwm.nix
-            # ./modules/stumpwm.nix
-            ./modules/gaming.nix
-            ./modules/virtualisation.nix
-            ./modules/android.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                extraSpecialArgs = { inherit inputs; };
-                users.sergio.imports = [ ./home/sergio/home.nix ];
-              };
-            }
-          ];
+          modules = [ ./machines/z390 ];
         };
         zen = lib.nixosSystem {
           system = "x86_64-linux";
