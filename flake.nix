@@ -3,8 +3,10 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
@@ -15,8 +17,7 @@
         config.allowUnfree = true;
       };
       lib = nixpkgs.lib;
-    in
-    {
+    in {
       nixosConfigurations = {
         z390 = lib.nixosSystem {
           system = "x86_64-linux";
@@ -35,9 +36,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.sergio.imports = [
-                  ./home/sergio/home.nix
-                ];
+                users.sergio.imports = [ ./home/sergio/home.nix ];
               };
             }
           ];
@@ -56,9 +55,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.sergio.imports = [
-                  ./home/sergio/home.nix
-                ];
+                users.sergio.imports = [ ./home/sergio/home.nix ];
               };
             }
           ];
@@ -76,9 +73,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.sergio.imports = [
-                  ./home/sergio/home.nix
-                ];
+                users.sergio.imports = [ ./home/sergio/home.nix ];
               };
             }
           ];
