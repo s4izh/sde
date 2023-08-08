@@ -2,13 +2,9 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+{ inputs, config, pkgs, ... }:
 
+{
   networking.hostName = "z390"; # Define your hostname.
   networking.networkmanager.enable = true;
 
@@ -39,6 +35,4 @@
 
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   hardware.nvidia.modesetting.enable = true;
-
-  system.stateVersion = "23.05";
 }
