@@ -26,22 +26,8 @@
         };
         zen = lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [
-            ./machines/zen/configuration.nix
-            ./modules/base.nix
-            ./modules/desktop.nix
-            ./modules/dwm.nix
-            # ./modules/exwm.nix
-            ./modules/virtualisation.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                extraSpecialArgs = { inherit inputs; };
-                users.sergio.imports = [ ./home/sergio/home.nix ];
-              };
-            }
-          ];
+          specialArgs = { inherit inputs; };
+          modules = [ ./machines/zen ];
         };
         # TODO specific vm config
         vm = lib.nixosSystem {
