@@ -27,6 +27,10 @@ indent_size = 4
 indent_style = tab
 indent_size = 4
 
+[*.nix]
+indent_style = space
+indent_size = 2
+
 # Tab indentation (no size specified)
 [Makefile]
 indent_style = tab
