@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
-let
-  dotfiles = /home/sergio/.dotfiles;
-in
-{
+let dotfiles = /home/sergio/.dotfiles;
+in {
   home.packages = with pkgs; [
     tmux
     fzf
@@ -24,10 +22,12 @@ in
     enable = true;
     configFile."git/config".source = "${dotfiles}/.config/git/config";
     configFile."dunst/dunstrc".source = "${dotfiles}/.config/dunst/dunstrc";
-    configFile."picom/picom.conf".source = "${dotfiles}/.config/picom/picom.conf";
+    configFile."picom/picom.conf".source =
+      "${dotfiles}/.config/picom/picom.conf";
     configFile."sxhkd/sxhkdrc".source = "${dotfiles}/.config/sxhkd/sxhkdrc";
     configFile."mimeapps.list".source = "${dotfiles}/.config/mimeapps.list";
-    configFile."libvirt/libvirt.conf".source = "${dotfiles}/.config/libvirt/libvirt.conf";
+    configFile."libvirt/libvirt.conf".source =
+      "${dotfiles}/.config/libvirt/libvirt.conf";
     configFile."tmux/tmux.conf".source = "${dotfiles}/.config/tmux/tmux.conf";
     # configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
     # configFile."user-dirs.locale".source = "${dotfiles}/.config/user-dirs.locale";
@@ -47,16 +47,23 @@ in
 
   home.file.".editorconfig".source = "${dotfiles}/.editorconfig";
 
-# programs.git = {
-#   enable = true;
-#   userName = "s4izh";
-#   userEmail = "sergiosanz234@gmail.com";
-#   extraConfig = {
-#     init = {
-#       defaultBranch = "main";
-#     };
-#   };
-# };
+  # xdg.mimeApps.defaultAplications = {
+  #   "text/plain" = [ "nvim.desktop" ];
+  #   # "aplication/pdf" = [ "zathura.desktop" ];
+  #   "image/*" = [ "sxiv.desktop" ];
+  #   "video/*" = [ "mpv.desktop" ];
+  # };
+
+  # programs.git = {
+  #   enable = true;
+  #   userName = "s4izh";
+  #   userEmail = "sergiosanz234@gmail.com";
+  #   extraConfig = {
+  #     init = {
+  #       defaultBranch = "main";
+  #     };
+  #   };
+  # };
 
   # home.sessionVariables = {
   #   HISTFILE = "{xdg.dataHome}/bash/bash_history";
@@ -101,7 +108,7 @@ in
   #   dunst.configFile = "${dotfiles}/.config/dunst/dunstrc";
   # };
 
-# xdg.configFile.<name>.recursive
+  # xdg.configFile.<name>.recursive
 
   # home.file.".ssh/config".source = ./.ssh/config;
 
@@ -169,17 +176,12 @@ in
     };
     gtk3.extraConfig = { gtk-application-prefer-dark-theme = true; };
     gtk4.extraConfig = { gtk-application-prefer-dark-theme = true; };
-    gtk3.bookmarks = [
-      "file:///home/sergio/uni/3q2"
-      "file:///home/sergio/pkm"
-      "file:///mnt"
-    ];
+    gtk3.bookmarks =
+      [ "file:///home/sergio/uni/3q2" "file:///home/sergio/pkm" "file:///mnt" ];
   };
 
   dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
+    "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
     # "org/gnome/desktop/wm/preferences" = {
     #   button-layout = "appmenu";
     # };
@@ -203,13 +205,15 @@ in
         "$c"
         "$golang"
         "$status"
-        "\n$character"
+        ''
+
+          $character''
       ];
     };
   };
 
-# programs.direnv.enable = true;
-# programs.direnv.nix-direnv.enable = true;
+  # programs.direnv.enable = true;
+  # programs.direnv.nix-direnv.enable = true;
 
   home.stateVersion = "23.05";
 }
