@@ -194,6 +194,9 @@
 
   networking.extraHosts = builtins.readFile /home/sergio/.dotfiles/etc/hosts;
 
+  # xdg.portal.enable = true;
+  # xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+
   # system.userActivationScripts.alacrittyLink.text = ''
   #   if [[ ! -h "$HOME/.config/alacritty" ]]; then
   #     ln -s "$HOME/.dotfiles/.config/alacritty" "$HOME/.config/alacritty"
