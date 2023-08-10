@@ -1,5 +1,9 @@
 super + e
-      emacsclient -c -a emacs
+    emacsclient -c -a emacs
 
 super + shift + s
-      screenshot
+    screenshot
+
+super + n
+    alacritty --class "notes,notes" -e tmux-sessionizer ~/notes
+
