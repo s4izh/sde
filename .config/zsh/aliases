@@ -140,4 +140,5 @@ alias \
 
 # extra
 alias extip="curl icanhazip.com"
+alias xclipb="xclip -selection clipboard"
 
