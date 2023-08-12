@@ -88,7 +88,7 @@ function etc_hosts() {
     # http://sbc.io/hosts/alternates/fakenews-gambling-porn-social/hosts
     # wget -O /tmp/etc-hosts --progress=bar https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts
     # sudo cat /tmp/etc-hosts >> /etc/hosts
-    sudo cat "$DOTDIR"/etc/hosts >> /etc/hosts
+    cat "$DOTDIR"/etc/hosts >> /etc/hosts
 }
 
 function common() {
