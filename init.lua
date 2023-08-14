@@ -53,6 +53,12 @@ autocmd({"BufWritePre"}, {
   command = [[LspZeroFormat]],
 })
 
+autocmd({"BufWritePre"}, {
+  group = SergioGroup,
+  pattern = "*.go",
+  command = [[LspZeroFormat]],
+})
+
 -- this is from Gavin Freeborn
 vim.cmd([[
 function! Statusline_expr()
