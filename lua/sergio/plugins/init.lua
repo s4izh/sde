@@ -19,6 +19,7 @@ return {
   "editorconfig/editorconfig-vim",
   "lukas-reineke/indent-blankline.nvim",
   "norcalli/nvim-colorizer.lua",
+  "tpope/vim-dispatch",
   -- "mhinz/vim-startify",
   -- "startup-nvim/startup.nvim",
 
