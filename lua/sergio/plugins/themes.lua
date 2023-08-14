@@ -18,7 +18,11 @@ return {
   "phha/zenburn.nvim",
   "ishan9299/nvim-solarized-lua",
   "AlexvZyl/nordic.nvim",
-  "eemed/sitruuna.vim",
+  -- "eemed/sitruuna.vim",
+  -- "xero/miasma.nvim",
+  "savq/melange-nvim",
+  "doums/darcula",
+  -- "mswift42/vim-themes"
   -- "maxmx03/solarized.nvim",
   -- "lifepillar/vim-solarized8",
 }
