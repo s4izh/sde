@@ -12,4 +12,4 @@ end
 
 -- vim.opt.background = "light"
 
-ColorMyPencils("gruvbox")
+ColorMyPencils("sitruuna")
