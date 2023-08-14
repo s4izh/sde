@@ -41,6 +41,18 @@ local opts = {
                 }
             }
         })
+        lsp.configure('gopls', {
+            settings = {
+                gopls = {
+                    completeUnimported = true,
+                    usePlaceholders = true,
+                    analyses = {
+                        unusedparams = true,
+                    },
+                    staticcheck = true,
+                },
+            },
+        })
         local cmp = require('cmp')
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
         local cmp_mappings = lsp.defaults.cmp_mappings({
