@@ -6,12 +6,16 @@ pkgs.mkShell {
     git-crypt
     nixFlakes
     gnumake
+    tmux
+    neovim
   ];
 
   shellHook = ''
-      echo "make help"
-      PATH=${pkgs.writeShellScriptBin "nix" ''
+    echo "make help"
+    PATH=${
+      pkgs.writeShellScriptBin "nix" ''
         ${pkgs.nixFlakes}/bin/nix --experimental-features "nix-command flakes" "$@"
-      ''}/bin:$PATH
-    '';
+      ''
+    }/bin:$PATH
+  '';
 }
