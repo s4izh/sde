@@ -26,7 +26,9 @@ src-dependencies:
 	@if [ ! -d $(SRC_DIR)/dwm ]; then git clone https://github.com/s4izh/dwm.git $(SRC_DIR)/dwm; fi
 	@if [ ! -d $(SRC_DIR)/dmenu ]; then git clone https://github.com/s4izh/dmenu.git $(SRC_DIR)/dmenu; fi
 	@if [ ! -d $(SRC_DIR)/dwmblocks ]; then git clone https://github.com/s4izh/dwmblocks.git $(SRC_DIR)/dwmblocks; fi
-	@if [ ! -d $(HOME)/.config/nvim ]; then git clone https://github.com/s4izh/nvim.git $(SRC_DIR)/nvim; fi
+	@if [ ! -d $(SRC_DIR)/st ]; then git clone https://github.com/s4izh/st.git $(SRC_DIR)/st; fi
+	@if [ ! -d $(HOME)/.config/nvim ]; then git clone https://github.com/s4izh/nvim.git $(HOME)/.config/nvim; fi
+	@if [ ! -d $(HOME)/.dotfiles ]; then git clone https://github.com/s4izh/.dotfiles.git $(HOME)/.dotfiles; fi
 create-softlinks:
 	@if [ ! -h $(HOME)/.config/alacritty ]; then\
 		ln -sf $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
@@ -36,3 +38,5 @@ create-softlinks:
 		ln -sf $(DOTFILES)/.config/zsh $(HOME)/.config/zsh; fi
 	@if [ ! -h $(HOME)/.zprofile ]; then\
 		ln -sf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.zprofile; fi
+	@if [ ! -h $(HOME)/.xinitrc ]; then\
+		ln -sf $(DOTFILES)/.xinitrc $(HOME)/.xinitrc; fi
