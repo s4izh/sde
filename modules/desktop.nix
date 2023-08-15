@@ -182,13 +182,15 @@
     source-serif-pro # Source Serif Pro
     unifont # Unifont
     fantasque-sans-mono # Fantasque Sans Mono
+    # (nerdfonts.override { fonts = [ "LiterationMono Nerd Font Mono" ]; })
+    nerdfonts
   ];
 
   fonts.fontconfig = {
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
       serif = [ "Source Serif Pro" ];
-      monospace = [ "Liberation Mono" ];
+      monospace = [ "LiterationMono Nerd Font Mono" ];
     };
   };
 
