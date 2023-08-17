@@ -49,6 +49,9 @@
 (use-package yaml-mode
   :mode "\\.yml\\'")
 
+(use-package zig-mode
+  :mode "\\.zig\\'")
+
 (use-package toml-mode)
 
 (use-package json-mode)
