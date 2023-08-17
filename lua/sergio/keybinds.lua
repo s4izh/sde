@@ -138,3 +138,6 @@ vim.keymap.set("n", "<Leader>dr", ":DapContinue <cr>")
 vim.keymap.set("n", "<Leader>ds", ":DapStepOver <cr>")
 vim.keymap.set("n", "<Leader>di", ":DapStepInto <cr>")
 vim.keymap.set("n", "<Leader>do", ":DapStepOut <cr>")
+
+vim.keymap.set("n", "<Leader>m", ":Make<cr>")
+
