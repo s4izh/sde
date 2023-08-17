@@ -473,3 +473,7 @@
 
 (global-set-key (kbd "C-x k") 'my/kill-current-buffer)
 (keymap-global-set "C-x k" 'my/kill-current-buffer)
+
+(use-package treesit-auto
+  :config
+  (global-treesit-auto-mode))
