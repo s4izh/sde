@@ -100,6 +100,7 @@
       nil)
     "Non-nil value if this is my work system."))
 
+
 (unless my/is-guix
   (setq use-package-always-ensure t))
 
@@ -110,6 +111,9 @@
 
 (load (concat user-emacs-directory
               "lisp/system.el"))
+
+(load (concat user-emacs-directory
+              "lisp/appearance.el"))
 
 (use-package undo-fu
   :bind (("C-x u"   . undo-fu-only-undo)
@@ -168,9 +172,6 @@
 
 ;; (load (concat user-emacs-directory
 ;;               "lisp/modeline.el"))
-
-(load (concat user-emacs-directory
-              "lisp/appearance.el"))
 
 
 (use-package dired

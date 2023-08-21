@@ -182,6 +182,8 @@
   )
 
 (use-package org-roam
+  :defer t
+  :disabled t
   ;;:ensure t
   ;; :bind (("C-c r l" . org-roam-buffer-toggle)
   ;;        ("C-c r f" . org-roam-node-find)
@@ -222,22 +224,35 @@
       :target (headline "* Captures")
       :immediate-finish t
       :unnarrowed t)
-     )))
+     ))
+  :config
+  (cl-defmethod org-roam-node-type ((node org-roam-node))
+    "Return the TYPE of NODE."
+    (condition-case nil
+        (file-name-nondirectory
+         (directory-file-name
+          (file-name-directory
+           (file-relative-name (org-roam-node-file node) org-roam-directory))))
+      (error "")))
 
-(setq org-roam-node-display-template
-      (concat "${title:*} "
-              (propertize "${tags:10}" 'face 'org-tag)))
+  (setq org-roam-node-display-template
+        (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag))))
 
-(ss/leader-key-def
-  ;; "or" '(ignore t :which-key "roam")
-  "rb" '(org-roam-buffer-toggle :which-key "buffer toggle")
-  "rc" '(org-roam-capture :which-key "roam capture")
-  "rf" '(org-roam-node-find :which-key "node find")
-  "ri" '(org-roam-node-insert :which-key "node insert")
-  "rI" '(org-roam-node-insert-immediate :which-key "node insert immediate")
-  "ru" '(org-roam-db-sync :which-key "sync roam db"))
+;; (setq org-roam-node-display-template
+;;       (concat "${title:*} "
+;;               (propertize "${tags:10}" 'face 'org-tag))))
+
+;; (ss/leader-key-def
+;;   ;; "or" '(ignore t :which-key "roam")
+;;   "rb" '(org-roam-buffer-toggle :which-key "buffer toggle")
+;;   "rc" '(org-roam-capture :which-key "roam capture")
+;;   "rf" '(org-roam-node-find :which-key "node find")
+;;   "ri" '(org-roam-node-insert :which-key "node insert")
+;;   "rI" '(org-roam-node-insert-immediate :which-key "node insert immediate")
+;;   "ru" '(org-roam-db-sync :which-key "sync roam db"))
 
 (use-package org-roam-ui
+  :disabled t
   :after org-roam
   ;;:ensure t
   ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
@@ -251,17 +266,6 @@
         org-roam-ui-open-on-start t))
 
 ;; show folder on display
-(cl-defmethod org-roam-node-type ((node org-roam-node))
-  "Return the TYPE of NODE."
-  (condition-case nil
-      (file-name-nondirectory
-       (directory-file-name
-        (file-name-directory
-         (file-relative-name (org-roam-node-file node) org-roam-directory))))
-    (error "")))
-
-(setq org-roam-node-display-template
-      (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
 
 ;; (custom-set-variables
  ;; '(org-agenda-files (list "~/notes/projects" "~/notes/uni" "~/notes/inbox.org")))
@@ -310,7 +314,8 @@
    'org-babel-load-languages
    '((restclient . t))))
 
-(use-package ob-rust) ;; cargo install rust-script too
+(use-package ob-rust
+  :disabled t) ;; cargo install rust-script too
 
 (use-package ob-async)
 
@@ -341,5 +346,6 @@
 
 
 (use-package toc-org
+  :defer t
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
