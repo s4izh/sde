@@ -1,67 +1,49 @@
-(use-package lsp-mode
-  ;; :ensure t
-  ;; :hook((lsp-mode . corfu-mode))
-  :config
-  (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
-  (lsp-enable-which-key-integration t))
-  ;; :custom (lsp-headerline-breadcrumb-enable nil))
-
 (setq c-default-style "linux"
-          c-basic-offset 4)
+  c-basic-offset 4)
 
-(use-package lsp-ui
-  ;;:straight t
-  :hook (lsp-mode . lsp-ui-mode)
-  :config
-  (setq lsp-ui-sideline-enable t)
-  ;; (setq lsp-ui-sideline-show-hover nil)
-  ;; (setq lsp-ui-doc-position 'bottom)
-  (lsp-ui-doc-show))
+(use-package flycheck
+  :defer t)
 
-(ss/leader-key-def
-  "l"  '(:ignore t :which-key "lsp")
-  "ld" 'xref-find-definitions
-  "lr" 'xref-find-references
-  ;; "ln" 'lsp-ui-find-next-reference
-  ;; "lp" 'lsp-ui-find-prev-reference
-  ;; "lw" 'lsp-ivy-workspace-symbol
-  ;; "ls" 'counsel-imenu
-  ;; "le" 'lsp-ui-flycheck-list
-  ;; "lS" 'lsp-ui-sideline-mode
-  "la" 'lsp-execute-code-action)
+(use-package eglot
+  :defer t)
 
-(use-package flycheck)
+;; (use-package rust-ts-mode
+;;   :mode ("\\.rs\\'" . rust-ts-mode)
+;;   :hook ((rust-ts-mode . flycheck-mode)
+;;          (rust-ts-mode . eglot-ensure)))
 
 (use-package rust-mode
-  :hook ((rust-mode . flycheck-mode))
-         ;; (rust-mode . lsp-deferred))
+  :defer t
+  :mode ("\\.rs\\'" . rust-mode)
+  :hook ((rust-mode . flycheck-mode)
+          (rust-mode . eglot-ensure))
   :init (setq rust-format-on-save t))
-
-(setq lsp-completion-provider :none)
-(defun corfu-lsp-setup ()
-  (setq-local completion-styles '(orderless)
-              completion-category-defaults nil))
-(add-hook 'lsp-mode-hook #'corfu-lsp-setup)
 
 (use-package nix-mode
   :mode "\\.nix\\'")
 
 (use-package yaml-mode
+  :defer t
   :mode "\\.yml\\'")
 
 (use-package zig-mode
+  :defer t
   :mode "\\.zig\\'")
 
-(use-package toml-mode)
+(use-package toml-mode
+  :defer t)
 
-(use-package json-mode)
+(use-package json-mode
+  :defer t)
 
 (use-package docker
   :bind ("C-c d" . docker))
 
-(use-package dockerfile-mode)
+(use-package dockerfile-mode
+  :defer t)
 
-(use-package systemd)
+(use-package systemd
+  :defer t)
 
 (use-package direnv
   :config
@@ -71,11 +53,11 @@
   :config
   (editorconfig-mode 1))
 
-
-(use-package bitbake)
+(use-package bitbake
+  :defer t)
 
 (setq treesit-language-source-alist
-   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+  '((bash "https://github.com/tree-sitter/tree-sitter-bash")
      (cmake "https://github.com/uyha/tree-sitter-cmake")
      (c "https://github.com/tree-sitter/tree-sitter-c")
      (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
@@ -93,22 +75,27 @@
      (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
      (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
-(use-package multi-compile)
+(use-package multi-compile
+  :defer t)
 
 (setq multi-compile-alist '(
-                               ("*scratch*" . (("print-hello" . "echo 'hello'")
-                                                  ("otra cosa" . "echo 'otra cosa'")))
-                               (rust-mode . (("rust-run" . "cargo run")
-                                                ("rust-clippy" . "cargo clippy")
-                                                ("rust-check" . "cargo check")
-                                                ("rust-test" . "cargo test")
-                                                ("rust-release" . "cargo run --release")))
-                               ("\\.*" . (("compiler" . "compiler %file-name")))
-                               ))
+                             ("*scratch*" . (("print-hello" . "echo 'hello'")
+                                              ("otra cosa" . "echo 'otra cosa'")))
+                             (rust-mode . (("rust-run" . "cargo run")
+                                            ("rust-clippy" . "cargo clippy")
+                                            ("rust-check" . "cargo check")
+                                            ("rust-test" . "cargo test")
+                                            ("rust-release" . "cargo run --release")))
+                             ("\\.*" . (("compiler" . "compiler %file-name")))
+                             ))
 
-(use-package yasnippet)
-(use-package yasnippet-snippets)
+(use-package yasnippet
+  :defer t)
+(use-package yasnippet-snippets
+  :defer t)
 
-(use-package eldoc-box)
+(use-package eldoc-box
+  :defer t)
 
-(use-package dts-mode)
+(use-package dts-mode
+  :defer t)
