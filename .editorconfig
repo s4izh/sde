@@ -18,6 +18,10 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 
+[*.el]
+indent_style = space
+indent_size = 2
+
 # 4 space indentation
 [*.{c,cpp,h,cc,hh}]
 indent_style = space
