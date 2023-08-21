@@ -22,6 +22,8 @@ return {
   -- "xero/miasma.nvim",
   "savq/melange-nvim",
   "doums/darcula",
+  "mcchrish/zenbones.nvim",
+  "thimc/gruber-darker.nvim",
   -- "mswift42/vim-themes"
   -- "maxmx03/solarized.nvim",
   -- "lifepillar/vim-solarized8",
