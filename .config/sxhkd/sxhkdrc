@@ -14,7 +14,7 @@ super + g
     alacritty -e repo
 
 super + v
-  alacritty --class volumen,volumen -e pulsemixer
+    alacritty --class volumen,volumen -e pulsemixer
 
 super + shift + i
   alacritty --class inbox,inbox -e nvim ~/notes/index.md
@@ -53,7 +53,7 @@ super + alt + s
     feh --bg-fill $(find ~/pix/wall -type f | shuf -n 1)
 
 super + e
-    emacsclient -c -a emacs
+    launch_emacs
 
 super + shift + e
     killall emacs && twmnc -t emacs -c "killed all emacs instances  "
