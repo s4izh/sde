@@ -118,7 +118,8 @@ local opts = {
                 -- {name = 'cmp_pandoc', keyword_length = 2},
             }
         })
-    end
+    end,
+    -- 'simrat39/rust-tools.nvim',
 }
 
 return opts
