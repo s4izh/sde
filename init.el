@@ -168,11 +168,11 @@
       `((".*" . ,temporary-file-directory)))
 
 (setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t))) (load custom-file 'noerror 'nomessage)
+  `((".*" ,temporary-file-directory t)))
+(load custom-file 'noerror 'nomessage)
 
 ;; (load (concat user-emacs-directory
 ;;               "lisp/modeline.el"))
-
 
 (use-package dired
   :ensure nil
