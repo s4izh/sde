@@ -63,7 +63,7 @@
 
 (use-package ef-themes)
 
-(use-package gruber-darker)
+(use-package gruber-darker-theme)
 
 (setq my/current-theme 'ef-night)
 (setq custom-safe-themes t)
