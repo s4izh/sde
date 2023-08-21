@@ -29,6 +29,8 @@
     ;; (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-12")) ;; arch
     (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12")) ;; arch
 )
+    ;; (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-12")) ;; arch
+;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12")) ;; arch
 
 (setq locale-coding-system 'utf-8)
 (set-face-attribute 'default nil :height 120)
@@ -50,7 +52,8 @@
 
 ;; (load-theme 'modus-operandi)
 
-(use-package doom-themes)
+(use-package doom-themes
+  :defer t)
 
 (use-package spaceway-theme
   ;; :disabled t
@@ -61,7 +64,8 @@
   (set-cursor-color "#dc322f"))
   ;; (load-theme 'spaceway t))
 
-(use-package ef-themes)
+(use-package ef-themes
+  :defer t)
 
 (use-package gruber-darker-theme)
 
@@ -136,8 +140,8 @@
 
 ;; (use-package color-theme-modern)
 
-(use-package keycast)
+;; (use-package keycast)
 
-(use-package highlight-indent-guides
-    :config
-    (setq highlight-indent-guides-method 'character))
+;; (use-package highlight-indent-guides
+;;     :config
+;;     (setq highlight-indent-guides-method 'character))

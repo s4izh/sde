@@ -10,14 +10,14 @@
     ("org" . "https://orgmode.org/elpa/")
     ("elpa" . "https://elpa.gnu.org/packages/")))
 
-(package-initialize)
+;; (package-initialize)
 
 ;; (setq use-package-always-ensure t)
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile (require 'use-package))
+;; (unless (package-installed-p 'use-package)
+;;   (package-refresh-contents)
+;;   (package-install 'use-package))
+;; (eval-when-compile (require 'use-package))
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -188,8 +188,8 @@
   (setq dired-listing-switches "-aghoA --group-directories-first")
   ;; (setq dired-listing-switches "--group-directories-first")
   ;;;;; Hide . and .. in dired
-  (setq dired-omit-files
-        (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..*$"))
+  ;; (setq dired-omit-files
+  ;;       (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..*$"))
 
   ;; When there are two Dired buffers side-by-side make Emacs
   ;; automatically suggest the other one as the target of copy or rename
@@ -246,6 +246,7 @@
 
 ;;; MAGIT
 (use-package magit
+  :defer t
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
@@ -253,18 +254,18 @@
 ;;   :ensure t
 ;;   :after magit)
 
-(use-package magit-delta
-  :disabled t
-  :ensure t
-  :hook (magit-mode . magit-delta-mode))
+;; (use-package magit-delta
+;;   :disabled t
+;;   :ensure t
+;;   :hook (magit-mode . magit-delta-mode))
 
 ;;; parenthesis
 (use-package smartparens
   :hook (prog-mode . smartparens-mode))
 
-(use-package rainbow-delimiters
-  :init
-  :hook (prog-mode . rainbow-delimiters-mode))
+;; (use-package rainbow-delimiters
+;;   :init
+;;   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; remove trailing whitespaces
 (use-package ws-butler
@@ -380,6 +381,7 @@
 ;;               "lisp/guix.el"))
 
 (use-package pdf-tools
+  :defer t
   :config
   (pdf-tools-install))
 
@@ -452,7 +454,7 @@
   (make-local-variable 'after-save-hook)
   (add-hook 'after-save-hook 'my/compiler))
 
-(use-package stumpwm-mode)
+;; (use-package stumpwm-mode)
 
 (defun create-tags (dir-name)
   "Create tags file."
@@ -474,6 +476,7 @@
 (global-set-key (kbd "C-x k") 'my/kill-current-buffer)
 (keymap-global-set "C-x k" 'my/kill-current-buffer)
 
-(use-package treesit-auto
-  :config
-  (global-treesit-auto-mode))
+;; (use-package treesit-auto
+;;   :ensure t
+;;   :config
+;;   (global-treesit-auto-mode))
