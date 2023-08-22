@@ -30,8 +30,9 @@
     vimv
     wget
     git
-    pciutils
-    usbutils
+    pciutils # lspci setpci
+    usbutils # lsusb
+    lshw
     file
     neofetch
     gnumake
