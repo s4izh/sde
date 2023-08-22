@@ -45,6 +45,7 @@
     # clang-wrapper
 
     # -- rust tooling --
+    rustup
     cargo
     cargo-watch
     cargo-make
