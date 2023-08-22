@@ -169,15 +169,15 @@ in {
       package = pkgs.qogir-icon-theme;
     };
     font = {
-      # name = "Liberation Mono";
-      name = "JetBrains Mono";
+      name = "LiterationMono Nerd Font";
+      # name = "Iosevka Nerd Font Mono";
       #package = pkgs.rubik;
-      size = 11;
+      size = 10;
     };
     gtk3.extraConfig = { gtk-application-prefer-dark-theme = true; };
     gtk4.extraConfig = { gtk-application-prefer-dark-theme = true; };
     gtk3.bookmarks =
-      [ "file:///home/sergio/uni/3q2" "file:///home/sergio/pkm" "file:///mnt" ];
+      [ "file:///home/sergio/uni/4q1" "file:///home/sergio/notes" "file:///mnt" ];
   };
 
   dconf.settings = {
