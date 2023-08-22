@@ -24,6 +24,11 @@
           specialArgs = { inherit inputs; };
           modules = [ ./machines/z390 ];
         };
+        rx = lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [ ./machines/rx ];
+        };
         zen = lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
