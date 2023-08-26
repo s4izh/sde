@@ -57,10 +57,9 @@ zsh_add_completion "esc/conda-zsh-completion" false
 # bindkey -s '^n' 'tmux-notes^M'
 bindkey '^R' history-incremental-search-backward
 
-# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 # eval "$(starship init zsh)"
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+# [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 
 # [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
 
@@ -69,8 +68,14 @@ bindkey '^R' history-incremental-search-backward
 # zle -N up-line-or-beginning-search
 # zle -N down-line-or-beginning-search
 
-[ -e /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+# via package manager
+[ -e /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -e /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+
+export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+
+# via git upstream download
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(direnv hook zsh)"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
