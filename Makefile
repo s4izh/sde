@@ -10,6 +10,7 @@ SRCDIR=$(HOME)/.local/src
 DOTDIR=$(HOME)/.dotfiles
 BOOTSTRAP=@bash $(DOTDIR)/archlinux/bootstrap
 MYGIT=git clone https://github.com/s4izh
+SYSTEMD_ENABLE	:= sudo systemctl --now enable
 
 .DEFAULT_GOAL := help
 
@@ -101,20 +102,24 @@ share:
 	@if [ -h $(HOME)/.local/share/sergio ]; then $(RM) $(HOME)/.local/share/sergio; fi
 	$(LNDIR) $(PWD)/.local/share/sergio $(HOME)/.local/share/sergio
 
-libvirt: ## virtualisation utils
+libvirtd: ## virtualisation utils
 	sudo pacman --needed -S qemu-full bridge-utils libvirt virt-manager \
         dhclient openbsd-netcat dnsmasq dmidecode ebtables \
         bridge-utils iptables-nft virt-install virt-manager virt-viewer
 	@if ! [ -d $(HOME)/.config/libvirt ]; then mkdir $(HOME)/.config/libvirt; fi
 	@if [ -h $(HOME)/.config/libvirt/libvirt.conf ]; then $(RM) $(HOME)/.config/libvirt/libvirt.conf; fi
-	$(LN) $(PWD)/.config/libvirt/libvirt.conf $(XDG_CONFIG_HOME)/libvirt/libvirt.conf
+	$(LN) $(PWD)/.config/libvirt/libvirt.conf $(HOME)/.config/libvirt/libvirt.conf
 	sudo usermod -aG libvirt $(USER)
-	sudo systemctl enable libvirtd
-	sudo systemctl start libvirtd
+	$(SYSTEMD_ENABLE) $@.service
+
+docker: ## docker initial setup
+	$(PKGINSTALL) $@ $@-compose $@-buildx
+	sudo usermod -aG $@ ${USER}
+	$(SYSTEMD_ENABLE) $@.service
 
 suckless: dwm dwmblocks dmenu ## my suckless software forks (dwm, dwmblocks, dmenu)
 
-dwm-deploy: dirs zsh suckless x11 xinitrc sxhkd nvim alacritty tmux git ## deploy all desktop with dwm
+dwm-deploy: dirs zsh suckless x11 xinitrc sxhkd nvim alacritty tmux git paru ## deploy all desktop with dwm
 
 .PHONY: https-to-ssh
 https-to-ssh:
@@ -126,3 +131,14 @@ fix-keys: ## use when keys break
 
 pacmancolors:
 	sudo sed -i "s/^#Color/Color/" /etc/pacman.conf
+
+docker_image: docker
+	docker build -t dotfiles ${PWD}
+
+.ONESHELL:
+test: docker_image ## test this Makefile with docker without backup directory
+	docker run -it --name make$@ -d dotfiles:latest /bin/bash
+	for target in dwm-deploy libvirt docker; do
+		docker exec -it make$@ sh -c "cd ${PWD}; make $${target}"
+	done
+
