@@ -1,0 +1,21 @@
+#!/bin/sh
+
+DOTDIR="$HOME/.dotfiles"
+
+mkdir -p "$HOME/.config"
+
+which zsh > /dev/null 2>&1
+
+if [ $? -eq 1 ]; then
+    sudo pacman --noconfirm --needed -S zsh
+fi
+
+if [ "$SHELL" != "/usr/bin/zsh" ]; then
+    chsh -s /usr/bin/zsh
+fi
+
+if [ -h $HOME/.config/zsh ]; then
+    rm $HOME/.config/zsh
+fi
+
+ln -sfv $DOTDIR/.config/zsh $HOME/.config/zsh
