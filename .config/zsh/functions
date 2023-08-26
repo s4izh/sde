@@ -236,3 +236,7 @@ function ghp () {
 function lncf () {
     ln -svf ~/.dotfiles/.config/$1 ~/.config/$1
 }
+
+function ffmpegcut () {
+    ffmpeg -i $1 -ss $2 -t $3 -c:v copy -c:a copy $4
+}
