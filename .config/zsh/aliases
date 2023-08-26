@@ -142,3 +142,5 @@ alias \
 alias extip="curl icanhazip.com"
 alias xclipb="xclip -selection clipboard"
 
+alias git-https-ssh="sed -i 's#https://github.com/s4izh#git@github.com:s4izh#'" .git/config
+
