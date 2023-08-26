@@ -1,0 +1,17 @@
+#!/bin/sh
+
+mkdir -p $HOME/.local/src
+PARU_DIR=$HOME/.local/src/paru
+
+which paru > /dev/null 2>&1
+
+if [ $? -eq 0 ]; then
+    echo "paru is already installed"
+    exit 0
+fi
+
+sudo pacman --noconfirm --needed -S rustup
+rustup default stable
+git clone https://aur.archlinux.org/paru.git $PARU_DIR
+cd $PARU_DIR && makepkg -si
+exit 0
