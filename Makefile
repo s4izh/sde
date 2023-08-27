@@ -5,7 +5,7 @@ RM				:= rm -v
 SUDO_LN			:= sudo -E ln -vsf
 LNDIR			:= @ln -vsf
 PKGINSTALL		:= sudo pacman --noconfirm --needed -S
-AURINSTALL		:= paru --noconfirm --needed -S
+AURINSTALL		:= paru --needed -S
 PKGRM			:= sudo pacman -Rns
 SRCDIR			:= $(HOME)/.local/src
 MYGIT			:= git clone https://github.com/s4izh
@@ -17,10 +17,17 @@ BASE_PKGS		+= pciutils psmisc shadow util-linux bzip2 gzip xz licenses pacman sy
 BASE_PKGS		+= iputils iproute2 autoconf sudo automake binutils bison fakeroot flex gcc groff libtool m4
 BASE_PKGS		+= make patch pkgconf texinfo which
 
-PKGS			:= fzf direnv
-DESKTOP_PKGS	:= firefox
-#AUR_PKGS		:=
+UTILS_PKGS		:= fzf direnv zip unzip neofetch tree
 
+DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
+DESKTOP_PKGS	+= mpv figlet
+
+AUR_PKGS		:= nwg-look-bin
+
+FONT_PKGS		:= ttf-liberation-mono-nerd xdg-utils
+
+ZEN_PKGS		:= amd-ucode xf86-video-amdgpu xf86-video-ati
+RX_PKGS			:= intel-ucode
 
 .DEFAULT_GOAL	:= help
 
@@ -39,6 +46,9 @@ backup: ## backup arch linux packages
 # pkgs
 pkgs-base: ## base pkgs
 	$(PKGINSTALL) $(BASE_PKGS)
+
+pkgs-utils: ## package useful no have available, no desktop specific
+	$(PKGINSTALL) $(PKGS)
 
 pkgs-desktop: ## desktop pkgs
 	$(PKGINSTALL) $(DESKTOP_PKGS)
