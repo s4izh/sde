@@ -20,11 +20,11 @@ BASE_PKGS		+= make patch pkgconf texinfo which usbutils
 UTILS_PKGS		:= fzf direnv zip unzip neofetch tree
 
 DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
-DESKTOP_PKGS	+= mpv figlet
+DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
 
 AUR_PKGS		:= nwg-look-bin
 
-FONT_PKGS		:= ttf-liberation-mono-nerd xdg-utils
+FONT_PKGS		:= ttf-liberation-mono-nerd
 
 ZEN_PKGS		:= amd-ucode xf86-video-amdgpu xf86-video-ati
 RX_PKGS			:= intel-ucode xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon
@@ -148,7 +148,7 @@ libvirtd: audio ## virtualisation utils
 	sudo usermod -aG libvirt $(USER)
 	$(SYSTEMD_ENABLE) $@.service
 
-docker: ## docker initial setup
+docker: ## docker setup and utils
 	$(PKGINSTALL) $@ $@-compose $@-buildx
 	sudo usermod -aG $@ ${USER}
 	$(SYSTEMD_ENABLE) $@.service
@@ -160,7 +160,7 @@ scripts:
 gaming: ## gaming utils
 	sudo pacman --needed -S steam lutris
 
-audio:
+audio: ## audio utils
 	$(PKGINSTALL) pipewire pipewire-pulse wireplumber
 
 desktop: base audio
@@ -176,16 +176,11 @@ pacmancolors: ## enable pacman colors
 test-docker-image: docker
 	docker build -t dotfiles ${PWD}
 
-test-target: dwm-deploy pacman-colors
+test-target: dwm-deploy pacman-colors ## target for the test, run inside docker
 
 test-docker-run: test-docker-image ## get a shell into the test docker image
 	docker run -it --rm --name maketest -v $(PWD):$(PWD) \
                 dotfiles:latest su -l sergio
-
-# test: docker-image ## test this Makefile with docker without backup directory
-# 	docker run -it --rm --name make$@ -v $(PWD):$(PWD) \
-# 		-d dotfiles:latest /bin/bash
-# 	docker exec -it make$@ sh -c "cd ${PWD}; make test-target"
 
 test-docker-non-iteractive: test-docker-image ## test this Makefile with docker without backup directory
 	docker run -it --rm --name maketest -v $(PWD):$(PWD) \
