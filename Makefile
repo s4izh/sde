@@ -9,13 +9,13 @@ AURINSTALL		:= paru --needed -S
 PKGRM			:= sudo pacman -Rns
 SRCDIR			:= $(HOME)/.local/src
 MYGIT			:= git clone https://github.com/s4izh
-SYSTEMD_ENABLE	:= sudo systemctl --now enable
+SYSTEMD_ENABLE	:= sudo systemctl enable
 BOOTSTRAP		:= @bash $(PWD)/archlinux/bootstrap
 
 BASE_PKGS		:= filesystem gcc-libs glibc bash coreutils file findutils gawk grep procps-ng sed tar gettext
 BASE_PKGS		+= pciutils psmisc shadow util-linux bzip2 gzip xz licenses pacman systemd systemd-sysvcompat
 BASE_PKGS		+= iputils iproute2 autoconf sudo automake binutils bison fakeroot flex gcc groff libtool m4
-BASE_PKGS		+= make patch pkgconf texinfo which
+BASE_PKGS		+= make patch pkgconf texinfo which usbutils
 
 UTILS_PKGS		:= fzf direnv zip unzip neofetch tree
 
@@ -27,7 +27,7 @@ AUR_PKGS		:= nwg-look-bin
 FONT_PKGS		:= ttf-liberation-mono-nerd xdg-utils
 
 ZEN_PKGS		:= amd-ucode xf86-video-amdgpu xf86-video-ati
-RX_PKGS			:= intel-ucode
+RX_PKGS			:= intel-ucode xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon
 
 .DEFAULT_GOAL	:= help
 
@@ -40,14 +40,14 @@ help:
 
 backup: ## backup arch linux packages
 	mkdir -p $(PWD)/archlinux
-	pacman -Qqen > $(PWD)/archlinux/pacmanlist
+	pacman -Qqn > $(PWD)/archlinux/pacmanlist
 	pacman -Qqem > $(PWD)/archlinux/aurlist
 
 # pkgs
 pkgs-base: ## base pkgs
 	$(PKGINSTALL) $(BASE_PKGS)
 
-pkgs-utils: ## package useful no have available, no desktop specific
+pkgs-utils: ## package useful to have available, no desktop specific
 	$(PKGINSTALL) $(PKGS)
 
 pkgs-desktop: ## desktop pkgs
@@ -157,6 +157,9 @@ scripts:
 	@if [ -h $(HOME)/.local/scripts ]; then $(RM) $(HOME)/.local/scripts; fi
 	$(LNDIR) $(PWD)/.local/scripts $(HOME)/.local/scripts
 
+gaming: ## gaming utils
+	sudo pacman --needed -S steam lutris
+
 audio:
 	$(PKGINSTALL) pipewire pipewire-pulse wireplumber
 
@@ -167,22 +170,26 @@ suckless: dwm dwmblocks dmenu ## my suckless software forks (dwm, dwmblocks, dme
 
 dwm-deploy: dirs suckless x11 xinitrc sxhkd nvim alacritty tmux git paru pkgs-desktop ## deploy all desktop with dwm
 
-pacmancolors:
+pacmancolors: ## enable pacman colors
 	sudo sed -i "s/^#Color/Color/" /etc/pacman.conf
 
 test-docker-image: docker
 	docker build -t dotfiles ${PWD}
 
-test-target: dwm-deploy libvirtd docker pacman-colors
+test-target: dwm-deploy pacman-colors
 
-test-docker-run: test-docker-image
-	docker run -it --rm --name maketest -v $(pwd):$(pwd) \
+test-docker-run: test-docker-image ## get a shell into the test docker image
+	docker run -it --rm --name maketest -v $(PWD):$(PWD) \
                 dotfiles:latest su -l sergio
 
-test: docker-image ## test this Makefile with docker without backup directory
-	docker run -it --rm --name make$@ -v $(PWD):$(PWD) \
-		-d dotfiles:latest /bin/bash
-	docker exec -it make$@ sh -c "cd ${PWD}; make test-target"
+# test: docker-image ## test this Makefile with docker without backup directory
+# 	docker run -it --rm --name make$@ -v $(PWD):$(PWD) \
+# 		-d dotfiles:latest /bin/bash
+# 	docker exec -it make$@ sh -c "cd ${PWD}; make test-target"
+
+test-docker-non-iteractive: test-docker-image ## test this Makefile with docker without backup directory
+	docker run -it --rm --name maketest -v $(PWD):$(PWD) \
+                dotfiles:latest sh -c "cd ${PWD}; make test-target"
 
 https-to-ssh:
 	sed -i 's#https://github.com/s4izh#git@github.com:s4izh#' "$(PWD)/$@/.git/config"
