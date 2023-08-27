@@ -7,8 +7,7 @@ case "$1" in
         notify-send "GPU Fan" "Fan is on"
     ;;
     off) echo 2 or 3
-        echo 0 > /sys/class/drm/card0/device/hwmon/hwmon0/pwm1_enable && \
-        echo 0 > /sys/class/drm/card0/device/hwmon/hwmon0/pwm1
+        echo 2 > /sys/class/drm/card0/device/hwmon/hwmon0/pwm1_enable && \
         notify-send "GPU Fan" "Fan is off"
     ;;
     *) exit
