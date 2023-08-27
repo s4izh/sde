@@ -32,6 +32,7 @@
 
   environment.systemPackages = with pkgs; [
     amdgpu_top
+    radeontool
   ];
 
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
