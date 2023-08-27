@@ -1,8 +1,10 @@
 #!/bin/sh
 
-DOTDIR="$HOME/.dotfiles"
+TARGET_USER="$1"
+DOTDIR="$2"
+USER_HOME=/home/$TARGET_USER
 
-mkdir -p "$HOME/.config"
+mkdir -p "$USER_HOME/.config"
 
 which zsh > /dev/null 2>&1
 
@@ -10,12 +12,19 @@ if [ $? -eq 1 ]; then
     sudo pacman --noconfirm --needed -S zsh
 fi
 
-if [ "$SHELL" != "/usr/bin/zsh" ]; then
-    chsh -s /usr/bin/zsh
+if [ "$(grep "^$TARGET_USER" /etc/passwd | cut -d: -f7)" != "/usr/bin/zsh" ]; then
+    sed -i '/sergio/s#/bin/bash#/usr/bin/zsh#' /etc/passwd
 fi
 
-if [ -h $HOME/.config/zsh ]; then
-    rm $HOME/.config/zsh
+if [ -h $USER_HOME/.config/zsh ]; then
+    rm $USER_HOME/.config/zsh
 fi
 
-ln -sfv $DOTDIR/.config/zsh $HOME/.config/zsh
+if [ -h $USER_HOME/.config/shell ]; then
+    rm $USER_HOME/.config/shell
+fi
+
+ln -sfv $DOTDIR/.config/zsh $USER_HOME/.config/zsh
+ln -sfv $DOTDIR/.config/shell $USER_HOME/.config/shell
+cp -dfv $DOTDIR/.zprofile $USER_HOME/.zprofile
+cp -dfv $DOTDIR/.zprofile $USER_HOME/.profile
