@@ -23,7 +23,6 @@ DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppl
 DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
 DESKTOP_PKGS	+= xautolock yt-dlp xdg-desktop-portal-gtk xdg-user-dirs
 
-
 AUR_PKGS		:= nwg-look-bin xdg-ninja
 
 FONT_PKGS		:= ttf-liberation-mono-nerd
@@ -170,7 +169,7 @@ scripts:
 	$(LNDIR) $(PWD)/.local/scripts $(HOME)/.local/scripts
 
 gaming: ## gaming utils
-	sudo pacman --needed -S steam lutris
+	sudo pacman --needed -S steam lutris wine-mono
 
 audio: ## audio utils
 	$(PKGINSTALL) pipewire pipewire-pulse wireplumber
@@ -180,7 +179,7 @@ desktop: base audio
 
 suckless: dwm dwmblocks dmenu ## my suckless software forks (dwm, dwmblocks, dmenu)
 
-dwm-deploy: dirs suckless x11 xinitrc sxhkd nvim alacritty tmux git paru pkgs-desktop ## deploy all desktop with dwm
+dwm-deploy: dirs suckless x11 xinitrc sxhkd nvim alacritty tmux git paru xdg pkgs-desktop ## deploy all desktop with dwm
 
 pacmancolors: ## enable pacman colors
 	sudo sed -i "s/^#Color/Color/" /etc/pacman.conf
@@ -188,7 +187,7 @@ pacmancolors: ## enable pacman colors
 test-docker-image: docker
 	docker build -t dotfiles ${PWD}
 
-docker-target: dirs nvim tmux git paru pkgs-utils pkgs-utils pacman-colors ## target for the docker image
+docker-target: dirs nvim tmux git paru pkgs-utils pacman-colors ## target for the docker image
 
 test-target: dwm-deploy pacman-colors ## target for the test, run inside docker
 
