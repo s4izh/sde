@@ -21,9 +21,10 @@ UTILS_PKGS		:= fzf direnv zip unzip neofetch tree
 
 DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
 DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
-DESKTOP_PKGS	+= xautolock yt-dlp
+DESKTOP_PKGS	+= xautolock yt-dlp xdg-desktop-portal-gtk xdg-user-dirs
 
-AUR_PKGS		:= nwg-look-bin
+
+AUR_PKGS		:= nwg-look-bin xdg-ninja
 
 FONT_PKGS		:= ttf-liberation-mono-nerd
 
@@ -120,6 +121,8 @@ nvim:
 	$(PKGINSTALL) neovim ripgrep
 	$(MYGIT)/$@ $(HOME)/.config/$@
 	sed -i 's#https://github.com/s4izh#git@github.com:s4izh#' "$(HOME)/.config/$@/.git/config"
+	@if [ -h $(HOME)/.editorconfig ]; then $(RM) $(HOME)/.editorconfig; fi
+	$(LNDIR) $(PWD)/.editorconfig $(HOME)/.editorconfig
 
 alacritty:
 	$(PKGINSTALL) alacritty
@@ -148,6 +151,14 @@ libvirtd: audio ## virtualisation utils
 	$(LN) $(PWD)/.config/libvirt/libvirt.conf $(HOME)/.config/libvirt/libvirt.conf
 	sudo usermod -aG libvirt $(USER)
 	$(SYSTEMD_ENABLE) $@.service
+
+xdg:
+	$(PKGINSTALL) xdg-desktop-portal-gtk xdg-user-dirs xdg-utils
+	@if [ -h $(HOME)/.config/user-dirs.dirs ]; then $(RM) $(HOME)/.config/user-dirs.dirs; fi
+	@if [ -h $(HOME)/templates ]; then $(RM) $(HOME)/templates; fi
+	$(LN) $(PWD)/.config/user-dirs.dirs $(HOME)/.local/user-dirs.dirs
+	$(LNDIR) $(PWD)/templates $(HOME)/templates
+	xdg-user-dirs-update
 
 docker: ## docker setup and utils
 	$(PKGINSTALL) $@ $@-compose $@-buildx
