@@ -2,27 +2,23 @@
 
 [ -f "$HOME/.Xresources" ] && xrdb -merge "$HOME/.Xresources"
 [ -f "$XDG_CONFIG_HOME/x11/font" ] && xrdb -merge "$XDG_CONFIG_HOME/x11/font"
-# [ -f "$XDG_CONFIG_HOME/x11/cursor" ] && xrdb -merge "$XDG_CONFIG_HOME/x11/cursor"
 
-[ -f "$HOME/.local/x_autostart.sh" ] && $HOME/.local/x_autostart.sh
-
-# while true; do
-#     dwm >/dev/null 2>&1
-# done
-
+feh --no-fehbg --bg-fill ~/pix/wal/V8OmdKN-3937590169.jpg &
+picom &
 nm-applet --indicator &
 dwmblocks &
 dunst &
 sxhkd &
 unclutter -idle 5 &
+xautolock -time 10 -locker slock &
 
-export SYSTEM_MENU=dmenu
+# the following commands are equivalent to the command
+# source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
+systemctl --user import-environment DISPLAY XAUTHORITY
+if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+    dbus-update-activation-environment DISPLAY XAUTHORITY
+fi
 
-while true; do
-    # Log stderror to a file
-    dwm 2> /tmp/dwm.log
-    # No error logging
-    # dwm >/dev/null 2>&1
-done
+gnome-keyring-daemon --start --components=secrets
 
-exec dwm
+exec dwm 2> /tmp/dwm.log
