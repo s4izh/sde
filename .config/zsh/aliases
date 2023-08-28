@@ -110,6 +110,8 @@ alias \
     nb="newsboat"
 	# za="zathura" now a function
 
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+
 alias lsmount="mount | column -t"
 alias du1="du -h --max-depth=1"
 
