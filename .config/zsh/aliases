@@ -144,3 +144,5 @@ alias xclipb="xclip -selection clipboard"
 
 alias git-https-ssh="sed -i 's#https://github.com/s4izh#git@github.com:s4izh#'" .git/config
 
+alias tasks="rg '\[ \]' \"$HOME/notes/\" | cut -d: -f2 | sort"
+alias taskswork="rg '\[ \]' \"$HOME/notes/work\" | cut -d: -f2 | sort"
