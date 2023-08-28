@@ -21,6 +21,7 @@ UTILS_PKGS		:= fzf direnv zip unzip neofetch tree
 
 DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
 DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
+DESKTOP_PKGS	+= xautolock yt-dlp
 
 AUR_PKGS		:= nwg-look-bin
 
@@ -175,6 +176,8 @@ pacmancolors: ## enable pacman colors
 
 test-docker-image: docker
 	docker build -t dotfiles ${PWD}
+
+docker-target: dirs nvim tmux git paru pkgs-utils pkgs-utils pacman-colors ## target for the docker image
 
 test-target: dwm-deploy pacman-colors ## target for the test, run inside docker
 
