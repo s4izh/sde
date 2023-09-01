@@ -325,6 +325,12 @@
                               corfu-auto nil)
               (corfu-mode))))
 
+(use-package corfu-terminal
+  :straight (:host codeberg :repo "akib/emacs-corfu-terminal" :branch "master"))
+
+(unless (display-graphic-p)
+  (corfu-terminal-mode +1))
+
 (use-package consult
   :after vertico
   :bind (("C-x b"       . consult-buffer)
