@@ -168,6 +168,11 @@ scripts:
 	@if [ -h $(HOME)/.local/scripts ]; then $(RM) $(HOME)/.local/scripts; fi
 	$(LNDIR) $(PWD)/.local/scripts $(HOME)/.local/scripts
 
+fontconfig:
+	$(PKGINSTALL) $@
+	@if [ -h $(HOME)/.config/$@ ]; then $(RM) $(HOME)/.config/$@; fi
+	$(LNDIR) $(PWD)/.config/$@ $(HOME)/.config/$@
+
 gaming: ## gaming utils
 	sudo pacman --needed -S steam lutris wine-mono
 
