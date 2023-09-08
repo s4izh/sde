@@ -67,6 +67,10 @@ else
             --stdout)
                 STDOUT=true
                 ;;
+            --notes)
+                SCREENSHOT_DIR="$HOME/notes/attachments/img"
+                NOTES=true
+                ;;
             --*|-*)
                 echo "Unknown option $i"
                 exit 1
@@ -80,6 +84,17 @@ else
     if [ "$STDOUT" == "true" ]; then
         echo "$SCREENSHOT_PATH"
         echo -e "![$FILE](.img/$FILE)\n<!-- $SCREENSHOT_PATH -->"
+    fi
+
+    if [ "$NOTES" == "true" ]; then
+        case $XDG_SESSION_TYPE in
+            wayland)
+                echo "[[$SCREENSHOT_PATH]]" | wl-copy
+                ;;
+            xorg|*)
+                echo "[[$SCREENSHOT_PATH]]" | xclip -selection clipboard
+                ;;
+        esac
     fi
 
 fi
