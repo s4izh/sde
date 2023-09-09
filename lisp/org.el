@@ -276,14 +276,14 @@
   "Take a screenshot into a time stamped unique-named file in the
     img directory under the org-buffer directory and insert a link to this file."
   (interactive)
-  (setq img-dir (concat org-directory "/attachments/img"))
+  ;; (setq img-dir (concat org-directory "/attachments/img"))
+  (setq img-dir "~/pix/screenshots")
   (unless (file-exists-p img-dir)
     (make-directory img-dir))
   (setq filename
         (concat img-dir "/" (format-time-string "%Y%m%d_%H%M%S") ".png"))
-  (call-process "import" nil nil nil filename)
+  (call-process "screenshot" nil nil nil filename)
   (insert (concat "[[" filename "]]")))
-
 
 (defun my/org-export-dispatch-with-folder ()
   "Export to a file in a given folder"
@@ -349,3 +349,10 @@
   :defer t
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
+
+(defun my/markdown-convert-buffer-to-org ()
+    "Convert the current buffer's content from markdown to orgmode format and save it with the current buffer's file name but with .org extension."
+    (interactive)
+    (shell-command-on-region (point-min) (point-max)
+                             (format "pandoc -f markdown -t org -o %s"
+                                     (concat (file-name-sans-extension (buffer-file-name)) ".org"))))
