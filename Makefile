@@ -116,6 +116,17 @@ st:
 	cd $(SRCDIR)/$@ && sudo make clean install
 	sed -i 's#https://github.com/s4izh#git@github.com:s4izh#' "$(SRCDIR)/$@/.git/config"
 
+dwl:
+	$(PKGINSTALL) wlroots wayland-protocols
+	$(MYGIT)/$@ $(SRCDIR)/$@
+	cd $(SRCDIR)/$@ && sudo make clean install
+	sed -i 's#https://github.com/s4izh#git@github.com:s4izh#' "$(SRCDIR)/$@/.git/config"
+
+foot:
+	$(PKGINSTALL) foot
+	@if [ -h $(HOME)/.config/$@ ]; then $(RM) $(HOME)/.config/$@; fi
+	$(LNDIR) $(PWD)/.config/$@ $(HOME)/.config/$@
+
 nvim:
 	$(PKGINSTALL) neovim ripgrep
 	$(MYGIT)/$@ $(HOME)/.config/$@

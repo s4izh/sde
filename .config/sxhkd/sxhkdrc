@@ -17,13 +17,13 @@ super + v
     alacritty --class volumen,volumen -e pulsemixer
 
 super + shift + i
-  alacritty --class inbox,inbox -e nvim ~/notes/index.md
+    alacritty --class inbox,inbox -e nvim ~/notes/index.md
 
 XF86AudioRaiseVolume
 	amixer set Master 5%+
 
 XF86AudioLowerVolume
-	amixer set Master 5%-
+    amixer set Master 5%-
 
 XF86AudioMute
 	amixer set Master toggle
