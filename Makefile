@@ -17,11 +17,11 @@ BASE_PKGS		+= pciutils psmisc shadow util-linux bzip2 gzip xz licenses pacman sy
 BASE_PKGS		+= iputils iproute2 autoconf sudo automake binutils bison fakeroot flex gcc groff libtool m4
 BASE_PKGS		+= make patch pkgconf texinfo which usbutils
 
-UTILS_PKGS		:= fzf direnv zip unzip neofetch tree
+UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq
 
 DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
 DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
-DESKTOP_PKGS	+= xautolock yt-dlp xdg-desktop-portal-gtk xdg-user-dirs
+DESKTOP_PKGS	+= xautolock yt-dlp xdg-desktop-portal-gtk xdg-user-dirs maim
 
 AUR_PKGS		:= nwg-look-bin xdg-ninja
 
@@ -49,7 +49,7 @@ pkgs-base: ## base pkgs
 	$(PKGINSTALL) $(BASE_PKGS)
 
 pkgs-utils: ## package useful to have available, no desktop specific
-	$(PKGINSTALL) $(PKGS)
+	$(PKGINSTALL) $(UTILS_PKGS)
 
 pkgs-desktop: ## desktop pkgs
 	$(PKGINSTALL) $(DESKTOP_PKGS)
@@ -85,8 +85,8 @@ x11:
 
 xinitrc:
 	$(PKGINSTALL) xorg-xinit
-	@if [ -h $(HOME)/.xinitrc ]; then $(RM) $(HOME)/.xinitrc; fi
-	$(LNDIR) $(PWD)/.xinitrc $(HOME)/.xinitrc
+	# @if [ -h $(HOME)/.xinitrc ]; then $(RM) $(HOME)/.xinitrc; fi
+	# $(LNDIR) $(PWD)/.xinitrc $(HOME)/.xinitrc
 
 sxhkd:
 	$(PKGINSTALL) sxhkd
@@ -180,6 +180,11 @@ scripts:
 	$(LNDIR) $(PWD)/.local/scripts $(HOME)/.local/scripts
 
 fontconfig:
+	$(PKGINSTALL) $@
+	@if [ -h $(HOME)/.config/$@ ]; then $(RM) $(HOME)/.config/$@; fi
+	$(LNDIR) $(PWD)/.config/$@ $(HOME)/.config/$@
+
+wget:
 	$(PKGINSTALL) $@
 	@if [ -h $(HOME)/.config/$@ ]; then $(RM) $(HOME)/.config/$@; fi
 	$(LNDIR) $(PWD)/.config/$@ $(HOME)/.config/$@
