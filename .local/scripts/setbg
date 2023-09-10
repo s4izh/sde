@@ -13,6 +13,12 @@ ln -sf $HOME/.cache/wal/colors-wal-dwm.h $HOME/.local/src/dwm/theme.h
 ln -sf $HOME/.cache/wal/colors-wal-dmenu.h $HOME/.local/src/dmenu/theme.h
 ln -sf $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
 
+echo "\
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 5;        /* gaps between windows */
+" >> $HOME/.cache/wal/colors-wal-dwm.h
+
+
 xrdb $HOME/.Xresources
 # xrdb -merge
 
