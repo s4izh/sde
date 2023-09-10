@@ -20,6 +20,13 @@ return {
   -- "lukas-reineke/indent-blankline.nvim",
   "norcalli/nvim-colorizer.lua",
   "tpope/vim-dispatch",
+  "tpope/vim-surround",
+  "oncomouse/lushwal.nvim",
+	cmd = { "LushwalCompile" },
+	dependencies = {
+		{ "rktjmp/lush.nvim" },
+		{ "rktjmp/shipwright.nvim" },
+	},
   -- "mhinz/vim-startify",
   -- "startup-nvim/startup.nvim",
 

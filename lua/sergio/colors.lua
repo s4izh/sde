@@ -1,4 +1,4 @@
-vim.opt.termguicolors = true
+-- vim.opt.termguicolors = true
 
 function ColorMyPencils(color)
 	color = color or "rose-pine"
@@ -12,4 +12,4 @@ end
 
 -- vim.opt.background = "light"
 
-ColorMyPencils("melange")
+ColorMyPencils("gruber-darker")
