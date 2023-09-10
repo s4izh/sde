@@ -1,29 +1,12 @@
 # vi: set ft=zsh :
 #!/bin/sh
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-
-HISTFILE="${XDG_CACHE_HOME:=$HOME/.cache/zsh}/history"
+HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache/zsh}/history"
 HISTSIZE=1000000
 SAVEHIST=1000000
 setopt appendhistory
 
-export EDITOR="nvim"
-export TERMINAL="alacritty"
-export BROWSER="firefox"
-export READER="zathura"
-
-export MANPAGER='nvim +Man!'
-export SUDO_ASKPASS="$HOME/.local/scripts/dmenupass"
-
-export PATH="$HOME/.local/bin":$PATH
-export PATH="$HOME/.local/scripts/tmux":$PATH
-
-export PATH=$HOME/.cargo/bin:$PATH
+[ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin":$PATH
 
 # export GOPATH=$HOME/.local/share/go
 # export PATH="$HOME/.local/share/neovim/bin":$PATH
