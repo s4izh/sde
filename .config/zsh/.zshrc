@@ -9,10 +9,16 @@ zle_highlight=('paste:none') # disable highlighting of pasted text
 # beep off
 unsetopt BEEP
 
+# Load aliases and shortcuts if existent.
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
+
 # completions
 autoload -Uz compinit
 zstyle ':completion:*' menu select
-zstyle ':completion::complete:lsof:*' menu yes select
+# zstyle ':completion::complete:lsof:*' menu yes select
+zstyle ':completion::*' menu yes select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
@@ -22,17 +28,13 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line # ctrl-x ctrl-e
 
-# bindkey -s '^A' '~/.local/scripts/tmux/tmux-main^M'
-# bindkey -s '^S' '~/.local/scripts/tmux/tmux-picker^M'
-# bindkey -s '^F' '~/.local/scripts/tmux/tmux-sessionizer^M'
-
-# Colors
+# colors
 autoload -Uz colors && colors
 
-# Useful Functions
+# useful Functions
 source "$ZDOTDIR/functions"
 
-# Normal files to source
+# normal files to source
 zsh_add_file "exports"
 zsh_add_file "aliases"
 zsh_add_file "prompt"
@@ -51,31 +53,19 @@ zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_completion "nix-community/nix-zsh-completions" false
 zsh_add_completion "esc/conda-zsh-completion" false
 
-# Key-bindings
-# bindkey -s '^o' 'ranger^M'
-# bindkey -s '^a' 'tmux-default^M'
-# bindkey -s '^n' 'tmux-notes^M'
+# key-bindings
 bindkey '^R' history-incremental-search-backward
-
-# eval "$(starship init zsh)"
-
-# [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
-
-# [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
 
 # autoload -U up-line-or-beginning-search
 # autoload -U down-line-or-beginning-search
 # zle -N up-line-or-beginning-search
 # zle -N down-line-or-beginning-search
 
-# via package manager
+# fzf via package manager
 [ -e /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -e /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-
 export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
-
-# via git upstream download
+# fzf via git upstream download
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(direnv hook zsh)"
-
