@@ -4,7 +4,7 @@
 wal=$(realpath "$1")
 
 wal -i $wal
-# ln -sf $wal ~/pix/$(basename "$wal")
+ln -sf $wal ~/pix/wal/default.jpg
 
 sed -i 'N;$!P;D' $HOME/.cache/wal/colors-wal-dwm.h
 sed -i '3s/.*/static const char norm_border[] = \"#222222\";/g' $HOME/.cache/wal/colors-wal-dwm.h
