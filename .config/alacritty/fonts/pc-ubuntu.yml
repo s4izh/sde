@@ -39,16 +39,16 @@ font:
   #   style: Bold Italic
 
   normal:
-    family: LiterationMono Nerd Font
+    family: FiraCode Nerd Font
     style: Regular
   bold:
-    family: LiterationMono Nerd Font
+    family: FiraCode Nerd Font
     style: Bold
   italic:
-    family: LiterationMono Nerd Font
+    family: FiraCode Nerd Font
     style: Italic
   bold_italic:
-    family: LiterationMono Nerd Font
+    family: FiraCode Nerd Font
     style: Bold Italic
 
   # Point size
