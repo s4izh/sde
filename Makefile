@@ -21,13 +21,13 @@ UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq
 
 DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
 DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
-DESKTOP_PKGS	+= xautolock yt-dlp xdg-desktop-portal-gtk xdg-user-dirs maim brightnessctl
+DESKTOP_PKGS	+= xautolock yt-dlp xdg-desktop-portal-gtk xdg-user-dirs maim
 
 AUR_PKGS		:= nwg-look-bin xdg-ninja
 
 FONT_PKGS		:= ttf-liberation-mono-nerd
 
-ZEN_PKGS		:= amd-ucode xf86-video-amdgpu xf86-video-ati
+ZEN_PKGS		:= amd-ucode xf86-video-amdgpu xf86-video-ati brightnessctl
 RX_PKGS			:= intel-ucode xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon
 
 .DEFAULT_GOAL	:= help
