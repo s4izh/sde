@@ -198,6 +198,11 @@ audio: ## audio utils
 desktop: base audio
 	$(PKGINSTALL) $(DESKTOP_PKGS)
 
+zathura:
+	$(PKGINSTALL) $@
+	@if [ -h $(HOME)/.config/$@ ]; then $(RM) $(HOME)/.config/$@; fi
+	$(LNDIR) $(PWD)/.config/$@ $(HOME)/.config/$@
+
 suckless: dwm dwmblocks dmenu ## my suckless software forks (dwm, dwmblocks, dmenu)
 
 dwm-deploy: dirs suckless x11 xinitrc sxhkd nvim alacritty tmux git paru xdg pkgs-desktop ## deploy all desktop with dwm
