@@ -11,12 +11,18 @@ handlebang() {
   bang=$(head -n 1 "$file")
   echo "$bang"
   case "$bang" in
-    *!/bin/sh|*!/bin/bash|*/bin/zsh) 
+    *!/bin/sh|*!/bin/bash|*/bin/zsh)
       echo "Running $file with $bang"
-      $file 
-      ;; 
-    *) 
-      echo "Can't handle $bang" 
+      $file
+      ;;
+    *!/usr/bin/env*)
+      echo "Running $file with $bang"
+      # runner=$(echo "$bang" | sed 's/.*\///')
+      echo "runner: $runner"
+      $runner $file
+      ;;
+    *)
+      echo "Can't handle $bang"
       ;;
   esac
 }
