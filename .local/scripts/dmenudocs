@@ -1,0 +1,14 @@
+#!/bin/sh
+
+notes="${NOTES:-$HOME/notes}"
+docs="$notes/docs"
+
+file=$(find $docs -type f -name "*.pdf" | \
+    sed "s~${docs}/~~g" | dmenu -i -p "open" -l 30)
+
+echo $file
+
+if [ -n "$file" ]; then
+    xdg-open "$docs/$file"
+fi
+
