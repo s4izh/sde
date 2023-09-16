@@ -35,7 +35,8 @@ PROMPT+=" %{$fg[white]%}
 "
 PROMPT+="%B%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
 
-PROMPT="%F{green}(%m) "
+# PROMPT="%F{yellow}%n"
+# PROMPT+="%F{green}[%m] "
 PROMPT="%F{blue}%~%f%b% "
 PROMPT+="\$vcs_info_msg_0_"
 PROMPT+="$name
@@ -114,7 +115,8 @@ PROMPT+="%F{white}ᛋ "
 # luke style
 # [user@host ~]$
 # PROMPT="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[cyan]%}%~"
-# PROMPT+="%{$fg[red]%}]%{$reset_color%}$%b "
+# PROMPT+="%{$fg[red]%}]%{$reset_color%}
+# $%b "
 
 # luke style no []
 # user@host ~ $
