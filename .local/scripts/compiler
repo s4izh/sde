@@ -18,7 +18,7 @@ handlebang() {
     *!/usr/bin/env*)
       echo "Running $file with $bang"
       # runner=$(echo "$bang" | sed 's/.*\///')
-      # echo "runner: $runner"
+      echo "runner: $runner"
       $runner $file
       ;;
     *)
