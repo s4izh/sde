@@ -21,6 +21,7 @@ export MENU="dmenu"
 export SUDO_ASKPASS="$HOME/.local/scripts/dmenupass"
 export MANPAGER='nvim +Man!'
 
+export NOTES="$HOME/notes"
 export UNI="$HOME/uni"
 [ -e "$UNI/.env" ] && source "$UNI/.env"
 
