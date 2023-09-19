@@ -7,8 +7,7 @@ tmux has-session -t $SESSION_NAME 2>/dev/null
 
 if [ $? != 0 ]          # si no hay sesion se crea
 then
-    tmux new-session -s $SESSION_NAME -d
-    tmux send-keys -t $SESSION_NAME "cd $PROJECT_PATH" C-m
+    tmux new-session -s $SESSION_NAME -d -c $PROJECT_PATH
     tmux send-keys -t $SESSION_NAME "nvim index.md" C-m
     # tmux new-window -n git -t $SESSION_NAME
     # tmux send-keys -t $SESSION_NAME:2 "cd $PROJECT_PATH" C-m
