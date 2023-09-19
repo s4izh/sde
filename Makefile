@@ -17,7 +17,7 @@ BASE_PKGS		+= pciutils psmisc shadow util-linux bzip2 gzip xz licenses pacman sy
 BASE_PKGS		+= iputils iproute2 autoconf sudo automake binutils bison fakeroot flex gcc groff libtool m4
 BASE_PKGS		+= make patch pkgconf texinfo which usbutils
 
-UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq
+UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq dosfstools
 
 DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
 DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
