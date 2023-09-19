@@ -17,7 +17,7 @@ handlebang() {
       ;;
     *!/usr/bin/env*)
       echo "Running $file with $bang"
-      # runner=$(echo "$bang" | sed 's/.*\///')
+      runner=$(echo "$bang" | sed 's/.*\///')
       echo "runner: $runner"
       $runner $file
       ;;
@@ -38,6 +38,7 @@ case "$ext" in
     java) javac -d classes "$file" && java -cp classes "${1%.*}" ;;
     md)   pandoc "$file" -o "$base".pdf --filter pandoc-crossref --citeproc;;
     org)  pandoc -s "$file" -V geometry:margin=1in -o "$base".pdf ;;
+    py)   python3 "$file" ;;
     rs)   cargo run ;;
     tex)  pdflatex "$file";;
     *) handlebang ;;
