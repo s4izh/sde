@@ -487,3 +487,8 @@
 ;;   :ensure t
 ;;   :config
 ;;   (global-treesit-auto-mode))
+
+(use-package compile
+  :ensure nil
+  :config
+  (setq compilation-scroll-output t))
