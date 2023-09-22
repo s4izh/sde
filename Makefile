@@ -17,7 +17,7 @@ BASE_PKGS		+= pciutils psmisc shadow util-linux bzip2 gzip xz licenses pacman sy
 BASE_PKGS		+= iputils iproute2 autoconf sudo automake binutils bison fakeroot flex gcc groff libtool m4
 BASE_PKGS		+= make patch pkgconf texinfo which usbutils
 
-UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq dosfstools
+UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq dosfstools man-pages
 
 DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
 DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
@@ -161,6 +161,10 @@ libvirtd: audio ## virtualisation utils
 	$(LN) $(PWD)/.config/libvirt/libvirt.conf $(HOME)/.config/libvirt/libvirt.conf
 	sudo usermod -aG libvirt $(USER)
 	$(SYSTEMD_ENABLE) $@.service
+
+bluetooth:
+	$(PKGINSTALL) bluez bluez-utils blueman
+	$(SYSTEMD_ENABLE) bluetooth.service
 
 xdg:
 	$(PKGINSTALL) xdg-desktop-portal-gtk xdg-user-dirs xdg-utils
