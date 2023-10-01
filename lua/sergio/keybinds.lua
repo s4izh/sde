@@ -107,7 +107,7 @@ vim.keymap.set("n", "<Leader>wf", ":set ft=")
 vim.keymap.set("n", "<Leader>wt", ":Toch<cr>")
 
 -- resumen especifícos
-vim.keymap.set("n", "<Leader>rs", ":r! wayss -a <cr>")
+-- vim.keymap.set("n", "<Leader>rs", ":r! wayss -a <cr>")
 
 vim.keymap.set("n", "<Leader>wc0", ":set conceallevel=0<cr>")
 vim.keymap.set("n", "<Leader>wc2", ":set conceallevel=2<cr>")
@@ -138,6 +138,8 @@ vim.keymap.set("n", "<Leader>dr", ":DapContinue <cr>")
 vim.keymap.set("n", "<Leader>ds", ":DapStepOver <cr>")
 vim.keymap.set("n", "<Leader>di", ":DapStepInto <cr>")
 vim.keymap.set("n", "<Leader>do", ":DapStepOut <cr>")
+
+vim.keymap.set("n", "<Leader>r", "q:?Dispatch<cr><cr>")
 
 vim.keymap.set("n", "<Leader>m", ":Make<cr>")
 
