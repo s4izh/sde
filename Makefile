@@ -30,6 +30,8 @@ FONT_PKGS		:= ttf-liberation-mono-nerd
 ZEN_PKGS		:= amd-ucode xf86-video-amdgpu xf86-video-ati brightnessctl
 RX_PKGS			:= intel-ucode xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon
 
+KERNEL_PKGS		:= base-devel xmlto kmod inetutils bc libelf git cpio perl tar xz
+
 .DEFAULT_GOAL	:= help
 
 .PHONY:			https-to-ssh pacmancolors fix-keys test
@@ -213,6 +215,9 @@ dwm-deploy: dirs suckless x11 xinitrc sxhkd nvim alacritty tmux git paru xdg pkg
 
 pacmancolors: ## enable pacman colors
 	sudo sed -i "s/^#Color/Color/" /etc/pacman.conf
+
+kernel:
+	$(PKGINSTALL) $(KERNEL_PKGS)
 
 test-docker-image: docker
 	docker build -t dotfiles ${PWD}
