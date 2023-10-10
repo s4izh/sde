@@ -505,3 +505,21 @@
   (interactive "MName of shell buffer to create: ")
     (vterm (concat "vterm-" name))
     (switch-to-buffer (concat "vterm-" name)))
+
+(defun switch-to-shell-or-vterm-buffer ()
+  "Switch to a shell or vterm buffer from a menu."
+  (interactive)
+  (let ((matching-buffers (cl-remove-if-not
+                          (lambda (buffer)
+                            (or (string-match-p "shell" (buffer-name buffer))
+                                (string-match-p "vterm" (buffer-name buffer))))
+                          (buffer-list))))
+    (if matching-buffers
+        (let ((buffer-names (mapcar 'buffer-name matching-buffers)))
+          (let ((chosen-buffer (completing-read "Switch to buffer: " buffer-names)))
+            (switch-to-buffer chosen-buffer)))
+      (message "No shell or vterm buffers found."))))
+
+(global-set-key (kbd "C-c s s") 'switch-to-shell-or-vterm-buffer)
+(global-set-key (kbd "C-c s n") 'spawn-shell)
+(global-set-key (kbd "C-c s v") 'spawn-vterm)
