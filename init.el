@@ -492,3 +492,16 @@
   :ensure nil
   :config
   (setq compilation-scroll-output t))
+
+(setq explicit-shell-file-name "/bin/bash")
+(setq vterm-shell "/bin/bash")
+
+(defun spawn-shell (name)
+  (interactive "MName of shell buffer to create: ")
+  (pop-to-buffer (get-buffer-create (generate-new-buffer-name (concat "shell-" name))))
+  (shell (current-buffer)))
+
+(defun spawn-vterm (name)
+  (interactive "MName of shell buffer to create: ")
+    (vterm (concat "vterm-" name))
+    (switch-to-buffer (concat "vterm-" name)))
