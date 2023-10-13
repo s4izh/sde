@@ -27,7 +27,7 @@
  "s"  '(sudo-find-file :which-key "sudo find file")
  "d" '(lambda () (interactive) (find-file (expand-file-name ".")))
  "js" '(lambda () (interactive) (find-file "~/.local/scripts"))
- "ju" '(lambda () (interactive) (find-file (expand-file-name "~/uni/3q1")))
+ "ju" '(lambda () (interactive) (find-file (expand-file-name (concat (getenv "UNI") "/" (getenv "CURRENT_Q")))))
  "ji" '(lambda () (interactive) (find-file (expand-file-name "~/notes/inbox.org")))
  "jwi" '(lambda () (interactive) (find-file (expand-file-name "~/notes/work/inbox.org")))
  "jwd" '(lambda () (interactive) (find-file (expand-file-name "~/notes/work/daily.org")))
