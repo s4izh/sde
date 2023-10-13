@@ -416,7 +416,7 @@
   (popper-echo-mode +1))                ; For echo area hints
 
 (use-package vterm
-  :bind (("C-x t" . vterm)
+  ;; :bind (("C-x t" . vterm)
          :map vterm-mode-map
          ("M-p" . vterm-send-up)
          ("M-n" . vterm-send-down))
@@ -523,3 +523,18 @@
 (global-set-key (kbd "C-c s s") 'switch-to-shell-or-vterm-buffer)
 (global-set-key (kbd "C-c s n") 'spawn-shell)
 (global-set-key (kbd "C-c s v") 'spawn-vterm)
+
+(defvar previous-buffer nil)
+
+(defun toggle-vterm-buffer ()
+  "Toggle a vterm buffer with the previous buffer."
+  (interactive)
+  (if (equal (buffer-name (current-buffer)) "*vterm*")
+      (if previous-buffer
+          (switch-to-buffer previous-buffer))
+    (setq previous-buffer (current-buffer))
+    (unless (get-buffer "*vterm*")
+      (vterm "*vterm*"))
+    (switch-to-buffer "*vterm*")))
+
+(global-set-key (kbd "C-x t") 'toggle-vterm-buffer)
