@@ -59,6 +59,8 @@
     (setq org-agenda-files (list (concat org-directory "/work")))
   (setq org-agenda-files (list (concat org-directory "/inbox.org"))))
 
+(setq org-agenda-files (list "~/notes/todo.org"))
+
 (defvar prot-org-custom-daily-agenda
   ;; NOTE 2021-12-08: Specifying a match like the following does not
   ;; work.
@@ -327,6 +329,11 @@
    (C . t)
    (shell . t)))
 
+(eval-after-load "org"
+  '(require 'ox-md nil t))
+
+(eval-after-load "org"
+  '(require 'ox-gfm nil t))
 
 (setq org-confirm-babel-evaluate nil)
 (push '("conf-unix" . conf-unix) org-src-lang-modes)

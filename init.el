@@ -186,7 +186,7 @@
 
   (setq dired-bind-jump nil)
   :config
-  (setq dired-listing-switches "-aghoA --group-directories-first")
+  ;; (setq dired-listing-switches "-aghoA --group-directories-first")
   ;; (setq dired-listing-switches "--group-directories-first")
   ;;;;; Hide . and .. in dired
   ;; (setq dired-omit-files
@@ -388,7 +388,6 @@
 ;;               "lisp/guix.el"))
 
 (use-package pdf-tools
-  :defer t
   :config
   (pdf-tools-install))
 
@@ -416,7 +415,8 @@
   (popper-echo-mode +1))                ; For echo area hints
 
 (use-package vterm
-  ;; :bind (("C-x t" . vterm)
+  :bind (
+          ;;("C-x t" . vterm)
          :map vterm-mode-map
          ("M-p" . vterm-send-up)
          ("M-n" . vterm-send-down))
@@ -524,7 +524,7 @@
 (global-set-key (kbd "C-c s n") 'spawn-shell)
 (global-set-key (kbd "C-c s v") 'spawn-vterm)
 
-(defvar previous-buffer nil)
+(setq previous-buffer nil)
 
 (defun toggle-vterm-buffer ()
   "Toggle a vterm buffer with the previous buffer."
@@ -538,3 +538,19 @@
     (switch-to-buffer "*vterm*")))
 
 (global-set-key (kbd "C-x t") 'toggle-vterm-buffer)
+
+(use-package autorevert
+  :ensure nil
+  :defer 1
+  :init (global-auto-revert-mode t))
+
+(use-package savehist
+  :defer 2
+  :init (savehist-mode t)) ; Save command history
+
+(use-package eldoc
+  :defer 10
+  :init
+  (setq eldoc-echo-area-display-truncation-message t)
+  (setq eldoc-echo-area-use-multiline-p nil)
+  (global-eldoc-mode t))
