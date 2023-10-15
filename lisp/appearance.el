@@ -70,7 +70,7 @@
 
 (use-package gruber-darker-theme)
 
-(setq my/current-theme 'gruber-darker)
+(setq my/current-theme 'spaceway)
 (setq custom-safe-themes t)
 
 (defun my/load-theme (theme)
