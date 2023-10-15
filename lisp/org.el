@@ -59,7 +59,7 @@
     (setq org-agenda-files (list (concat org-directory "/work")))
   (setq org-agenda-files (list (concat org-directory "/inbox.org"))))
 
-(setq org-agenda-files (list "~/notes/todo.org"))
+(setq org-agenda-files (list "~/notes/gtd.org"))
 
 (defvar prot-org-custom-daily-agenda
   ;; NOTE 2021-12-08: Specifying a match like the following does not
