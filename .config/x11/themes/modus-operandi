@@ -6,7 +6,7 @@
 *.cursorColor:  #505050
 
 ! white
-*.color0:       #ffffff
+*.color0:       #000000
 *.color8:       #5C6370
 
 ! red

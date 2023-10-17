@@ -1,5 +1,5 @@
 #!/bin/sh
-CHOICE=$(echo -e "laptop-only\nlaptop-external-only\nexternal\nracing\ndual\narandr" | dmenu -p monitor)
+CHOICE=$(echo -e "laptop-only\nlaptop-external-only\ngaming\nexternal\nracing\ndual\narandr" | dmenu -p monitor)
 
 # case "$CHOICE" in
 # 	laptop) xrandr --output eDP --primary --mode 1920x1080 --output HDMI-A-0 --off &; sed -i 's/size: 12/size: 9'/ ~/.config/alacritty/alacritty.yml & ;;
@@ -16,6 +16,9 @@ case "$CHOICE" in
     'laptop-external-only')
         xrandr --output eDP --off || wlr-randr --output eDP --off
         ln -sf $HOME/.config/alacritty/fonts/laptop-219.yml $HOME/.config/alacritty/font.yml
+    ;;
+    'gaming')
+        xrandr --output DP-2 --mode 1920x1080 --rate 144
     ;;
     'external')
 		xrandr --output HDMI-A-0 --primary --mode 1920x1080 --output eDP --off
