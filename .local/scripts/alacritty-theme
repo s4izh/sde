@@ -1,6 +1,6 @@
 #!/bin/sh
 
-theme=$(ls "$HOME/.config/alacritty/themes"| $SYSTEM_MENU -l 30)
-
+SYSTEM_MENU=${SYSTEM_MENU:-dmenu}
+theme=$(ls "$HOME/.config/alacritty/themes"| $SYSTEM_MENU -l 30) || exit
 cd $HOME/.config/alacritty/
 ln -sf themes/$theme theme.yml
