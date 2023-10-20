@@ -118,6 +118,11 @@ st:
 	cd $(SRCDIR)/$@ && sudo make clean install
 	sed -i 's#https://github.com/s4izh#git@github.com:s4izh#' "$(SRCDIR)/$@/.git/config"
 
+slock:
+	$(MYGIT)/$@ $(SRCDIR)/$@
+	cd $(SRCDIR)/$@ && sudo make clean install
+	sed -i 's#https://github.com/s4izh#git@github.com:s4izh#' "$(SRCDIR)/$@/.git/config"
+
 dwl:
 	$(PKGINSTALL) wlroots wayland-protocols
 	$(MYGIT)/$@ $(SRCDIR)/$@
