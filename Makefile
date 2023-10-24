@@ -226,6 +226,9 @@ dwm-deploy: dirs suckless x11 xinitrc sxhkd nvim alacritty tmux git paru xdg pkg
 pacmancolors: ## enable pacman colors
 	sudo sed -i "s/^#Color/Color/" /etc/pacman.conf
 
+python:
+	$(PKGINSTALL) python3 python-pip
+
 kernel:
 	$(PKGINSTALL) $(KERNEL_PKGS)
 
