@@ -43,6 +43,8 @@ PROMPT+="$name
 "
 PROMPT+="%F{white}ᛋ "
 
+# PROMPT="%F{white}%n@%m %~ "
+
 # setopt prompt_substfunction getCluster() {
 #   export CLUSTER=$(kubectl config current-context)
 #   PS1="%F{208}% [rees] %F{155}[%W]%F{111} [${CLUSTER}]%F{152} %B%~  %F{255}%b"
