@@ -85,10 +85,9 @@ X11:
 	@if [ -h $(HOME)/.config/$@ ]; then $(RM) $(HOME)/.config/$@; fi
 	$(LNDIR) $(PWD)/.config/$@ $(HOME)/.config/$@
 
-xinitrc:
+xinitrc: X11
 	$(PKGINSTALL) xorg-xinit
-	@if [ -h $(HOME)/.xinitrc ]; then $(RM) $(HOME)/.xinitrc; fi
-	$(LNDIR) $(PWD)/.xinitrc $(HOME)/.xinitrc
+	cp -dfv $(PWD)/.xinitrc $(HOME)/.xinitrc
 
 sxhkd:
 	$(PKGINSTALL) sxhkd
