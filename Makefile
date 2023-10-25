@@ -80,15 +80,15 @@ zsh: ## install zsh and change to zsh
 paru: ## install paru
 	$(BOOTSTRAP)/paru
 
-x11:
+X11:
 	$(PKGINSTALL) xorg-server
 	@if [ -h $(HOME)/.config/$@ ]; then $(RM) $(HOME)/.config/$@; fi
 	$(LNDIR) $(PWD)/.config/$@ $(HOME)/.config/$@
 
 xinitrc:
 	$(PKGINSTALL) xorg-xinit
-	# @if [ -h $(HOME)/.xinitrc ]; then $(RM) $(HOME)/.xinitrc; fi
-	# $(LNDIR) $(PWD)/.xinitrc $(HOME)/.xinitrc
+	@if [ -h $(HOME)/.xinitrc ]; then $(RM) $(HOME)/.xinitrc; fi
+	$(LNDIR) $(PWD)/.xinitrc $(HOME)/.xinitrc
 
 sxhkd:
 	$(PKGINSTALL) sxhkd
@@ -221,7 +221,7 @@ zathura:
 
 suckless: dwm dwmblocks dmenu ## my suckless software forks (dwm, dwmblocks, dmenu)
 
-dwm-deploy: dirs suckless x11 xinitrc sxhkd nvim alacritty tmux git paru xdg pkgs-desktop ## deploy all desktop with dwm
+dwm-deploy: dirs suckless X11 xinitrc sxhkd nvim alacritty tmux git paru xdg pkgs-desktop ## deploy all desktop with dwm
 
 pacmancolors: ## enable pacman colors
 	sudo sed -i "s/^#Color/Color/" /etc/pacman.conf
