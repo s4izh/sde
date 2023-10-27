@@ -7,6 +7,11 @@ text/markdown=nvim.desktop
 image/png=sxiv.desktop;
 image/jpeg=sxiv.desktop;
 image/gif=sxiv.desktop;
+text/html=firefox.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/about=firefox.desktop
+x-scheme-handler/unknown=firefox.desktop
 
 [Added Associations]
 text/rust=code.desktop;nvim.desktop;
