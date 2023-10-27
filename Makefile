@@ -21,7 +21,7 @@ UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq dosfstools man-pages
 
 DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
 DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
-DESKTOP_PKGS	+= xautolock yt-dlp xdg-desktop-portal-gtk xdg-user-dirs maim unrar figlet toilet
+DESKTOP_PKGS	+= xautolock yt-dlp xdg-desktop-portal-gtk xdg-user-dirs maim unrar figlet toilet ntfs-3g
 
 AUR_PKGS		:= nwg-look-bin xdg-ninja
 
