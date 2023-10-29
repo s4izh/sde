@@ -34,6 +34,11 @@
           specialArgs = { inherit inputs; };
           modules = [ ./machines/zen ];
         };
+        jsc = lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [ ./machines/jsc ];
+        };
         # TODO specific vm config
         vm = lib.nixosSystem {
           system = "x86_64-linux";
