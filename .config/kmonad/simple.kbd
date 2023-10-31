@@ -1,8 +1,8 @@
 (defcfg
   input  (device-file "/dev/input/by-id/usb-SINO_WEALTH_Gaming_KB-event-kbd")
   output (uinput-sink
-          "KMonad"
-          "sleep 0.2s")
+          "KMonad")
+          ;; "sleep 0.2s")
           ;; xset r rate 230 70; sleep 0.2s; setxkbmap -option compose:menu")
   fallthrough false
   allow-cmd true
