@@ -143,3 +143,7 @@ vim.keymap.set("n", "<Leader>r", "q:?Dispatch<cr><cr>")
 
 vim.keymap.set("n", "<Leader>m", ":Make<cr>")
 
+vim.keymap.set("n", "gv", ":vs <cfile><cr>")
+
+-- ident all
+vim.keymap.set("n", "<Leader>I", "ggvG=")
