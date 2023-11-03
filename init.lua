@@ -77,6 +77,8 @@ let &statusline = Statusline_expr()
 set laststatus=2 "show statusbar
 ]])
 
+-- vim.cmd([[highlight StatusLine ctermbg=NONE guibg=NONE]])
+
 vim.g.slime_target = "tmux"
 
 vim.cmd([[
@@ -94,3 +96,7 @@ noremap <silent> <M-k> :<C-U>TmuxNavigateUp<cr>
 noremap <silent> <M-l> :<C-U>TmuxNavigateRight<cr>
 noremap <silent> <M-\> :<C-U>TmuxNavigatePrevious<cr>
 ]])
+
+-- ColorMyPencils("kanagawa-dragon")
+
+require('gen').model = 'codellama'
