@@ -112,8 +112,11 @@ vim.keymap.set("n", "<Leader>wt", ":Toch<cr>")
 vim.keymap.set("n", "<Leader>wc0", ":set conceallevel=0<cr>")
 vim.keymap.set("n", "<Leader>wc2", ":set conceallevel=2<cr>")
 
+-- already set in tmux config
 vim.keymap.set("i", "<C-g>", "<esc>")
 vim.keymap.set("n", "<C-g>", "<esc>")
+vim.keymap.set("v", "<C-g>", "<esc>")
+
 vim.keymap.set("i", "kj", "<esc>")
 
 
@@ -147,3 +150,7 @@ vim.keymap.set("n", "gv", ":vs <cfile><cr>")
 
 -- ident all
 vim.keymap.set("n", "<Leader>I", "ggvG=<c-o>")
+
+-- gen.nvim
+vim.keymap.set('v', "<leader>]", ":Gen<CR>")
+vim.keymap.set('n', "<leader>]", ":Gen<CR>")
