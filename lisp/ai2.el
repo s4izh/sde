@@ -25,3 +25,11 @@
                 shell-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (copilot-mode 0))))
+
+(use-package ellama
+  :init
+  (setopt ellama-language "english")
+  (require 'llm-ollama)
+  (setopt ellama-provider
+		  (make-llm-ollama
+		   :chat-model "zephyr:latest" :embedding-model "zephyr:latest")))
