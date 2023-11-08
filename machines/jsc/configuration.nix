@@ -104,9 +104,6 @@
       google-chrome
       kate
       chromium
-      kazam
-      mpv
-      yt-dlp
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJeQfTgmLkyFn+QJ2G85//oLRyeCYScPs0WfWiF1TN6s sergiosanz234@gmail.com"
@@ -125,7 +122,7 @@
     };
   };
 
-  system.autoUpgrade.enable = true;
+  # system.autoUpgrade.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -135,6 +132,13 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    kazam
+    mpv
+    yt-dlp
+    kdenlive
+    ffmpeg
+    git
+    tree
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -150,7 +154,7 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
      enable = true;
-     passwordAuthentication = false;
+     settings.PasswordAuthentication = false;
   };
 
   # Open ports in the firewall.
