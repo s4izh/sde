@@ -91,6 +91,7 @@ local opts = {
             vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
             vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+            vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float)
             -- if client.supports_method('textDocument/formatting') then
             --     vim.api.nvim_clear_autocmds({
             --         group = augroup,
