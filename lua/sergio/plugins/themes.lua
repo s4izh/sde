@@ -29,6 +29,7 @@ return {
   "squarefrog/tomorrow-night.vim",
   "eemed/sitruuna.vim",
   "projekt0n/github-nvim-theme",
+  "catppuccin/nvim",
   -- "nyoom-engineering/oxocarbon.nvim",
   -- "mswift42/vim-themes"
   -- "maxmx03/solarized.nvim",
