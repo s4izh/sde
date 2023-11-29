@@ -8,23 +8,23 @@ ext="${file##*.}"
 # base=$(echo "$file" | sed 's/\..*//')
 
 handlebang() {
-  bang=$(head -n 1 "$file")
-  echo "$bang"
-  case "$bang" in
-    *!/bin/sh|*!/bin/bash|*/bin/zsh)
-      echo "Running $file with $bang"
-      $file
-      ;;
-    *!/usr/bin/env*)
-      echo "Running $file with $bang"
-      runner=$(echo "$bang" | sed 's/.*\///')
-      echo "runner: $runner"
-      $runner $file
-      ;;
-    *)
-      echo "Can't handle $bang"
-      ;;
-  esac
+    bang=$(head -n 1 "$file")
+    echo "$bang"
+    case "$bang" in
+        *!/bin/sh|*!/bin/bash|*/bin/zsh)
+            echo "Running $file with $bang"
+            $file
+            ;;
+        *!/usr/bin/env*)
+            echo "Running $file with $bang"
+            runner=$(echo "$bang" | sed 's/.*\///')
+            echo "runner: $runner"
+            $runner $file
+            ;;
+        *)
+            echo "Can't handle $bang"
+            ;;
+    esac
 }
 
 cd "$dir" || exit 1
@@ -41,6 +41,6 @@ case "$ext" in
     py)   python3 "$file" ;;
     rs)   cargo run ;;
     tex)  pdflatex "$file";;
-    *) handlebang ;;
+    *)    handlebang ;;
     # default) exit ;;
 esac
