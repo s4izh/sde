@@ -40,5 +40,6 @@
     count = !git --no-pager log --oneline | wc -l
     cp = cherry-pick
     delta = "!f() { git diff \"$@\" | delta; }; f"
+    pr = "pull --rebase"
 [pull]
     rebase = true
