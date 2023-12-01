@@ -1,6 +1,6 @@
 [user]
-    email = "sergiosanz234@gmail.com"
-    name = "Sergio Sanz"
+    email = "sergio.sanz.martinez@proton.me"
+    name = "s4izh"
 [core]
     ; pager = delta
     editor = nvim
@@ -41,5 +41,6 @@
     cp = cherry-pick
     delta = "!f() { git diff \"$@\" | delta; }; f"
     pr = "pull --rebase"
+    pwd = "rev-parse --show-prefix"
 [pull]
     rebase = true
