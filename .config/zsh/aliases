@@ -64,15 +64,15 @@ alias systemctl-list="systemctl list-unit-files --state=enabled"
 
 alias sz="source ~/.config/zsh/.zshrc"
 
-# git
-alias \
-    gm="git checkout main" \
-    gco="git checkout" \
-    gc="git commit -m" \
-    gst="git status" \
-    ga="git add" \
-    gsu="git submodule update --init --recursive" \
-    gsr="git submodule update --recursive --remote" \
+# git aliases now just in git config file
+# alias \
+#     gm="git checkout main" \
+#     gco="git checkout" \
+#     gc="git commit -m" \
+#     gst="git status" \
+#     ga="git add" \
+#     gsu="git submodule update --init --recursive" \
+#     gsr="git submodule update --recursive --remote" \
 
 alias index="nvim index*"
 
