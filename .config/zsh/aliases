@@ -92,7 +92,8 @@ alias \
 	grep="grep --color=auto" \
 	diff="diff --color=auto" \
 	ccat="highlight --out-format=ansi" \
-	ip="ip -color=auto"
+	ip="ip -color=auto" \
+	tree="tree -C"
 
 # alias ls="exa"
 
