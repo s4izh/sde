@@ -44,5 +44,7 @@
     pr = "pull --rebase"
     pwd = "rev-parse --show-prefix"
     st = status
+    su = submodule update --init --recursive
+    sr = submodule update --recursive --remote
 [pull]
     rebase = true
