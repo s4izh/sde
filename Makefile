@@ -15,7 +15,7 @@ BOOTSTRAP		:= @bash $(PWD)/archlinux/bootstrap
 BASE_PKGS		:= filesystem gcc-libs glibc bash coreutils file findutils gawk grep procps-ng sed tar gettext
 BASE_PKGS		+= pciutils psmisc shadow util-linux bzip2 gzip xz licenses pacman systemd systemd-sysvcompat
 BASE_PKGS		+= iputils iproute2 autoconf sudo automake binutils bison fakeroot flex gcc groff libtool m4
-BASE_PKGS		+= make patch pkgconf texinfo which usbutils
+BASE_PKGS		+= make patch pkgconf texinfo which usbutils git git-crypt
 
 UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq dosfstools man-pages
 
@@ -25,7 +25,7 @@ DESKTOP_PKGS	+= xautolock yt-dlp xdg-desktop-portal-gtk xdg-user-dirs maim unrar
 
 AUR_PKGS		:= nwg-look-bin xdg-ninja
 
-FONT_PKGS		:= ttf-liberation-mono-nerd
+FONT_PKGS		:= ttf-liberation-mono-nerd ttf-jetbrains-mono-nerd ttf-firacode-nerd
 
 ZEN_PKGS		:= amd-ucode xf86-video-amdgpu xf86-video-ati brightnessctl
 RX_PKGS			:= intel-ucode xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon
