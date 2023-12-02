@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "unload" ]; then
+    pactl unload-module module-loopback
+    # pactl unload-module $(pactl list short modules | grep virtual_mic | awk '{print $1}')
+    pactl unload-module module-null-sink
+    exit
+fi
+
+HEADSET_SINK_NAME="$(pactl list short sinks | grep Hyper | cut -f 2)"
+NULL_SINK_NAME="null-sink"
+MIC_SOURCE_NAME="$(pactl list short sources | grep Hyper | grep input | cut -f 2)"
+
+# pactl load-module module-loopback source=$HEADSET_SINK_NAME sink=$NULL_SINK_NAME
+# pactl load-module module-loopback source=$MIC_SOURCE_NAME sink=$HEADSET_SINK_NAME
+
+pactl load-module module-null-sink sink_name=virtual_mic
+pactl set-default-sink virtual_mic
+pactl load-module module-loopback source=$MIC_SOURCE_NAME sink=virtual_mic
+pactl load-module module-loopback source=virtual_mic.monitor sink=$HEADSET_SINK_NAME
