@@ -1,7 +1,9 @@
 # vi: set ft=zsh :
 #!/bin/sh
 
-HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache/zsh}/history"
+HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
+[ -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh" ] || mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+
 HISTSIZE=1000000
 SAVEHIST=1000000
 setopt appendhistory
