@@ -23,13 +23,13 @@ hi PMenuThumb     guifg=NONE      guibg=#a4a5a8   guisp=#a4a5a8   gui=NONE   cte
 endif
 
 " General colors
-hi Normal         guifg=#f9f8ff   guibg=#000000   guisp=NONE      gui=NONE   ctermfg=15     ctermbg=NONE   cterm=NONE
+" hi Normal         guifg=#f9f8ff   guibg=#000000   guisp=NONE      gui=NONE   ctermfg=15     ctermbg=NONE   cterm=NONE
 hi Cursor         guifg=NONE      guibg=#cd6f5c   guisp=#cd6f5c   gui=NONE   ctermfg=NONE   ctermbg=173    cterm=NONE
 hi Visual         guifg=#c3c6ca   guibg=#554d4b   guisp=NONE      gui=NONE   ctermfg=251    ctermbg=239    cterm=NONE
 hi Visualnos      guifg=#c3c6ca   guibg=#303030   guisp=NONE      gui=NONE   ctermfg=251    ctermbg=236    cterm=NONE
 hi Search         guifg=#000000   guibg=#8dabcd   guisp=#8dabcd   gui=NONE   ctermfg=NONE   ctermbg=110    cterm=NONE
 hi Folded         guifg=#857b6f   guibg=#000000   guisp=NONE      gui=NONE   ctermfg=241    ctermbg=233    cterm=NONE
-hi StatusLineNC   guifg=NONE      guibg=#262626   guisp=#262626   gui=NONE   ctermfg=NONE   ctermbg=235    cterm=NONE
+hi StatusLineNC   guifg=NONE      guibg=#262626   guisp=#262626   gui=NONE   ctermfg=NONE   ctermbg=NONE   cterm=NONE
 hi VertSplit      guifg=#444444   guibg=#444444   guisp=NONE      gui=NONE   ctermfg=238    ctermbg=238    cterm=NONE
 " hi StatusLineNC   guifg=#857b6f   guibg=#444444   guisp=NONE      gui=NONE   ctermfg=241    ctermbg=238    cterm=NONE
 hi LineNr         guifg=#595959   guibg=NONE      guisp=NONE      gui=NONE   ctermfg=240    ctermbg=NONE   cterm=NONE
