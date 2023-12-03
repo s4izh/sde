@@ -41,5 +41,21 @@ font:
   #   family: Iosevka
   #   style: Regular
 
+  # normal:
+  #   family: InputMonoCompressed
+  #   style: Regular
+  # bold:
+  #   family: InputMonoCompressed
+  #   style: Bold
+  # italic:
+  #   family: InputMonoCompressed
+  #   style: Italic
+  # bold_italic:
+  #   family: InputMonoCompressed
+  #   style: Bold Italic
+  # normal:
+  #   family: InputMonoCompressed
+  #   style: Regular
+
   # Point size
   size: 15.0
