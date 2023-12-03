@@ -203,6 +203,7 @@ gaming: ## gaming utils
 	sudo pacman --needed -S steam lutris wine-mono
 
 kmonad:
+	sudo -E usermod -aG input $(USER)
 	$(AURINSTALL) $@-bin
 	@if [ -h $(HOME)/.config/$@ ]; then $(RM) $(HOME)/.config/$@; fi
 	$(LNDIR) $(PWD)/.config/$@ $(HOME)/.config/$@
