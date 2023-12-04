@@ -27,3 +27,5 @@ colors:
   selection:
     background: '#bcbcbc'
     text: '#000000'
+env:
+    THEME: light
