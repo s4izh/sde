@@ -44,7 +44,12 @@ PROMPT+="$name
 PROMPT+="%F{white}ᛋ "
 
 PROMPT="%F{white}$ "
-PROMPT="%F{white}%n%F{255}:%F{255}%1~ %F{15}$ "
+# PROMPT="%F{white}%n%F{255}:%F{255}%1~ %F{15}$ "
+if [[ "$THEME" == "light" ]]; then
+    PROMPT="%F{235}%n%F{234}:%F{240}%1~ %F{15}$ "
+else
+    PROMPT="%F{white}%n%F{255}:%F{255}%1~ %F{15}$ "
+fi
 # PROMPT="%F{180}%n%F{white}@%{$fg[blue]%}%M %F{144}%1~ %F{15}$ "
 # PROMPT="%F{15}%1~ %F{15}$ "
 # PROMPT+="%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
