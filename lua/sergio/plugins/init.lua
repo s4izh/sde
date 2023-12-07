@@ -9,7 +9,6 @@ return {
   "vim-airline/vim-airline",
   -- "nvim-lualine/lualine.nvim",
   "halkn/ripgrep.vim",
-  "github/copilot.vim",
   "christoomey/vim-tmux-navigator",
   -- "TimUntersberger/neogit",
   -- "ThePrimeagen/harpoon",
