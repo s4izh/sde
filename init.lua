@@ -97,6 +97,4 @@ noremap <silent> <M-l> :<C-U>TmuxNavigateRight<cr>
 noremap <silent> <M-\> :<C-U>TmuxNavigatePrevious<cr>
 ]])
 
--- ColorMyPencils("kanagawa-dragon")
-
 require('gen').model = 'codellama'
