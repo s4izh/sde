@@ -1,5 +1,13 @@
 vim.g.mapleader = " "
 
+--vim.api.nvim_set_hl('FloatBorder', {
+--  ctermfg = 'NONE',
+--  ctermbg = 'NONE',
+--  cterm = 'NONE',
+--})
+vim.cmd([[highlight FloatBorder  ctermfg=NONE ctermbg=NONE cterm=NONE]])
+vim.cmd([[highlight FloatBorder  guifg=NONE guibg=NONE cterm=NONE]])
+
 require("sergio")
 
 vim.opt.signcolumn = "no"
