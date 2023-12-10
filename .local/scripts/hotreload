@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+basename=$(basename "$0")
+
+if [ -z "$1" ]; then
+    echo "Usage: $basename <command>"
+    echo "  <command> is one of: on, off"
+    echo "  - on: enable wm hotreloading"
+    echo "  - off: disable wm hotreloading"
+    exit 1
+fi
+
+case "$1" in
+    on)
+        echo "Enabling wm hotreloading"
+        if [ -f /tmp/hotreloading ]; then
+            echo "wm hotreloading is already enabled"
+            exit 1
+        fi
+        touch /tmp/hotreloading
+        ;;
+    off)
+        echo "Disabling wm hotreloading"
+        if [ ! -f /tmp/hotreloading ]; then
+            echo "wm hotreloading is not enabled"
+            exit 1
+        fi
+        rm /tmp/hotreloading
+        ;;
+    *)
+        echo "Invalid command: $1"
+        exit 1
+        ;;
+esac
