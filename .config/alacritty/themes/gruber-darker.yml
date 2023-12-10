@@ -5,9 +5,9 @@ colors:
   primary:
     background: '#181818'
     foreground: '#e4e4e4'
-  cursor:
-    text: '#e4e4e4'
-    cursor: '#ffdd33'
+  # cursor:
+    # text: '#e4e4e4'
+    # cursor: '#ffdd33'
 
   vi_mode_cursor:
     text: CellBackground
