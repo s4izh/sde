@@ -22,5 +22,12 @@ fi
 
 gnome-keyring-daemon --start --components=secrets
 
-exec dwm 2> /tmp/dwm.log
+while true; do
+    dwm 2> /tmp/dwm.log
+    if [ ! -e "/tmp/hotreloading" ]; then
+        break
+    fi
+done
+
+# exec dwm 2> /tmp/dwm.log
 # exec stumpwm 2> /tmp/stumpwm.log
