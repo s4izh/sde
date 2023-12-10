@@ -41,9 +41,10 @@ import:
 # Blank space added around the window in pixels. This padding is scaled
 # by DPI and the specified value is always added at both opposing sides.
 window:
-    padding:
-      x: 2
-      y: 2
+  padding:
+    x: 2
+    y: 2
+  dynamic_padding: true
 
 # Spread additional padding evenly around the terminal content.
 #dynamic_padding: false
@@ -63,7 +64,7 @@ window:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-    opacity: 0.97
+  opacity: 0.97
 
 # Startup Mode (changes require restart)
 #
@@ -144,3 +145,8 @@ window:
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
+# colors:
+#   dim:
+#     terminal_foreground: false
+#     allow_italic: false
+
