@@ -54,20 +54,14 @@ set laststatus=2 "show statusbar
 
 -- vim.cmd([[highlight StatusLine ctermbg=NONE guibg=NONE]])
 
-vim.g.slime_target = "tmux"
 
-vim.cmd([[
-  "let g:slime_paste_file = expand("$HOME/.slime_paste")
-  let g:slime_paste_file = tempname()
-]])
+-- vim.g.tmux_navigator_no_mappings = 1
 
-vim.g.tmux_navigator_no_mappings = 1
-
-vim.cmd([[
-let g:tmux_navigator_no_mappings = 1
-noremap <silent> <M-h> :<C-U>TmuxNavigateLeft<cr>
-noremap <silent> <M-j> :<C-U>TmuxNavigateDown<cr>
-noremap <silent> <M-k> :<C-U>TmuxNavigateUp<cr>
-noremap <silent> <M-l> :<C-U>TmuxNavigateRight<cr>
-noremap <silent> <M-\> :<C-U>TmuxNavigatePrevious<cr>
-]])
+-- vim.cmd([[
+-- let g:tmux_navigator_no_mappings = 1
+-- noremap <silent> <M-h> :<C-U>TmuxNavigateLeft<cr>
+-- noremap <silent> <M-j> :<C-U>TmuxNavigateDown<cr>
+-- noremap <silent> <M-k> :<C-U>TmuxNavigateUp<cr>
+-- noremap <silent> <M-l> :<C-U>TmuxNavigateRight<cr>
+-- noremap <silent> <M-\> :<C-U>TmuxNavigatePrevious<cr>
+-- ]])
