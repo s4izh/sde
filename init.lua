@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 require("sergio")
 
-vim.opt.signcolumn="no"
+vim.opt.signcolumn = "no"
 
 -- require('lualine').setup()
 
@@ -41,22 +41,10 @@ autocmd('TextYankPost', {
 })
 
 -- remove trailing whitespace on save
-autocmd({"BufWritePre"}, {
+autocmd({ "BufWritePre" }, {
   group = SergioGroup,
   pattern = "*",
   command = [[%s/\s\+$//e]],
-})
-
-autocmd({"BufWritePre"}, {
-  group = SergioGroup,
-  pattern = "*.rs",
-  command = [[LspZeroFormat]],
-})
-
-autocmd({"BufWritePre"}, {
-  group = SergioGroup,
-  pattern = "*.go",
-  command = [[LspZeroFormat]],
 })
 
 -- this is from Gavin Freeborn
