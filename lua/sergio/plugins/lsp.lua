@@ -20,6 +20,7 @@ local lsp_minimal = {
     })
     lsp.gopls.setup({})
     lsp.tsserver.setup({})
+    lsp.bashls.setup({})
     lsp.clangd.setup({
       capabilities = capabilities,
     })
