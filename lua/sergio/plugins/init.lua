@@ -5,8 +5,6 @@ return {
   "junegunn/goyo.vim",
   "vim-airline/vim-airline",
   "halkn/ripgrep.vim",
-  "christoomey/vim-tmux-navigator",
-  "jpalardy/vim-slime",
   "editorconfig/editorconfig-vim",
   "kmonad/kmonad-vim", -- support for kmonad files
   {
