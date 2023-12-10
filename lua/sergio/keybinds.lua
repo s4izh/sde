@@ -61,11 +61,6 @@ vim.keymap.set("n", "<Leader>O", ":!opout %<cr><cr>")
 
 -- vim.keymap.set("n", "<Leader>wb", ":!~/vimwiki/scripts/backlinks.sh %<cr>")
 
-vim.keymap.set("n", "<Leader>la", ":LspStop<cr>")
-
--- vim.keymap.set("n", "H", ":bp<cr>")
--- vim.keymap.set("n", "L", ":bn<cr>")
-
 -- function ToggleColorColumn()
 --   if vim.wo.colorcolumn == "" then
 --     vim.wo.colorcolumn = "80";
