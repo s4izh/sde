@@ -1,12 +1,12 @@
 local function show_documentation()
-    local filetype = vim.bo.filetype
-    if vim.tbl_contains({ 'vim','help' }, filetype) then
-        vim.cmd('h '..vim.fn.expand('<cword>'))
-    elseif vim.tbl_contains({ 'man' }, filetype) then
-        vim.cmd('Man '..vim.fn.expand('<cword>'))
-    elseif vim.fn.expand('%:t') == 'Cargo.toml' and require('crates').popup_available() then
-        require('crates').show_popup()
-    end
+  local filetype = vim.bo.filetype
+  if vim.tbl_contains({ 'vim', 'help' }, filetype) then
+    vim.cmd('h ' .. vim.fn.expand('<cword>'))
+  elseif vim.tbl_contains({ 'man' }, filetype) then
+    vim.cmd('Man ' .. vim.fn.expand('<cword>'))
+  elseif vim.fn.expand('%:t') == 'Cargo.toml' and require('crates').popup_available() then
+    require('crates').show_popup()
+  end
 end
 
 local lsp_minimal = {
@@ -14,6 +14,7 @@ local lsp_minimal = {
   config = function()
     local lsp = require("lspconfig")
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    local format_group = vim.api.nvim_create_augroup('FormatGroup', {})
     lsp.rust_analyzer.setup({
       capabilities = capabilities,
     })
@@ -74,6 +75,13 @@ local lsp_minimal = {
         vim.keymap.set('n', '<space>lf', function()
           vim.lsp.buf.format { async = true }
         end, opts)
+
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          pattern = "*.lua",
+          callback = function()
+            vim.lsp.buf.format { async = true }
+          end,
+        })
       end,
     })
     -- adding borders to lsp
@@ -102,22 +110,22 @@ local lspzero = {
   branch = 'v1.x',
   dependencies = {
     -- LSP Support
-    { 'neovim/nvim-lspconfig' },                 -- Required
-    { 'williamboman/mason.nvim' },               -- Optional
-    { 'williamboman/mason-lspconfig.nvim' },     -- Optional
+    { 'neovim/nvim-lspconfig' },             -- Required
+    { 'williamboman/mason.nvim' },           -- Optional
+    { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
     -- Autocompletion
-    { 'hrsh7th/nvim-cmp' },             -- Required
-    { 'hrsh7th/cmp-nvim-lsp' },         -- Required
-    { 'hrsh7th/cmp-buffer' },           -- Optional
-    { 'hrsh7th/cmp-path' },             -- Optional
-    { 'saadparwaiz1/cmp_luasnip' },     -- Optional
-    { 'hrsh7th/cmp-nvim-lua' },         -- Optional
+    { 'hrsh7th/nvim-cmp' },         -- Required
+    { 'hrsh7th/cmp-nvim-lsp' },     -- Required
+    { 'hrsh7th/cmp-buffer' },       -- Optional
+    { 'hrsh7th/cmp-path' },         -- Optional
+    { 'saadparwaiz1/cmp_luasnip' }, -- Optional
+    { 'hrsh7th/cmp-nvim-lua' },     -- Optional
     { 'aspeddro/cmp-pandoc.nvim' },
 
     -- Snippets
-    { 'L3MON4D3/LuaSnip' },                 -- Required
-    { 'rafamadriz/friendly-snippets' },     -- Optional
+    { 'L3MON4D3/LuaSnip' },             -- Required
+    { 'rafamadriz/friendly-snippets' }, -- Optional
   },
   config = function()
     local lsp = require("lsp-zero")
