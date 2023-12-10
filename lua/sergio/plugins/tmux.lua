@@ -1,5 +1,6 @@
 local tmux_navigator = {
   "christoomey/vim-tmux-navigator",
+  event = "VeryLazy",
   config = function()
     vim.g.tmux_navigator_no_mappings = 1
     local opts = { noremap = true, silent = true }
@@ -13,6 +14,7 @@ local tmux_navigator = {
 
 local slime = {
   "jpalardy/vim-slime",
+  event = "VeryLazy",
   config = function()
     vim.g.slime_target = "tmux"
     vim.g.slime_paste_file = vim.fn.tempname()

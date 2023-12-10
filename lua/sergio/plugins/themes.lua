@@ -1,35 +1,114 @@
 return {
-  "rose-pine/neovim",
-  -- "morhetz/gruvbox",
-  "ellisonleao/gruvbox.nvim",
-  "sainnhe/everforest",
-  "wesgibbs/vim-irblack",
-  "shaunsingh/nord.nvim",
-  "gavinok/spaceway.vim",
-  "ishan9299/modus-theme-vim",
-  "rebelot/kanagawa.nvim",
-  -- "Mofiqul/vscode.nvim",
-  "folke/tokyonight.nvim",
-  "xero/sourcerer.vim",
-  "tomasiser/vim-code-dark",
-  "navarasu/onedark.nvim",
-  "tanvirtin/monokai.nvim",
-  "dylanaraps/wal.vim",
-  "phha/zenburn.nvim",
-  "ishan9299/nvim-solarized-lua",
-  "AlexvZyl/nordic.nvim",
+  {
+    "rose-pine/neovim",
+    event = "VeryLazy",
+  },
+  {
+    "ellisonleao/gruvbox.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "sainnhe/everforest",
+    event = "VeryLazy",
+  },
+  {
+    "wesgibbs/vim-irblack",
+    event = "VeryLazy",
+  },
+  {
+    "shaunsingh/nord.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "gavinok/spaceway.vim",
+    event = "VeryLazy",
+  },
+  {
+    "ishan9299/modus-theme-vim",
+    event = "VeryLazy",
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "folke/tokyonight.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "xero/sourcerer.vim",
+    event = "VeryLazy",
+  },
+  {
+    "tomasiser/vim-code-dark",
+    event = "VeryLazy",
+  },
+  {
+    "navarasu/onedark.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "tanvirtin/monokai.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "dylanaraps/wal.vim",
+    event = "VeryLazy",
+  },
+  {
+    "phha/zenburn.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "ishan9299/nvim-solarized-lua",
+    event = "VeryLazy",
+  },
+  {
+    "AlexvZyl/nordic.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "savq/melange-nvim",
+    event = "VeryLazy",
+  },
+  {
+    "doums/darcula",
+    event = "VeryLazy",
+  },
+  {
+    "mcchrish/zenbones.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "thimc/gruber-darker.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "olivercederborg/poimandres.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "NTBBloodbath/doom-one.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "squarefrog/tomorrow-night.vim",
+    event = "VeryLazy",
+  },
+  {
+    "eemed/sitruuna.vim",
+    event = "VeryLazy",
+  },
+  {
+    "projekt0n/github-nvim-theme",
+    event = "VeryLazy",
+  },
+  {
+    "catppuccin/nvim",
+    event = "VeryLazy",
+  },
   -- "eemed/sitruuna.vim",
   -- "xero/miasma.nvim",
-  "savq/melange-nvim",
-  "doums/darcula",
-  "mcchrish/zenbones.nvim",
-  "thimc/gruber-darker.nvim",
-  "olivercederborg/poimandres.nvim",
-  "NTBBloodbath/doom-one.nvim",
-  "squarefrog/tomorrow-night.vim",
-  "eemed/sitruuna.vim",
-  "projekt0n/github-nvim-theme",
-  "catppuccin/nvim",
   -- "nyoom-engineering/oxocarbon.nvim",
   -- "mswift42/vim-themes"
   -- "maxmx03/solarized.nvim",
