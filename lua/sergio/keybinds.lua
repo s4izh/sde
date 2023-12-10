@@ -141,7 +141,7 @@ vim.keymap.set("n", "<Leader>r", "q:?Dispatch<cr><cr>")
 
 vim.keymap.set("n", "<Leader>m", ":Make<cr>")
 
-vim.keymap.set("n", "gv", ":vs <cfile><cr>")
+vim.keymap.set("n", "<Leader>gv", ":vs <cfile><cr>")
 vim.keymap.set("n", "<Leader>gm", ":Man <c-r><c-w><cr>")
 
 -- ident all
