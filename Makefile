@@ -31,6 +31,8 @@ FONT_PKGS		:= ttf-liberation-mono-nerd ttf-jetbrains-mono-nerd ttf-firacode-nerd
 ZEN_PKGS		:= amd-ucode xf86-video-amdgpu xf86-video-ati brightnessctl
 RX_PKGS			:= intel-ucode xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon
 
+LSP_PKGS		:= clang bash-language-server lua-language-server pyright rust-analyzer
+
 KERNEL_PKGS		:= base-devel xmlto kmod inetutils bc libelf git cpio perl tar xz python-gitpython
 
 .DEFAULT_GOAL	:= help
