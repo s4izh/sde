@@ -28,7 +28,8 @@
     ;; (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12"))
     ;; (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-13")) ;; arch
     ;; (add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font-12")) ;; arch
-    (add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-12")) ;; arch
+    ;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-12")) ;; arch
+    (add-to-list 'default-frame-alist '(font . "InputMonoNarrow-12")) ;; arch
 )
     ;; (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-12")) ;; arch
 ;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12")) ;; arch
