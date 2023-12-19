@@ -65,6 +65,7 @@ set laststatus=2 "show statusbar
 
 -- vim.g.tmux_navigator_no_mappings = 1
 
+vim.g.tmux_navigator_no_mappings = 1
 -- vim.cmd([[
 -- let g:tmux_navigator_no_mappings = 1
 -- noremap <silent> <M-h> :<C-U>TmuxNavigateLeft<cr>
