@@ -25,11 +25,12 @@
   )
 
 (if my/is-arch
-    ;; (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12"))
+    (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12"))
     ;; (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-13")) ;; arch
     ;; (add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font-12")) ;; arch
     ;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-12")) ;; arch
-    (add-to-list 'default-frame-alist '(font . "InputMonoNarrow-12")) ;; arch
+    ;; (add-to-list 'default-frame-alist '(font . "InputMonoNarrow-12")) ;; arch
+    ;; (add-to-list 'default-frame-alist '(font . "InputMonoCompressed-12")) ;; arch
 )
     ;; (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-12")) ;; arch
 ;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12")) ;; arch
@@ -71,7 +72,10 @@
 
 (use-package gruber-darker-theme)
 
-(setq my/current-theme 'spaceway)
+(use-package naysayer-theme)
+
+(setq my/current-theme 'naysayer)
+
 (setq custom-safe-themes t)
 
 (defun my/load-theme (theme)
@@ -109,6 +113,7 @@
   (add-hook mode (lambda () (display-line-numbers-mode 1))))
 
 (dolist (mode '(org-mode-hook
+                markdown-mode-hook
                 term-mode-hook
                 vterm-mode-hook
                 shell-mode-hook
