@@ -107,6 +107,16 @@ return {
     "catppuccin/nvim",
     event = "VeryLazy",
   },
+  {
+    "NAlexPear/Spacegray.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "Th3Whit3Wolf/space-nvim",
+    event = "VeryLazy",
+  },
+  "liuchengxu/space-vim-theme",
+  "RMichelsen/cyanide",
   -- "eemed/sitruuna.vim",
   -- "xero/miasma.nvim",
   -- "nyoom-engineering/oxocarbon.nvim",
