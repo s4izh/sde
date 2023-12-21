@@ -12,4 +12,4 @@ end
 
 vim.opt.background = "dark"
 
-ColorMyPencils("gruber-darker")
+ColorMyPencils("cyanide")
