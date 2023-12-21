@@ -22,6 +22,7 @@ local lsp_minimal = {
     lsp.tsserver.setup({})
     lsp.bashls.setup({})
     lsp.clangd.setup({
+      -- cmd = { "clangd", "--background-index" },
       capabilities = capabilities,
     })
     lsp.pyright.setup({})
