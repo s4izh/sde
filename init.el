@@ -539,6 +539,9 @@
 
 (global-set-key (kbd "C-x t") 'toggle-vterm-buffer)
 
+(ss/leader-key-def
+  "t" '(toggle-vterm-buffer :which-key "toggle vterm"))
+
 (use-package autorevert
   :ensure nil
   :defer 1
@@ -554,3 +557,9 @@
   (setq eldoc-echo-area-display-truncation-message t)
   (setq eldoc-echo-area-use-multiline-p nil)
   (global-eldoc-mode t))
+
+(use-package lab
+  :defer 10
+  :config
+  (setq lab-host (getenv "GITLAB_HOST"))
+  (setq lab-token (getenv "GITLAB_TOKEN")))
