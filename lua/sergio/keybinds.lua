@@ -112,7 +112,7 @@ vim.keymap.set("i", "<C-g>", "<esc>")
 vim.keymap.set("n", "<C-g>", "<esc>")
 vim.keymap.set("v", "<C-g>", "<esc>")
 
-vim.keymap.set("i", "kj", "<esc>")
+-- vim.keymap.set("i", "kj", "<esc>")
 
 
 -- Check if we're in a diff window
