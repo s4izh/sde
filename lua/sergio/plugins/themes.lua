@@ -2,6 +2,12 @@ return {
   {
     "rose-pine/neovim",
     event = "VeryLazy",
+    config = function ()
+      local rose_pine = require('rose-pine')
+      rose_pine.setup({
+        disable_italics = true
+      })
+    end
   },
   {
     "ellisonleao/gruvbox.nvim",
