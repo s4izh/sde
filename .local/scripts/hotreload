@@ -16,7 +16,7 @@ if [ -z "$command" ]; then
     exit 1
 fi
 
-case "$1" in
+case "$command" in
     on)
         echo "Enabling wm hotreloading"
         if [ -f /tmp/hotreloading ]; then
