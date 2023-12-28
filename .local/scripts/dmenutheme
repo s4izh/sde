@@ -47,8 +47,8 @@ case "$CHOICE" in
     ;;
 esac
 
-if [ -n $CHOICE ]; then
+if [ -n "$CHOICE" ]; then
     # color="vim.cmd(\"colorscheme $NVIM_THEME\")"
     # echo $color > $NVIM_DIR/lua/colorscheme.lua
-    ln -sf $ALACRITTY_DIR/themes/$ALACRITTY_THEME.yml $ALACRITTY_DIR/theme.yml
+    ln -sf $ALACRITTY_DIR/themes/"$ALACRITTY_THEME".yml $ALACRITTY_DIR/theme.yml
 fi
