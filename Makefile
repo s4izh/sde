@@ -15,9 +15,9 @@ BOOTSTRAP		:= @bash $(PWD)/archlinux/bootstrap
 BASE_PKGS		:= filesystem gcc-libs glibc bash coreutils file findutils gawk grep procps-ng sed tar gettext
 BASE_PKGS		+= pciutils psmisc shadow util-linux bzip2 gzip xz licenses pacman systemd systemd-sysvcompat
 BASE_PKGS		+= iputils iproute2 autoconf sudo automake binutils bison fakeroot flex gcc groff libtool m4
-BASE_PKGS		+= make patch pkgconf texinfo which usbutils git git-crypt
+BASE_PKGS		+= make patch pkgconf texinfo which usbutils git
 
-UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq dosfstools man-pages
+UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq dosfstools man-pages git-crypt gnupg pass
 
 DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
 DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
