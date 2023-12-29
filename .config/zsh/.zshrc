@@ -61,6 +61,10 @@ bindkey '^R' history-incremental-search-backward
 # zle -N up-line-or-beginning-search
 # zle -N down-line-or-beginning-search
 
+# use tty-mode when needed
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
 # fzf via package manager
 [ -e /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -e /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
@@ -69,3 +73,4 @@ export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(direnv hook zsh)"
+
