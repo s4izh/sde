@@ -17,14 +17,14 @@ BASE_PKGS		+= pciutils psmisc shadow util-linux bzip2 gzip xz licenses pacman sy
 BASE_PKGS		+= iputils iproute2 autoconf sudo automake binutils bison fakeroot flex gcc groff libtool m4
 BASE_PKGS		+= make patch pkgconf texinfo which usbutils git
 
-UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq dosfstools man-pages git-crypt gnupg pass
+UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq dosfstools man-pages git-crypt gnupg pass pass-otp
 
 DESKTOP_PKGS	:= firefox discord network-manager-applet texlive zathura-pdf-poppler thunar pandoc-cli pandoc-crossref
 DESKTOP_PKGS	+= mpv figlet pavucontrol xdg-utils xclip xsel xdotool xorg-xbacklight xorg-xrandr xorg-xsetroot redshift
 DESKTOP_PKGS	+= xautolock yt-dlp xdg-desktop-portal-gtk xdg-user-dirs maim unrar figlet toilet ntfs-3g mlocate
 DESKTOP_PKGS	+= lddtree
 
-AUR_PKGS		:= nwg-look-bin xdg-ninja
+AUR_PKGS		:= nwg-look-bin xdg-ninja pass-import
 
 FONT_PKGS		:= ttf-liberation-mono-nerd ttf-jetbrains-mono-nerd ttf-firacode-nerd
 
