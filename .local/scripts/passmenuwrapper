@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "--type" ]; then
+    passmenu --type
+else
+    passmenu
+fi
+
+if [ $? -eq 0 ]; then
+    if [ "$1" == "--type" ]; then
+        notify-send "pass" "Content typed in the active window"
+    else
+        notify-send "pass" "Content in the clipboard for 45s"
+    fi
+fi
