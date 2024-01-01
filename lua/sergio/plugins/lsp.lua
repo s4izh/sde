@@ -21,6 +21,7 @@ local lsp_minimal = {
     lsp.gopls.setup({})
     lsp.tsserver.setup({})
     lsp.bashls.setup({})
+    lsp.zls.setup({})
     lsp.clangd.setup({
       -- cmd = { "clangd", "--background-index" },
       capabilities = capabilities,
