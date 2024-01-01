@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>e", vim.cmd.Oil)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -94,7 +95,7 @@ vim.keymap.set("n", "<Leader>wsc", ":setlocal spell spelllang=ca<cr>")
 vim.keymap.set("n", "<Leader>wse", ":setlocal spell spelllang=es<cr>")
 vim.keymap.set("n", "<Leader>wsi", ":setlocal spell spelllang=en<cr>")
 vim.keymap.set("n", "<Leader>wS", ":setlocal nospell<cr>")
-vim.keymap.set("n", "<Leader>wT", ":r!~/notes/src/template %<cr>ggdd")
+vim.keymap.set("n", "<Leader>wT", ":r!~/notes/utils/template %<cr>ggdd")
 -- vim.keymap.set("n", "<Leader>wn", ":set nospell")
 
 vim.keymap.set("n", "<Leader>wf", ":set ft=")
