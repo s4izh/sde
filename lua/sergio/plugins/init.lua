@@ -37,7 +37,7 @@ return {
       { "rktjmp/lush.nvim" },
       { "rktjmp/shipwright.nvim" },
     },
-  }
+  },
   -- "ctrlpvim/ctrlp.vim",
   -- "chrisbra/vim-zsh",
   -- "mhinz/vim-startify",

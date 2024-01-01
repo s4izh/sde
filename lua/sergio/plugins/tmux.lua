@@ -15,6 +15,7 @@ local tmux_navigator = {
 local slime = {
   "jpalardy/vim-slime",
   event = "VeryLazy",
+  enabled = false,
   config = function()
     vim.g.slime_target = "tmux"
     vim.g.slime_paste_file = vim.fn.tempname()
