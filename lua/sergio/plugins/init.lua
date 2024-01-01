@@ -3,7 +3,7 @@ return {
   "tpope/vim-dispatch",
   "tpope/vim-surround",
   "junegunn/goyo.vim",
-  "vim-airline/vim-airline",
+  -- "vim-airline/vim-airline",
   "halkn/ripgrep.vim",
   "editorconfig/editorconfig-vim",
   "kmonad/kmonad-vim", -- support for kmonad files
