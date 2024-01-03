@@ -13,6 +13,7 @@
   (setq evil-want-C-u-scroll t)
   (setq evil-respect-visual-line-mode t) ;; basically gj gk etc
   (setq evil-want-Y-yank-to-eol t)
+  (setq evil-want-C-i-jump nil)
   :config
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-normal-state-map (kbd "<escape>") 'abort-minibuffers)

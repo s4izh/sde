@@ -184,6 +184,11 @@
               ("-" . dired-up-directory))
   :init
 
+  (use-package dired-launch
+    :ensure t
+    :config
+    (setq dired-launch-default-launcher '("xdg-open")))
+
   (setq dired-bind-jump nil)
   :config
   ;; (setq dired-listing-switches "-aghoA --group-directories-first")
@@ -346,7 +351,6 @@
          ;; ("M-s g"       . consult-ripgrep)
          ;; ("M-s M-g"     . consult-ripgrep)
          ;; ("C-x C-SPC"   . consult-global-mark)
-         ;; ("C-x M-:"     . consult-complex-command)
          ;; ("C-c n"       . consult-org-agenda)
          ("C-c m"       . my/notegrep))
          ;; :map help-map
