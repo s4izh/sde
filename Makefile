@@ -222,6 +222,12 @@ zathura:
 	@if [ -h $(HOME)/.config/$@ ]; then $(RM) $(HOME)/.config/$@; fi
 	$(LNDIR) $(PWD)/.config/$@ $(HOME)/.config/$@
 
+pinentry-dmenu:
+	$(MYGIT)/$@ $(SRCDIR)/$@
+	cd $(SRCDIR)/$@ && sudo make clean install
+	@if [ -h $(HOME)/.gnupg/gpg-agent.conf ]; then $(RM) $(HOME)/.gnupg/gpg-agent.conf; fi
+	$(LN) $(PWD)/.gnupg/gpg-agent.conf $(HOME)/.gnupg/gpg-agent.conf
+
 suckless: dwm dwmblocks dmenu ## my suckless software forks (dwm, dwmblocks, dmenu)
 
 dwm-deploy: dirs suckless X11 xinitrc sxhkd nvim alacritty tmux git paru xdg pkgs-desktop ## deploy all desktop with dwm
