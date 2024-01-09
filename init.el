@@ -377,10 +377,10 @@
   :bind(("C-," . embark-act)))
 
 ;;; PASS
-;; (use-package password-store
-;;   :commands (password-store-copy
-;;              password-store-insert
-;;              password-store-generate))
+(use-package password-store
+  :commands (password-store-copy
+             password-store-insert
+             password-store-generate))
 
 ;; Authenticte with auth-source-pass
 ;; (use-package auth-source-pass
