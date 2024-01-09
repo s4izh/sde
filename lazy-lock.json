@@ -1,4 +1,5 @@
 {
+  "DrawIt": { "branch": "master", "commit": "4e824fc939cec81dc2a8f4d91aaeb6151d1cc140" },
   "LuaSnip": { "branch": "master", "commit": "57c9f5c31b3d712376c704673eac8e948c82e9c1" },
   "Spacegray.nvim": { "branch": "main", "commit": "6ceae7a0b048f763f2ad18224d2723db0719ace6" },
   "calendar.vim": { "branch": "master", "commit": "66e6d0955efb6beb68912dce3ff484e8805d975c" },
@@ -64,6 +65,7 @@
   "space-nvim": { "branch": "main", "commit": "6537fc7188a93607c40aaad7c0f45a3c1eb40b99" },
   "space-vim-theme": { "branch": "master", "commit": "4790dbba31f678f75af4f4c7a1465008542bd979" },
   "spaceway.vim": { "branch": "master", "commit": "9027289fa293a59ce169ab4868d50073178409b4" },
+  "tabular": { "branch": "master", "commit": "339091ac4dd1f17e225fe7d57b48aff55f99b23a" },
   "telescope.nvim": { "branch": "master", "commit": "f336f8cfab38a82f9f00df380d28f0c2a572f862" },
   "tokyonight.nvim": { "branch": "main", "commit": "f247ee700b569ed43f39320413a13ba9b0aef0db" },
   "tomorrow-night.vim": { "branch": "master", "commit": "630abe71eeb18a78708ee91a9c7aa6009aaabf09" },
@@ -75,12 +77,11 @@
   "vim-fugitive": { "branch": "master", "commit": "59659093581aad2afacedc81f009ed6a4bfad275" },
   "vim-irblack": { "branch": "master", "commit": "59622caff32a7925181ab139701fad3eee54ae51" },
   "vim-markdown": { "branch": "master", "commit": "46add6c3017d3e4035dc10ffa9cb54221d8dfe1a" },
-  "vim-slime": { "branch": "main", "commit": "a532203bcd7af7f5e571c07b60bba7287076dc19" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-table-mode": { "branch": "master", "commit": "4ff8de2ac93431ee6d85a9e04177012752e6abdc" },
   "vim-tmux-navigator": { "branch": "master", "commit": "38b1d0402c4600543281dc85b3f51884205674b6" },
-  "vimwiki": { "branch": "dev", "commit": "0bb1b4945bb205a076a35b66174e5d66be8eaafe" },
   "wal.vim": { "branch": "master", "commit": "c72ba0d18946f29aab9c95eb6975d321c68b3681" },
+  "wiki.vim": { "branch": "master", "commit": "65b67f3669a0db078dab2750d3c51c680ee14df1" },
   "zenbones.nvim": { "branch": "main", "commit": "510d12c088ed45a410371c63ebd62ffb54c1615f" },
   "zenburn.nvim": { "branch": "master", "commit": "cc78ddba1d65f885d3928692ee628ed40216b900" }
 }
