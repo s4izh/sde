@@ -5,7 +5,9 @@
   :defer t)
 
 (use-package eglot
-  :defer t)
+  :defer t
+  :config
+  (setq eglot-sync-connect 0))
 
 ;; (use-package rust-ts-mode
 ;;   :mode ("\\.rs\\'" . rust-ts-mode)

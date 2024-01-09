@@ -27,6 +27,8 @@
 
 
 (with-eval-after-load 'evil
+  (define-key evil-normal-state-map (kbd "H") 'previous-buffer)
+  (define-key evil-normal-state-map (kbd "L") 'next-buffer)
   (define-key evil-normal-state-map (kbd "C-y") nil)
   (define-key evil-visual-state-map (kbd "C-y") nil)
   (define-key evil-insert-state-map (kbd "C-y") nil)
@@ -56,3 +58,8 @@
 (setq-default evil-shift-width tab-width)
 ;; spaces instead of tabs
 (setq-default indent-tabs-mode nil)
+
+(use-package evil-god-state
+  :after evil
+  :config
+  (evil-define-key 'normal 'global (kbd ",") 'evil-execute-in-god-state))
