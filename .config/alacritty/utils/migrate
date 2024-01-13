@@ -1,0 +1,58 @@
+#!/bin/sh
+
+ALACRITTY_DIR=$XDG_CONFIG_HOME/alacritty
+ALACRITTY_DIR=${ALACRITTY_DIR:-$HOME/config/alacritty}
+cd $ALACRITTY_DIR
+
+echo "Entering $ALACRITTY_DIR"
+mv -v alacritty.toml alacritty.toml.bak
+
+TOML_THEME_DIR=$ALACRITTY_DIR/toml/themes
+TOML_FONT_DIR=$ALACRITTY_DIR/toml/fonts
+
+YML_THEME_DIR=$ALACRITTY_DIR/yml/themes
+YML_FONT_DIR=$ALACRITTY_DIR/yml/fonts
+
+if ! [ -d $TOML_THEME_DIR ]; then
+    mkdir -v $TOML_THEME_DIR
+fi
+
+ln -svf $ALACRITTY_DIR/yml/alacritty.yml alacritty.yml
+
+for theme in $YML_THEME_DIR/*; do
+    ln -sf $theme yml/theme.yml
+    alacritty migrate
+
+    base="${theme%.*}"
+    theme="${base##*/}"
+    ext="${theme##*.}"
+
+    echo "------"
+    echo $base
+    echo $theme
+    echo $ext
+    echo "------"
+
+    mv yml/theme.toml $TOML_THEME_DIR/$theme.toml
+    rm alacritty.toml
+done
+
+if ! [ -d $TOML_FONT_DIR ]; then
+    mkdir -v $TOML_FONT_DIR
+fi
+
+for font in $YML_FONT_DIR/*; do
+    ln -svf $font yml/font.yml
+    alacritty migrate
+
+    base="${font%.*}"
+    font="${base##*/}"
+    ext="${font##*.}"
+
+    cp yml/font.toml $TOML_FONT_DIR/$font.toml
+    rm alacritty.toml
+done
+
+ln -svf toml/alacritty.toml alacritty.toml
+
+rm alacritty.yml
