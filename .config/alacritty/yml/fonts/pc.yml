@@ -42,7 +42,7 @@ font:
   #   family: Liberation Mono
   #   style: Regular
   # bold:
-  #   family: Liberation Mono 
+  #   family: Liberation Mono
   #   style: Bold
   # italic:
   #   family: Liberation Mono
@@ -55,4 +55,4 @@ font:
   #   style: Regular
 
   # Point size
-  size: 12
+  size: 16
