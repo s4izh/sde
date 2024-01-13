@@ -1,0 +1,21 @@
+[colors.normal]
+black = "#000000"
+blue = "#6688aa"
+cyan = "#528b8b"
+green = "#73c936"
+magenta = "#9e95c7"
+red = "#c73c3f"
+white = "#acadb1"
+yellow = "#ffdd33"
+
+[colors.primary]
+background = "#181818"
+foreground = "#e4e4e4"
+
+[colors.selection]
+background = "#d8dee9"
+text = "#191919"
+
+[colors.vi_mode_cursor]
+cursor = "CellForeground"
+text = "CellBackground"
