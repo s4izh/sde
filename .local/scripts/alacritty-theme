@@ -1,6 +1,22 @@
 #!/bin/sh
 
 SYSTEM_MENU=${SYSTEM_MENU:-dmenu}
-theme=$(ls "$HOME/.config/alacritty/themes"| $SYSTEM_MENU -l 30) || exit
-cd $HOME/.config/alacritty/
-ln -sf themes/$theme theme.yml
+
+config_type=$(echo -e "toml\nyml" | $SYSTEM_MENU -p "choose config type")
+
+case "$config_type" in
+    "toml") ext=toml ;;
+    "yml") ext=yml ;;
+    *) exit ;;
+esac
+
+theme=$(ls "$HOME/.config/alacritty/$ext/themes" | $SYSTEM_MENU -l 30) || exit
+
+case "$theme" in
+    *$ext)
+        cd $HOME/.config/alacritty/"$ext"
+        ln -sf themes/"$theme" theme."$ext"
+        ;;
+    *) exit
+        ;;
+esac
