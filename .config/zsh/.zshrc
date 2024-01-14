@@ -19,6 +19,7 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 # zstyle ':completion::complete:lsof:*' menu yes select
 zstyle ':completion::*' menu yes select
+zstyle ':completion::complete:*' use-cache 1
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
@@ -37,7 +38,7 @@ source "$ZDOTDIR/functions"
 # normal files to source
 zsh_add_file "exports"
 zsh_add_file "aliases"
-zsh_add_file "prompt"
+# zsh_add_file "prompt"
 # zsh_add_file "vim-mode"
 
 if [[ -n $EMACS ]]; then
@@ -50,8 +51,8 @@ fi
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
-zsh_add_completion "nix-community/nix-zsh-completions" false
-zsh_add_completion "esc/conda-zsh-completion" false
+# zsh_add_completion "nix-community/nix-zsh-completions" false
+# zsh_add_completion "esc/conda-zsh-completion" false
 
 # key-bindings
 bindkey '^R' history-incremental-search-backward
@@ -63,14 +64,18 @@ bindkey '^R' history-incremental-search-backward
 
 # use tty-mode when needed
 export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null
+# gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # fzf via package manager
 [ -e /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -e /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+
 export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 # fzf via git upstream download
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(direnv hook zsh)"
+
+PROMPT="%B%F{green}%n@%m%k %B%F{blue}%~
+%B%F{white}$ %b%f%k"
 
