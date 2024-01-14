@@ -38,7 +38,7 @@ source "$ZDOTDIR/functions"
 # normal files to source
 zsh_add_file "exports"
 zsh_add_file "aliases"
-# zsh_add_file "prompt"
+zsh_add_file "prompt"
 # zsh_add_file "vim-mode"
 
 if [[ -n $EMACS ]]; then
@@ -75,7 +75,3 @@ export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(direnv hook zsh)"
-
-PROMPT="%B%F{green}%n@%m%k %B%F{blue}%~
-%B%F{white}$ %b%f%k"
-

@@ -141,8 +141,9 @@ PROMPT="%n:%1~%  $ "
 
 # luke style no []
 # user@host ~ $
-# PROMPT="%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[cyan]%}%~"
-# PROMPT+=" %{$reset_color%}$%b "
+PROMPT="%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[cyan]%}%~"
+PROMPT+="
+%{$reset_color%}$%b "
 
 # gerry style
 # user[host] ~ *git
