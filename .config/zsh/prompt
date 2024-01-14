@@ -147,3 +147,7 @@ PROMPT="%n:%1~%  $ "
 # gerry style
 # user[host] ~ *git
 # $
+
+# gentoo style
+PROMPT="%B%F{green}%n@%m%k %B%F{blue}%~
+%B%F{white}$ %b%f%k"
