@@ -19,7 +19,7 @@ handlebang() {
             echo "Running $file with $bang"
             runner=$(echo "$bang" | sed 's/.*\///')
             echo "runner: $runner"
-            $runner $file
+            $runner "$file"
             ;;
         *)
             echo "Can't handle $bang"
