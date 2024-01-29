@@ -2,7 +2,7 @@
 
 SYSTEM_MENU=${SYSTEM_MENU:-dmenu}
 
-config_type=$(echo -e "toml\nyml" | $SYSTEM_MENU -p "choose config type")
+config_type=$(printf "toml\nyml" | $SYSTEM_MENU -p "choose config type")
 
 case "$config_type" in
     "toml") ext=toml ;;
