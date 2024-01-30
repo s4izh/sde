@@ -1,6 +1,18 @@
 (global-set-key (kbd "C-M-u") 'universal-argument)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
+(defun my/evil-scroll-down-and-center ()
+  "Scroll and center the buffer"
+  (interactive)
+  (evil-scroll-down evil-scroll-count)
+  (recenter))
+
+(defun my/evil-scroll-up-and-center ()
+  "Scroll down and center the buffer"
+  (interactive)
+  (evil-scroll-up evil-scroll-count)
+  (recenter))
+
 (use-package evil
   :demand t
   ;; :bind (("<escape>" . keyboard-escape-quit))
@@ -18,6 +30,10 @@
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-normal-state-map (kbd "<escape>") 'abort-minibuffers)
   (evil-define-key 'normal 'global "K" 'man)
+  (define-key evil-normal-state-map (kbd "C-d") 'my/evil-scroll-down-and-center)
+  (define-key evil-visual-state-map (kbd "C-d") 'my/evil-scroll-down-and-center)
+  (define-key evil-normal-state-map (kbd "C-u") 'my/evil-scroll-up-and-center)
+  (define-key evil-visual-state-map (kbd "C-u") 'my/evil-scroll-up-and-center)
   ;; (define-key evil-normal-state-map (kbd "/") 'consult-line)
   ;; (define-key evil-normal-state-map (kbd "?") 'consult-line)
   ;; (define-key evil-insert-state-map (kbd "C-n") 'vertico-next)
