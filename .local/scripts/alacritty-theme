@@ -10,12 +10,18 @@ case "$config_type" in
     *) exit ;;
 esac
 
-theme=$(ls "$HOME/.config/alacritty/$ext/themes" | $SYSTEM_MENU -l 30) || exit
+query=$(ls "$HOME/.config/alacritty/$ext/themes")"\nnone"
+
+theme=$(printf "$query" | $SYSTEM_MENU -l 30) || exit
 
 case "$theme" in
     *$ext)
-        cd $HOME/.config/alacritty/"$ext"
+        cd "$HOME/.config/alacritty/$ext" || exit
         ln -sf themes/"$theme" theme."$ext"
+        ;;
+    none)
+        cd "$HOME/.config/alacritty/$ext" || exit
+        rm -f theme."$ext"
         ;;
     *) exit
         ;;
