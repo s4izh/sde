@@ -38,6 +38,7 @@ return {
       { "rktjmp/shipwright.nvim" },
     },
   },
+  "RaafatTurki/hex.nvim", -- requieres xdd
   -- "ctrlpvim/ctrlp.vim",
   -- "chrisbra/vim-zsh",
   -- "mhinz/vim-startify",
