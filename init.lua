@@ -10,7 +10,7 @@ vim.cmd([[highlight FloatBorder  guifg=NONE guibg=NONE cterm=NONE]])
 
 require("sergio")
 
-vim.opt.signcolumn = "no"
+-- vim.opt.signcolumn = "no"
 
 vim.cmd([[
   autocmd BufNewFile,BufRead ~/.config/sway/config.d/* set filetype=swayconfig
@@ -36,11 +36,11 @@ autocmd('TextYankPost', {
 })
 
 -- remove trailing whitespace on save
-autocmd({ "BufWritePre" }, {
-  group = sergio_group,
-  pattern = "*",
-  command = [[%s/\s\+$//e]],
-})
+-- autocmd({ "BufWritePre" }, {
+--   group = sergio_group,
+--   pattern = "*",
+--   command = [[%s/\s\+$//e]],
+-- })
 
 -- this is from Gavin Freeborn
 vim.cmd([[
