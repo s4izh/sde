@@ -1,5 +1,5 @@
 (global-set-key (kbd "C-M-u") 'universal-argument)
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (defun my/evil-scroll-down-and-center ()
   "Scroll and center the buffer"

@@ -497,6 +497,9 @@
   :config
   (setq compilation-scroll-output t))
 
+(require 'ansi-color)
+(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
+
 (setq explicit-shell-file-name "/bin/bash")
 (setq vterm-shell "/bin/bash")
 

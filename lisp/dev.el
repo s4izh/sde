@@ -102,3 +102,6 @@
 
 (use-package dts-mode
   :defer t)
+
+(use-package rmsbolt
+  :defer t)
