@@ -33,3 +33,16 @@
   (setopt ellama-provider
 		  (make-llm-ollama
 		   :chat-model "mistral:latest" :embedding-model "mistral:latest")))
+
+
+(use-package gptel
+  :config
+  (setq gptel-default-mode "markdown-mode")
+  (gptel-make-ollama
+    "Ollama"                               ;Any name of your choosing
+    :host "localhost:11434"                ;Where it's running
+    :models '("mistral")            ;Installed models
+    :stream t)                             ;Stream responses
+  )
+(setq-default gptel-model "mistral" ;Pick your default model
+              gptel-backend (gptel-make-ollama "Ollama" :host "localhost:11434"))
