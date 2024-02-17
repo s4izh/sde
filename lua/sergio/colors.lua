@@ -12,4 +12,4 @@ end
 
 vim.opt.background = "dark"
 
-ColorMyPencils("cyanide")
+ColorMyPencils("spaceway")
