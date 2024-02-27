@@ -43,13 +43,16 @@ XF86MonBrightnessDown
 super + n
     nixsearch
 
+@super + ctrl + n
+    insert_n
+
 super + X
     pkill -f xdotool
 
-super + ctrl + n
+super + ctrl + r
 	redshift -O 5000
 
-super + shift + n
+super + shift + r
 	redshift -x
 
 super + alt + s
