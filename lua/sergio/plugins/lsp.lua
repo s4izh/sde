@@ -38,6 +38,23 @@ local lsp_minimal = {
         },
       },
     })
+    lsp.ltex.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      cmd = { "ltex-ls" },
+      filetypes = { "tex", "bib", "markdown" },
+      settings = {
+        ltex = {
+          language = "es",
+        },
+      },
+    })
+    lsp.texlab.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      cmd = { "texlab" },
+      filetypes = { "tex", "bib", "markdown" },
+    })
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('UserLspConfig', {}),
       callback = function(ev)
