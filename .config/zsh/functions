@@ -296,16 +296,16 @@ function __tmux() {
   fi
 
   # Same for KITTY_LISTEN_ON (although note, "unix:" prefix must be stripped).
-  local KITTY_SOCK=${KITTY_LISTEN_ON##unix:}
-  if [ -r "$KITTY_SOCK" -a ! -L "$KITTY_SOCK" ]; then
-    ln -sf "$KITTY_SOCK" "$HOME/.config/kitty/kitty.sock"
-    ENV_OVERRIDES+=(KITTY_LISTEN_ON="unix:$HOME/.config/kitty/kitty.sock")
-  fi
+  # local KITTY_SOCK=${KITTY_LISTEN_ON##unix:}
+  # if [ -r "$KITTY_SOCK" -a ! -L "$KITTY_SOCK" ]; then
+  #   ln -sf "$KITTY_SOCK" "$HOME/.config/kitty/kitty.sock"
+  #   ENV_OVERRIDES+=(KITTY_LISTEN_ON="unix:$HOME/.config/kitty/kitty.sock")
+  # fi
 
   # If provided with args, pass them through.
   if [[ -n "$@" ]]; then
-    env "${ENV_OVERRIDES[@]}" tmux "$@"
-    return
+      env "${ENV_OVERRIDES[@]}" tmux "$@"
+      return
   fi
 
   # Check for .tmux file (poor man's Tmuxinator).
