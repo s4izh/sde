@@ -75,3 +75,6 @@ export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(direnv hook zsh)"
+# eval "$(starship init zsh)"
+
+[ -f "/home/sergio/.ghcup/env" ] && source "/home/sergio/.ghcup/env" # ghcup-env
