@@ -96,6 +96,8 @@ local lsp_minimal = {
           vim.lsp.buf.format { async = true }
         end, opts)
 
+        vim.keymap.set('n', '<space>ls', ":LspStop<cr>", opts)
+
         vim.api.nvim_set_hl(0, 'FloatBorder', { link = 'Normal'})
 
         -- vim.api.nvim_create_autocmd('BufWritePre', {
