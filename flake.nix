@@ -18,46 +18,49 @@
       };
       lib = nixpkgs.lib;
     in {
-      nixosConfigurations = {
-        z390 = lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./machines/z390 ];
+      nixosConfigurations = let
+        createMachineConfig = machineName: {
+          name = "${machineName}";
+          value = lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = { inherit inputs; };
+            modules = [ ./machines/${machineName} ];
+          };
         };
-        rx = lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./machines/rx ];
-        };
-        zen = lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./machines/zen ];
-        };
-        jsc = lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [ ./machines/jsc ];
-        };
-        # TODO specific vm config
-        vm = lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./machines/zen/configuration.nix
-            ./modules/base.nix
-            ./modules/desktop.nix
-            ./modules/dwm.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                extraSpecialArgs = { inherit inputs; };
-                users.sergio.imports = [ ./home/sergio/home.nix ];
-              };
-            }
-          ];
-        };
-      };
+        machineNames = [ 
+          "z390"
+          "rx"
+          "zen"
+          "jsc"
+        ];
+        autoMachineConfigs = map createMachineConfig machineNames;
+        machineConfigs = autoMachineConfigs ++ [
+        {
+          name = "vm";
+          value = lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+                ./machines/zen/configuration.nix
+                ./modules/base.nix
+                ./modules/desktop.nix
+                ./modules/dwm.nix
+                home-manager.nixosModules.home-manager
+                {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    extraSpecialArgs = { inherit inputs; };
+                    users.sergio.imports = [ ./home/sergio/home.nix ];
+                  };
+                }
+            ];
+          };
+        }
+        ];
+
+        in
+          builtins.listToAttrs machineConfigs;
+
+      # };
       homeManagerConfigurations = {
         sergio = home-manager.lib.homeManagerConfiguration {
           # pkgs = nixpkgs.legacyPackages.${system};
