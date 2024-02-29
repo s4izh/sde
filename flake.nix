@@ -18,7 +18,8 @@
       };
       lib = nixpkgs.lib;
     in {
-      nixosConfigurations = let
+      nixosConfigurations =
+      let
         createMachineConfig = machineName: {
           name = "${machineName}";
           value = lib.nixosSystem {
@@ -32,30 +33,11 @@
           "rx"
           "zen"
           "jsc"
+          "vm"
         ];
         autoMachineConfigs = map createMachineConfig machineNames;
-        machineConfigs = autoMachineConfigs ++ [
-        {
-          name = "vm";
-          value = lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-                ./machines/zen/configuration.nix
-                ./modules/base.nix
-                ./modules/desktop.nix
-                ./modules/dwm.nix
-                home-manager.nixosModules.home-manager
-                {
-                  home-manager = {
-                    useGlobalPkgs = true;
-                    extraSpecialArgs = { inherit inputs; };
-                    users.sergio.imports = [ ./home/sergio/home.nix ];
-                  };
-                }
-            ];
-          };
-        }
-        ];
+
+        machineConfigs = autoMachineConfigs ++ [ ];
 
         in
           builtins.listToAttrs machineConfigs;
