@@ -27,7 +27,6 @@
     mpv
     yt-dlp
     xdotool
-    exa
     picom
     headsetcontrol
     sxiv
@@ -126,9 +125,9 @@
   };
 
   services.xserver = {
-    layout = "es";
-    xkbVariant = "";
-    xkbOptions = "caps:escape";
+    xkb.layout = "es";
+    xkb.variant = "";
+    xkb.options = "caps:escape";
     # xkbOptions = "ctrl:nocaps";
     libinput = {
       enable = true;
@@ -176,22 +175,25 @@
   };
 
   # check the names with fc-list
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     iosevka # Iosevka
     jetbrains-mono # JetBrains Mono
     source-code-pro # Source Code Pro
     source-serif-pro # Source Serif Pro
     unifont # Unifont
     fantasque-sans-mono # Fantasque Sans Mono
+    input-fonts
     # (nerdfonts.override { fonts = [ "LiterationMono Nerd Font Mono" ]; })
     nerdfonts
   ];
+
+  nixpkgs.config.input-fonts.acceptLicense = true;
 
   fonts.fontconfig = {
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
       serif = [ "Source Serif Pro" ];
-      monospace = [ "LiterationMono Nerd Font Mono" ];
+      monospace = [ "InputMonoCondensed" ];
     };
   };
 
