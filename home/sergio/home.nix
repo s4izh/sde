@@ -169,7 +169,7 @@ in {
       package = pkgs.qogir-icon-theme;
     };
     font = {
-      name = "LiterationMono Nerd Font";
+      name = "monospace";
       # name = "Iosevka Nerd Font Mono";
       #package = pkgs.rubik;
       size = 10;
@@ -215,5 +215,5 @@ in {
   # programs.direnv.enable = true;
   # programs.direnv.nix-direnv.enable = true;
 
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 }
