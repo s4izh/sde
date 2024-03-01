@@ -55,6 +55,12 @@ local lsp_minimal = {
       cmd = { "texlab" },
       filetypes = { "tex", "bib", "markdown" },
     })
+    lsp.nixd.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      cmd = { "nixd" },
+      filetypes = { "nix" },
+    })
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('UserLspConfig', {}),
       callback = function(ev)
