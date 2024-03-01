@@ -17,6 +17,7 @@ in {
     "${modules}/virtualisation.nix"
     "${modules}/android.nix"
     "${modules}/dev.nix"
+    "${modules}/nvim.nix"
     # "${modules}/i3.nix"
     inputs.home-manager.nixosModules.home-manager
   ];
