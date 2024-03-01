@@ -112,39 +112,39 @@ in {
 
   # home.file.".ssh/config".source = ./.ssh/config;
 
-  programs.ssh = {
-    enable = true;
-    matchBlocks = {
-      "github.com" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/github";
-      };
-      "repo.fib.upc.es" = {
-        hostname = "repo.fib.upc.es";
-        user = "git";
-        identityFile = "~/.ssh/repofib";
-      };
-      "zen" = {
-        hostname = "192.168.1.137";
-        user = "sergio";
-        identityFile = "~/.ssh/zen";
-      };
-      "pti" = {
-        hostname = "nattech.fib.upc.edu";
-        user = "alumne";
-        port = 22040;
-      };
-      "sistemes" = {
-        hostname = "192.168.122.10";
-        user = "alumne";
-        identityFile = "~/.ssh/sistemes";
-        port = 22;
-        forwardX11 = true;
-        forwardX11Trusted = true;
-      };
-    };
-  };
+  # programs.ssh = {
+  #   enable = true;
+  #   matchBlocks = {
+  #     "github.com" = {
+  #       hostname = "github.com";
+  #       user = "git";
+  #       identityFile = "~/.ssh/github";
+  #     };
+  #     "repo.fib.upc.es" = {
+  #       hostname = "repo.fib.upc.es";
+  #       user = "git";
+  #       identityFile = "~/.ssh/repofib";
+  #     };
+  #     "zen" = {
+  #       hostname = "192.168.1.137";
+  #       user = "sergio";
+  #       identityFile = "~/.ssh/zen";
+  #     };
+  #     "pti" = {
+  #       hostname = "nattech.fib.upc.edu";
+  #       user = "alumne";
+  #       port = 22040;
+  #     };
+  #     "sistemes" = {
+  #       hostname = "192.168.122.10";
+  #       user = "alumne";
+  #       identityFile = "~/.ssh/sistemes";
+  #       port = 22;
+  #       forwardX11 = true;
+  #       forwardX11Trusted = true;
+  #     };
+  #   };
+  # };
 
   programs.emacs = {
     enable = true;
