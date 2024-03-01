@@ -7,7 +7,7 @@ pkgs.mkShell {
     nixFlakes
     gnumake
     tmux
-    neovim
+    vim
   ];
 
   shellHook = ''
