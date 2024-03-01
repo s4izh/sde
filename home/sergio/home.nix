@@ -4,7 +4,7 @@ in {
   home.packages = with pkgs; [
     tmux
     fzf
-    neovim
+    # neovim
     nixfmt
     nil
     shellcheck
