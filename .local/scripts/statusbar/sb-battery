@@ -9,6 +9,10 @@ fi
 info=$(acpi | cut -d: -f2)
 status=$(echo $info | cut -d, -f1)
 capacity=$(echo $info | cut -d, -f2)
-# capacity=${capacity%?}
+capacity=${capacity%?}
 
-echo $status $capacity
+if [ "$capacity" -lt "5" ]; then
+    notify-send "Battery low: $capacity%"
+fi
+
+echo $status $capacity\%
