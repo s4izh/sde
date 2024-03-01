@@ -20,22 +20,22 @@
     in {
       nixosConfigurations =
       let
-        createMachineConfig = machineName: {
-          name = "${machineName}";
+        mkHostConfig = { host, arch }: {
+          name = "${host}";
           value = lib.nixosSystem {
-            system = "x86_64-linux";
+            system = "${arch}";
             specialArgs = { inherit inputs; };
-            modules = [ ./machines/${machineName} ];
+            modules = [ ./machines/${host} ];
           };
         };
-        machineNames = [ 
-          "z390"
-          "rx"
-          "zen"
-          "jsc"
-          "vm"
+        hosts = [ 
+          { host = "z390" ; arch = "x86_64-linux"; }
+          { host = "rx"   ; arch = "x86_64-linux"; }
+          { host = "zen"  ; arch = "x86_64-linux"; }
+          { host = "jsc"  ; arch = "x86_64-linux"; }
+          { host = "vm"   ; arch = "x86_64-linux"; }
         ];
-        autoMachineConfigs = map createMachineConfig machineNames;
+        autoMachineConfigs = map mkHostConfig hosts;
 
         machineConfigs = autoMachineConfigs ++ [ ];
 
