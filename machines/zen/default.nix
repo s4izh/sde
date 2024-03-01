@@ -12,6 +12,7 @@ in {
     ./configuration.nix
     "${modules}/base.nix"
     "${modules}/desktop.nix"
+    "${modules}/dev.nix"
     "${modules}/dwm.nix"
     "${modules}/virtualisation.nix"
     inputs.home-manager.nixosModules.home-manager
