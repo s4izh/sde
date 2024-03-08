@@ -26,6 +26,10 @@
   #   }];
   # };
 
+  services.openssh = {
+    enable = true;
+  };
+
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.opengl.enable = true;
