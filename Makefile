@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-NIX_DIR := $(HOME)/.local/src/nixos
+NIX_DIR := $(PWD)
 DOTFILES := $(HOME)/.dotfiles
 SRC_DIR := $(HOME)/.local/src
 
