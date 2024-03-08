@@ -39,8 +39,7 @@
 
         machineConfigs = autoMachineConfigs ++ [ ];
 
-        in
-          builtins.listToAttrs machineConfigs;
+      in builtins.listToAttrs machineConfigs;
 
       # };
       homeManagerConfigurations = {
