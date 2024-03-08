@@ -29,6 +29,7 @@ in {
     configFile."libvirt/libvirt.conf".source =
       "${dotfiles}/.config/libvirt/libvirt.conf";
     configFile."tmux/tmux.conf".source = "${dotfiles}/.config/tmux/tmux.conf";
+    configFile."zathura/zathurarc".source = "${dotfiles}/.config/zathura/zathurarc";
     # configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
     # configFile."user-dirs.locale".source = "${dotfiles}/.config/user-dirs.locale";
     userDirs = {
