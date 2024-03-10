@@ -30,6 +30,10 @@
     enable = true;
   };
 
+  environment.etc = {
+    "resolv.conf".text = "nameserver 8.8.8.8\n";
+  };
+
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.opengl.enable = true;
@@ -37,6 +41,9 @@
   environment.systemPackages = with pkgs; [
     amdgpu_top
   ];
+
+  hardware.cpu.amd.updateMicrocode = true;
+  hardware.keyboard.qmk.enable = true;
 
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
   # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
