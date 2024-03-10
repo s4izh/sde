@@ -9,10 +9,17 @@ case $XDG_SESSION_TYPE in
     wayland)
         echo "This script is not supported on Wayland"
         notify-send "This script is not supported on Wayland"
+        exit 1
         ;;
     xorg|*)
         xrandr | grep " connected" | cut -d " " -f 1 | xargs -I _ xrandr --output _ --brightness "$brightness"
-        exit 0
+        if [ $? -eq 0 ]; then
+            notify-send "Brightness set to $brightness"
+            exit 0
+        else
+            notify-send "Failed to set brightness"
+            exit 1
+        fi
         ;;
 esac
 
