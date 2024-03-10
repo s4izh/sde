@@ -4,6 +4,17 @@
 # - wayland: grim, slurp, wl-copy, wl-paste
 # - xorg: maim, xclip
 
+usage() {
+    echo "Usage: $(basename $1) [OPTIONS]"
+    echo "Take a screenshot and save it to a file"
+    echo "Options:"
+    echo "  --dir=DIR      Save the screenshot to DIR"
+    echo "  --name=NAME    Save the screenshot with NAME"
+    echo "  --stdout       Print the screenshot path to stdout"
+    echo "  --notes        Copy the screenshot path to clipboard"
+    echo "  -h, --help     Show this help message and exit"
+}
+
 SCREENSHOT_DIR="$HOME/pix/screenshots"
 FILE=$(date +'%Y%m%d_%H%M%S').png
 SCREENSHOT_PATH=$SCREENSHOT_DIR/$FILE
@@ -51,6 +62,10 @@ function _screenshot() {
             ;;
     esac
 }
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    usage "$0"
+fi
 
 if [ -z "$1" ]; then
     _screenshot
