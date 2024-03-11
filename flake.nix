@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
@@ -16,16 +17,22 @@
         inherit system;
         config.allowUnfree = true;
       };
+      # overlays = [ inputs.neovim-nightly-overlay.overlay ];
       lib = nixpkgs.lib;
     in {
       nixosConfigurations =
       let
+        # specialArgs = { inherit inputs; };
+        # extraSpecialArgs = { inherit inputs; };
         mkHostConfig = { host, arch }: {
-          name = "${host}";
+          name = host;
           value = lib.nixosSystem {
-            system = "${arch}";
+            system = arch;
             specialArgs = { inherit inputs; };
-            modules = [ ./machines/${host} ];
+            modules = [
+              ./machines/${host} 
+              # { nixpkgs.overlays = overlays; }
+            ];
           };
         };
         hosts = [ 
