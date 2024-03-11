@@ -22,6 +22,8 @@ in {
     inputs.home-manager.nixosModules.home-manager
   ];
 
+  nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
+
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = { sergio = import ../../home/sergio/home.nix; };
