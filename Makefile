@@ -15,7 +15,7 @@ BOOTSTRAP		:= @bash $(PWD)/archlinux/bootstrap
 BASE_PKGS		:= filesystem gcc-libs glibc bash coreutils file findutils gawk grep procps-ng sed tar gettext
 BASE_PKGS		+= pciutils psmisc shadow util-linux bzip2 gzip xz licenses pacman systemd systemd-sysvcompat
 BASE_PKGS		+= iputils iproute2 autoconf sudo automake binutils bison fakeroot flex gcc groff libtool m4
-BASE_PKGS		+= make patch pkgconf texinfo which usbutils git
+BASE_PKGS		+= make patch pkgconf texinfo which usbutils git reflector
 
 UTILS_PKGS		:= fzf direnv zip unzip neofetch tree wget jq dosfstools man-pages git-crypt gnupg pass pass-otp
 
