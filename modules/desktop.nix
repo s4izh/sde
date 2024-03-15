@@ -32,65 +32,21 @@
     sxiv
 
     # -- compile tools --
-    nodejs
-    libtool
-
-    # -- c tooling --
-    gcc
-    cmake
-    clang
-    clang-tools
-    # llvmPackages_15.libclang
-    # clang-wrapper
-
-    # -- rust tooling --
-    rustup
-    cargo
-    cargo-watch
-    cargo-make
-    rust-analyzer
-    # rustup esto no hace falta
-    rustfmt
-    rustc
+    # nodejs
+    # libtool
 
     # -- python tooling --
     python3
 
-    # -- nix --
-    nil
-    nixfmt
-
-    # -- erlang --
-    erlang
-    erlang-ls
-    rebar3
-
-    # -- bash --
-    #bash-language-server
-    nodePackages_latest.bash-language-server
-
-    # -- linux --
-    man-pages
-    mandoc
-    man-db
-
     # -- dev --
-    direnv
     starship
     nmap
-    jq
-    gdb
-    cloc
-    pstree
-    shellcheck
-    shfmt
     xdg-ninja
 
     # -- writting --
     pandoc
     haskellPackages.pandoc-crossref
     groff
-    texlive.combined.scheme-full
     aspell
 
     libreoffice-fresh
@@ -107,11 +63,6 @@
 
     # other
     newsboat
-
-    # -- go --
-    go
-    gopls
-    cobra-cli
   ];
 
   # programs.starship.enable = true;
@@ -185,8 +136,11 @@
     unifont # Unifont
     fantasque-sans-mono # Fantasque Sans Mono
     input-fonts
+    # fira-code-nerd-font # FiraCode Nerd Font
     # (nerdfonts.override { fonts = [ "LiterationMono Nerd Font Mono" ]; })
-    nerdfonts
+    nerdfonts 
+    # LiterationMono Nerd Font Mono
+    # FiraCode Nerd Font
   ];
 
   nixpkgs.config.input-fonts.acceptLicense = true;
@@ -195,7 +149,8 @@
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
       serif = [ "Source Serif Pro" ];
-      monospace = [ "InputMonoCondensed" ];
+      # monospace = [ "InputMonoCondensed" ];
+      monospace = [ "FiraCode Nerd Font" ];
     };
   };
 
