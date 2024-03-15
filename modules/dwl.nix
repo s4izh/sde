@@ -10,7 +10,6 @@
     dwl
     somebar
     bemenu
-    dwl
     somebar
     foot
     pkg-config
