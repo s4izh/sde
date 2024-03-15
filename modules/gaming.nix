@@ -6,7 +6,7 @@
     # dxvk
     heroic
     bottles
-    # gamescope
+    gamescope
     oversteer
     obs-studio
     kdenlive
