@@ -17,7 +17,7 @@
         inherit system;
         config.allowUnfree = true;
       };
-      # overlays = [ inputs.neovim-nightly-overlay.overlay ];
+      overlays = [ inputs.neovim-nightly-overlay.overlay ];
       lib = nixpkgs.lib;
     in {
       nixosConfigurations =
@@ -61,6 +61,9 @@
                 homeDirectory = "/home/sergio";
                 stateVersion = "23.05";
               };
+            }
+            {
+              nixpkgs.overlays = overlays;
             }
           ];
         };
