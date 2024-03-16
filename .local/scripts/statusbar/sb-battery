@@ -11,7 +11,7 @@ status=$(echo $info | cut -d, -f1)
 capacity=$(echo $info | cut -d, -f2)
 capacity=${capacity%?}
 
-if [ "$capacity" -lt "5" ]; then
+if [ "$capacity" -lt "5" ] && [ "$status" != "Charging" ]; then
     notify-send "Battery low: $capacity%"
 fi
 
