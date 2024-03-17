@@ -13,7 +13,8 @@ return {
         --     -- nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_cursor({}))<cr>
         -- ]]
         vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-        vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+        -- vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+        vim.keymap.set('n', '<leader>fp', builtin.git_files, {})
         vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
         vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
         vim.keymap.set('n', '<leader>fs', builtin.grep_string, {})

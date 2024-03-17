@@ -74,3 +74,7 @@ vim.g.tmux_navigator_no_mappings = 1
 -- noremap <silent> <M-l> :<C-U>TmuxNavigateRight<cr>
 -- noremap <silent> <M-\> :<C-U>TmuxNavigatePrevious<cr>
 -- ]])
+
+-- rg as grepprg
+vim.api.nvim_set_option("grepprg", "rg --vimgrep --smart-case")
+vim.api.nvim_set_option("grepformat", "%f:%l:%c:%m,%f:%l:%m")
