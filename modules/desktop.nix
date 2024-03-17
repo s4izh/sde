@@ -30,6 +30,7 @@
     picom
     headsetcontrol
     sxiv
+    htop
 
     x11vnc # remote desktop
 
@@ -65,6 +66,7 @@
 
     # other
     newsboat
+    cointop
   ];
 
   # programs.starship.enable = true;
@@ -151,8 +153,9 @@
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
       serif = [ "Source Serif Pro" ];
-      # monospace = [ "InputMonoCondensed" ];
-      monospace = [ "FiraCode Nerd Font" ];
+      monospace = [ "InputMonoCondensed" ];
+      # monospace = [ "FiraCode Nerd Font" ];
+      # monospace = [ "LiterationMono Nerd Font" ];
     };
   };
 
