@@ -13,7 +13,7 @@ in {
     "${modules}/base.nix"
     "${modules}/desktop.nix"
     "${modules}/dwm.nix"
-    "${modules}/dwl.nix"
+    # "${modules}/dwl.nix"
     "${modules}/hyprland.nix"
     "${modules}/gaming.nix"
     "${modules}/virtualisation.nix"
