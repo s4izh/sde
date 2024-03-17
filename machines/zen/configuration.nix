@@ -27,7 +27,6 @@
     };
   };
 
-
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
@@ -42,4 +41,15 @@
   services.logind.extraConfig = ''
     HandlePowerKey=ignore
   '';
+
+  hardware.asus.battery = {
+    enableChargeUptoScript = true;
+    chargeUpto = 85;
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 5900 ];
+  };
+
 }
