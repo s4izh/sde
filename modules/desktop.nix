@@ -31,9 +31,11 @@
     headsetcontrol
     sxiv
 
+    x11vnc # remote desktop
+
     # -- compile tools --
-    # nodejs
-    # libtool
+    nodejs # for copilot
+    libtool
 
     # -- python tooling --
     python3
