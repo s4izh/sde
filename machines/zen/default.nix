@@ -10,10 +10,12 @@ in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./configuration.nix
+    ./battery.nix
     "${modules}/base.nix"
     "${modules}/desktop.nix"
     "${modules}/dev.nix"
     "${modules}/dwm.nix"
+    "${modules}/nvim.nix"
     "${modules}/virtualisation.nix"
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -22,6 +24,8 @@ in {
     extraSpecialArgs = { inherit inputs; };
     users = { sergio = import ../../home/sergio/home.nix; };
   };
+
+  nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
