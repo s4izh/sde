@@ -30,7 +30,7 @@
             system = arch;
             specialArgs = { inherit inputs; };
             modules = [
-              ./machines/${host} 
+              ./hosts/${host} 
               # { nixpkgs.overlays = overlays; }
             ];
           };
