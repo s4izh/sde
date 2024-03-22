@@ -78,3 +78,5 @@ vim.g.tmux_navigator_no_mappings = 1
 -- rg as grepprg
 vim.api.nvim_set_option("grepprg", "rg --vimgrep --smart-case")
 vim.api.nvim_set_option("grepformat", "%f:%l:%c:%m,%f:%l:%m")
+
+vim.opt.tags="./tags;tags"
