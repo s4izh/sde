@@ -152,3 +152,5 @@ vim.keymap.set("n", "<Leader>I", "ggvG=<c-o>")
 -- gen.nvim
 vim.keymap.set('v', "<leader>]", ":Gen<CR>")
 vim.keymap.set('n', "<leader>]", ":Gen<CR>")
+
+vim.keymap.set('n', "<leader>fv", ":find *")

@@ -12,4 +12,5 @@ end
 
 vim.opt.background = "dark"
 
-ColorMyPencils("zenburn")
+-- ColorMyPencils("zenburn")
+require('colorbuddy').colorscheme('gruvbuddy')
