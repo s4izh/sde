@@ -4,9 +4,9 @@ return {
     event = "VeryLazy",
     config = function ()
       local rose_pine = require('rose-pine')
-      rose_pine.setup({
-        disable_italics = true
-      })
+      -- rose_pine.setup({
+      --   disable_italics = true
+      -- })
     end
   },
   {
@@ -123,6 +123,8 @@ return {
   },
   "liuchengxu/space-vim-theme",
   "RMichelsen/cyanide",
+  "tjdevries/colorbuddy.vim",
+  "tjdevries/gruvbuddy.nvim",
   -- "eemed/sitruuna.vim",
   -- "xero/miasma.nvim",
   -- "nyoom-engineering/oxocarbon.nvim",

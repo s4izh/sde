@@ -6,9 +6,9 @@ return {
         -- calling `setup` is optional for customization
         require("fzf-lua").setup({})
     end,
-    keys = {
-        -- { "<leader>ff", "<cmd>FzfLua files<cr>" },
-        -- { "<leader>fg", "<cmd>FzfLua grep_visual<cr>" },
-        -- { "<C-p>", "<cmd>FzfLua git_files<cr>" },
-    },
+    -- keys = {
+    --     -- { "<leader>ff", "<cmd>FzfLua files<cr>" },
+    --     -- { "<leader>fg", "<cmd>FzfLua grep_visual<cr>" },
+    --     -- { "<C-p>", "<cmd>FzfLua git_files<cr>" },
+    -- },
 }
