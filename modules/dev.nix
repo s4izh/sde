@@ -31,6 +31,7 @@
     clang
     clang-tools
     gdb
+    universal-ctags
   ];
   erlangpkgs = with pkgs; [
     rebar3
