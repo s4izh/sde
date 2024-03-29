@@ -9,6 +9,8 @@ local cmp_config = {
     "saadparwaiz1/cmp_luasnip",
     "L3MON4D3/LuaSnip",
     "rafamadriz/friendly-snippets",     -- for more snippets
+    -- "delphinus/cmp-ctags",
+    "quangnguyen30192/cmp-nvim-tags",
   },
   config = function()
     local cmp = require("cmp")
@@ -21,6 +23,30 @@ local cmp_config = {
         { name = 'pandoc' },
         { name = 'luasnip' },         -- For luasnip users.
         { name = 'crates' },
+        {
+          name = "ctags",
+          -- default values
+          option = {
+            executable = "ctags",
+            trigger_characters = { "." },
+            trigger_characters_ft = {},
+          },
+        },
+        -- {
+        -- name = 'tags',
+        -- option = {
+        --   -- this is the default options, change them if you want.
+        --   -- Delayed time after user input, in milliseconds.
+        --   complete_defer = 100,
+        --   -- Max items when searching `taglist`.
+        --   max_items = 10,
+        --   -- Use exact word match when searching `taglist`, for better searching
+        --   -- performance.
+        --   exact_match = false,
+        --   -- Prioritize searching result for current buffer.
+        --   current_buffer_only = false,
+        -- },
+        -- },
       }, {
         { name = 'buffer' },
       }),

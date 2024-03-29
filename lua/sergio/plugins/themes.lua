@@ -125,6 +125,7 @@ return {
   "RMichelsen/cyanide",
   "tjdevries/colorbuddy.vim",
   "tjdevries/gruvbuddy.nvim",
+  "relastle/bluewery.vim",
   -- "eemed/sitruuna.vim",
   -- "xero/miasma.nvim",
   -- "nyoom-engineering/oxocarbon.nvim",
