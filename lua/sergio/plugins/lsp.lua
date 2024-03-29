@@ -42,7 +42,7 @@ local lsp_minimal = {
       on_attach = on_attach,
       capabilities = capabilities,
       cmd = { "ltex-ls" },
-      filetypes = { "tex", "bib", "markdown" },
+      filetypes = { "tex", "bib" },
       settings = {
         ltex = {
           language = "es",
@@ -53,7 +53,7 @@ local lsp_minimal = {
       on_attach = on_attach,
       capabilities = capabilities,
       cmd = { "texlab" },
-      filetypes = { "tex", "bib", "markdown" },
+      filetypes = { "tex", "bib" },
     })
     lsp.nixd.setup({
       on_attach = on_attach,

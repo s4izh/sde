@@ -7,13 +7,13 @@ return {
   "halkn/ripgrep.vim",
   "editorconfig/editorconfig-vim",
   "kmonad/kmonad-vim", -- support for kmonad files
-  {
-    "xiyaowong/transparent.nvim",
-    config = function()
-      require("transparent").setup()
-      vim.cmd([[TransparentEnable]])
-    end,
-  },
+  -- {
+  --   "xiyaowong/transparent.nvim",
+  --   config = function()
+  --     require("transparent").setup()
+  --     vim.cmd([[TransparentEnable]])
+  --   end,
+  -- },
   {
     "lewis6991/gitsigns.nvim",
     requires = {
@@ -39,6 +39,10 @@ return {
     },
   },
   "RaafatTurki/hex.nvim", -- requieres xdd
+
+  "junegunn/fzf",
+  "junegunn/fzf.vim",
+  -- "wellle/context.vim",
   -- "ctrlpvim/ctrlp.vim",
   -- "chrisbra/vim-zsh",
   -- "mhinz/vim-startify",
