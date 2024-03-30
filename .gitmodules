@@ -1,0 +1,3 @@
+[submodule "pack/plugins/submodules/commentary"]
+	path = pack/plugins/submodules/commentary
+	url = https://tpope.io/vim/commentary.git
