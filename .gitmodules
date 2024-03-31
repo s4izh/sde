@@ -13,3 +13,24 @@
 [submodule "pack/plugins/submodules/fzf.vim"]
 	path = pack/plugins/submodules/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
+[submodule "pack/plugins/submodules/themes/sitruuna.vim"]
+	path = pack/plugins/submodules/themes/sitruuna.vim
+	url = https://github.com/eemed/sitruuna.vim
+[submodule "pack/plugins/submodules/themes/SpaceWay.vim"]
+	path = pack/plugins/submodules/themes/SpaceWay.vim
+	url = https://github.com/Gavinok/SpaceWay.vim
+[submodule "pack/plugins/submodules/nvim-treesitter"]
+	path = pack/plugins/submodules/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter
+[submodule "pack/plugins/submodules/themes/onedark.nvim"]
+	path = pack/plugins/submodules/themes/onedark.nvim
+	url = https://github.com/navarasu/onedark.nvim
+[submodule "pack/plugins/submodules/themes/gruber-darker.nvim"]
+	path = pack/plugins/submodules/themes/gruber-darker.nvim
+	url = https://github.com/thimc/gruber-darker.nvim
+[submodule "pack/plugins/submodules/themes/gruvbox.nvim"]
+	path = pack/plugins/submodules/themes/gruvbox.nvim
+	url = https://github.com/ellisonleao/gruvbox.nvim
+[submodule "pack/plugins/submodules/themes/cyanide"]
+	path = pack/plugins/submodules/themes/cyanide
+	url = https://github.com/RMichelsen/cyanide

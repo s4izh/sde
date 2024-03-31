@@ -1,0 +1,41 @@
+#!/bin/sh
+
+usage() {
+    echo "$0 type url"
+    echo "  - type: [std/theme]"
+    exit 1
+}
+
+if [ -z "$1" ] || [ -z "$2" ]; then
+    usage
+fi
+
+cd "$HOME/.config/nvim" || exit
+
+plugin_path="pack/plugins"
+submodule_path="$plugin_path/submodules"
+
+type=$1
+url=$2
+
+case "$type" in
+    'theme')
+        submodule_path=$submodule_path"/themes"
+        relative_submodule_path="../submodules/themes"
+        ;;
+    'std')
+        relative_submodule_path="../submodules"
+        ;;
+    *) usage
+        ;;
+esac
+
+plugin_name=$(echo "$url" | cut -d/ -f5)
+
+if ! [ -d "$submodule_path/$plugin_name" ]; then
+    git submodule add "$url" "$submodule_path/$plugin_name"
+fi
+
+cd "$plugin_path"/start || exit
+
+ln -sf "$relative_submodule_path/$plugin_name" .
