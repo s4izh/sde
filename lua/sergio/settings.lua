@@ -30,3 +30,14 @@ vim.opt.hlsearch = true -- :noh to stop highlighting
 vim.opt.incsearch = true
 
 vim.o.path = vim.o.path .. "**"
+
+-- disable autocomment on next line
+-- vim.cmd[[
+--     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+-- ]]
+vim.api.nvim_create_autocmd({"FileType"}, {
+  pattern = {"*"},
+  command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+})
+
+vim.opt.tags="./tags;tags"
