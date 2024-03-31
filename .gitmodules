@@ -34,3 +34,6 @@
 [submodule "pack/plugins/submodules/themes/cyanide"]
 	path = pack/plugins/submodules/themes/cyanide
 	url = https://github.com/RMichelsen/cyanide
+[submodule "pack/plugins/submodules/themes/bluewery.vim"]
+	path = pack/plugins/submodules/themes/bluewery.vim
+	url = https://github.com/relastle/bluewery.vim
