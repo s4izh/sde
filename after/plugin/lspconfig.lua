@@ -32,7 +32,7 @@ lsp.pyright.setup({})
 
 lsp.lua_ls.setup({
   cmd = { "lua-language-server" },
-  -- capabilities = capabilities,
+  capabilities = capabilities,
   settings = {
     Lua = {
       diagnostics = {
@@ -44,7 +44,7 @@ lsp.lua_ls.setup({
 
 lsp.ltex.setup({
   on_attach = on_attach,
-  -- capabilities = capabilities,
+  capabilities = capabilities,
   cmd = { "ltex-ls" },
   filetypes = { "tex", "bib" },
   settings = {
@@ -56,14 +56,14 @@ lsp.ltex.setup({
 
 lsp.texlab.setup({
   on_attach = on_attach,
-  -- capabilities = capabilities,
+  capabilities = capabilities,
   cmd = { "texlab" },
   filetypes = { "tex", "bib" },
 })
 
 lsp.nixd.setup({
   on_attach = on_attach,
-  -- capabilities = capabilities,
+  capabilities = capabilities,
   cmd = { "nixd" },
   filetypes = { "nix" },
 })
