@@ -1,13 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, config, pkgs, ... }:
-
-let modules = ../../modules;
-
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}: let
+  modules = ../../modules;
 in {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./configuration.nix
     ./battery.nix
@@ -21,11 +24,11 @@ in {
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = { sergio = import ../../home/sergio/home.nix; };
+    extraSpecialArgs = {inherit inputs;};
+    users = {sergio = import ../../home/sergio/home.nix;};
   };
 
-  nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
+  nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlay];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
