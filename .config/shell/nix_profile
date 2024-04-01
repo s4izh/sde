@@ -7,6 +7,7 @@ export READER="zathura"
 
 export UNI="$HOME/uni"
 [ -e "$UNI/.env" ] && source "$UNI/.env"
+export TFG_DIR="$HOME/personal/tfg"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -20,6 +21,7 @@ export SUDO_ASKPASS="$HOME/.local/scripts/dmenupass"
 export MANPAGER='nvim +Man!'
 
 export SYSTEM_MENU='dmenu'
+export NIXPKGS="$HOME/.local/src/nixpkgs"
 
 export PATH="$HOME/.local/bin":$PATH
 export PATH="$HOME/.local/scripts":$PATH
