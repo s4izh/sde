@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -102,14 +106,12 @@
   # fix java apps
   environment.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
 
-
   programs.npm.enable = true;
   programs.thunar.enable = true;
 
   # automounting
   # services.gvfs.enable = true;
   # services.dbus.enable = true;
-
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -142,7 +144,7 @@
     input-fonts
     # fira-code-nerd-font # FiraCode Nerd Font
     # (nerdfonts.override { fonts = [ "LiterationMono Nerd Font Mono" ]; })
-    nerdfonts 
+    nerdfonts
     # LiterationMono Nerd Font Mono
     # FiraCode Nerd Font
   ];
@@ -152,8 +154,8 @@
   fonts.fontconfig = {
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
-      serif = [ "Source Serif Pro" ];
-      monospace = [ "InputMonoCondensed" ];
+      serif = ["Source Serif Pro"];
+      monospace = ["InputMonoCondensed"];
       # monospace = [ "UbuntuMono Nerd Font" ];
       # monospace = [ "JetBrainsMono Nerd Font" ];
       # monospace = [ "FiraCode Nerd Font" ];
