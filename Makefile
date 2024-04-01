@@ -17,6 +17,8 @@ switch: src-dependencies create-softlinks ## Switch to the flake
 	sudo nixos-rebuild switch --flake .# --impure
 update: ## Update the flake
 	nix flake update
+gc: ## Run garbage collection
+	nix-store --gc
 user: ## Switch to the flake as a user
 	nix build ".#homeManagerConfigurations.sergio.activationPackage" --impure
 	./result/activate
