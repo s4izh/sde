@@ -67,3 +67,6 @@
 [submodule "pack/plugins/submodules/plenary.nvim"]
 	path = pack/plugins/submodules/plenary.nvim
 	url = https://github.com/nvim-lua/plenary.nvim
+[submodule "pack/plugins/submodules/cmp-path"]
+	path = pack/plugins/submodules/cmp-path
+	url = https://github.com/hrsh7th/cmp-path
