@@ -6,8 +6,10 @@
 *.cursorColor:  #505050
 
 ! white
-*.color0:       #000000
-*.color8:       #5C6370
+! *.color0:       #000000
+! *.color8:       #5C6370
+*.color7:       #000000
+*.color15:       #5C6370
 
 ! red
 *.color1:       #972500
@@ -34,8 +36,10 @@
 *.color14:      #00538B
 
 ! black
-*.color7:       #ffffff
-*.color15:      #ffffff
+! *.color7:       #ffffff
+! *.color15:      #ffffff
+*.color0:       #bbbbbb
+*.color8:       #bbbbbb
 
 dwm.normbordercolor: #444444
 dwm.normbgcolor: #ffffff
