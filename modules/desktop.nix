@@ -85,7 +85,7 @@
     xkb.layout = "es";
     xkb.variant = "";
     xkb.options = "caps:escape";
-    # xkbOptions = "ctrl:nocaps";
+    # xkb.options = "ctrl:nocaps";
     libinput = {
       enable = true;
       mouse = {
@@ -154,6 +154,7 @@
       #sansSerif = [ "Liberation Mono" ];
       serif = [ "Source Serif Pro" ];
       monospace = [ "InputMonoCondensed" ];
+      # monospace = [ "Source Code Pro" ];
       # monospace = [ "FiraCode Nerd Font" ];
       # monospace = [ "LiterationMono Nerd Font" ];
     };
