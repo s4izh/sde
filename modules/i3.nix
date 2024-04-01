@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   services.xserver = {
     enable = true;
     displayManager.defaultSession = "none+i3";
@@ -12,15 +17,14 @@
     xorg.xwininfo
   ];
 
-
   nixpkgs.overlays = [
     (final: prev: {
       dmenu = prev.dmenu.overrideAttrs (old: {
-        src = /home/sergio/.local/src/dmenu ;
+        src = /home/sergio/.local/src/dmenu;
       });
       st = prev.st.overrideAttrs (old: {
-        src = /home/sergio/.local/src/st ;
-        buildInputs = old.buildInputs ++ [ pkgs.harfbuzz ];
+        src = /home/sergio/.local/src/st;
+        buildInputs = old.buildInputs ++ [pkgs.harfbuzz];
       });
     })
   ];
