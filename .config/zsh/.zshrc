@@ -6,6 +6,8 @@ setopt interactive_comments
 stty stop undef		# Disable ctrl-s to freeze terminal.
 zle_highlight=('paste:none') # disable highlighting of pasted text
 
+setopt auto_cd
+
 # beep off
 unsetopt BEEP
 
@@ -69,6 +71,11 @@ export GPG_TTY=$(tty)
 # fzf via package manager
 [ -e /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -e /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+fi
 
 export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 # fzf via git upstream download
