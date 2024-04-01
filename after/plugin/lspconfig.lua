@@ -10,11 +10,11 @@ local function show_documentation()
 end
 
 local lsp = require("lspconfig")
--- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local format_group = vim.api.nvim_create_augroup('FormatGroup', {})
 
 lsp.rust_analyzer.setup({
-  -- capabilities = capabilities,
+  capabilities = capabilities,
 })
 
 lsp.gopls.setup({})
@@ -26,7 +26,7 @@ lsp.bashls.setup({})
 lsp.zls.setup({})
 
 lsp.clangd.setup({
-  -- capabilities = capabilities,
+  capabilities = capabilities,
 })
 lsp.pyright.setup({})
 
