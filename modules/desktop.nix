@@ -154,7 +154,8 @@
       #sansSerif = [ "Liberation Mono" ];
       serif = [ "Source Serif Pro" ];
       monospace = [ "InputMonoCondensed" ];
-      # monospace = [ "Source Code Pro" ];
+      # monospace = [ "UbuntuMono Nerd Font" ];
+      # monospace = [ "JetBrainsMono Nerd Font" ];
       # monospace = [ "FiraCode Nerd Font" ];
       # monospace = [ "LiterationMono Nerd Font" ];
     };
