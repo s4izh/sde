@@ -6,8 +6,8 @@ alias \
     cfv='cd ~/.config/nvim && nvim $(fzf)' \
     qtilecf='cd ~/.config/qtile && nvim .' \
     cfi='cd ~/.config/i3 && nvim config' \
-    cfd='cd ~/.local/src/dwm && nvim config.h' \
-    cfdl='cd ~/.local/src/dwl && nvim config.h' \
+    cfd='cd ~/.local/src/dwm && nvim config.def.h' \
+    cfdl='cd ~/.local/src/dwl && nvim config.def.h' \
     cfh='cd ~/.config/hypr && nvim hyprland.conf' \
     cff='nvim ~/.config/foot/foot.ini' \
     cft='nvim ~/.config/tmux/tmux.conf' \
