@@ -52,10 +52,15 @@
     go
     gopls
   ];
+  zigpkgs = with pkgs; [
+    zig
+    zls
+  ];
   devpkgs = with pkgs; [
     git
     tmux
     fzf
+    bat
     gnumake
     direnv
     jq
@@ -73,5 +78,6 @@ in {
     ++ erlangpkgs
     ++ linuxpkgs
     ++ shpkgs
-    ++ gopkgs;
+    ++ gopkgs
+    ++ zigpkgs;
 }
