@@ -12,4 +12,6 @@ end
 
 vim.opt.background = "dark"
 
-ColorMyPencils("default")
+require("rose-pine")
+
+ColorMyPencils("rose-pine")
