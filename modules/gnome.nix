@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   services.xserver = {
     enable = true;
     desktopManager.gnome.enable = true;
@@ -13,9 +17,9 @@
 
   nixpkgs.overlays = [
     (final: prev: {
-     dmenu = prev.dmenu.overrideAttrs (old: {
-         src = /home/sergio/.local/src/dmenu ;
-         });
-     })
+      dmenu = prev.dmenu.overrideAttrs (old: {
+        src = /home/sergio/.local/src/dmenu;
+      });
+    })
   ];
 }

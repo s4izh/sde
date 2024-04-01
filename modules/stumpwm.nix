@@ -1,6 +1,9 @@
-
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   services.xserver = {
     enable = true;
     windowManager.stumpwm.enable = true;
@@ -20,6 +23,6 @@
       dmenu = prev.dmenu.overrideAttrs (old: {
         src = /home/sergio/.local/src/dmenu;
       });
-  })
+    })
   ];
 }
