@@ -1,14 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -58,12 +59,12 @@
     libinput = {
       enable = true;
       mouse = {
-	      accelProfile = "flat";
-	      naturalScrolling = true;
+        accelProfile = "flat";
+        naturalScrolling = true;
       };
       touchpad = {
-	      accelProfile = "flat";
-	      naturalScrolling = true;
+        accelProfile = "flat";
+        naturalScrolling = true;
       };
     };
   };
@@ -98,7 +99,7 @@
   users.users.javier = {
     isNormalUser = true;
     description = "javier";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       firefox
       google-chrome
@@ -112,7 +113,7 @@
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
     };
     gc = {
@@ -153,8 +154,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-     enable = true;
-     settings.PasswordAuthentication = false;
+    enable = true;
+    settings.PasswordAuthentication = false;
   };
 
   # Open ports in the firewall.

@@ -1,16 +1,17 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # fonts
-    (nerdfonts.override { fonts = [
-      "Ubuntu"
-      "UbuntuMono"
-      "CascadiaCode"
-      "FantasqueSansMono"
-      "FiraCode"
-      "VictorMono"
-      "Mononoki"
-    ]; })
+    (nerdfonts.override {
+      fonts = [
+        "Ubuntu"
+        "UbuntuMono"
+        "CascadiaCode"
+        "FantasqueSansMono"
+        "FiraCode"
+        "VictorMono"
+        "Mononoki"
+      ];
+    })
     font-awesome
 
     # themes
@@ -29,9 +30,9 @@
     file = {
       ".config/gtk-4.0/gtk.css" = {
         text = ''
-        window.messagedialog .response-area > button,
-        window.dialog.message .dialog-action-area > button,
-          .background.csd{ border-radius: 0; }
+          window.messagedialog .response-area > button,
+          window.dialog.message .dialog-action-area > button,
+            .background.csd{ border-radius: 0; }
         '';
       };
     };

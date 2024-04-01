@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     legendary-gl
     wineWowPackages.stable
@@ -45,6 +49,5 @@
 
   #G29 wheel
   hardware.new-lg4ff.enable = true;
-  services.udev.packages = with pkgs; [ oversteer ];
+  services.udev.packages = with pkgs; [oversteer];
 }
-

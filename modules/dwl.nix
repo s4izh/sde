@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   services.xserver = {
     enable = true;
     # windowManager.dwm.enable = true;
@@ -18,12 +22,12 @@
   nixpkgs.overlays = [
     (final: prev: {
       dwl = prev.dwl.overrideAttrs (old: {
-	      src = /home/sergio/.local/src/dwl ;
+        src = /home/sergio/.local/src/dwl;
       });
       somebar = prev.somebar.overrideAttrs (old: {
-	      src = /home/sergio/.local/src/somebar ;
+        src = /home/sergio/.local/src/somebar;
       });
-  })
+    })
   ];
 
   # system.stateVersion = "22.11"; # Did you read the comment? yes
