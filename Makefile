@@ -109,7 +109,7 @@ dwmblocks:
 	sed -i 's#https://github.com/s4izh#git@github.com:s4izh#' "$(SRCDIR)/$@/.git/config"
 
 dmenu:
-	$(PKGINSTALL) coreutils fontconfig freetype2 glibc fontconfig libx11 libxft libxinerama
+	$(PKGINSTALL) coreutils fontconfig freetype2 glibc libx11 libxft libxinerama
 	$(MYGIT)/$@ $(SRCDIR)/$@
 	cd $(SRCDIR)/$@ && sudo make clean install
 	sed -i 's#https://github.com/s4izh#git@github.com:s4izh#' "$(SRCDIR)/$@/.git/config"
