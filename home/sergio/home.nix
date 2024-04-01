@@ -1,5 +1,11 @@
-{ config, pkgs, lib, ... }:
-let dotfiles = /home/sergio/.dotfiles;
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  dotfiles = "${config.home.homeDirectory}" /.dotfiles;
+  ln = config.lib.file.mkOutOfStoreSymlink;
 in {
   home.packages = with pkgs; [
     tmux
@@ -22,12 +28,10 @@ in {
     enable = true;
     configFile."git/config".source = "${dotfiles}/.config/git/config";
     configFile."dunst/dunstrc".source = "${dotfiles}/.config/dunst/dunstrc";
-    configFile."picom/picom.conf".source =
-      "${dotfiles}/.config/picom/picom.conf";
+    configFile."picom/picom.conf".source = "${dotfiles}/.config/picom/picom.conf";
     configFile."sxhkd/sxhkdrc".source = "${dotfiles}/.config/sxhkd/sxhkdrc";
     configFile."mimeapps.list".source = "${dotfiles}/.config/mimeapps.list";
-    configFile."libvirt/libvirt.conf".source =
-      "${dotfiles}/.config/libvirt/libvirt.conf";
+    configFile."libvirt/libvirt.conf".source = "${dotfiles}/.config/libvirt/libvirt.conf";
     # configFile."tmux/tmux.conf".source = "${dotfiles}/.config/tmux/tmux.conf";
     configFile."zathura/zathurarc".source = "${dotfiles}/.config/zathura/zathurarc";
     # configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
@@ -45,6 +49,8 @@ in {
       publicShare = "${config.home.homeDirectory}/media/pub";
     };
   };
+
+  # home.file.".config/tmux".source = ln $"
 
   home.file.".editorconfig".source = "${dotfiles}/.editorconfig";
 
@@ -175,14 +181,13 @@ in {
       #package = pkgs.rubik;
       size = 10;
     };
-    gtk3.extraConfig = { gtk-application-prefer-dark-theme = true; };
-    gtk4.extraConfig = { gtk-application-prefer-dark-theme = true; };
-    gtk3.bookmarks =
-      [ "file:///home/sergio/uni/4q1" "file:///home/sergio/notes" "file:///mnt" ];
+    gtk3.extraConfig = {gtk-application-prefer-dark-theme = true;};
+    gtk4.extraConfig = {gtk-application-prefer-dark-theme = true;};
+    gtk3.bookmarks = ["file:///home/sergio/uni/4q1" "file:///home/sergio/notes" "file:///mnt"];
   };
 
   dconf.settings = {
-    "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
+    "org/gnome/desktop/interface" = {color-scheme = "prefer-dark";};
     # "org/gnome/desktop/wm/preferences" = {
     #   button-layout = "appmenu";
     # };

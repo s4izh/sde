@@ -1,5 +1,9 @@
-{ pkgs, lib, inputs, ... }:
 {
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   environment.systemPackages = [
     pkgs.openssl
     pkgs.pkg-config
@@ -14,6 +18,5 @@
   services.postgresql.enable = true;
   services.postgresql.port = 5432;
 
-  users.users.sergio.extraGroups = [ "postgres" ];
-
+  users.users.sergio.extraGroups = ["postgres"];
 }
