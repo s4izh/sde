@@ -61,3 +61,9 @@
 [submodule "pack/plugins/submodules/friendly-snippets"]
 	path = pack/plugins/submodules/friendly-snippets
 	url = https://github.com/rafamadriz/friendly-snippets
+[submodule "pack/plugins/submodules/telescope.nvim"]
+	path = pack/plugins/submodules/telescope.nvim
+	url = https://github.com/nvim-telescope/telescope.nvim
+[submodule "pack/plugins/submodules/plenary.nvim"]
+	path = pack/plugins/submodules/plenary.nvim
+	url = https://github.com/nvim-lua/plenary.nvim
