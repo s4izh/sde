@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # services.xserver = {
   #   enable = true;
   #   windowManager.stumpwm.enable = true;
@@ -13,5 +17,4 @@
   environment.systemPackages = with pkgs; [
     yambar
   ];
-
 }

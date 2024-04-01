@@ -1,16 +1,18 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   networking.hostName = "zen";
   networking.networkmanager.enable = true;
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = ["amdgpu"];
   hardware.opengl.enable = true;
 
   # Bootloader.
@@ -49,7 +51,6 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 5900 ];
+    allowedTCPPorts = [5900];
   };
-
 }

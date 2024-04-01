@@ -1,8 +1,12 @@
-{ pkgs, lib, inputs, ... }:
 {
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   environment.systemPackages = [
   ];
 
   programs.adb.enable = true;
-  users.users.sergio.extraGroups = [ "adbusers" ];
+  users.users.sergio.extraGroups = ["adbusers"];
 }

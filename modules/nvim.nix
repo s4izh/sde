@@ -1,8 +1,11 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-nightly;
   };
 }
-
