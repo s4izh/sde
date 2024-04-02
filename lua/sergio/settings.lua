@@ -5,9 +5,10 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
--- numbers
+-- number column
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.signcolumn = "no"
 
 vim.g.editorconfig = true
 
