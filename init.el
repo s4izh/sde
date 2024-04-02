@@ -570,3 +570,51 @@
   :config
   (setq lab-host (getenv "GITLAB_HOST"))
   (setq lab-token (getenv "GITLAB_TOKEN")))
+
+
+(defun ssh-to-config-host ()
+  "Open an SSH connection to a host from the SSH config file."
+  (interactive)
+  (let* ((config-file "~/.ssh/config")
+         (hosts (ssh-config-list-hosts config-file))
+         (chosen-host (completing-read "Choose an SSH config host: " hosts)))
+    (when (not (string-empty-p chosen-host))
+      (ssh-tramp chosen-host))))
+
+(defun ssh-config-list-hosts (config-file)
+  "List hosts defined in the SSH config file."
+  (with-temp-buffer
+    (insert-file-contents config-file)
+    (goto-char (point-min))
+    (let (hosts)
+      (while (re-search-forward "^Host[[:space:]]+\\([^#[:space:]]+\\)" nil t)
+        (push (match-string 1) hosts))
+      hosts)))
+
+(defun ssh-tramp (host)
+  "Open an SSH connection to HOST."
+  ;; (shell)
+  ;; (insert (format "ssh %s\n" host))
+  ;; (comint-send-input))
+  (let ((tramp-file-name (concat "/ssh:" host "|sudo:" host ":/tmp") ))
+    (find-file tramp-file-name)))
+
+(defun ssh-interactive (host)
+  "Open an SSH connection to HOST."
+  ;; (shell)
+  ;; (insert (format "ssh %s\n" host))
+  ;; (comint-send-input))
+  (interactive "sHost: \nsCommand: ")
+  (let ((tramp-file-name (format "/ssh:%s|sudo:%s|/tmp" host host)))
+    (find-file tramp-file-name)))
+
+(defun ssh-exec-command (host command)
+  "Execute a command on a remote host via SSH."
+  (interactive "sHost: \nsCommand: ")
+  (let* ((tramp-file-name (format "/ssh:%s|sudo:%s:/tmp" host host))
+         (default-directory tramp-file-name)
+         (output-buffer (get-buffer-create "*ssh-output*")))
+    (with-current-buffer output-buffer
+      (erase-buffer))
+    (tramp-handle-shell-command command output-buffer output-buffer)
+    (display-buffer output-buffer)))
