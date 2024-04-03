@@ -73,3 +73,6 @@
 [submodule "pack/plugins/submodules/vim-dispatch"]
 	path = pack/plugins/submodules/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch
+[submodule "pack/plugins/submodules/vim-systemd-syntax"]
+	path = pack/plugins/submodules/vim-systemd-syntax
+	url = https://codeberg.org/Dokana/vim-systemd-syntax
