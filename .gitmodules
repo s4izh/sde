@@ -79,3 +79,6 @@
 [submodule "pack/plugins/submodules/nvim-treesitter-context"]
 	path = pack/plugins/submodules/nvim-treesitter-context
 	url = https://github.com/nvim-treesitter/nvim-treesitter-context
+[submodule "pack/plugins/submodules/harpoon"]
+	path = pack/plugins/submodules/harpoon
+	url = https://github.com/ThePrimeagen/harpoon/
