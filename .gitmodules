@@ -76,3 +76,6 @@
 [submodule "pack/plugins/submodules/vim-systemd-syntax"]
 	path = pack/plugins/submodules/vim-systemd-syntax
 	url = https://codeberg.org/Dokana/vim-systemd-syntax
+[submodule "pack/plugins/submodules/nvim-treesitter-context"]
+	path = pack/plugins/submodules/nvim-treesitter-context
+	url = https://github.com/nvim-treesitter/nvim-treesitter-context
