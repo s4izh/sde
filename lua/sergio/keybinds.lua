@@ -36,7 +36,7 @@ vim.keymap.set("n", "J", "mzJ`z")
 
 -- custom scripts
 vim.keymap.set("n", "<Leader>cc", ":w | !compiler %<cr>")
-vim.keymap.set("n", "<Leader>o", ":!opout %<cr><cr>")
+vim.keymap.set("n", "<Leader>O", ":!opout %<cr><cr>")
 vim.keymap.set("n", "<Leader>x", ":!chmod +x %<cr><cr>")
 
 -- conceallevel
