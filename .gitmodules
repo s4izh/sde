@@ -82,3 +82,6 @@
 [submodule "pack/plugins/submodules/harpoon"]
 	path = pack/plugins/submodules/harpoon
 	url = https://github.com/ThePrimeagen/harpoon/
+[submodule "pack/plugins/submodules/themes/modus-themes.nvim"]
+	path = pack/plugins/submodules/themes/modus-themes.nvim
+	url = https://github.com/miikanissi/modus-themes.nvim
