@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  dotfiles = "${config.home.homeDirectory}" /.dotfiles;
+  dotfiles = "${config.home.homeDirectory}/.dotfiles";
   ln = config.lib.file.mkOutOfStoreSymlink;
 in {
   home.packages = with pkgs; [
