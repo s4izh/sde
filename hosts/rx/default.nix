@@ -24,11 +24,11 @@ in {
     "${modules}/dev.nix"
     "${modules}/nvim.nix"
     "${modules}/river.nix"
+    "${modules}/stumpwm.nix"
+    # "${modules}/xfce.nix"
     # "${modules}/i3.nix"
     inputs.home-manager.nixosModules.home-manager
   ];
-
-  nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlay];
 
   home-manager = {
     extraSpecialArgs = {inherit inputs;};

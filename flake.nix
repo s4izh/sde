@@ -7,7 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs @ {
@@ -21,7 +21,6 @@
       inherit system;
       config.allowUnfree = true;
     };
-    overlays = [inputs.neovim-nightly-overlay.overlay];
     lib = nixpkgs.lib;
   in {
     nixosConfigurations = let
@@ -37,7 +36,6 @@
           specialArgs = {inherit inputs;};
           modules = [
             ./hosts/${host}
-            # { nixpkgs.overlays = overlays; }
           ];
         };
       };
@@ -82,9 +80,6 @@
               homeDirectory = "/home/sergio";
               stateVersion = "23.11";
             };
-          }
-          {
-            nixpkgs.overlays = overlays;
           }
         ];
       };
