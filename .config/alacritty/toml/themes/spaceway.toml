@@ -1,5 +1,5 @@
 [colors.cursor]
-text = "#CDCDCD"
+# text = "#CDCDCD"
 
 [colors.normal]
 black = "#191919"
