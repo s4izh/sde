@@ -4,8 +4,11 @@
   lib,
   ...
 }: {
-  programs.neovim = {
-    enable = true;
-    package = pkgs.neovim-nightly;
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   package = pkgs.neovim;
+  # };
+  environment.systemPackages = with pkgs; [
+    neovim
+  ];
 }

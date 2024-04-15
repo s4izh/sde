@@ -56,6 +56,9 @@
     zig
     zls
   ];
+  haskellpkgs = with pkgs; [
+    ghc
+  ];
   devpkgs = with pkgs; [
     git
     tmux
@@ -79,5 +82,6 @@ in {
     ++ linuxpkgs
     ++ shpkgs
     ++ gopkgs
-    ++ zigpkgs;
+    ++ zigpkgs
+    ++ haskellpkgs;
 }
