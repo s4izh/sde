@@ -163,7 +163,7 @@
     };
   };
 
-  networking.extraHosts = builtins.readFile /home/sergio/.dotfiles/etc/hosts;
+  # networking.extraHosts = builtins.readFile /home/sergio/.dotfiles/etc/hosts;
 
   # xdg.portal.enable = true;
   # xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];

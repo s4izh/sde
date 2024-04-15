@@ -7,7 +7,7 @@
   services.xserver = {
     enable = true;
     windowManager.stumpwm.enable = true;
-    displayManager.lightdm.enable = true;
+    # displayManager.lightdm.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

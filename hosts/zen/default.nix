@@ -28,8 +28,6 @@ in {
     users = {sergio = import ../../home/sergio/home.nix;};
   };
 
-  nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlay];
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
