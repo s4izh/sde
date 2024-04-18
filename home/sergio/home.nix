@@ -11,8 +11,8 @@ in {
     tmux
     fzf
     # neovim
-    nixfmt
-    nil
+    # nixfmt
+    # nil
     shellcheck
     shfmt
     gnumake
