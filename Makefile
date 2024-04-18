@@ -15,6 +15,8 @@ test: ## Test the flake
 	sudo nixos-rebuild test --flake .# --impure
 switch: src-dependencies create-softlinks ## Switch to the flake
 	sudo nixos-rebuild switch --flake .# --impure
+bootstrap: src-dependencies create-softlinks ## First bootstrap, specify NIX_HOSTNAME as env variable
+	sudo nixos-rebuild switch --flake .#$(NIX_HOSTNAME) --impure
 update: ## Update the flake
 	nix flake update
 gc: ## Run garbage collection
@@ -34,6 +36,8 @@ src-dependencies:
 	@if [ ! -d $(HOME)/.config/nvim ]; then git clone https://github.com/s4izh/nvim.git $(HOME)/.config/nvim; fi
 	@if [ ! -d $(HOME)/.dotfiles ]; then git clone https://github.com/s4izh/.dotfiles.git $(HOME)/.dotfiles; fi
 create-softlinks:
+	@if [ ! -h $(HOME)/.local/scripts ]; then\
+		ln -sf $(DOTFILES)/.local/scripts $(HOME)/.local/scripts; fi
 	@if [ ! -h $(HOME)/.config/alacritty ]; then\
 		ln -sf $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
 	@if [ ! -h $(HOME)/templates ]; then\
