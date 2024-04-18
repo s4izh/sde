@@ -17,15 +17,15 @@
   boot.kernelModules = ["kvm-intel amdgpu"];
   boot.extraModulePackages = [];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/f6eef78d-e1d2-4d30-ab24-99d70cdd9bf8";
-    fsType = "ext4";
-  };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/ec65ed5a-db25-4e46-9d1b-a88fb67b5d12";
+      fsType = "ext4";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/401D-2D5A";
-    fsType = "vfat";
-  };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/819B-5494";
+      fsType = "vfat";
+    };
 
   fileSystems."/mnt/ssd" = {
     device = "/dev/disk/by-id/ata-CT240BX200SSD1_1629F01F23E6-part3";
@@ -44,6 +44,6 @@
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  #powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
