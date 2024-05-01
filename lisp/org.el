@@ -316,8 +316,8 @@
    'org-babel-load-languages
    '((restclient . t))))
 
-(use-package ob-rust
-  :disabled t) ;; cargo install rust-script too
+;; (use-package ob-rust
+;;   :disabled t) ;; cargo install rust-script too
 
 (use-package ob-async)
 
@@ -325,7 +325,7 @@
  'org-babel-load-languages
  '((emacs-lisp . t)
    (python . t)
-   (rust . t)
+   ;; (rust . t)
    (C . t)
    (shell . t)))
 

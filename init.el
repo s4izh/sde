@@ -285,9 +285,9 @@
 (load (concat user-emacs-directory
               "lisp/org.el"))
 
-(unless my/is-ubuntu
-  (load (concat user-emacs-directory
-                "lisp/ai2.el")))
+; (unless my/is-ubuntu
+;   (load (concat user-emacs-directory
+;                 "lisp/ai2.el")))
 
 (setq tramp-default-method "ssh")
 
@@ -618,3 +618,58 @@
       (erase-buffer))
     (tramp-handle-shell-command command output-buffer output-buffer)
     (display-buffer output-buffer)))
+
+
+(defun gnuplot-rectangle (&optional title style)
+  (interactive)
+  (let* ((name (make-temp-file "plot"))
+         (buf (find-file name))
+         xlabel ylabel cols header n)
+    (with-current-buffer buf
+      (setq cols (split-string (car killed-rectangle)))
+      (when (string-match-p "^[a-zA-Z]" (car cols))
+        (setq header cols)
+        (pop killed-rectangle))
+      (setq n (length header))
+      (pcase n
+        (1 (setq ylabel (nth 1 header)))
+        (2 (setq xlabel (nth 0 header)
+                 ylabel (nth 1 header)))
+        (_ (setq xlabel (nth 0 header))))
+      (yank-rectangle)
+      (save-buffer))
+
+    (setq style (or style "line"))
+    (with-temp-buffer
+      (insert "set title  '" (or title "Title") "'\n")
+      (insert "set xlabel '" (or xlabel "x-axis") "'\n")
+      (insert "set ylabel '" (or ylabel "y-axis") "'\n")
+      (insert "plot '" name "'")
+      (setq n (length cols))
+      (dotimes (i (1- n))
+        (if (> n 1) (insert " using 1:" (number-to-string (+ i 2))))
+        (if (< i n) (insert " with " style))
+        (if (> n 2)
+            (insert " title '" (nth (+ i 1) header) "'")
+          (insert " notitle"))
+        (if (> i 0) (insert ",")))
+      (if (= 1 n) (insert " using 1 with " style " notitle"))
+      (newline)
+      (gnuplot-mode)
+      (gnuplot-send-buffer-to-gnuplot))
+
+    ;; Cleanup
+    (kill-buffer buf)
+    ;; (delete-file name)
+    ))
+
+
+(use-package auctex
+  :ensure t
+  :hook
+  (LaTeX-mode . turn-on-prettify-symbols-mode)
+  (LaTeX-mode . turn-on-flyspell))
+
+;; (use-package vertico-posframe
+;;   :ensure t
+;;   :config (vertico-posframe-mode nil))
