@@ -668,8 +668,17 @@
   :ensure t
   :hook
   (LaTeX-mode . turn-on-prettify-symbols-mode)
-  (LaTeX-mode . turn-on-flyspell))
+  (LaTeX-mode . turn-on-flyspell)
+  :config
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+        TeX-source-correlate-start-server t)
+  ;; TeX-pdf-tools-sync-view
+  ;; Update PDF buffers after successful LaTeX runs
+  (add-hook 'TeX-after-compilation-finished-functions
+            #'TeX-revert-document-buffer))
 
 ;; (use-package vertico-posframe
 ;;   :ensure t
 ;;   :config (vertico-posframe-mode nil))
+;; Use pdf-tools to open PDF files
+
