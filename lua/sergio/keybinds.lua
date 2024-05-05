@@ -57,3 +57,10 @@ if vim.opt.diff:get() then
 end
 
 vim.keymap.set("n", "<Leader>R", ":set wrap! linebreak!<cr>")
+
+-- writing
+vim.keymap.set("n", "<Leader>wsc", ":setlocal spell spelllang=ca<cr>")
+vim.keymap.set("n", "<Leader>wse", ":setlocal spell spelllang=es<cr>")
+vim.keymap.set("n", "<Leader>wsi", ":setlocal spell spelllang=en<cr>")
+vim.keymap.set("n", "<Leader>wS", ":setlocal nospell<cr>")
+vim.keymap.set("n", "<Leader>wT", ":r!~/notes/utils/template %<cr>ggdd")
