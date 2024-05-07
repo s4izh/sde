@@ -71,6 +71,7 @@
     # other
     newsboat
     cointop
+    screenkey
   ];
 
   # programs.starship.enable = true;
@@ -89,17 +90,17 @@
     xkb.layout = "es";
     xkb.variant = "";
     xkb.options = "caps:escape";
-    # xkb.options = "ctrl:nocaps";
-    libinput = {
-      enable = true;
-      mouse = {
-        accelProfile = "flat";
-        middleEmulation = false;
-      };
-      touchpad = {
-        accelProfile = "flat";
-        naturalScrolling = true;
-      };
+  };
+
+  services.libinput = {
+    enable = true;
+    mouse = {
+      accelProfile = "flat";
+      middleEmulation = false;
+    };
+    touchpad = {
+      accelProfile = "flat";
+      naturalScrolling = true;
     };
   };
 
@@ -155,9 +156,9 @@
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
       serif = ["Source Serif Pro"];
-      monospace = ["InputMonoCondensed"];
+      # monospace = ["InputMonoCondensed"];
       # monospace = [ "UbuntuMono Nerd Font" ];
-      # monospace = [ "JetBrainsMono Nerd Font" ];
+      monospace = ["JetBrainsMono Nerd Font"];
       # monospace = [ "FiraCode Nerd Font" ];
       # monospace = [ "LiterationMono Nerd Font" ];
     };

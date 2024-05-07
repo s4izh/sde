@@ -7,7 +7,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs @ {
@@ -24,7 +23,7 @@
     lib = nixpkgs.lib;
   in {
     nixosConfigurations = let
-      # specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
       # extraSpecialArgs = { inherit inputs; };
       mkHostConfig = {
         host,
@@ -36,6 +35,9 @@
           specialArgs = {inherit inputs;};
           modules = [
             ./hosts/${host}
+            {
+              nix.registry.nixpkgs.flake = inputs.nixpkgs; # nix shell to use system flake
+            }
           ];
         };
       };
@@ -67,7 +69,6 @@
     in
       builtins.listToAttrs machineConfigs;
 
-    # };
     homeManagerConfigurations = {
       sergio = home-manager.lib.homeManagerConfiguration {
         # pkgs = nixpkgs.legacyPackages.${system};
@@ -84,12 +85,6 @@
         ];
       };
     };
-    # devShells.x86_64-linux.default = pkgs.stdenvNoCC.mkDerivation {
-    #   name = "nixdev-shell";
-    #   buildInputs = [
-    #   ];
-    # };
-    # devShells.x86_64-linux.default = import ./shell.nix { inherit pkgs; };
-    packages.x86_64-linux.default = import ./shell.nix { inherit pkgs; };
+    packages.x86_64-linux.default = import ./shell.nix {inherit pkgs;};
   };
 }
