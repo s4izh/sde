@@ -219,7 +219,7 @@ in {
   };
 
   # programs.direnv.enable = true;
-  # programs.direnv.nix-direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 
   home.stateVersion = "23.11";
 }
