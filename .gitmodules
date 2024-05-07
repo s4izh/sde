@@ -85,3 +85,6 @@
 [submodule "pack/plugins/submodules/themes/modus-themes.nvim"]
 	path = pack/plugins/submodules/themes/modus-themes.nvim
 	url = https://github.com/miikanissi/modus-themes.nvim
+[submodule "pack/plugins/submodules/themes/melange-nvim"]
+	path = pack/plugins/submodules/themes/melange-nvim
+	url = https://github.com/savq/melange-nvim
