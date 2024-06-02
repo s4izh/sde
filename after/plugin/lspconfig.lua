@@ -26,6 +26,7 @@ lsp.bashls.setup({})
 lsp.zls.setup({})
 
 lsp.clangd.setup({
+  cmd = { "clangd",  "-cross-file-rename" },
   capabilities = capabilities,
 })
 lsp.pyright.setup({})
