@@ -91,3 +91,6 @@
 [submodule "pack/plugins/submodules/nvim-autopairs"]
 	path = pack/plugins/submodules/nvim-autopairs
 	url = https://github.com/windwp/nvim-autopairs
+[submodule "pack/plugins/submodules/oil.nvim"]
+	path = pack/plugins/submodules/oil.nvim
+	url = https://github.com/stevearc/oil.nvim
