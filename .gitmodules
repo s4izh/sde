@@ -88,3 +88,6 @@
 [submodule "pack/plugins/submodules/themes/melange-nvim"]
 	path = pack/plugins/submodules/themes/melange-nvim
 	url = https://github.com/savq/melange-nvim
+[submodule "pack/plugins/submodules/nvim-autopairs"]
+	path = pack/plugins/submodules/nvim-autopairs
+	url = https://github.com/windwp/nvim-autopairs
