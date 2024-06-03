@@ -16,7 +16,7 @@ vim.keymap.set("n", "Q", "<nop>")
 -- quickfix mappings
 vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>q", "<cmd>copen<CR>")
+-- vim.keymap.set("n", "<leader>q", "<cmd>copen<CR>")
 
 -- move lines up and down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
