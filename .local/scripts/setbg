@@ -4,32 +4,35 @@
 wal=$(realpath "$1")
 
 wal -i $wal
-ln -sf $wal ~/pix/wal/default.jpg
+ln -sf $wal ~/pix/default-wallpaper.jpg
 
 sed -i 'N;$!P;D' $HOME/.cache/wal/colors-wal-dwm.h
 sed -i '3s/.*/static const char norm_border[] = \"#222222\";/g' $HOME/.cache/wal/colors-wal-dwm.h
 
-ln -sf $HOME/.cache/wal/colors-wal-dwm.h $HOME/.local/src/dwm/theme.h
-ln -sf $HOME/.cache/wal/colors-wal-dmenu.h $HOME/.local/src/dmenu/theme.h
-ln -sf $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
-
 echo "\
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
+
 " >> $HOME/.cache/wal/colors-wal-dwm.h
 
+# ln -sf $HOME/.cache/wal/colors-wal-dwm.h $HOME/.local/src/dwm/theme.h
+cp $HOME/.cache/wal/colors-wal-dwm.h $HOME/.local/src/dwm/theme.h
+# ln -sf $HOME/.cache/wal/colors-wal-dmenu.h $HOME/.local/src/dmenu/theme.h
+cp $HOME/.cache/wal/colors-wal-dmenu.h $HOME/.local/src/dmenu/theme.h
+# ln -sf $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
+cp $HOME/.cache/wal/colors.Xresources $HOME/.Xresources
 
 xrdb $HOME/.Xresources
 # xrdb -merge
 
-(cd $HOME/.local/src/dwm && sudo make clean install)
-(cd $HOME/.local/src/dmenu && sudo make clean install)
+# (cd $HOME/.local/src/dwm && sudo make clean install)
+# (cd $HOME/.local/src/dmenu && sudo make clean install)
 
-alacrittycolors=$HOME/.cache/wal/colors-wal-alacritty.yml
+alacrittycolors=$HOME/.cache/wal/colors-wal-alacritty.toml
 
 [ ! -f $alacrittycolors ] && touch $alacrittycolors
 alacritty-pywall $alacrittycolors
-ln -sf $alacrittycolors $HOME/.config/alacritty/theme.yml
+ln -sf $alacrittycolors $HOME/.config/alacritty/toml/theme.toml
 
 # this is for autostart
 # echo "wal -i $wal" > ~/pix/wallpaper.sh
