@@ -94,3 +94,12 @@
 [submodule "pack/plugins/submodules/oil.nvim"]
 	path = pack/plugins/submodules/oil.nvim
 	url = https://github.com/stevearc/oil.nvim
+[submodule "pack/plugins/submodules/neo-tree.nvim"]
+	path = pack/plugins/submodules/neo-tree.nvim
+	url = https://github.com/nvim-neo-tree/neo-tree.nvim
+[submodule "pack/plugins/submodules/nui.nvim"]
+	path = pack/plugins/submodules/nui.nvim
+	url = https://github.com/MunifTanjim/nui.nvim
+[submodule "pack/plugins/submodules/themes/neovim"]
+	path = pack/plugins/submodules/themes/neovim
+	url = https://github.com/rose-pine/neovim
