@@ -35,8 +35,25 @@ cmp.setup({
         -- },
       }),
       mapping = cmp.mapping.preset.insert({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-p>'] = function(fallback)
+          if cmp.visible() then
+            -- cmp.mapping.select_prev_item(cmp_select)
+            cmp.select_prev_item()
+          else
+            cmp.complete()
+            cmp.select_prev_item()
+          end
+        end,
+        ['<C-n>'] = function(fallback)
+          if cmp.visible() then
+            -- cmp.mapping.select_next_item(cmp_select)
+            cmp.select_next_item()
+          else
+            cmp.complete()
+            cmp.select_next_item()
+          end
+        end,
+
         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
@@ -57,6 +74,9 @@ cmp.setup({
           vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
           return vim_item
         end
+      },
+      completion = {
+        autocomplete = false,
       },
     })
     require("luasnip.loaders.from_vscode").lazy_load()
