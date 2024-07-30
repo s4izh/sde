@@ -43,6 +43,8 @@ vim.keymap.set("n", "<Leader>x", ":!chmod +x %<cr><cr>")
 vim.keymap.set("n", "<Leader>wc0", ":set conceallevel=0<cr>")
 vim.keymap.set("n", "<Leader>wc2", ":set conceallevel=2<cr>")
 
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
 -- resource config
 vim.keymap.set("n", "<Leader>V", ":source ~/.config/nvim/init.lua <cr>")
 
