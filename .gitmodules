@@ -100,8 +100,8 @@
 [submodule "pack/plugins/submodules/nui.nvim"]
 	path = pack/plugins/submodules/nui.nvim
 	url = https://github.com/MunifTanjim/nui.nvim
-[submodule "pack/plugins/submodules/themes/neovim"]
-	path = pack/plugins/submodules/themes/neovim
+[submodule "pack/plugins/submodules/themes/rose-pine"]
+	path = pack/plugins/submodules/themes/rose-pine
 	url = https://github.com/rose-pine/neovim
 [submodule "pack/plugins/submodules/themes/kanagawa.nvim"]
 	path = pack/plugins/submodules/themes/kanagawa.nvim
