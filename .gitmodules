@@ -103,3 +103,9 @@
 [submodule "pack/plugins/submodules/themes/neovim"]
 	path = pack/plugins/submodules/themes/neovim
 	url = https://github.com/rose-pine/neovim
+[submodule "pack/plugins/submodules/themes/kanagawa.nvim"]
+	path = pack/plugins/submodules/themes/kanagawa.nvim
+	url = https://github.com/rebelot/kanagawa.nvim
+[submodule "pack/plugins/submodules/themes/vim-noctu"]
+	path = pack/plugins/submodules/themes/vim-noctu
+	url = https://github.com/xero/vim-noctu
