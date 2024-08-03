@@ -1,1 +1,0 @@
-../submodules/themes/sitruuna.vim

@@ -1,1 +1,0 @@
-../submodules/themes/bluewery.vim
