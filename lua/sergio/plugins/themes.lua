@@ -25,4 +25,6 @@ return {
   setup_theme("gavinok/spaceway.vim"),
   setup_theme("xero/sourcerer.vim"),
   setup_theme("xero/vim-noctu"),
+  setup_theme("maxmx03/solarized.nvim"),
+  setup_theme("navarasu/onedark.nvim"),
 }
