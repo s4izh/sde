@@ -8,7 +8,7 @@ vim.opt.smartindent = true
 -- number column
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.signcolumn = "no"
+vim.opt.signcolumn = "yes"
 
 vim.g.editorconfig = true
 
