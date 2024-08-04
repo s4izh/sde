@@ -7,11 +7,10 @@ else
 
     scripts=~/.local/scripts
     dotfiles=~/.dotfiles
-    nvim=~/.config/nvim
     notes=~/notes
     passwords=$PASSWORD_STORE_DIR
 
-    selected=$(printf "$folders\n$scripts\n$dotfiles\n$passwords\n$notes\n$nvim\nnew" | fzf)
+    selected=$(printf "$folders\n$scripts\n$dotfiles\n$passwords\n$notes\nnew" | fzf)
 fi
 
 if [[ -z $selected ]]; then
