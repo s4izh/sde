@@ -18,3 +18,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.api.nvim_set_option("grepprg", "rg --vimgrep --smart-case")
 vim.api.nvim_set_option("grepformat", "%f:%l:%c:%m,%f:%l:%m")
+
+vim.g.git_base = "HEAD"
