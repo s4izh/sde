@@ -69,5 +69,18 @@ vim.keymap.set("n", "<Leader>wT", ":r!~/notes/utils/template %<cr>ggdd")
 
 
 vim.keymap.set("n", "<Leader>fw", ":silent grep <C-R><C-W> | copen<cr>")
+--vim.keymap.set("v", "<Leader>fs", ":grep -r <C-r>h | copen<cr>")
 
-vim.keymap.set("n", "<Leader>r", ":so %<cr>")
+vim.keymap.set("n", "<Leader>r", ":luafile %<cr>")
+
+vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//gc<left><left><left>', { noremap = true, silent = true })
+
+-- vim.keymap.set('v', '<Leader>fs', '"hy:silent grep <C-r>h | copen<CR>', { noremap = true, silent = true })
+vim.keymap.set('v', '<Leader>fs', function()
+  vim.cmd('normal! "hy')
+  local query = vim.fn.getreg('h')
+  query = vim.fn.escape(query, '\\')
+  query = vim.fn.escape(query, '"')
+  vim.cmd('silent grep "' .. query .. '" .')
+  vim.cmd('copen')
+end, { noremap = true, silent = true })
