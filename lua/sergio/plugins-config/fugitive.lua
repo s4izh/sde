@@ -1,5 +1,9 @@
 vim.keymap.set("n", "<leader>gs", ":Ge:<CR>")
 
+vim.keymap.set("n", "<Space>gd", ":set nosplitright<CR>:execute 'Gvdiff ' .. g:git_base<CR>:set splitright<CR>")
+vim.keymap.set("n", "<Space>gb", ":Git blame<CR>")
+vim.keymap.set("n", "<Space>gc", ":0Gclog<CR>", { noremap = false })
+
 vim.api.nvim_create_autocmd("BufWinEnter", {
   group = vim.api.nvim_create_augroup("my_fugitive_group", {}),
   pattern = "*",
