@@ -14,4 +14,4 @@ vim.opt.background = "dark"
 
 -- require("rose-pine")
 
-ColorMyPencils("sitruuna")
+ColorMyPencils("habamax")

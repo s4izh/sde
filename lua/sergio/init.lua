@@ -1,4 +1,8 @@
+require("sergio.lazy")
 require("sergio.settings")
 require("sergio.keybinds")
 require("sergio.sudo")
 require("sergio.statusline")
+require("sergio.quickfix")
+-- require("sergio.fuzzy")
+require("sergio.colors")
