@@ -27,4 +27,8 @@ return {
   setup_theme("xero/vim-noctu"),
   setup_theme("maxmx03/solarized.nvim"),
   setup_theme("navarasu/onedark.nvim"),
+  setup_theme("mofiqul/vscode.nvim"),
+  setup_theme("projekt0n/github-nvim-theme"),
+  setup_theme("rebelot/kanagawa.nvim"),
+  setup_theme("sainnhe/sonokai"),
 }
