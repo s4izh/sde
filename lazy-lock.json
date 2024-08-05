@@ -13,9 +13,11 @@
   "friendly-snippets": { "branch": "main", "commit": "00ebcaa159e817150bd83bfe2d51fa3b3377d5c4" },
   "fzf": { "branch": "master", "commit": "128e4a2e8d9f57373182cad64fb69e33fb20e0ee" },
   "fzf.vim": { "branch": "master", "commit": "45d96c9cb1213204479593236dfabf911ff15443" },
+  "github-nvim-theme": { "branch": "main", "commit": "6e59aeaa6c2d912adc9bfa6bc6e30ccf368b9b1b" },
   "gruber-darker.nvim": { "branch": "main", "commit": "1793c0929ca965430410f7ec578272a4af9226ee" },
   "gruvbox": { "branch": "master", "commit": "f1ecde848f0cdba877acb0c740320568252cc482" },
   "gruvbuddy.nvim": { "branch": "master", "commit": "3aa94b2fb061b13ccc118d21fad25d6b1ff3fc8b" },
+  "kanagawa.nvim": { "branch": "master", "commit": "e5f7b8a804360f0a48e40d0083a97193ee4fcc87" },
   "lazy.nvim": { "branch": "main", "commit": "077102c5bfc578693f12377846d427f49bc50076" },
   "melange-nvim": { "branch": "master", "commit": "f626d41b9110e6ab853538d8b939979a0f1adfeb" },
   "modus-theme-vim": { "branch": "master", "commit": "4d827fbf1aad55f4d62225f7b999efc5023864a3" },
@@ -31,10 +33,12 @@
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "sitruuna.vim": { "branch": "master", "commit": "e0e0a829bdeefbe7ba012f26cebdad2fb4481cb0" },
   "solarized.nvim": { "branch": "main", "commit": "3a197875c76803e4a64d4b1491c6dd0d22b161cd" },
+  "sonokai": { "branch": "master", "commit": "598d29bef1cdea1eef4749c96824af0ae2f9350c" },
   "sourcerer.vim": { "branch": "master", "commit": "f6408ea1724ba85b68ea3f2875becece165aa06d" },
   "spaceway.vim": { "branch": "master", "commit": "9027289fa293a59ce169ab4868d50073178409b4" },
   "vim-commentary": { "branch": "master", "commit": "c4b8f52cbb7142ec239494e5a2c4a512f92c4d07" },
   "vim-dispatch": { "branch": "master", "commit": "4c695bc052cad2ae6b980aebbe48d046466e27ae" },
   "vim-fugitive": { "branch": "master", "commit": "0444df68cd1cdabc7453d6bd84099458327e5513" },
-  "vim-noctu": { "branch": "master", "commit": "b8c48ac13d2d19203600b2982176663b377d9e09" }
+  "vim-noctu": { "branch": "master", "commit": "b8c48ac13d2d19203600b2982176663b377d9e09" },
+  "vscode.nvim": { "branch": "main", "commit": "f6c88cdf9d37d5c0bb1e492a13a3b4b4cc4dd13e" }
 }
