@@ -9,13 +9,11 @@ function ColorMyPencils(color)
 
   vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "white", bg = "none" })
   vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
-  -- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
 
   vim.api.nvim_set_hl(0, "LineNr", { bg = "none", ctermbg = "none", fg="grey" })
-
-  vim.cmd [[
-      highlight LineNr ctermbg=none guibg=none
-  ]]
+  -- vim.cmd [[
+  --     highlight LineNr ctermbg=none guibg=none
+  -- ]]
 
   -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "black" })  -- Transparent status line
   vim.api.nvim_set_hl(0, "StatusLine", { fg = "white" })  -- Transparent status line
@@ -35,3 +33,13 @@ vim.opt.background = "dark"
 vim.g.gruvbox_contrast_dark = 'hard' -- Set desired contrast here
 
 ColorMyPencils("gruber-darker")
+
+vim.api.nvim_create_user_command("Theme", function(opts)
+  ColorMyPencils(opts.args)
+end, {
+  nargs = 1,
+  complete = function(ArgLead, CmdLine, CursorPos)
+    return vim.fn.getcompletion(ArgLead, 'color')
+  end,
+})
+
