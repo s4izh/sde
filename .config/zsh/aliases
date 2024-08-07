@@ -85,7 +85,6 @@ alias \
 	yta="yt -x -f bestaudio/best" \
 	ffmpeg="ffmpeg -hide_banner"
 
-
 # colorize commands when possible
 alias \
 	ls="ls --color=auto --group-directories-first" \
