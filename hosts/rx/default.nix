@@ -24,6 +24,7 @@ in {
     "${modules}/dev.nix"
     "${modules}/nvim.nix"
     "${modules}/river.nix"
+    "${modules}/sway.nix"
     "${modules}/stumpwm.nix"
     # "${modules}/xfce.nix"
     # "${modules}/i3.nix"
