@@ -50,3 +50,7 @@ create-softlinks:
 		ln -sf $(DOTFILES)/.xinitrc $(HOME)/.xinitrc; fi
 	@if [ ! -h $(HOME)/.config/tmux ]; then\
 		ln -sf $(DOTFILES)/.config/tmux $(HOME)/.config/tmux; fi
+	@if [ ! -h $(HOME)/.config/sway ]; then\
+		ln -sf $(DOTFILES)/.config/sway $(HOME)/.config/sway; fi
+	@if [ ! -h $(HOME)/.config/shell ]; then\
+		ln -sf $(DOTFILES)/.config/shell $(HOME)/.config/shell; fi
