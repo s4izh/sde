@@ -7,24 +7,45 @@ if [ -z "$INSIDE_EMACS" ]; then
     eval "$(fzf --bash)"
 fi
 
-BOLD_RED="1;31m"
-BOLD_GREEN="1;32m"
-BOLD_WHITE="1;37m"
-
-if [ "$TERM" != "dumb" ] || [ -n "$INSIDE_EMACS" ]; then
-  PROMPT_COLOR=$BOLD_RED # rojo para el root
-  ((UID)) && PROMPT_COLOR=$BOLD_WHITE
-  if [ -n "$INSIDE_EMACS" ]; then
-    # Emacs term mode doesn't support xterm title escape sequence (\e]0;)
-    PS1="\n\[\033[$PROMPT_COLOR\][\u@\h:\w]\\$\[\033[0m\] "
-  else
-    PS1="\n\[\033[$PROMPT_COLOR\][\[\e]0;\u@\h: \w\a\]\u@\h:\w]\\$\[\033[0m\] "
-  fi
-  if test "$TERM" = "xterm"; then
-    PS1="\[\033]2;\h:\u:\w\007\]$PS1"
-  fi
-fi
-
 if [ -f "$HOME/.config/shell/aliases" ]; then
     source "$HOME/.config/shell/aliases"
+fi
+
+_set_prompt() {
+    local BOLD="1;"
+    local NORMAL="0;"
+
+    local RED="31m"
+    local GREEN="32m"
+    local YELLOW="33m"
+    local BLUE="34m"
+    local MAGENTA="35m"
+    local CYAN="36m"
+    local WHITE="37m"
+
+    local PROMPT_COLOR="$BOLD$WHITE"
+    local GIT_COLOR="$NORMAL$YELLOW"
+    local NIX_COLOR="$NORMAL$CYAN"
+    local PROMPT_CHAR="$NORMAL$GREEN"
+
+    if [ -n "$IN_NIX_SHELL" ]; then
+        PS1="\[\e[$NIX_COLOR\][nix-shell]\[\e[$PROMPT_COLOR\] \u@\h:\w"
+    else
+        PS1="\[\e[$PROMPT_COLOR\]\u@\h:\w"
+    fi
+
+    if git rev-parse --is-inside-work-tree &>/dev/null; then
+        branch_name=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
+        PS1+=" \[\e[$NORMAL$GIT_COLOR\](git:$branch_name)\[\e[$NORMAL$PROMPT_COLOR\]"
+    fi
+
+    # PS1+=" $ \e[0m"
+    # PS1+="\n\[\e[$BOLD$WHITE\]$ \e[0m"
+    PS1+="\n$ \e[0m"
+}
+
+PROMPT_COMMAND=_set_prompt
+
+if command -v direnv > /dev/null 2>&1; then
+    eval "$(direnv hook bash)"
 fi
