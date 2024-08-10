@@ -25,7 +25,7 @@ user: ## Switch to the flake as a user
 	nix build ".#homeManagerConfigurations.sergio.activationPackage" --impure
 	./result/activate
 	rm -rf result
-src-dependencies:
+src-dependencies: ## Download impure source dependencies
 	@if [ ! -d $(SRC_DIR) ]; then mkdir -p $(SRC_DIR); fi
 	@if [ ! -d $(SRC_DIR)/dwm ]; then git clone https://github.com/s4izh/dwm.git $(SRC_DIR)/dwm; fi
 	@if [ ! -d $(SRC_DIR)/dmenu ]; then git clone https://github.com/s4izh/dmenu.git $(SRC_DIR)/dmenu; fi
@@ -35,7 +35,7 @@ src-dependencies:
 	@if [ ! -d $(SRC_DIR)/st ]; then git clone https://github.com/s4izh/st.git $(SRC_DIR)/st; fi
 	@if [ ! -d $(HOME)/.config/nvim ]; then git clone https://github.com/s4izh/nvim.git $(HOME)/.config/nvim; fi
 	@if [ ! -d $(HOME)/.dotfiles ]; then git clone https://github.com/s4izh/.dotfiles.git $(HOME)/.dotfiles; fi
-create-softlinks:
+create-softlinks: ## Create softlinks
 	@if [ ! -h $(HOME)/.local/scripts ]; then\
 		ln -sf $(DOTFILES)/.local/scripts $(HOME)/.local/scripts; fi
 	@if [ ! -h $(HOME)/.config/alacritty ]; then\
