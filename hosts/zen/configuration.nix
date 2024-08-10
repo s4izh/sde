@@ -13,7 +13,7 @@
   services.blueman.enable = true;
 
   services.xserver.videoDrivers = ["amdgpu"];
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
