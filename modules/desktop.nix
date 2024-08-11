@@ -73,6 +73,7 @@
     newsboat
     cointop
     screenkey
+    sdcv # dictionary
   ];
 
   # programs.starship.enable = true;
