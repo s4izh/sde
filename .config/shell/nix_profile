@@ -28,6 +28,8 @@ export PATH="$HOME/.local/scripts":$PATH
 export PATH="$HOME/.local/scripts/statusbar":$PATH
 export PATH="$HOME/.local/scripts/tmux":$PATH
 
+export STARDICT_DATA_DIR="$XDG_DATA_HOME"
+
 export FZF_DEFAULT_OPTS="-m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all"
 export BAT_THEME="base16"
 
