@@ -1,0 +1,16 @@
+# vim: set ft=sh :
+
+function se() {
+    local current_dir=$PWD
+    cd ~/.local/scripts/
+    choice=$(fzf)
+    # [ -z "$choice" ] && cd $current_dir && exit
+    nvim $choice
+    cd $current_dir
+}
+
+function def() {
+	sdcv -n --utf8-output --color "$@" 2>&1 | \
+	fold --width=$(tput cols) | \
+	less --quit-if-one-screen -RX
+}
