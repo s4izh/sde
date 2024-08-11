@@ -32,7 +32,7 @@ case "$CHOICE" in
     ;;
     'gaming-streched')
         xrandr --output DisplayPort-1 --mode 1920x1080 --scale-from 1024x768 --rate 165
-        touch /tmp/gaming-streched
+        touch /tmp/monitor/gaming-streched
     ;;
     'gaming-normal')
         xrandr --output DisplayPort-1 --mode 1920x1080 --scale-from 1920x1080 --rate 165
