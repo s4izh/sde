@@ -15,6 +15,7 @@
     pavucontrol
     pulsemixer
     zathura
+    sioyek
     feh
     # fzf
     redshift
@@ -74,6 +75,7 @@
     cointop
     screenkey
     sdcv # dictionary
+    pywal
   ];
 
   # programs.starship.enable = true;
@@ -160,13 +162,14 @@
       serif = ["Source Serif Pro"];
       # monospace = ["InputMonoCondensed"];
       # monospace = [ "UbuntuMono Nerd Font" ];
-      monospace = ["JetBrainsMono Nerd Font"];
+      # monospace = ["Iosevka"];
       # monospace = [ "FiraCode Nerd Font" ];
       # monospace = [ "LiterationMono Nerd Font" ];
+      monospace = [ "JetBrains Mono" ];
     };
   };
 
-  # networking.extraHosts = builtins.readFile /home/sergio/.dotfiles/etc/hosts;
+  networking.extraHosts = builtins.readFile /home/sergio/.dotfiles/etc/hosts;
 
   # xdg.portal.enable = true;
   # xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
