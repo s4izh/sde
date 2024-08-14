@@ -21,7 +21,8 @@ return {
   setup_theme("tjdevries/colorbuddy.vim"),
   setup_theme("tjdevries/gruvbuddy.nvim"),
   setup_theme("sainnhe/everforest"),
-  setup_theme("ishan9299/modus-theme-vim"),
+  setup_theme("ishan9299/modus-theme-vim"), -- modus-operandi, modus-vivendi
+  setup_theme("miikanissi/modus-themes.nvim"),
   setup_theme("gavinok/spaceway.vim"),
   setup_theme("xero/sourcerer.vim"),
   setup_theme("xero/vim-noctu"),
@@ -31,4 +32,10 @@ return {
   setup_theme("projekt0n/github-nvim-theme"),
   setup_theme("rebelot/kanagawa.nvim"),
   setup_theme("sainnhe/sonokai"),
+  setup_theme("zenbones-theme/zenbones.nvim"),
+  setup_theme("rktjmp/lush.nvim"),
+  setup_theme("yorickpeterse/vim-paper"),
+  setup_theme("yorickpeterse/nvim-grey"),
+  setup_theme("phha/zenburn.nvim"),
+  setup_theme("Alligator/accent.vim"),
 }
