@@ -66,6 +66,7 @@ vim.keymap.set("n", "<Leader>wse", ":setlocal spell spelllang=es<cr>")
 vim.keymap.set("n", "<Leader>wsi", ":setlocal spell spelllang=en<cr>")
 vim.keymap.set("n", "<Leader>wS", ":setlocal nospell<cr>")
 vim.keymap.set("n", "<Leader>wT", ":r!~/notes/utils/template %<cr>ggdd")
+vim.keymap.set("n", "<Leader>wl", ":r!~/notes/utils/link-note % 2>/dev/null<cr>")
 
 
 vim.keymap.set("n", "<Leader>fw", ":silent grep <C-R><C-W> | copen<cr>")
