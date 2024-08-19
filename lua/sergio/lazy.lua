@@ -11,4 +11,25 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("sergio.plugins")
+require("lazy").setup("sergio.plugins", {
+  install = {
+    missing = false,
+  },
+  change_detection = { notify = false },
+  rocks = {
+    enabled = false,
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        'gzip',
+        -- 'netrwPlugin',
+        'rplugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+      },
+    },
+  },
+})
