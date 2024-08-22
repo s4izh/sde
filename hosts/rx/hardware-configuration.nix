@@ -27,11 +27,11 @@
     fsType = "vfat";
   };
 
-  fileSystems."/mnt/ssd" = {
-    device = "/dev/disk/by-id/ata-CT240BX200SSD1_1629F01F23E6-part3";
-    fsType = "ext4";
-    options = ["nofail"];
-  };
+  # fileSystems."/mnt/ssd" = {
+  #   device = "/dev/disk/by-id/ata-CT240BX200SSD1_1629F01F23E6-part3";
+  #   fsType = "ext4";
+  #   options = ["nofail"];
+  # };
 
   swapDevices = [];
 
