@@ -6,15 +6,52 @@
   config,
   pkgs,
   ...
-}: {
+}:
+let
+  fallout = pkgs.fetchFromGitHub
+  {
+    owner = "shvchk";
+    repo = "fallout-grub-theme";
+    rev = "80734103d0b48d724f0928e8082b6755bd3b2078";
+    sha256 = "sha256-7kvLfD6Nz4cEMrmCA9yq4enyqVyqiTkVZV5y4RyUatU=";
+  };
+in
+{
   networking.hostName = "rx"; # Define your hostname.
   networking.networkmanager.enable = true;
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.configurationLimit = 5;
+
   boot.loader.efi.efiSysMountPoint = "/boot";
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+    configurationLimit = 5;
+    useOSProber = true;
+    # theme = fallout;
+  };
+
+  boot.loader.grub = {
+    minegrub-world-sel = {
+      enable = true;
+      customIcons = [{
+        name = "nixos";
+        lineTop = "NixOS (23/11/2023, 23:03)";
+        lineBottom = "Survival Mode, No Cheats, Version: 23.11";
+        # Icon: you can use an icon from the remote repo, or load from a local file
+        imgName = "nixos";
+        customImg = builtins.path {
+          path = ./../../extra/nixos-logo.png;
+          name = "nixos";
+        };
+      }];
+    };
+  };
 
   networking.firewall = {
     enable = true;
@@ -38,7 +75,7 @@
 
   services.xserver.videoDrivers = ["amdgpu"];
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   environment.systemPackages = with pkgs; [
     amdgpu_top
