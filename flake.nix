@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    minegrub-world-sel-theme.url = "github:Lxtharia/minegrub-world-sel-theme";
   };
 
   outputs = inputs @ {
@@ -38,6 +39,7 @@
             {
               nix.registry.nixpkgs.flake = inputs.nixpkgs; # nix shell to use system flake
             }
+            inputs.minegrub-world-sel-theme.nixosModules.default
           ];
         };
       };
@@ -80,6 +82,7 @@
               username = "sergio";
               homeDirectory = "/home/sergio";
               stateVersion = "23.11";
+
             };
           }
         ];
