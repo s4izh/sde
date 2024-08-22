@@ -36,6 +36,7 @@
   "onedark.nvim": { "branch": "master", "commit": "fae34f7c635797f4bf62fb00e7d0516efa8abe37" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "sitruuna.vim": { "branch": "master", "commit": "e0e0a829bdeefbe7ba012f26cebdad2fb4481cb0" },
+  "solarized-osaka.nvim": { "branch": "main", "commit": "126d394c0c979a99206214a2b6b8c86e456c9c0f" },
   "solarized.nvim": { "branch": "main", "commit": "3a197875c76803e4a64d4b1491c6dd0d22b161cd" },
   "sonokai": { "branch": "master", "commit": "598d29bef1cdea1eef4749c96824af0ae2f9350c" },
   "sourcerer.vim": { "branch": "master", "commit": "f6408ea1724ba85b68ea3f2875becece165aa06d" },
