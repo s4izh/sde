@@ -21,7 +21,9 @@ lsp.gopls.setup({})
 
 lsp.tsserver.setup({})
 
-lsp.bashls.setup({})
+if (vim.fn.executable("bash-language-server") > 0) then
+  lsp.bashls.setup({})
+end
 
 lsp.zls.setup({})
 
@@ -29,19 +31,22 @@ lsp.clangd.setup({
   cmd = { "clangd",  "-cross-file-rename" },
   capabilities = capabilities,
 })
+
 lsp.pyright.setup({})
 
-lsp.lua_ls.setup({
-  cmd = { "lua-language-server" },
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
+if (vim.fn.executable("lua-language-server") > 0) then
+  lsp.lua_ls.setup({
+    cmd = { "lua-language-server" },
+    capabilities = capabilities,
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
       },
     },
-  },
-})
+  })
+end
 
 lsp.ltex.setup({
   on_attach = on_attach,
