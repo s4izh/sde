@@ -20,7 +20,7 @@
   "gruvbuddy.nvim": { "branch": "master", "commit": "3aa94b2fb061b13ccc118d21fad25d6b1ff3fc8b" },
   "kanagawa.nvim": { "branch": "master", "commit": "e5f7b8a804360f0a48e40d0083a97193ee4fcc87" },
   "lazy.nvim": { "branch": "main", "commit": "077102c5bfc578693f12377846d427f49bc50076" },
-  "lush.nvim": { "branch": "main", "commit": "6a254139d077ad53be7e4f3602c8da0c84447fd9" },
+  "lush.nvim": { "branch": "main", "commit": "45a79ec4acb5af783a6a29673a999ce37f00497e" },
   "melange-nvim": { "branch": "master", "commit": "f626d41b9110e6ab853538d8b939979a0f1adfeb" },
   "modus-theme-vim": { "branch": "master", "commit": "4d827fbf1aad55f4d62225f7b999efc5023864a3" },
   "modus-themes.nvim": { "branch": "master", "commit": "f978043c34f4e967a5496b4fa78c2ad092315b00" },
@@ -47,6 +47,6 @@
   "vim-noctu": { "branch": "master", "commit": "b8c48ac13d2d19203600b2982176663b377d9e09" },
   "vim-paper": { "branch": "main", "commit": "01b79707c2144f9c845057da2e7d6ec024e15c76" },
   "vscode.nvim": { "branch": "main", "commit": "f6c88cdf9d37d5c0bb1e492a13a3b4b4cc4dd13e" },
-  "zenbones.nvim": { "branch": "main", "commit": "5d69a8b159178c53d08151350967e2b0a42d59be" },
+  "zenbones.nvim": { "branch": "main", "commit": "8e4d87d4ff9107a6c85775831a79c521d775ab0d" },
   "zenburn.nvim": { "branch": "master", "commit": "f5ee12b30119499c7fa7f95719cd7c5aab9f9f29" }
 }
