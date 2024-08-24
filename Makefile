@@ -46,6 +46,8 @@ create-softlinks: ## Create softlinks
 		ln -sf $(DOTFILES)/.config/zsh $(HOME)/.config/zsh; fi
 	@if [ ! -h $(HOME)/.zprofile ]; then\
 		ln -sf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.zprofile; fi
+	@if [ ! -h $(HOME)/.profile ]; then\
+		ln -sf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.profile; fi
 	@if [ ! -h $(HOME)/.xinitrc ]; then\
 		ln -sf $(DOTFILES)/.xinitrc $(HOME)/.xinitrc; fi
 	@if [ ! -h $(HOME)/.config/tmux ]; then\

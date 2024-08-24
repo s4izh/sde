@@ -8,7 +8,7 @@
     isNormalUser = true;
     description = "sergio";
     extraGroups = ["networkmanager" "wheel"];
-    shell = pkgs.zsh;
+    shell = pkgs.bash;
     packages = with pkgs; [
     ];
   };
@@ -38,7 +38,7 @@
     usbutils # lsusb
     lshw
     file
-    neofetch
+    fastfetch
     gnumake
     ripgrep
     tmux
