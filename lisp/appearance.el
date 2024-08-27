@@ -21,8 +21,7 @@
 
 (if my/is-ubuntu
     ;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono-12"))
-    (add-to-list 'default-frame-alist '(font . "Liberation Mono-12"))
-  )
+    (add-to-list 'default-frame-alist '(font . "Liberation Mono-12")))
 
 (if my/is-arch
     ;; (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12"))
@@ -31,10 +30,12 @@
     ;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-12")) ;; arch
     ;; (add-to-list 'default-frame-alist '(font . "InputMonoNarrow-12")) ;; arch
     ;; (add-to-list 'default-frame-alist '(font . "InputMonoCompressed-12")) ;; arch
-    ;; (add-to-list 'default-frame-alist '(font . "Unifont-12")) ;; arch
-)
+    ;; (add-to-list 'default-frame-alist '(font . "Unifont-12")) ;; arch)
     ;; (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-12")) ;; arch
 ;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12")) ;; arch
+
+(if my/is-nixos
+    (add-to-list 'default-frame-alist '(font . "monospace")))
 
 (setq locale-coding-system 'utf-8)
 (set-face-attribute 'default nil :height 120)
