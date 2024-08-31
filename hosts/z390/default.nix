@@ -6,9 +6,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   modules = ../../modules;
-in {
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -24,8 +26,12 @@ in {
   ];
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {sergio = import ../../home/sergio/home.nix;};
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+    users = {
+      sergio = import ../../home/sergio/home.nix;
+    };
   };
 
   system.stateVersion = "23.05";

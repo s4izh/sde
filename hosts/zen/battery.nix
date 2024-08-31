@@ -3,12 +3,14 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   p = pkgs.writeScriptBin "charge-upto" ''
     echo ''${0:-100} > /sys/class/power_supply/BAT?/charge_control_end_threshold
   '';
   cfg = config.hardware.asus.battery;
-in {
+in
+{
   options.hardware.asus.battery = {
     chargeUpto = lib.mkOption {
       description = "Maximum level of charge for your battery, as a percentage.";
@@ -22,10 +24,16 @@ in {
     };
   };
   config = {
-    environment.systemPackages = lib.mkIf cfg.enableChargeUptoScript [p];
+    environment.systemPackages = lib.mkIf cfg.enableChargeUptoScript [ p ];
     systemd.services.battery-charge-threshold = {
-      wantedBy = ["local-fs.target" "suspend.target"];
-      after = ["local-fs.target" "suspend.target"];
+      wantedBy = [
+        "local-fs.target"
+        "suspend.target"
+      ];
+      after = [
+        "local-fs.target"
+        "suspend.target"
+      ];
       description = "Set the battery charge threshold to ${toString cfg.chargeUpto}%";
       startLimitBurst = 5;
       startLimitIntervalSec = 1;

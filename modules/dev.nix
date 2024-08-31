@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   rustpkgs = with pkgs; [
     rustup
     cargo
@@ -22,9 +23,7 @@
     nixd
     alejandra
   ];
-  luapkgs = with pkgs; [
-    lua-language-server
-  ];
+  luapkgs = with pkgs; [ lua-language-server ];
   cpkgs = with pkgs; [
     gcc
     cmake
@@ -56,9 +55,7 @@
     zig
     zls
   ];
-  haskellpkgs = with pkgs; [
-    ghc
-  ];
+  haskellpkgs = with pkgs; [ ghc ];
   devpkgs = with pkgs; [
     git
     tmux
@@ -70,7 +67,8 @@
     pstree
     cloc
   ];
-in {
+in
+{
   environment.systemPackages =
     devpkgs
     ++ rustpkgs
