@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # fonts
     (nerdfonts.override {
@@ -15,7 +16,7 @@
     font-awesome
 
     # themes
-    qogir-theme #gtk
+    qogir-theme # gtk
     qogir-icon-theme
     adw-gtk3
   ];
