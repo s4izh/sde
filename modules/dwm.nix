@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   services.xserver = {
     enable = true;
     windowManager.dwm.enable = true;
@@ -42,7 +43,7 @@
       });
       st = prev.st.overrideAttrs (old: {
         src = /home/sergio/.local/src/st;
-        buildInputs = old.buildInputs ++ [pkgs.harfbuzz];
+        buildInputs = old.buildInputs ++ [ pkgs.harfbuzz ];
       });
     })
   ];
