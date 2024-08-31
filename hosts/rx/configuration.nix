@@ -8,8 +8,7 @@
   ...
 }:
 let
-  fallout = pkgs.fetchFromGitHub
-  {
+  fallout = pkgs.fetchFromGitHub {
     owner = "shvchk";
     repo = "fallout-grub-theme";
     rev = "80734103d0b48d724f0928e8082b6755bd3b2078";
@@ -39,23 +38,25 @@ in
   boot.loader.grub = {
     minegrub-world-sel = {
       enable = true;
-      customIcons = [{
-        name = "nixos";
-        lineTop = "NixOS (23/11/2023, 23:03)";
-        lineBottom = "Survival Mode, No Cheats, Version: 23.11";
-        # Icon: you can use an icon from the remote repo, or load from a local file
-        imgName = "nixos";
-        customImg = builtins.path {
-          path = ./../../extra/nixos-logo.png;
+      customIcons = [
+        {
           name = "nixos";
-        };
-      }];
+          lineTop = "NixOS (23/11/2023, 23:03)";
+          lineBottom = "Survival Mode, No Cheats, Version: 23.11";
+          # Icon: you can use an icon from the remote repo, or load from a local file
+          imgName = "nixos";
+          customImg = builtins.path {
+            path = ./../../extra/nixos-logo.png;
+            name = "nixos";
+          };
+        }
+      ];
     };
   };
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [25565];
+    allowedTCPPorts = [ 25565 ];
   };
 
   # networking = {
@@ -73,13 +74,11 @@ in
     "resolv.conf".text = "nameserver 8.8.8.8\n";
   };
 
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.graphics.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    amdgpu_top
-  ];
+  environment.systemPackages = with pkgs; [ amdgpu_top ];
 
   hardware.cpu.amd.updateMicrocode = true;
   hardware.keyboard.qmk.enable = true;
