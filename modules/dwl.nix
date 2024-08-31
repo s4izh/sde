@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   services.xserver = {
     enable = true;
     # windowManager.dwm.enable = true;

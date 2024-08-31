@@ -6,9 +6,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   modules = ../../modules;
-in {
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
