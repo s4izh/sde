@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   environment.systemPackages = with pkgs; [
     virt-manager
     virt-viewer
@@ -11,12 +12,15 @@
     docker
     docker-compose
     kompose
-    win-virtio
+    # win-virtio # TODO: make this optional as module
   ];
 
   virtualisation.docker.enable = true;
 
   programs.dconf.enable = true;
   virtualisation.libvirtd.enable = true;
-  users.users.sergio.extraGroups = ["libvirtd" "docker"];
+  users.users.sergio.extraGroups = [
+    "libvirtd"
+    "docker"
+  ];
 }
