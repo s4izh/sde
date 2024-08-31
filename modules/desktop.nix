@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -90,6 +91,8 @@
     };
   };
 
+  services.guix.enable = true;
+
   services.xserver = {
     xkb.layout = "es";
     xkb.variant = "";
@@ -159,7 +162,7 @@
   fonts.fontconfig = {
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
-      serif = ["Source Serif Pro"];
+      serif = [ "Source Serif Pro" ];
       # monospace = ["InputMonoCondensed"];
       # monospace = [ "UbuntuMono Nerd Font" ];
       # monospace = ["Iosevka"];

@@ -3,10 +3,12 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
   ln = config.lib.file.mkOutOfStoreSymlink;
-in {
+in
+{
   home.packages = with pkgs; [
     tmux
     fzf
@@ -181,13 +183,23 @@ in {
       #package = pkgs.rubik;
       size = 10;
     };
-    gtk3.extraConfig = {gtk-application-prefer-dark-theme = true;};
-    gtk4.extraConfig = {gtk-application-prefer-dark-theme = true;};
-    gtk3.bookmarks = ["file:///home/sergio/uni/4q1" "file:///home/sergio/notes" "file:///mnt"];
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+    gtk3.bookmarks = [
+      "file:///home/sergio/uni/4q1"
+      "file:///home/sergio/notes"
+      "file:///mnt"
+    ];
   };
 
   dconf.settings = {
-    "org/gnome/desktop/interface" = {color-scheme = "prefer-dark";};
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
     # "org/gnome/desktop/wm/preferences" = {
     #   button-layout = "appmenu";
     # };

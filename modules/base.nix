@@ -3,21 +3,27 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   users.users.sergio = {
     isNormalUser = true;
     description = "sergio";
-    extraGroups = ["networkmanager" "wheel"];
-    shell = pkgs.bash;
-    packages = with pkgs; [
+    extraGroups = [
+      "networkmanager"
+      "wheel"
     ];
+    shell = pkgs.bash;
+    packages = with pkgs; [ ];
   };
 
   programs.zsh.enable = true;
 
   nix = {
     settings = {
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
     };
     gc = {

@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   services.xserver = {
     enable = true;
     displayManager.defaultSession = "none+i3";
@@ -24,7 +25,7 @@
       });
       st = prev.st.overrideAttrs (old: {
         src = /home/sergio/.local/src/st;
-        buildInputs = old.buildInputs ++ [pkgs.harfbuzz];
+        buildInputs = old.buildInputs ++ [ pkgs.harfbuzz ];
       });
     })
   ];
