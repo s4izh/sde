@@ -6,7 +6,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   networking.hostName = "z390"; # Define your hostname.
   networking.networkmanager.enable = true;
 
@@ -18,7 +19,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [25565];
+    allowedTCPPorts = [ 25565 ];
   };
 
   # networking = {
@@ -28,7 +29,7 @@
   #   }];
   # };
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.opengl.enable = true;
 
