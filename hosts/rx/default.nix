@@ -6,9 +6,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   modules = ../../modules;
-in {
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -29,11 +31,16 @@ in {
     # "${modules}/xfce.nix"
     # "${modules}/i3.nix"
     inputs.home-manager.nixosModules.home-manager
+    inputs.minegrub-world-sel-theme.nixosModules.default
   ];
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {sergio = import ../../home/sergio/home.nix;};
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+    users = {
+      sergio = import ../../home/sergio/home.nix;
+    };
   };
 
   system.stateVersion = "23.11";
