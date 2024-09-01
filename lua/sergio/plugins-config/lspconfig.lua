@@ -28,7 +28,7 @@ end
 lsp.zls.setup({})
 
 lsp.clangd.setup({
-  cmd = { "clangd",  "-cross-file-rename" },
+  cmd = { "clangd", "-cross-file-rename" },
   capabilities = capabilities,
 })
 
@@ -117,16 +117,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.keymap.set('n', '<space>ls', ":LspStop<cr>", opts)
 
-    vim.api.nvim_set_hl(0, 'FloatBorder', { link = 'Normal'})
+    vim.api.nvim_set_hl(0, 'FloatBorder', { link = 'Normal' })
 
-    -- vim.api.nvim_create_autocmd('BufWritePre', {
-      --   pattern = "*.lua",
-      --   callback = function()
-        --     vim.lsp.buf.format { async = true }
-        --   end,
-        -- })
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      pattern = "*.lua",
+      callback = function()
+        vim.lsp.buf.format { async = true }
       end,
     })
+  end,
+})
 
 -- adding borders to lsp
 -- local _border = "rounded"
@@ -148,3 +148,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
 --   border = _border
 -- }
 
+-- zoxide
+-- capabilities.workspace = {
+--   didChangeWatchedFiles = {
+--     dynamicRegistration = true,
+--   },
+-- }
+-- lsp.markdown_oxide.setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+-- })
