@@ -7,6 +7,7 @@
 let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
   ln = config.lib.file.mkOutOfStoreSymlink;
+  lnDir = config.lib.file.mkOutOfStoreSymlink;
 in
 {
   home.packages = with pkgs; [
@@ -28,14 +29,14 @@ in
 
   xdg = {
     enable = true;
-    configFile."git/config".source = "${dotfiles}/.config/git/config";
-    configFile."dunst/dunstrc".source = "${dotfiles}/.config/dunst/dunstrc";
-    configFile."picom/picom.conf".source = "${dotfiles}/.config/picom/picom.conf";
-    configFile."sxhkd/sxhkdrc".source = "${dotfiles}/.config/sxhkd/sxhkdrc";
-    configFile."mimeapps.list".source = "${dotfiles}/.config/mimeapps.list";
-    configFile."libvirt/libvirt.conf".source = "${dotfiles}/.config/libvirt/libvirt.conf";
+    configFile."git".source = lnDir "${dotfiles}/.config/git";
+    configFile."dunst/dunstrc".source = ln "${dotfiles}/.config/dunst/dunstrc";
+    configFile."picom/picom.conf".source = ln "${dotfiles}/.config/picom/picom.conf";
+    configFile."sxhkd/sxhkdrc".source = ln "${dotfiles}/.config/sxhkd/sxhkdrc";
+    configFile."mimeapps.list".source = ln "${dotfiles}/.config/mimeapps.list";
+    configFile."libvirt/libvirt.conf".source = ln "${dotfiles}/.config/libvirt/libvirt.conf";
     # configFile."tmux/tmux.conf".source = "${dotfiles}/.config/tmux/tmux.conf";
-    configFile."zathura/zathurarc".source = "${dotfiles}/.config/zathura/zathurarc";
+    configFile."zathura/zathurarc".source = ln "${dotfiles}/.config/zathura/zathurarc";
     # configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
     # configFile."user-dirs.locale".source = "${dotfiles}/.config/user-dirs.locale";
     userDirs = {
@@ -54,7 +55,7 @@ in
 
   # home.file.".config/tmux".source = ln $"
 
-  home.file.".editorconfig".source = "${dotfiles}/.editorconfig";
+  home.file.".editorconfig".source = ln "${dotfiles}/.editorconfig";
 
   # xdg.mimeApps.defaultAplications = {
   #   "text/plain" = [ "nvim.desktop" ];
@@ -179,8 +180,6 @@ in
     };
     font = {
       name = "monospace";
-      # name = "Iosevka Nerd Font Mono";
-      #package = pkgs.rubik;
       size = 10;
     };
     gtk3.extraConfig = {
@@ -203,31 +202,6 @@ in
     # "org/gnome/desktop/wm/preferences" = {
     #   button-layout = "appmenu";
     # };
-  };
-
-  programs.starship = {
-    enable = true;
-    settings = {
-      add_newline = true;
-      format = lib.strings.concatStrings [
-        "$os"
-        "$directory"
-        "$container"
-        "$git_branch$git_status"
-        "$nix_shell"
-        "$python"
-        "$nodejs"
-        "$lua"
-        "$rust"
-        "$java"
-        "$c"
-        "$golang"
-        "$status"
-        ''
-
-          $character''
-      ];
-    };
   };
 
   # programs.direnv.enable = true;
