@@ -158,7 +158,7 @@ in
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs29;
+    package = pkgs.emacs29-gtk3;
   };
 
   gtk = {
