@@ -79,19 +79,19 @@ vim.keymap.set({ "i", "s" }, "<C-s>", function() ls.jump(-1) end, { silent = tru
 --     capabilities = capabilities
 -- }
 
-cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    }),
-    matching = { disallow_symbol_nonprefix_matching = false }
-})
+-- cmp.setup.cmdline(':', {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = cmp.config.sources({
+--       { name = 'path' }
+--     }, {
+--       { name = 'cmdline' }
+--     }),
+--     matching = { disallow_symbol_nonprefix_matching = false }
+-- })
 
-cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
+-- cmp.setup.cmdline({ '/', '?' }, {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     { name = 'buffer' }
+--   }
+-- })
