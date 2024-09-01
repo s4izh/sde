@@ -18,6 +18,7 @@
   "gruber-darker.nvim": { "branch": "main", "commit": "1793c0929ca965430410f7ec578272a4af9226ee" },
   "gruvbox": { "branch": "master", "commit": "f1ecde848f0cdba877acb0c740320568252cc482" },
   "gruvbuddy.nvim": { "branch": "master", "commit": "3aa94b2fb061b13ccc118d21fad25d6b1ff3fc8b" },
+  "indent-blankline.nvim": { "branch": "master", "commit": "db926997af951da38e5004ec7b9fbdc480b48f5d" },
   "kanagawa.nvim": { "branch": "master", "commit": "e5f7b8a804360f0a48e40d0083a97193ee4fcc87" },
   "lazy.nvim": { "branch": "main", "commit": "077102c5bfc578693f12377846d427f49bc50076" },
   "lush.nvim": { "branch": "main", "commit": "45a79ec4acb5af783a6a29673a999ce37f00497e" },
@@ -48,5 +49,5 @@
   "vim-paper": { "branch": "main", "commit": "01b79707c2144f9c845057da2e7d6ec024e15c76" },
   "vscode.nvim": { "branch": "main", "commit": "f6c88cdf9d37d5c0bb1e492a13a3b4b4cc4dd13e" },
   "zenbones.nvim": { "branch": "main", "commit": "8e4d87d4ff9107a6c85775831a79c521d775ab0d" },
-  "zenburn.nvim": { "branch": "master", "commit": "f5ee12b30119499c7fa7f95719cd7c5aab9f9f29" }
+  "zenburn.nvim": { "branch": "master", "commit": "f5ee12b30119499c7fa7f95719cd7c5aab9f9f29" },
 }
