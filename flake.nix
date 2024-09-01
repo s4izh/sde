@@ -21,14 +21,32 @@
       ...
     }:
     let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
       lib = nixpkgs.lib;
+
+      forAllSystems =
+        function:
+        lib.genAttrs
+          [
+            "x86_64-linux"
+            "aarch64-linux"
+          ]
+          (
+            system:
+            let
+              syspkgs = import nixpkgs {
+                inherit system;
+                config.allowUnfree = true;
+              };
+            in
+            function syspkgs
+          );
     in
+    # (system: function nixpkgs.legacyPackages.${system});
     {
+      # packages.x86_64-linux.default = import ./shell.nix { inherit pkgs; };
+      packages = forAllSystems (pkgs: {
+        default = import ./shell.nix { inherit pkgs; };
+      });
       nixosConfigurations =
         let
           # extraSpecialArgs = { inherit inputs; };
@@ -79,8 +97,7 @@
 
       homeManagerConfigurations = {
         sergio = home-manager.lib.homeManagerConfiguration {
-          # pkgs = nixpkgs.legacyPackages.${system};
-          inherit pkgs;
+          pkgs = import nixpkgs { system = "x86_64-linux"; };
           modules = [
             ./home/sergio/home.nix
             {
@@ -88,12 +105,10 @@
                 username = "sergio";
                 homeDirectory = "/home/sergio";
                 stateVersion = "23.11";
-
               };
             }
           ];
         };
       };
-      packages.x86_64-linux.default = import ./shell.nix { inherit pkgs; };
     };
 }
