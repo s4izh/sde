@@ -39,4 +39,5 @@ return {
   setup_theme("phha/zenburn.nvim"),
   setup_theme("Alligator/accent.vim"),
   setup_theme("craftzdog/solarized-osaka.nvim"),
+  setup_theme("nanotech/jellybeans.vim"),
 }
