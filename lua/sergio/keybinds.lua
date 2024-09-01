@@ -73,6 +73,7 @@ vim.keymap.set("n", "<Leader>fw", ":silent grep <C-R><C-W> | copen<cr>")
 --vim.keymap.set("v", "<Leader>fs", ":grep -r <C-r>h | copen<cr>")
 
 vim.keymap.set("n", "<Leader>r", ":luafile %<cr>")
+vim.keymap.set("n", "<Leader>vc", ":e ~/.config/nvim/init.lua<cr>")
 
 vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//gc<left><left><left>', { noremap = true, silent = true })
 
