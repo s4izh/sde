@@ -21,7 +21,11 @@ let
   ];
   nixpkgs = with pkgs; [
     nixd
-    alejandra
+    nixfmt-rfc-style
+    (writeShellScriptBin "nixpkgs-fmt" ''
+      #!/usr/bin/env bash
+      nixfmt $@
+    '') # wrapper script since nixd calls nixpkgs-fmt
   ];
   luapkgs = with pkgs; [ lua-language-server ];
   cpkgs = with pkgs; [
