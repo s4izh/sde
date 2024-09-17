@@ -189,9 +189,10 @@ in
       gtk-application-prefer-dark-theme = true;
     };
     gtk3.bookmarks = [
-      "file:///home/sergio/uni/4q1"
-      "file:///home/sergio/notes"
       "file:///mnt"
+      "file:///home/sergio/notes"
+      "file:///home/sergio/uni/mei"
+      "file:///home/sergio/uni/gei"
     ];
   };
 
