@@ -37,6 +37,7 @@
     headsetcontrol
     sxiv
     htop
+    resources
 
     x11vnc # remote desktop
 
