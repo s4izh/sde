@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    folders=$(find ~/personal ~/uni/"$CURRENT_Q" ~/git ~/devel ~/devel/lanaccess ~/.local/src -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
+    folders=$(find ~/personal ~/uni/mei ~/git ~/devel ~/devel/lanaccess ~/.local/src -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
 
     scripts=~/.local/scripts
     dotfiles=~/.dotfiles
