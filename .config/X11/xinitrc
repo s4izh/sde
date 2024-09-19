@@ -4,7 +4,7 @@
 [ -f "$XDG_CONFIG_HOME/X11/font" ] && xrdb -merge "$XDG_CONFIG_HOME/x11/font"
 
 feh --no-fehbg --bg-fill ~/pix/wal/default &
-picom &
+# picom &
 nm-applet --indicator &
 dwmblocks &
 dunst &
