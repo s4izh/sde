@@ -27,6 +27,14 @@ handlebang() {
     esac
 }
 
+handlemd() {
+    if grep -q "^theme: " $file; then
+        pandoc "$file" -o "$base".pdf -t beamer --filter pandoc-crossref --citeproc
+    else
+        pandoc "$file" -o "$base".pdf --filter pandoc-crossref --citeproc
+    fi
+}
+
 cd "$dir" || exit 1
 
 case "$ext" in
@@ -36,7 +44,7 @@ case "$ext" in
     cpp)  g++ "$file" -o "$base" && "$base" ;;
     go)   go run "$file" ;;
     java) javac -d classes "$file" && java -cp classes "${1%.*}" ;;
-    md)   pandoc "$file" -o "$base".pdf --filter pandoc-crossref --citeproc;;
+    md)   handlemd "$file" "$base" ;;
     org)  pandoc -s "$file" -V geometry:margin=1in -o "$base".pdf ;;
     py)   python3 "$file" ;;
     rs)   cargo run ;;
