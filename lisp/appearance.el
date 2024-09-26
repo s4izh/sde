@@ -38,7 +38,7 @@
     (add-to-list 'default-frame-alist '(font . "monospace")))
 
 (setq locale-coding-system 'utf-8)
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 150)
 
 ;; THEMES
 ;; modus
@@ -54,6 +54,11 @@
  modus-themes-org-blocks 'gray-background
  ;; modus-themes-scale-headings t
  modus-themes-region '(bg-only))
+
+(setq modus-vivendi-palette-overrides
+      '((bg-main "#292D3E")
+        (bg-mode-line-active "#232635")
+        (border-mode-line-active "#232635")))
 
 ;; (load-theme 'modus-operandi)
 

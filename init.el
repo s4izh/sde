@@ -297,6 +297,7 @@
 ;;;; Code Completion
 (use-package corfu
   ;; Optional customizations
+  :ensure t
   :hook((emacs-lisp-mode . corfu-mode))
   :custom
   (corfu-cycle t)                 ; Allows cycling through candidates
