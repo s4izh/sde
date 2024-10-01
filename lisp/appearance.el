@@ -33,6 +33,7 @@
     ;; (add-to-list 'default-frame-alist '(font . "Unifont-12")) ;; arch)
     ;; (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-12")) ;; arch
 ;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12")) ;; arch
+)
 
 (if my/is-nixos
     (add-to-list 'default-frame-alist '(font . "monospace")))
