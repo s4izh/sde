@@ -78,6 +78,7 @@
     screenkey
     sdcv # dictionary
     pywal
+    baobab # disk usage
   ];
 
   # programs.starship.enable = true;
