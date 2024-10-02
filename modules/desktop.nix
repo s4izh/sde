@@ -167,10 +167,10 @@
       serif = [ "Source Serif Pro" ];
       # monospace = ["InputMonoCondensed"];
       # monospace = [ "UbuntuMono Nerd Font" ];
-      # monospace = ["Iosevka"];
+      monospace = ["Iosevka"];
       # monospace = [ "FiraCode Nerd Font" ];
       # monospace = [ "LiterationMono Nerd Font" ];
-      monospace = [ "JetBrains Mono" ];
+      # monospace = [ "JetBrains Mono" ];
     };
   };
 
