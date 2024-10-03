@@ -19,6 +19,8 @@ in
     "${modules}/base.nix"
     "${modules}/desktop.nix"
     "${modules}/dev.nix"
+    "${modules}/unity.nix"
+    # "${modules}/gnome.nix"
     "${modules}/dwm.nix"
     "${modules}/nvim.nix"
     "${modules}/virtualisation.nix"
