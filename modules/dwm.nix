@@ -48,5 +48,16 @@
     })
   ];
 
+  services.tlp = {
+    enable = true;
+    settings = {
+      PCIE_ASPM_ON_AC = "powersave";
+      PCIE_ASPM_ON_BAT = "powersave";
+    };
+  };
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+
   # system.stateVersion = "22.11"; # Did you read the comment? yes
 }
