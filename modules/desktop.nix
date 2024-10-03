@@ -176,8 +176,12 @@
 
   networking.extraHosts = builtins.readFile /home/sergio/.dotfiles/etc/hosts;
 
+  # steam and other FHS-installed packages need portals to be able to
+  # start other programs without trapping them in their own container.
   # xdg.portal.enable = true;
-  # xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+  # xdg.portal.xdgOpenUsePortal = true;
+  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  # xdg.portal.config.common.default = "*";
 
   # system.userActivationScripts.alacrittyLink.text = ''
   #   if [[ ! -h "$HOME/.config/alacritty" ]]; then
