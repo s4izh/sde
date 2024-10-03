@@ -18,14 +18,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
 
-  services.tlp = {
-    enable = true;
-    settings = {
-      PCIE_ASPM_ON_AC = "powersave";
-      PCIE_ASPM_ON_BAT = "powersave";
-    };
-  };
-
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
