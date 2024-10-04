@@ -20,8 +20,10 @@
 ;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12"))
 
 (if my/is-ubuntu
-    ;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono-12"))
-    (add-to-list 'default-frame-alist '(font . "Liberation Mono-12")))
+  ;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono-12"))
+  (add-to-list 'default-frame-alist '(font . "Iosevka-12"))
+  ;; (add-to-list 'default-frame-alist '(font . "Liberation Mono-12"))
+)
 
 (if my/is-arch
     ;; (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12"))
@@ -112,7 +114,7 @@
 (setq display-line-numbers-type 'relative)
 (set-default 'truncate-lines t)
 ;; line highlight
-(global-hl-line-mode t)
+(global-hl-line-mode nil)
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook
