@@ -11,6 +11,10 @@
       url = "github:Lxtharia/minegrub-world-sel-theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    pipewire-screenaudio = {
+      url = "github:IceDBorn/pipewire-screenaudio";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -86,6 +90,10 @@
             }
             {
               host = "vm";
+              arch = "x86_64-linux";
+            }
+            {
+              host = "thinkcenter";
               arch = "x86_64-linux";
             }
           ];
