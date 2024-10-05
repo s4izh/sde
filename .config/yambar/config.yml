@@ -1,4 +1,5 @@
 bg_default: &bg_default {stack: [{background: {color: 92a58bff}} ]}
+# bg_default: &bg_default {stack: [{background: {color: 005577ff}} ]}
 fg_default: &fg_default {stack: [{foreground: {color: 555555ff}} ]}
 #, {foreground: {color: 555555ff}}
 bar:
@@ -8,7 +9,7 @@ bar:
   spacing: 0
   margin: 2
   layer: bottom
-  foreground: ccccccff
+  foreground: bbbbbbff
   background: 222222dd
 
   left:
@@ -52,13 +53,13 @@ bar:
               state == visible && occupied:
                 map:
                   <<: *river_base
-                  deco: *bg_default
+                  # deco: *bg_default
               state == unfocused:
                 map:
                   <<: *river_base
-              state == invisible && ~occupied && id < 10:
-                map:
-                  <<: *river_base
+              # state == invisible && ~occupied && id < 10:
+              #   map:
+              #     <<: *river_base
               state == invisible && occupied:
                 map:
                   <<: *river_base
@@ -68,3 +69,15 @@ bar:
         content:
           - string: {text: "{time}"}
 
+    # - script:
+    #     path: /home/sergio/.config/yambar/mem.sh
+    #     foreground: 'BFFF00FF'
+    #     content:
+    #       map:
+    #         conditions:
+    #           high:
+    #             - string: {text: "{bar}", foreground: 'FF206FFF'}
+    #             - string: {text: " {value}%", foreground: 'FF206FFF'}
+    #           ~high:
+    #             - string: {text: "{bar}"}
+    #             - string: {text: " {value}%"}

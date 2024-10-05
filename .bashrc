@@ -75,7 +75,30 @@ _set_prompt() {
     # PS1+="\n$ \e[0m"
 }
 
-PROMPT_COMMAND=_set_prompt
+# PROMPT_COMMAND=_set_prompt
+
+BOLD="1;"
+NORMAL="0;"
+
+RED="31m"
+GREEN="32m"
+YELLOW="33m"
+BLUE="34m"
+MAGENTA="35m"
+CYAN="36m"
+WHITE="37m"
+
+PROMPT_COLOR="$BOLD$GREEN"
+GIT_COLOR="$NORMAL$YELLOW"
+NIX_COLOR="$NORMAL$CYAN"
+GUIX_COLOR="$NORMAL$YELLOW"
+
+# PS1="\[\e[$PROMPT_COLOR\]\u@\h:\w"
+# PS1=""
+PS1="\[\e[$PROMPT_COLOR\]\w"
+# PS1="\[\e[$PROMPT_COLOR\]\W"
+# PS1+=" $ \e[0m"
+PS1+="\n$ \e[0m"
 
 if command -v direnv > /dev/null 2>&1; then
     eval "$(direnv hook bash)"
