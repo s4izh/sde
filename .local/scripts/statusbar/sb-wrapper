@@ -1,5 +1,0 @@
-#!/bin/bash
-
-command=$(cat -)
-
-echo "[$command]"

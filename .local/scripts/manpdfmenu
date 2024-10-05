@@ -1,5 +1,0 @@
-#!/bin/sh
-
-program=$(man -k . | dmenu -l 30 | awk '{print $1}')
-[ -z $program ] && exit
-man -Tpdf $program | zathura -

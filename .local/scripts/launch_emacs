@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-emacsclient -c -s main
-if [ $? -eq 1 ]; then
-    emacs --daemon=main
-    emacsclient -c -s main
-fi

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-filename=$(dmenu -p "[sc] name:")
-
-maim "$UNI_PATH/3q2/pti/lab/p1-servlets/$filename.png"

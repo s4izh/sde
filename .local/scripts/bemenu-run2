@@ -1,7 +1,0 @@
-#!/bin/sh
-
-bemenu-run -H 18 -i --fn "mono 10" \
-    # --tb "#000000" --tf "#31748f" --fb "#000000" \
-    # --ff "#ffffff" --hb "#000000" --ab "#000000" \
-    # --hf "#31748f"# --nf no la pongo
-    

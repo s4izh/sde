@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-HSA_OVERRIDE_GFX_VERSION=10.3.0 ROCM_PATH=/opt/rocm ./home/sergio/.local/src/ollama_amd/ollama serve

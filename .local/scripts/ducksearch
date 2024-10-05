@@ -1,6 +1,0 @@
-#!/bin/sh
-
-query=$(dmenu -p "duckduckgo search: " | sed 's/ /+/g')
-[ -z "$query" ] && exit 0
-
-xdg-open https://duckduckgo.com/?q=$query
