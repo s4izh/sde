@@ -2,13 +2,14 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    firefox
+    # (firefox.override { nativeMessagingHosts = [ inputs.pipewire-screenaudio.packages.${system}.default ]; })
     alacritty
     discord
     dmenu
@@ -79,6 +80,10 @@
     sdcv # dictionary
     pywal
     baobab # disk usage
+
+    # -- terminal goodies --
+    yazi
+    ueberzugpp # image preview
   ];
 
   # programs.starship.enable = true;
@@ -87,6 +92,11 @@
 
   programs.firefox = {
     enable = true;
+    package = (
+      pkgs.firefox.override {
+        nativeMessagingHosts = [ inputs.pipewire-screenaudio.packages.${pkgs.system}.default ];
+      }
+    );
     preferences = {
       "browser.fullscreen.autohide" = false;
       "browser.compactmode.show" = true;
@@ -149,13 +159,21 @@
     jetbrains-mono # JetBrains Mono
     source-code-pro # Source Code Pro
     source-serif-pro # Source Serif Pro
-    unifont # Unifont
+    # unifont # Unifont
+    unifont_upper
+    # gnu-freefont
     fantasque-sans-mono # Fantasque Sans Mono
     input-fonts
     # fira-code-nerd-font # FiraCode Nerd Font
     # (nerdfonts.override { fonts = [ "LiterationMono Nerd Font Mono" ]; })
+    commit-mono # Commit Mono
+    # ubuntu-mono # Ubuntu Mono
     nerdfonts
-    # LiterationMono Nerd Font Mono
+    # inconsolata-nerd-font
+    texlivePackages.inconsolata-nerd-font
+    texlivePackages.gnu-freefont
+    victor-mono
+    liberation_ttf
     # FiraCode Nerd Font
   ];
 
@@ -165,12 +183,17 @@
     defaultFonts = {
       #sansSerif = [ "Liberation Mono" ];
       serif = [ "Source Serif Pro" ];
-      # monospace = ["InputMonoCondensed"];
-      # monospace = [ "UbuntuMono Nerd Font" ];
-      monospace = ["Iosevka"];
+      # monospace = [ "InputMonoCondensed" ];
       # monospace = [ "FiraCode Nerd Font" ];
       # monospace = [ "LiterationMono Nerd Font" ];
       # monospace = [ "JetBrains Mono" ];
+      # monospace = [ "UbuntuMono Nerd Font" ];
+      monospace = ["Iosevka"];
+      # monospace = [ "Liberation Mono" ];
+      # monospace = [ "Inconsolata Nerd Font" ];
+      # monospace = [ "FreeMono" ];
+      # monospace = [ "Commit Mono" ];
+      # monospace = [ "Victor Mono" ];
     };
   };
 
