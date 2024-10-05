@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+# dependencies: file, notify-send
+# - wayland: grim, slurp, wl-copy, wl-paste
+# - xorg: maim, xclip
+
+usage() {
+    echo "Usage: $(basename $1) [OPTIONS]"
+    echo "Take a screenshot and save it to a file"
+    echo "Options:"
+    echo "  --dir=DIR      Save the screenshot to DIR"
+    echo "  --name=NAME    Save the screenshot with NAME"
+    echo "  --stdout       Print the screenshot path to stdout"
+    echo "  --notes        Copy the screenshot path to clipboard"
+    echo "  -h, --help     Show this help message and exit"
+}
+
+SCREENSHOT_DIR="$HOME/pix/screenshots"
+FILE=$(date +'%Y%m%d_%H%M%S').png
+SCREENSHOT_PATH=$SCREENSHOT_DIR/$FILE
+
+if [ ! -d "$SCREENSHOT_DIR" ]; then
+    mkdir -p "$SCREENSHOT_DIR"
+fi
+
+function send_notification {
+    notify-send "Screenshot saved" "$SCREENSHOT_PATH" -i "$SCREENSHOT_PATH"
+    # notify-send.sh "Screenshot saved" "$SCREENSHOT_PATH" -i $SCREENSHOT_PATH -d "feh $SCREENSHOT_PATH"
+}
+
+function xorg_screenshot() {
+    maim -s | tee "$SCREENSHOT_PATH" | xclip -selection clipboard -t image/png
+
+  # i dont know how to make this better
+  # img=$(maim -s) and checking if $img is empty doesnt work
+  #
+
+    if file "$SCREENSHOT_PATH" | grep -qs "empty"; then
+        rm "$SCREENSHOT_PATH"
+    else
+        send_notification
+    fi
+}
+
+function wayland_screenshot() {
+    slurpout=$(slurp)
+    if [ -z "$slurpout" ]; then
+        exit
+    else
+        grim -g "$slurpout" - | wl-copy --type image/png && wl-paste > "$SCREENSHOT_PATH"
+        send_notification
+    fi
+}
+
+function _screenshot() {
+    case $XDG_SESSION_TYPE in
+        wayland)
+            wayland_screenshot
+            ;;
+        xorg|*)
+            xorg_screenshot
+            ;;
+    esac
+}
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    usage "$0"
+fi
+
+if [ -z "$1" ]; then
+    _screenshot
+    exit
+else
+    for i in "$@"; do
+        case $i in
+            --dir=*)
+                SCREENSHOT_DIR="${i#*=}"
+                ;;
+            --name=*)
+                FILE="${i#*=}"
+                ;;
+            --stdout)
+                STDOUT=true
+                ;;
+            --notes)
+                SCREENSHOT_DIR="$HOME/notes/attachments/img"
+                NOTES=true
+                ;;
+            --*|-*)
+                echo "Unknown option $i"
+                exit 1
+                ;;
+        esac
+    done
+
+    SCREENSHOT_PATH=$SCREENSHOT_DIR/$FILE
+    _screenshot
+
+    if [ "$STDOUT" == "true" ]; then
+        echo "$SCREENSHOT_PATH"
+        echo -e "![$FILE](.img/$FILE)\n<!-- $SCREENSHOT_PATH -->"
+    fi
+
+    if [ "$NOTES" == "true" ]; then
+        case $XDG_SESSION_TYPE in
+            wayland)
+                echo "[[$SCREENSHOT_PATH]]" | wl-copy
+                ;;
+            xorg|*)
+                echo "[[$SCREENSHOT_PATH]]" | xclip -selection clipboard
+                ;;
+        esac
+    fi
+
+fi

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+case "$1" in
+    on)
+        echo 1 > /sys/class/drm/card0/device/hwmon/hwmon0/pwm1_enable && \
+        echo 128 > /sys/class/drm/card0/device/hwmon/hwmon0/pwm1
+        notify-send "GPU Fan" "Fan is on"
+    ;;
+    off) echo 2 or 3
+        echo 2 > /sys/class/drm/card0/device/hwmon/hwmon0/pwm1_enable && \
+        notify-send "GPU Fan" "Fan is off"
+    ;;
+    *) exit
+    ;;
+esac

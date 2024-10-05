@@ -1,0 +1,18 @@
+#!/bin/sh
+
+which acpi > /dev/null 2>&1
+
+if [ $? -eq 1 ]; then
+    exit 1
+fi
+
+info=$(acpi | cut -d: -f2)
+status=$(echo $info | cut -d, -f1)
+capacity=$(echo $info | cut -d, -f2)
+capacity=${capacity%?}
+
+if [ "$capacity" -lt "5" ] && [ "$status" != "Charging" ]; then
+    notify-send "Battery low: $capacity%"
+fi
+
+echo $status $capacity\%

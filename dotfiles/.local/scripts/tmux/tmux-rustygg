@@ -1,0 +1,31 @@
+#!/bin/bash
+
+SESSION_NAME=rustygg
+PROJECT_PATH='~/personal/rustygg/'
+
+tmux has-session -t $SESSION_NAME 2>/dev/null
+
+if [ $? != 0 ]          # si no hay sesion se crea
+then
+    tmux new-session -s $SESSION_NAME -d
+    tmux send-keys -t $SESSION_NAME "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME "$EDITOR ." C-m
+    tmux new-window -n zsh -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME:2 "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME:2 "bacon" C-m
+    tmux split-window -v -p 30 -t $SESSION_NAME:2
+    tmux send-keys -t $SESSION_NAME:2.1 "cd $PROJECT_PATH" C-m
+    tmux new-window -n git -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME:3 "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME:3 "lazygit" C-m
+    # tmux new-window -n uni -t $SESSION_NAME
+    # tmux send-keys -t $SESSION_NAME:2 "$EDITOR todo.md" C-m
+    # tmux send-keys -t $SESSION_NAME:3 "cd $PROJECT_PATH" C-m
+    # tmux send-keys -t $SESSION_NAME:3 "$EDITOR uni.md" C-m
+fi
+
+if [ -z $TMUX ]; then   # si estamos fuera de tmux hacemos attach
+    tmux attach -t $SESSION_NAME:1
+else                    # si estamos dentro solo cambiamos el cliente
+    tmux switch-client -t $SESSION_NAME:1
+fi

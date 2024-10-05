@@ -1,0 +1,40 @@
+#!/bin/sh
+
+SESSION_NAME=pti
+PROJECT_PATH="$HOME/personal/car-tracking-fullstack"
+
+tmux has-session -t $SESSION_NAME 2>/dev/null
+if [ $? != 0 ]          # si no hay sesion se crea
+then
+    tmux new-session -s $SESSION_NAME -d
+    tmux send-keys -t $SESSION_NAME "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME "cd backend && nvim ." C-m
+    tmux new-window -n docker-compose -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME:2 "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME:2 "clear" C-m
+    tmux send-keys -t $SESSION_NAME:2 "docker-compose up"
+    tmux new-window -n backend -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME:3 "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME:3 "clear" C-m
+    tmux send-keys -t $SESSION_NAME:3 "make backend-setup"
+    tmux new-window -n diesel -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME:4 "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME:4 "clear" C-m
+    tmux send-keys -t $SESSION_NAME:4 "make db-setup"
+    tmux new-window -n mariadb -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME:5 "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME:5 "clear" C-m
+    tmux send-keys -t $SESSION_NAME:5 "docker exec -ti mariadb mysql -U db -prust"
+    # tmux send-keys -t $SESSION_NAME:5 "make docker-bd"
+    tmux new-window -n frontend -t $SESSION_NAME
+    tmux send-keys -t $SESSION_NAME:6 "cd $PROJECT_PATH" C-m
+    tmux send-keys -t $SESSION_NAME:6 "clear" C-m
+    tmux send-keys -t $SESSION_NAME:6 "make docker-front"
+    # tmux send-keys -t $SESSION_NAME:2 "clear" C-m
+fi
+
+if [ -z $TMUX ]; then   # si estamos fuera de tmux hacemos attach
+    tmux attach -t $SESSION_NAME:1
+else                    # si estamos dentro solo cambiamos el cliente
+    tmux switch-client -t $SESSION_NAME:1
+fi

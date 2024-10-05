@@ -1,0 +1,54 @@
+#!/bin/sh
+
+file=$(readlink -f "$1")
+dir=${file%/*}
+base="${file%.*}"
+ext="${file##*.}"
+
+# base=$(echo "$file" | sed 's/\..*//')
+
+handlebang() {
+    bang=$(head -n 1 "$file")
+    echo "$bang"
+    case "$bang" in
+        *!/bin/sh|*!/bin/bash|*/bin/zsh)
+            echo "Running $file with $bang"
+            $file
+            ;;
+        *!/usr/bin/env*)
+            echo "Running $file with $bang"
+            runner=$(echo "$bang" | sed 's/.*\///')
+            echo "runner: $runner"
+            $runner "$file"
+            ;;
+        *)
+            echo "Can't handle $bang"
+            ;;
+    esac
+}
+
+handlemd() {
+    if grep -q "^theme: " $file; then
+        pandoc "$file" -o "$base".pdf -t beamer --filter pandoc-crossref --citeproc
+    else
+        pandoc "$file" -o "$base".pdf --filter pandoc-crossref --citeproc
+    fi
+}
+
+cd "$dir" || exit 1
+
+case "$ext" in
+    # keep alphabetical order
+    c)    gcc "$file" -o "$base" && "$base" ;;
+    cc)   g++ "$file" -o "$base" && "$base" ;;
+    cpp)  g++ "$file" -o "$base" && "$base" ;;
+    go)   go run "$file" ;;
+    java) javac -d classes "$file" && java -cp classes "${1%.*}" ;;
+    md)   handlemd "$file" "$base" ;;
+    org)  pandoc -s "$file" -V geometry:margin=1in -o "$base".pdf ;;
+    py)   python3 "$file" ;;
+    rs)   cargo run ;;
+    tex)  pdflatex "$file";;
+    *)    handlebang ;;
+    # default) exit ;;
+esac

@@ -1,0 +1,162 @@
+#!/bin/sh
+
+## autoload vcs and colors
+autoload -Uz vcs_info
+autoload -U colors && colors
+
+# enable only git
+zstyle ':vcs_info:*' enable git
+
+# setup a hook that runs before every ptompt.
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+
+# add a function to check for untracked files in the directory.
+# from https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+#
++vi-git-untracked(){
+    if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+        git status --porcelain | grep '??' &> /dev/null ; then
+        # This will show the marker if there are any untracked files in repo.
+        # If instead you want to show the marker only if there are untracked
+        # files in $PWD, use:
+        #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
+        hook_com[staged]+='!' # signify new files with a bang
+    fi
+}
+
+zstyle ':vcs_info:*' check-for-changes true
+PROMPT="%F{yellow}%n%F{green}[%m] %F{blue}%~%f%b% "
+zstyle ':vcs_info:git:*' formats " %{$fg[magenta]%}*%{$fg[magenta]%}%b"
+PROMPT+="\$vcs_info_msg_0_"
+PROMPT+=" %{$fg[white]%}
+"
+PROMPT+="%B%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
+
+# PROMPT="%F{yellow}%n"
+# PROMPT+="%F{green}[%m] "
+PROMPT="%F{blue}%~%f%b% "
+PROMPT+="\$vcs_info_msg_0_"
+PROMPT+="$name
+"
+PROMPT+="%F{white}ᛋ "
+
+PROMPT="%F{white}$ "
+# PROMPT="%F{white}%n%F{255}:%F{255}%1~ %F{15}$ "
+if [[ "$THEME" == "light" ]]; then
+    PROMPT="%F{235}%n%F{234}:%F{240}%1~ %F{15}$ "
+    PROMPT="%F{white}%1~ %F{white}$ "
+    PROMPT+="\$vcs_info_msg_0_"
+else
+    PROMPT="%F{white}%n%F{255}:%F{white}%1~%F{15}"
+    # PROMPT="%F{255}%1~"
+    # PROMPT+="\$vcs_info_msg_0_"
+    PROMPT+=" %F{15}$ "
+fi
+
+PROMPT="%n:%1~%  $ "
+
+# PROMPT="%F{180}%n%F{white}@%{$fg[blue]%}%M %F{144}%1~ %F{15}$ "
+# PROMPT="%F{15}%1~ %F{15}$ "
+# PROMPT+="%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
+
+# PROMPT="%F{white}%n@%m %~ "
+
+# setopt prompt_substfunction getCluster() {
+#   export CLUSTER=$(kubectl config current-context)
+#   PS1="%F{208}% [rees] %F{155}[%W]%F{111} [${CLUSTER}]%F{152} %B%~  %F{255}%b"
+# }
+
+# typeset -a precmd_functions
+# precmd_functions=(getCluster)
+
+# typeset -a precmd_functions
+# precmd_functions=(nix_check)
+
+# mia
+# PROMPT="%F{blue}%1~%f%b% "
+# PROMPT+="\$vcs_info_msg_0_"
+# PROMPT+="%B%(?.%F{grey}.%F{red}) %(!.#.$)%f%b "
+
+# minimal with :
+# PROMPT="%F{blue}%1~%f%b% "
+# PROMPT+="%{$reset_color%}:%: "
+
+# complete prompt
+# user@host(~)[git]
+# $
+
+# PROMPT="%{$fg[yellow]%}%n%{$fg[green]%} @ %{$fg[blue]%}%M %{$fg[white]%}%(%{$fg[cyan]%}~"
+# zstyle ':vcs_info:git:*' formats "%{$fg[cyan]%}%m%u%c%{$fg[yellow]%}%b"
+# PROMPT="%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M%{$fg[white]%}(%{$fg[red]%}%~%{$fg[white]%})"
+# PROMPT+="%{$fg[white]%}["
+# PROMPT+="\$vcs_info_msg_0_"
+# PROMPT+="%{$fg[white]%}]
+# "
+# PROMPT+="%B%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
+
+# zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
+# zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%})"
+# zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%}%b%{$fg[blue]%})"
+
+# format our main prompt for hostname current folder, and permissions.
+# c@m="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
+# c@m="%B%{$fg[blue]%}[%{$fg[white]%}s4izh%{$fg[red]%}@%{$fg[white]%}arch%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
+# c@m=" %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
+# c@m="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
+# c@m="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %{$fg[cyan]%}%c%{$fg[blue]%}%]%{$reset_color%}"
+# c@m+="\$vcs_info_msg_0_ "
+# TODO look into this for more colors
+# https://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+# also ascii escape codes
+
+# mixed prompt
+# MIXED="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%m%{$fg[red]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
+# MIXED+="\$vcs_info_msg_0_ "
+
+# PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+# PROMPT+='%{$fg[cyan]%}%c%{$reset_color%} '
+
+# PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+# PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
+
+# ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
+# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
+# ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+
+# zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}git:(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%})"
+# PROMPT=" %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
+# PROMPT="%{$fg[cyan]%}%c%{$reset_color%}"
+# PROMPT+="\$vcs_info_msg_0_ "
+# PROMPT+="%{$reset_color%}$%b "
+
+# luke style
+# [user@host ~]$
+# PROMPT="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[cyan]%}%~"
+# PROMPT+="%{$fg[red]%}]%{$reset_color%}
+# $%b "
+
+# luke style no []
+# user@host ~ $
+PROMPT="%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[cyan]%}%~"
+PROMPT+="
+%{$reset_color%}$%b "
+
+# gerry style
+# user[host] ~ *git
+# $
+
+# gentoo style
+PROMPT="%B%F{green}%n@%m%k %B%F{blue}%~
+%B%F{white}$ %b%f%k"
+
+# PROMPT="%B%F{green}%n@%m%k %B%F{blue}%~
+# %B%F{white}󰘧 %b%f%k"
+
+if [[ -n $SSH_TTY ]]; then
+    PROMPT="%B%F{green}%n@%m(ssh)%k %B%F{blue}%~
+%B%F{white}$ %b%f%k"
+fi

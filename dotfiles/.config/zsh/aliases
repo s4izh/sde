@@ -1,0 +1,153 @@
+#!/bin/sh
+
+# configs
+alias \
+    cfz='cd ~/.config/zsh && nvim .zshrc' \
+    cfv='cd ~/.config/nvim && nvim $(fzf)' \
+    qtilecf='cd ~/.config/qtile && nvim .' \
+    cfi='cd ~/.config/i3 && nvim config' \
+    cfd='cd ~/.local/src/dwm && nvim config.def.h' \
+    cfdl='cd ~/.local/src/dwl && nvim config.def.h' \
+    cfh='cd ~/.config/hypr && nvim hyprland.conf' \
+    cff='nvim ~/.config/foot/foot.ini' \
+    cft='nvim ~/.config/tmux/tmux.conf' \
+
+alias cl='clear'
+
+alias em='emacsclient -nw'
+alias vim='nvim'
+
+alias tn='tmux-notes'
+
+alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
+
+# get fastest mirrors
+alias \
+    mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist" \
+    mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist" \
+    mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist" \
+    mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist" \
+
+# colorize grep output (good for log files)
+alias \
+    grep='grep --color=auto' \
+    egrep='egrep --color=auto' \
+    fgrep='fgrep --color=auto' \
+
+# confirm before overwriting something
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+
+# easier to read disk
+alias df='df -h'     # human-readable sizes
+alias free='free -m' # show sizes in MB
+
+# get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4 | head -5'
+
+# get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3 | head -5'
+
+# gpg encryption
+# verify signature for isos
+alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+# receive the key of a developer
+alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+
+# For when keys break
+alias arch-fix-keys="sudo pacman-key --init && sudo pacman-key --populate archlinux && sudo pacman-key --refresh-keys"
+
+# systemd
+alias systemctl-list="systemctl list-unit-files --state=enabled"
+
+
+alias sz="source ~/.config/zsh/.zshrc"
+
+# git aliases now just in git config file
+# alias \
+#     gm="git checkout main" \
+#     gco="git checkout" \
+#     gc="git commit -m" \
+#     gst="git status" \
+#     ga="git add" \
+#     gsu="git submodule update --init --recursive" \
+#     gsr="git submodule update --recursive --remote" \
+
+alias index="nvim index*"
+
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	mkd="mkdir -pv" \
+	yt="yt-dlp --embed-metadata -i" \
+	yta="yt -x -f bestaudio/best" \
+	ffmpeg="ffmpeg -hide_banner"
+
+# colorize commands when possible
+alias \
+	ls="ls --color=auto --group-directories-first" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi" \
+	ip="ip -color=auto" \
+	tree="tree -C"
+
+alias tree="tree -a -I '.git|node_modules|target|dist|build|__pycache__'"
+
+# alias ls="exa"
+
+# alias ls="exa -g --group-directories-first" # --icons
+
+# abbreviated long commands
+alias \
+	ka="killall" \
+	g="git" \
+	trem="transmission-remote" \
+	YT="youtube-viewer" \
+	sdn="shutdown -h now" \
+	e="$EDITOR" \
+	v="nvim" \
+    nb="newsboat"
+	# za="zathura" now a function
+
+alias wget="wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\""
+
+alias lsmount="mount | column -t"
+alias du1="du -h --max-depth=1"
+
+# tmux
+alias \
+    tks="tmux kill-session" \
+    tkS="tmux kill-server" \
+
+# alias blue="sudo systemctl enable bluetooth.service"
+alias sm="sudo make clean install"
+alias py="python"
+
+distro=$(cat /etc/os-release | grep "^ID=" | cut -d = -f 2)
+
+if [[ $distro == "nixos" ]]; then
+    alias \
+        cfn="nvim /etc/nixos/configuration.nix" \
+        nr="cd ~/.local/src/nixos && sudo nixos-rebuild switch --flake . --impure; cd -" \
+        nt="cd ~/.local/src/nixos && sudo nixos-rebuild test --flake . --impure; cd -" \
+        nu="cd ~/.local/src/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake . --impure; cd -" \
+        nd="nix develop --command zsh"
+fi
+
+alias \
+    tm='~/.local/scripts/tmux/tmux-main' \
+    tp='~/.local/scripts/tmux/tmux-picker' \
+    ts='~/.local/scripts/tmux/tmux-sessionizer' \
+
+# extra
+alias extip="curl icanhazip.com"
+alias xclipb="xclip -selection clipboard"
+
+alias git-https-ssh="sed -i 's#https://github.com/s4izh#git@github.com:s4izh#'" .git/config
+
+alias tasks="rg '\[ \]' \"$HOME/notes/\" | cut -d: -f2 | sort"
+alias taskswork="rg '\[ \]' \"$HOME/notes/work\" | cut -d: -f2 | sort"
+

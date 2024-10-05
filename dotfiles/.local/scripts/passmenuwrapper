@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ "$1" = "--type" ] || [ "$1" = "-t" ]; then
+    passmenu --type -l 30
+else
+    passmenu -l 30 > /tmp/passtmp
+fi
+
+if [ $? -eq 0 ]; then
+    if [ "$1" = "--type" ] || [ "$1" = "-t" ]; then
+        notify-send "pass" "Content typed in the active window"
+    else
+        notify-send "pass" "$(cat /tmp/passtmp)"
+    fi
+fi
+
+

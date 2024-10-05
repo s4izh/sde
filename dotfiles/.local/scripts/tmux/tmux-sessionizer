@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    folders=$(find ~/personal ~/uni/mei ~/git ~/devel ~/devel/lanaccess ~/.local/src -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
+
+    scripts=~/.local/scripts
+    dotfiles=~/.dotfiles
+    notes=~/notes
+    passwords=$PASSWORD_STORE_DIR
+
+    selected=$(printf "$folders\n$scripts\n$dotfiles\n$passwords\n$notes\nnew" | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+if [[ $selected == "new" ]]; then
+    project_name=$(echo "" | fzf --print-query)
+    mkdir -p ~/personal/$project_name
+    tmux-sessionizer ~/personal/$project_name
+    exit 0
+fi
+
+path=$(echo $selected | sed 's/\/home\/sergio\///g')
+script=$(grep "^PROJECT_PATH=\"\$HOME/$path\"" ~/.local/scripts/tmux/* | cut -d: -f1)
+
+if [[ -n $script ]]; then
+    sh $script
+    exit
+fi
+
+script=$(grep "^PROJECT_PATH=\"\$HOME/$path\"" ~/.local/scripts2/* 2>/dev/null | cut -d: -f1)
+
+if [[ -n $script ]]; then
+    sh $script
+    exit
+fi
+
+if [[ -e "$selected/.tmuxp.yaml" ]]; then
+    tmuxp load $selected/.tmuxp.yaml
+    exit
+fi
+
+if [[ -e "$selected/.tmux" ]]; then
+    sh $selected/.tmux
+    exit
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected
+    exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+if [ -z $TMUX ]; then   # si estamos fuera de tmux hacemos attach
+    tmux attach -t $selected_name
+else                    # si estamos dentro solo cambiamos el cliente
+    tmux switch-client -t $selected_name
+fi

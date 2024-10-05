@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# script to take a screenshots of a section save it at screenshots dir and pipe the image into the clipboard
+if [ "$1" == "--name-prompt" ]; then
+    filename=$(dmenu -p "[normal sc] name:")
+else
+    filename=$(date +%Y%m%d%H%M%S)
+fi
+
+# maim --select | tee $HOME/pix/screenshots/$filename.png | xclip -selection clipboard -t image/png
+# maim --select | xclip -selection clipboard -t image/png
+
+maim -s | tee $home/pix/screenshots/$filename.png | xclip -selection clipboard -t image/png
+
+if [ file $home/pix/screenshots/$filename.png | grep -qs "empty" ]; then
+    rm $home/pix/screenshots/$filename.png
+else
+  notify-send "Screenshot saved" "$home/pix/screenshots/$filename.png" -a "maim-ss"
+fi
+
+if [ $XDG_SESSION_TYPE == "wayland" ]; then
+    # notify-send "Screenshot saved" "Screenshot saved at $home/pix/screenshots/$filename.png"
+fi

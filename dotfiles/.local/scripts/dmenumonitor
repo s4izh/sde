@@ -1,0 +1,64 @@
+#!/bin/sh
+CHOICE=$(echo -e "laptop-only\nlaptop-external-only\ngaming-streched\ngaming-black-bars\ngaming-normal\nexternal\nracing\ndual\narandr" | dmenu -p monitor)
+
+# case "$CHOICE" in
+# 	laptop) xrandr --output eDP --primary --mode 1920x1080 --output HDMI-A-0 --off &; sed -i 's/size: 12/size: 9'/ ~/.config/alacritty/alacritty.yml & ;;
+# 	external) bash ./monitormenuscripts/external & ;;
+# 	dual) xrandr --output HDMI-A-0 --primary --mode 1920x1080 --output eDP --mode 1920x1080 --left-of HDMI-A-0 & ;;
+# 	arandr) arandr & disown;;
+# esac
+
+mkdir /tmp/monitor
+
+case "$CHOICE" in
+    'laptop-only')
+ 		xrandr --output eDP --primary --mode 1920x1080 --output HDMI-A-0 --off
+        ln -sf $HOME/.config/alacritty/fonts/laptop.yml $HOME/.config/alacritty/font.yml
+    ;;
+    'laptop-external-only')
+        xrandr --output eDP --off || wlr-randr --output eDP --off
+        ln -sf $HOME/.config/alacritty/fonts/laptop-219.yml $HOME/.config/alacritty/font.yml
+    ;;
+    'gaming-black-bars')
+        if [ -f /tmp/monitor/gaming-black-bars ]; then
+            xrandr --output DisplayPort-1 --mode "1024x768_165.00"
+        else
+            echo "switching to gaming mode first time"
+            xrandr --newmode "1024x768_165.00" 198.78  1024 1112 1224 1424  768 769 772 846  -HSync +Vsync
+            xrandr --addmode DisplayPort-1 1024x768_165.00
+            xrandr --output DisplayPort-1 --mode "1024x768_165.00"
+            touch /tmp/monitor/gaming-black-bars
+        fi
+    ;;
+    'gaming-streched')
+        xrandr --output DisplayPort-1 --mode 1920x1080 --scale-from 1024x768 --rate 165
+        touch /tmp/monitor/gaming-streched
+    ;;
+    'gaming-normal')
+        xrandr --output DisplayPort-1 --mode 1920x1080 --scale-from 1920x1080 --rate 165
+    ;;
+    'external')
+		xrandr --output HDMI-A-0 --primary --mode 1920x1080 --output eDP --off
+		sed -i 's/size: 9/size: 12'/ ~/.config/alacritty/alacritty.yml
+    ;;
+    'racing')
+		xrandr --output DP-4 --mode 2560x1080 --right-of DVI-D-0
+    ;;
+    '[MainLeft]')
+        xrandr --output LVDS1 --mode 1366x768 --left-of VGA1 --primary
+        xrandr --output VGA1 --mode 1920x1080
+    ;;
+    '[MainRight]')
+        xrandr --output LVDS1 --mode 1366x768 --right-of VGA1 --primary
+        xrandr --output VGA1 --mode 1920x1080
+    ;;
+    '[ARandR]')
+        arandr & disown
+    ;;
+    # *'On'*)
+    #     xset dpms force on
+    # ;;
+    # *'Off'*)
+    #     xset dpms force off
+    # ;;
+esac

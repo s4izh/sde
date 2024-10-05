@@ -1,0 +1,129 @@
+#!/bin/sh
+
+set -e
+
+DOTDIR="$HOME"/.dotfiles
+
+function help() {
+    echo "Usage: $0 <dwm|x11|shell|nvim>"
+    exit 1
+}
+
+function xdg_config() {
+    rm -f "$HOME"/.config/"$1"
+    ln -vsf "$DOTDIR"/.config/"$1" "$HOME"/.config/"$1"
+}
+
+function dwm () {
+    if [ ! -d ~/.local/src/dwm ]; then
+        [ ! -d ~/.local/src ] && mkdir -p ~/.local/src
+        git clone git@github.com:s4izh/dwm.git ~/.local/src/dwm
+        cd ~/.local/src/dwm
+        sudo make clean install
+    fi
+}
+
+function dmenu () {
+    if [ ! -d ~/.local/src/dmenu ]; then
+        [ ! -d ~/.local/src ] && mkdir -p ~/.local/src
+        git clone git@github.com:s4izh/dmenu.git ~/.local/src/dmenu
+        cd ~/.local/src/dmenu
+        sudo make clean install
+    fi
+}
+
+function x11 () {
+    rm -f "$HOME"/.config/x11
+    ln -vsf "$DOTDIR"/.config/x11 "$HOME"/.config/x11
+}
+
+function shell () {
+    [ -e "$HOME"/.config/shell ] && rm -vf "$HOME"/.config/shell
+    ln -vsf "$DOTDIR"/.config/shell "$HOME"/.config/shell
+    cp -dfv "$DOTDIR"/.zprofile "$HOME"/.zprofile
+}
+
+function zsh () {
+    [ -e "$HOME"/.config/zsh ] && rm -vf "$HOME"/.config/zsh
+    ln -vsf "$DOTDIR"/.config/zsh "$HOME"/.config/zsh
+}
+
+function nvim() {
+    [ -e "$HOME"/.config/nvim ] && rm -vf "$HOME"/.config/nvim
+    git clone git@github.com:s4izh/nvim.git ~/.config/nvim
+}
+
+function tmux() {
+    [ -e "$HOME"/.config/tmux ] && rm -vf "$HOME"/.config/tmux
+    ln -vsf "$DOTDIR"/.config/tmux "$HOME"/.config/tmux
+}
+
+function sway() {
+    [ -e "$HOME"/.config/sway ] && rm -vf "$HOME"/.config/sway
+    ln -vsf "$DOTDIR"/.config/sway "$HOME"/.config/sway
+}
+
+function picom() {
+    [ -e "$HOME"/.config/picom ] && rm -vf "$HOME"/.config/picom
+    ln -vsf "$DOTDIR"/.config/picom "$HOME"/.config/picom
+}
+
+function dunst() {
+    [ -e "$HOME"/.config/dunst ] && rm -vf "$HOME"/.config/dunst
+    ln -vsf "$DOTDIR"/.config/dunst "$HOME"/.config/dunst
+}
+
+function tmux() {
+    [ -e "$HOME"/.config/tmux ] && rm -vf "$HOME"/.config/tmux
+    ln -vsf "$DOTDIR"/.config/tmux "$HOME"/.config/tmux
+}
+
+function scripts() {
+    [ -e "$HOME"/.local/scripts ] && rm -vf "$HOME"/.local/scripts
+    ln -vsf "$DOTDIR"/.local/scripts "$HOME"/.local/scripts
+}
+
+function etc_hosts() {
+    # wget --progress=bar -O - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts | sudo bash -c "cat >> /etc/hosts"
+    # http://sbc.io/hosts/alternates/fakenews-gambling-porn-social/hosts
+    # wget -O /tmp/etc-hosts --progress=bar https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts
+    # sudo cat /tmp/etc-hosts >> /etc/hosts
+    cat "$DOTDIR"/etc/hosts >> /etc/hosts
+}
+
+function common() {
+    shell
+    zsh
+    nvim
+    tmux
+    scripts
+}
+
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <dwm|x11|shell|nvim>"
+    echo "       $0 <sway|wayland>"
+    echo "       $0 <shell|zsh|nvim|scripts>"
+    exit 1
+fi
+
+for i in "$@"; do
+    case $i in
+        shell) shell ;;
+        zsh) shell && zsh ;;
+        nvim) nvim ;;
+        scripts) scripts ;;
+        dwm) dwm ;;
+        x11) x11 ;;
+        sway) sway ;;
+        wayland)
+            common
+            sway
+            ;;
+        -h|--help) help ;;
+        hosts) etc_hosts ;;
+        picom) picom ;;
+        dunst) dunst ;;
+        tmux) tmux ;;
+        *) echo "Unknown option: $i" ;;
+    esac
+done

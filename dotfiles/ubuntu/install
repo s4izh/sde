@@ -1,0 +1,115 @@
+#!/bin/bash
+
+DOTFILES="$HOME/.dotfiles"
+SRC_DIR="$HOME/.local/src"
+
+if ! [[ -d $SRC_DIR ]]; then
+    mkdir -p $SRC_DIR
+fi
+
+# function general () {
+#     sudo apt install \
+#         xclip
+# }
+
+# poner $HOME/.cargo/bin en el path
+function _alacritty () {
+    sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+    # git clone https://github.com/alacritty/alacritty.git $SRC_DIR/alacritty
+    # cd $SRC_DIR/alacritty
+    if [[ $(which rustc) ]]; then
+        echo "rust toolchain already installed"
+    else
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        rustup override set stable
+        rustup update stable
+        . "$HOME/.cargo/env"
+    fi
+
+    if [[ $(which alacritty) ]]; then
+        echo "alacritty already installed"
+    else
+        cargo install alacritty
+    fi
+
+    [ -e $HOME/.config/alacritty ] || ln -sf $DOTFILES/.config/alacritty $HOME/.config/alacritty
+    ln -sf $HOME/.config/alacritty/fonts/pc-ubuntu.yml \
+        $HOME/.config/alacritty/font.yml
+
+    # cargo build --release
+    # [ -e $HOME/.local/bin ] || mkdir $HOME/.local/bin
+    # ln -sf ~/.local/src/alacritty/target/release/alacritty ~/.local/bin/alacritty
+}
+
+function _dmenu () {
+    sudo apt-get install libx11-dev libxft-dev
+    git clone https://github.com/s4izh/dmenu $SRC_DIR/dmenu
+    cd $SRC_DIR/dmenu
+    sudo make clean install
+}
+
+function _dwm () {
+    sudo apt-get install libx11-dev libxft-dev libxinerama-dev
+    git clone https://github.com/s4izh/dwm $SRC_DIR/dwm
+    cd $SRC_DIR/dwm
+    sudo make clean install
+}
+
+function _nvim () {
+    sudo apt-get install ninja-build gettext cmake unzip curl
+    git clone https://github.com/neovim/neovim $SRC_DIR/neovim
+    cd $SRC_DIR/neovim
+    git checkout stable
+    make CMAKE_BUILD_TYPE=Release
+    sudo make install
+    sudo apt-get install ripgrep # runtime dependency (add node if using copilot)
+    git clone https://github.com/s4izh/nvim ~/.config/nvim
+}
+
+function _scripts () {
+    sudo apt-get install scrot xclip xdotool fzf ripgrep
+    ln -sf $DOTFILES/.local/scripts $HOME/.local/scripts
+}
+
+function _zsh () {
+    if [[ $(which zsh) ]]; then
+        echo "zsh already installed"
+    else
+        sudo apt-get install zsh curl
+    fi
+
+    current_shell=$(echo $SHELL | rev | cut -d / -f 1 | rev)
+
+    if [[ "$current_shell" != "zsh" ]]; then
+        chsh -s $(which zsh)
+    else
+        echo "zsh already default shell"
+    fi
+
+    # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+    ln -sf $DOTFILES/.zprofile $HOME/.zprofile
+    ln -sf $DOTFILES/ubuntu/.zshrc $HOME/.zshrc
+    ln -sf $DOTFILES/.config/zsh $HOME/.config/zsh
+}
+
+function _font () {
+    sudo apt-get install fonts-liberation
+    # change /etc/fonts/fonts.conf
+    # monospace to Liberation Mono
+}
+
+selected=$(echo "alacritty font nvim scripts zsh" | tr ' ' '\n' | fzf -m)
+
+for i in $selected; do
+    case $i in
+        alacritty) _alacritty ;;
+        dmenu) _dmenu ;;
+        dwm) _dwm ;;
+        font) _font ;;
+        nvim) _nvim ;;
+        scripts) _scripts ;;
+        zsh) _zsh ;;
+        *) echo "Unknown option: $i" ;;
+    esac
+done

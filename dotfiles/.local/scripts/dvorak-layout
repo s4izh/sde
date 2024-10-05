@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sxiv $HOME/dl/dvorak-layout.jpg

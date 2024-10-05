@@ -1,0 +1,54 @@
+#!/bin/sh
+
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export BROWSER="firefox"
+export READER="zathura"
+
+export UNI="$HOME/uni"
+[ -e "$UNI/.env" ] && source "$UNI/.env"
+export TFG_DIR="$HOME/personal/tfg"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+export SUDO_ASKPASS="$HOME/.local/scripts/dmenupass"
+export MANPAGER='nvim +Man!'
+
+export SYSTEM_MENU='dmenu'
+export NIXPKGS="$HOME/.local/src/nixpkgs"
+
+export PATH="$HOME/.local/bin":$PATH
+export PATH="$HOME/.local/scripts":$PATH
+export PATH="$HOME/.local/scripts/statusbar":$PATH
+export PATH="$HOME/.local/scripts/tmux":$PATH
+
+export STARDICT_DATA_DIR="$XDG_DATA_HOME"
+
+export FZF_DEFAULT_OPTS="-m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all"
+export BAT_THEME="base16"
+
+# tmux not sourcing .bashrc
+# https://unix.stackexchange.com/questions/320465/new-tmux-sessions-do-not-source-bashrc-file
+# if [ -n "$BASH_VERSION" ]; then
+# if [ -n "$BASH_VERSION" -a -n "$PS1" ]; then
+#     if [ -f "$HOME/.bashrc" ]; then
+#         . "$HOME/.bashrc"
+#     fi
+# fi
+
+# https://stackoverflow.com/questions/28464543/can-one-configure-tmux-to-load-bashrc-instead-of-bash-profile
+if [ ! -z $TMUX ]; then
+    if [ -f "$HOME/.bashrc" ]; then
+        . "$HOME/.bashrc"
+    fi
+fi
+
+[ "$(tty)" = "/dev/tty1" ] && exec startx
+
+[ "$(tty)" = "/dev/tty2" ] && gamescope.sh

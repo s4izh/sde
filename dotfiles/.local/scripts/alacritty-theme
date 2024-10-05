@@ -1,0 +1,28 @@
+#!/bin/sh
+
+SYSTEM_MENU=${SYSTEM_MENU:-dmenu}
+
+config_type=$(printf "toml\nyml" | $SYSTEM_MENU -p "choose config type")
+
+case "$config_type" in
+    "toml") ext=toml ;;
+    "yml") ext=yml ;;
+    *) exit ;;
+esac
+
+query=$(ls "$HOME/.config/alacritty/$ext/themes")"\nnone"
+
+theme=$(printf "$query" | $SYSTEM_MENU -l 30) || exit
+
+case "$theme" in
+    *$ext)
+        cd "$HOME/.config/alacritty/$ext" || exit
+        ln -sf themes/"$theme" theme."$ext"
+        ;;
+    none)
+        cd "$HOME/.config/alacritty/$ext" || exit
+        rm -f theme."$ext"
+        ;;
+    *) exit
+        ;;
+esac
