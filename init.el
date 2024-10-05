@@ -501,26 +501,27 @@
 (require 'ansi-color)
 (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
 
-(setq explicit-shell-file-name "/bin/bash")
-(setq vterm-shell "/bin/bash")
+(setq explicit-shell-file-name "bash")
+(setq vterm-shell "bash")
 
 (defun spawn-shell (name)
   (interactive "MName of shell buffer to create: ")
-  (pop-to-buffer (get-buffer-create (generate-new-buffer-name (concat "shell-" name))))
+  (pop-to-buffer (get-buffer-create (generate-new-buffer-name (format "*shell-%s*" name))))
   (shell (current-buffer)))
 
 (defun spawn-vterm (name)
   (interactive "MName of shell buffer to create: ")
-    (vterm (concat "vterm-" name))
-    (switch-to-buffer (concat "vterm-" name)))
+  (let ((vterm-buffer-name (format "*vterm-%s*" name)))
+    (vterm vterm-buffer-name)
+    (switch-to-buffer vterm-buffer-name)))
 
 (defun switch-to-shell-or-vterm-buffer ()
   "Switch to a shell or vterm buffer from a menu."
   (interactive)
   (let ((matching-buffers (cl-remove-if-not
                           (lambda (buffer)
-                            (or (string-match-p "shell" (buffer-name buffer))
-                                (string-match-p "vterm" (buffer-name buffer))))
+                            (or (string-match-p "*shell" (buffer-name buffer))
+                                (string-match-p "*vterm" (buffer-name buffer))))
                           (buffer-list))))
     (if matching-buffers
         (let ((buffer-names (mapcar 'buffer-name matching-buffers)))
@@ -715,3 +716,19 @@ If SUBMODE is not provided, use `LANG-mode' by default."
   :config
   (setq imenu-list-focus-after-activation t
         imenu-list-auto-resize nil))
+
+(use-package languagetool
+  :ensure nil
+  :defer t
+  :commands (languagetool-check
+             languagetool-clear-suggestions
+             languagetool-correct-at-point
+             languagetool-correct-buffer
+             languagetool-set-language
+             languagetool-server-mode
+             languagetool-server-start
+             languagetool-server-stop)
+  :config
+  (setq languagetool-console-command "/nix/store/y0kpcp0kpiw9sjqdkgda2w84vz9jv4gw-LanguageTool-6.3/share/languagetool-server.jar"
+    languagetool-server-command "/nix/store/y0kpcp0kpiw9sjqdkgda2w84vz9jv4gw-LanguageTool-6.3/share/languagetool.jar")
+  (setq languagetool-correction-language "es"))

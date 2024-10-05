@@ -326,6 +326,7 @@
  '((emacs-lisp . t)
    (python . t)
    ;; (rust . t)
+   (sql . t)
    (C . t)
    (shell . t)))
 
