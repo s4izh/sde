@@ -37,7 +37,7 @@ in
 
   boot.loader.grub = {
     minegrub-world-sel = {
-      enable = true;
+      enable = false;
       customIcons = [
         {
           name = "nixos";
