@@ -27,7 +27,7 @@
 
 (if my/is-arch
     ;; (add-to-list 'default-frame-alist '(font . "LiterationMono Nerd Font-12"))
-    (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-13")) ;; arch
+    (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-13"))) ;; arch
     ;; (add-to-list 'default-frame-alist '(font . "FiraCode Nerd Font-12")) ;; arch
     ;; (add-to-list 'default-frame-alist '(font . "JetBrainsMono NF-12")) ;; arch
     ;; (add-to-list 'default-frame-alist '(font . "InputMonoNarrow-12")) ;; arch
@@ -38,7 +38,9 @@
 )
 
 (if my/is-nixos
-    (add-to-list 'default-frame-alist '(font . "monospace")))
+    ;; (add-to-list 'default-frame-alist '(font . "Unifont"))
+  (add-to-list 'default-frame-alist '(font . "monospace"))
+)
 
 (setq locale-coding-system 'utf-8)
 (set-face-attribute 'default nil :height 150)
@@ -114,7 +116,7 @@
 (setq display-line-numbers-type 'relative)
 (set-default 'truncate-lines t)
 ;; line highlight
-(global-hl-line-mode nil)
+;; (global-hl-line-mode t)
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook
