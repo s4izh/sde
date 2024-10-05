@@ -25,6 +25,9 @@ user: ## Switch to the flake as a user
 	nix build ".#homeManagerConfigurations.sergio.activationPackage" --impure
 	./result/activate
 	rm -rf result
+deploy:
+	sudo nixos-rebuild switch --flake ".#thinkcenter" --impure \
+		--target-host root@192.168.1.176 --build-host root@192.168.1.176
 src-dependencies: ## Download impure source dependencies
 	@if [ ! -d $(SRC_DIR) ]; then mkdir -p $(SRC_DIR); fi
 	@if [ ! -d $(SRC_DIR)/dwm ]; then git clone https://github.com/s4izh/dwm.git $(SRC_DIR)/dwm; fi
