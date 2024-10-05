@@ -153,6 +153,9 @@ PROMPT+="
 PROMPT="%B%F{green}%n@%m%k %B%F{blue}%~
 %B%F{white}$ %b%f%k"
 
+# PROMPT="%B%F{green}%n@%m%k %B%F{blue}%~
+# %B%F{white}󰘧 %b%f%k"
+
 if [[ -n $SSH_TTY ]]; then
     PROMPT="%B%F{green}%n@%m(ssh)%k %B%F{blue}%~
 %B%F{white}$ %b%f%k"
