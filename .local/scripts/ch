@@ -1,3 +1,0 @@
-#!/bin/sh
-
-pygmentize -g $HOME/.local/share/cheat/$1.sh

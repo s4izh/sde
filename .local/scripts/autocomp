@@ -1,6 +1,0 @@
-#!/bin/sh
-#
-# :!setsid autocomp % & to a vim keybind
-
-pkill -f "entr compiler" && exit
-echo "$1" | entr compiler "$1"
