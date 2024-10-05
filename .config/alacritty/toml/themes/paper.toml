@@ -1,0 +1,23 @@
+[colors.primary]
+background = "#f2eede"
+foreground = "#aaaaaa"
+
+[colors.normal]
+black = "#000000"
+red = "#cc3e28"
+green = "#216609"
+yellow = "#b58900"
+blue = "#1e6fcc"
+magenta = "#5c21a5"  # Renamed to magenta from purple
+cyan = "#158c86"
+white = "#aaaaaa"  # Matches the lgrey3
+
+[colors.bright]
+black = "#555555"  # Matches the dgrey
+red = "#cc3e28"
+green = "#216609"
+yellow = "#b58900"
+blue = "#1e6fcc"
+magenta = "#5c21a5"  # Renamed to magenta from purple
+cyan = "#158c86"
+white = "#aaaaaa"  # Matches the lgrey3
