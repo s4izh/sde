@@ -56,7 +56,12 @@
     };
   };
 
-  xdg.portal.enable = true;
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+  };
+  xdg.portal.config.common.default = "xdg-desktop-portal-gtk";
+
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
 
   # system.stateVersion = "22.11"; # Did you read the comment? yes
