@@ -1,5 +1,5 @@
 require("ibl").setup({
-  enabled = true,
+  enabled = false,
   indent = {
     char = '▏',
   },
