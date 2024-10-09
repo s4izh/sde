@@ -18,7 +18,7 @@
   "gruber-darker.nvim": { "branch": "main", "commit": "1793c0929ca965430410f7ec578272a4af9226ee" },
   "gruvbox": { "branch": "master", "commit": "f1ecde848f0cdba877acb0c740320568252cc482" },
   "gruvbuddy.nvim": { "branch": "master", "commit": "3aa94b2fb061b13ccc118d21fad25d6b1ff3fc8b" },
-  "indent-blankline.nvim": { "branch": "master", "commit": "db926997af951da38e5004ec7b9fbdc480b48f5d" },
+  "indent-blankline.nvim": { "branch": "master", "commit": "18603eb949eba08300799f64027af11ef922283f" },
   "jellybeans.vim": { "branch": "master", "commit": "ef83bf4dc8b3eacffc97bf5c96ab2581b415c9fa" },
   "kanagawa.nvim": { "branch": "master", "commit": "e5f7b8a804360f0a48e40d0083a97193ee4fcc87" },
   "lazy.nvim": { "branch": "main", "commit": "077102c5bfc578693f12377846d427f49bc50076" },

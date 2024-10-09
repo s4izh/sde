@@ -4,6 +4,7 @@ require("ibl").setup({
     char = '▏',
   },
   scope = {
+    enabled = false,
     char = '▏',
     show_start = false,
   }
