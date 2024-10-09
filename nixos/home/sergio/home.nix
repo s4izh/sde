@@ -5,7 +5,7 @@
   ...
 }:
 let
-  dotfiles = "${config.home.homeDirectory}/.dotfiles";
+  dotfiles = "../../../dotfiles";
   ln = config.lib.file.mkOutOfStoreSymlink;
   lnDir = config.lib.file.mkOutOfStoreSymlink;
 in
@@ -13,9 +13,6 @@ in
   home.packages = with pkgs; [
     tmux
     fzf
-    # neovim
-    # nixfmt
-    # nil
     shellcheck
     shfmt
     gnumake
@@ -29,19 +26,10 @@ in
 
   xdg = {
     enable = true;
-    configFile."git".source = lnDir "${dotfiles}/.config/git";
-    configFile."dunst/dunstrc".source = ln "${dotfiles}/.config/dunst/dunstrc";
-    configFile."picom/picom.conf".source = ln "${dotfiles}/.config/picom/picom.conf";
-    configFile."sxhkd/sxhkdrc".source = ln "${dotfiles}/.config/sxhkd/sxhkdrc";
     configFile."mimeapps.list".source = ln "${dotfiles}/.config/mimeapps.list";
-    configFile."libvirt/libvirt.conf".source = ln "${dotfiles}/.config/libvirt/libvirt.conf";
-    # configFile."tmux/tmux.conf".source = "${dotfiles}/.config/tmux/tmux.conf";
-    configFile."zathura/zathurarc".source = ln "${dotfiles}/.config/zathura/zathurarc";
-    # configFile."user-dirs.dirs".source = "${dotfiles}/.config/user-dirs.dirs";
-    # configFile."user-dirs.locale".source = "${dotfiles}/.config/user-dirs.locale";
     userDirs = {
       enable = true;
-      createDirectories = true;
+      createDirectories = false;
       desktop = "${config.home.homeDirectory}/dt";
       download = "${config.home.homeDirectory}/dl";
       documents = "${config.home.homeDirectory}/docs";
@@ -55,7 +43,7 @@ in
 
   # home.file.".config/tmux".source = ln $"
 
-  home.file.".editorconfig".source = ln "${dotfiles}/.editorconfig";
+  # home.file.".editorconfig".source = ln "${dotfiles}/.editorconfig";
 
   # xdg.mimeApps.defaultAplications = {
   #   "text/plain" = [ "nvim.desktop" ];
@@ -103,15 +91,6 @@ in
 
   # xdg.configFile."zsh/alias".source = "${dotfiles}/.config/zsh/alias";
   # xdg.configFile."zsh/functions".source = "${dotfiles}/.config/zsh/functions";
-
-  # services.dwm-status = {
-  #   enable = true;
-  #   order = [
-  #     "audio"
-  #     "battery"
-  #     "cpu_load"
-  #   ];
-  # };
 
   # services.dunst = {
   #   enable = true;

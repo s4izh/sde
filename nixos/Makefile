@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 NIX_DIR := $(PWD)
-DOTFILES := $(HOME)/.dotfiles
+DOTFILES := ../dotfiles
 SRC_DIR := $(HOME)/.local/src
 
 help:
@@ -39,23 +39,19 @@ src-dependencies: ## Download impure source dependencies
 	@if [ ! -d $(HOME)/.config/nvim ]; then git clone https://github.com/s4izh/nvim.git $(HOME)/.config/nvim; fi
 	@if [ ! -d $(HOME)/.dotfiles ]; then git clone https://github.com/s4izh/.dotfiles.git $(HOME)/.dotfiles; fi
 create-softlinks: ## Create softlinks
-	@if [ ! -h $(HOME)/.local/scripts ]; then\
-		ln -sf $(DOTFILES)/.local/scripts $(HOME)/.local/scripts; fi
-	@if [ ! -h $(HOME)/.config/alacritty ]; then\
-		ln -sf $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
-	@if [ ! -h $(HOME)/templates ]; then\
-		ln -sf $(DOTFILES)/templates $(HOME)/templates; fi
-	@if [ ! -h $(HOME)/.config/zsh ]; then\
-		ln -sf $(DOTFILES)/.config/zsh $(HOME)/.config/zsh; fi
-	@if [ ! -h $(HOME)/.zprofile ]; then\
-		ln -sf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.zprofile; fi
-	@if [ ! -h $(HOME)/.profile ]; then\
-		ln -sf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.profile; fi
-	@if [ ! -h $(HOME)/.xinitrc ]; then\
-		ln -sf $(DOTFILES)/.xinitrc $(HOME)/.xinitrc; fi
-	@if [ ! -h $(HOME)/.config/tmux ]; then\
-		ln -sf $(DOTFILES)/.config/tmux $(HOME)/.config/tmux; fi
-	@if [ ! -h $(HOME)/.config/sway ]; then\
-		ln -sf $(DOTFILES)/.config/sway $(HOME)/.config/sway; fi
-	@if [ ! -h $(HOME)/.config/shell ]; then\
-		ln -sf $(DOTFILES)/.config/shell $(HOME)/.config/shell; fi
+	@if [ ! -h $(HOME)/.local/scripts ]; then ln -sf $(DOTFILES)/.local/scripts $(HOME)/.local/scripts; fi
+	@if [ ! -h $(HOME)/.config/alacritty ]; then ln -sf $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
+	@if [ ! -h $(HOME)/templates ]; then ln -sf $(DOTFILES)/templates $(HOME)/templates; fi
+	@if [ ! -h $(HOME)/.config/zsh ]; then ln -sf $(DOTFILES)/.config/zsh $(HOME)/.config/zsh; fi
+	@if [ ! -h $(HOME)/.zprofile ]; then ln -sf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.zprofile; fi
+	@if [ ! -h $(HOME)/.profile ]; then ln -sf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.profile; fi
+	@if [ ! -h $(HOME)/.xinitrc ]; then ln -sf $(DOTFILES)/.xinitrc $(HOME)/.xinitrc; fi
+	@if [ ! -h $(HOME)/.config/tmux ]; then ln -sf $(DOTFILES)/.config/tmux $(HOME)/.config/tmux; fi
+	@if [ ! -h $(HOME)/.config/sway ]; then ln -sf $(DOTFILES)/.config/sway $(HOME)/.config/sway; fi
+	@if [ ! -h $(HOME)/.config/shell ]; then ln -sf $(DOTFILES)/.config/shell $(HOME)/.config/shell; fi
+	@if [ ! -h $(HOME)/.config/git ]; then ln -sf $(DOTFILES)/.config/git $(HOME)/.config/git; fi
+	@if [ ! -h $(HOME)/.config/libvirt ]; then ln -sf $(DOTFILES)/.config/libvirt $(HOME)/.config/libvirt; fi
+	@if [ ! -h $(HOME)/.config/zathura ]; then ln -sf $(DOTFILES)/.config/zathura $(HOME)/.config/zathura; fi
+	@if [ ! -h $(HOME)/.config/picom ]; then ln -sf $(DOTFILES)/.config/picom $(HOME)/.config/picom; fi
+	@if [ ! -h $(HOME)/.config/sxhkd ]; then ln -sf $(DOTFILES)/.config/sxhkd $(HOME)/.config/sxhkd; fi
+	@if [ ! -h $(HOME)/.config/dunst ]; then ln -sf $(DOTFILES)/.config/dunst $(HOME)/.config/dunst; fi
