@@ -60,8 +60,11 @@ let
     zls
   ];
   haskellpkgs = with pkgs; [ ghc ];
-  devpkgs = with pkgs; [
+  gitpkgs = with pkgs; [
     git
+    python312Packages.git-filter-repo
+  ];
+  devpkgs = with pkgs; [
     tmux
     fzf
     bat
@@ -75,6 +78,7 @@ in
 {
   environment.systemPackages =
     devpkgs
+    ++ gitpkgs
     ++ rustpkgs
     ++ latexpkgs
     ++ nixpkgs
