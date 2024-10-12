@@ -10,7 +10,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 vim.g.editorconfig = true
 
