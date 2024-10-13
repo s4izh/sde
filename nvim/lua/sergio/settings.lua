@@ -38,9 +38,9 @@ vim.o.path = vim.o.path .. "**"
 -- vim.cmd[[
 --     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 -- ]]
-vim.api.nvim_create_autocmd({"FileType"}, {
-  pattern = {"*"},
-  command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "*" },
+    command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
 })
 
-vim.opt.tags="./tags;tags"
+vim.opt.tags = "./tags;tags"
