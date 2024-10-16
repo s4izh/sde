@@ -19,8 +19,6 @@ lsp.rust_analyzer.setup({
 
 lsp.gopls.setup({})
 
-lsp.tsserver.setup({})
-
 if (vim.fn.executable("bash-language-server") > 0) then
   lsp.bashls.setup({})
 end
