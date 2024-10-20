@@ -1,8 +1,40 @@
 .DEFAULT_GOAL := help
 
-NIX_DIR := $(PWD)
-DOTFILES := ../dotfiles
+.PHONY: src-dependencies create-softlinks remove-softlinks
+
+SDE_DIR := $(HOME)/personal/sde
+NIX_DIR := $(SDE_DIR)/nixos
+DOTFILES := $(SDE_DIR)/dotfiles
 SRC_DIR := $(HOME)/.local/src
+
+GIT_SRCS := \
+	https://github.com/s4izh/dwm.git \
+	https://github.com/s4izh/dmenu.git \
+	https://github.com/s4izh/dwmblocks.git \
+	https://github.com/s4izh/dwl.git \
+	https://github.com/s4izh/somebar.git \
+	https://github.com/s4izh/st.git
+
+CONFIG_FILES := \
+	.local/scripts \
+	.config/alacritty \
+	templates \
+	.config/zsh \
+	.zprofile \
+	.bashrc \
+	.xinitrc \
+	.editorconfig \
+	.config/tmux \
+	.config/sway \
+	.config/shell \
+	.config/git \
+	.config/libvirt \
+	.config/zathura \
+	.config/picom \
+	.config/sxhkd \
+	.config/dunst
+
+REPO_NAMES := $(notdir $(basename $(GIT_SRCS)))
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
@@ -28,30 +60,27 @@ user: ## Switch to the flake as a user
 deploy:
 	sudo nixos-rebuild switch --flake ".#thinkcenter" --impure \
 		--target-host root@192.168.1.176 --build-host root@192.168.1.176
+
 src-dependencies: ## Download impure source dependencies
 	@if [ ! -d $(SRC_DIR) ]; then mkdir -p $(SRC_DIR); fi
-	@if [ ! -d $(SRC_DIR)/dwm ]; then git clone https://github.com/s4izh/dwm.git $(SRC_DIR)/dwm; fi
-	@if [ ! -d $(SRC_DIR)/dmenu ]; then git clone https://github.com/s4izh/dmenu.git $(SRC_DIR)/dmenu; fi
-	@if [ ! -d $(SRC_DIR)/dwmblocks ]; then git clone https://github.com/s4izh/dwmblocks.git $(SRC_DIR)/dwmblocks; fi
-	@if [ ! -d $(SRC_DIR)/dwl ]; then git clone https://github.com/s4izh/dwl.git $(SRC_DIR)/dwl; fi
-	@if [ ! -d $(SRC_DIR)/somebar ]; then git clone https://github.com/s4izh/somebar.git $(SRC_DIR)/somebar; fi
-	@if [ ! -d $(SRC_DIR)/st ]; then git clone https://github.com/s4izh/st.git $(SRC_DIR)/st; fi
-	@if [ ! -d $(HOME)/.config/nvim ]; then git clone https://github.com/s4izh/nvim.git $(HOME)/.config/nvim; fi
-	@if [ ! -d $(HOME)/.dotfiles ]; then git clone https://github.com/s4izh/.dotfiles.git $(HOME)/.dotfiles; fi
-create-softlinks: ## Create softlinks
-	@if [ ! -h $(HOME)/.local/scripts ]; then ln -sf $(DOTFILES)/.local/scripts $(HOME)/.local/scripts; fi
-	@if [ ! -h $(HOME)/.config/alacritty ]; then ln -sf $(DOTFILES)/.config/alacritty $(HOME)/.config/alacritty; fi
-	@if [ ! -h $(HOME)/templates ]; then ln -sf $(DOTFILES)/templates $(HOME)/templates; fi
-	@if [ ! -h $(HOME)/.config/zsh ]; then ln -sf $(DOTFILES)/.config/zsh $(HOME)/.config/zsh; fi
-	@if [ ! -h $(HOME)/.zprofile ]; then ln -sf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.zprofile; fi
-	@if [ ! -h $(HOME)/.profile ]; then ln -sf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.profile; fi
-	@if [ ! -h $(HOME)/.xinitrc ]; then ln -sf $(DOTFILES)/.xinitrc $(HOME)/.xinitrc; fi
-	@if [ ! -h $(HOME)/.config/tmux ]; then ln -sf $(DOTFILES)/.config/tmux $(HOME)/.config/tmux; fi
-	@if [ ! -h $(HOME)/.config/sway ]; then ln -sf $(DOTFILES)/.config/sway $(HOME)/.config/sway; fi
-	@if [ ! -h $(HOME)/.config/shell ]; then ln -sf $(DOTFILES)/.config/shell $(HOME)/.config/shell; fi
-	@if [ ! -h $(HOME)/.config/git ]; then ln -sf $(DOTFILES)/.config/git $(HOME)/.config/git; fi
-	@if [ ! -h $(HOME)/.config/libvirt ]; then ln -sf $(DOTFILES)/.config/libvirt $(HOME)/.config/libvirt; fi
-	@if [ ! -h $(HOME)/.config/zathura ]; then ln -sf $(DOTFILES)/.config/zathura $(HOME)/.config/zathura; fi
-	@if [ ! -h $(HOME)/.config/picom ]; then ln -sf $(DOTFILES)/.config/picom $(HOME)/.config/picom; fi
-	@if [ ! -h $(HOME)/.config/sxhkd ]; then ln -sf $(DOTFILES)/.config/sxhkd $(HOME)/.config/sxhkd; fi
-	@if [ ! -h $(HOME)/.config/dunst ]; then ln -sf $(DOTFILES)/.config/dunst $(HOME)/.config/dunst; fi
+	@for repo in $(GIT_SRCS); do \
+		repo_name=$$(echo $$repo | sed 's/.*\/\(.*\)\.git/\1/'); \
+		if [ ! -d $(SRC_DIR)/$$repo_name ]; then \
+			git clone $$repo $(SRC_DIR)/$$repo_name; \
+		fi; \
+	done
+
+create-softlinks: ## Create all softlinks
+	@for file in $(CONFIG_FILES); do \
+		if [ ! -h $(HOME)/$$file ]; then \
+			ln -svf $(DOTFILES)/$$file $(HOME)/$$file; \
+		fi \
+	done
+	@ln -svf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.profile;
+
+remove-softlinks: ## Remove all softlinks
+	@for file in $(CONFIG_FILES); do \
+		if [ -h $(HOME)/$$file ]; then \
+			rm -v $(HOME)/$$file; \
+		fi \
+	done
