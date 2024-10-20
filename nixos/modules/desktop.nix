@@ -5,6 +5,9 @@
   inputs,
   ...
 }:
+let
+  hostfile = "/home/sergio/personal/sde/dotfiles/etc/hosts";
+in
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -197,7 +200,7 @@
     };
   };
 
-  networking.extraHosts = builtins.readFile /home/sergio/.dotfiles/etc/hosts;
+  networking.extraHosts = builtins.readFile hostfile;
 
   # steam and other FHS-installed packages need portals to be able to
   # start other programs without trapping them in their own container.
