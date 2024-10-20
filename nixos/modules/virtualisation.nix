@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     virt-manager
     virt-viewer
+    remmina
     swtpm
     docker
     docker-compose
