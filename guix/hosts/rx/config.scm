@@ -42,26 +42,36 @@
                           (specification->package "st")
                           (specification->package "alacritty")
                           (specification->package "firefox")
-			  (specification->package "vim")
-			  (specification->package "tmux")
-			  (specification->package "git")
-                          (specification->package "neovim"))
+                          (specification->package "make")
+                          (specification->package "vim")
+                          (specification->package "tmux")
+                          (specification->package "git")
+                          (specification->package "neovim")
+                          (specification->package "gcc-toolchain")
+                          (specification->package "fzf"))
                     %base-packages))
 
   ;; Below is the list of system services.  To search for available
   ;; services, run 'guix system search KEYWORD' in a terminal.
   (services
-   (append (list
+   (append
+    (list
+     ;; To configure OpenSSH, pass an 'openssh-configuration'
+     ;; record as a second argument to 'service' below.
+     (service openssh-service-type)
+     (set-xorg-configuration
+      (xorg-configuration (keyboard-layout keyboard-layout))))
 
-                 ;; To configure OpenSSH, pass an 'openssh-configuration'
-                 ;; record as a second argument to 'service' below.
-                 (service openssh-service-type)
-                 (set-xorg-configuration
-                  (xorg-configuration (keyboard-layout keyboard-layout))))
+   (modify-services %desktop-services
+    (guix-service-type config =>
+     (guix-configuration
+      (substitute-urls
+       (append (list "https://substitutes.nonguix.org")
+        %default-substitute-urls))
+      (authorized-keys
+       (append (list (local-file "../../substitutes/nonguix.pub"))
+        %default-authorized-guix-keys)))))))
 
-           ;; This is the default list of services we
-           ;; are appending to.
-           %desktop-services))
   (bootloader (bootloader-configuration
                 (bootloader grub-efi-bootloader)
                 (targets (list "/boot/efi"))
