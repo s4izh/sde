@@ -23,7 +23,7 @@ fi
 gnome-keyring-daemon --start --components=secrets
 
 while true; do
-    dwm 2> /tmp/dwm.log
+    dbus-launch --exit-with-session dwm 2> /tmp/dwm.log
     if [ ! -e "/tmp/hotreloading" ]; then
         break
     fi
