@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+git filter-repo --commit-callback "
+    if commit.author_email == b'$EMAIL_FROM':
+        commit.author_email = b'$EMAIL_TO'
+        commit.author_name = b'$NAME_TO'
+    if commit.committer_email == b'$EMAIL_FROM':
+        commit.committer_email = b'$EMAIL_TO'
+        commit.committer_name = b'$NAME_TO'
+"
