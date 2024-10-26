@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Define the path to the parent directory containing the Git repositories
+PARENT_DIR="$HOME/personal"
+
+# Define the script to run if the Git remote matches
+SCRIPT_TO_RUN="filter-repo"
+
+export EMAIL_TO=sergiosanz234@gmail.com
+export EMAIL_FROM=sergio.sanz.martinez@proton.me
+export NAME_TO=s4izh
+
+for dir in "$PARENT_DIR"/*/; do
+    if [ -d "$dir/.git" ]; then
+        cd "$dir" || continue
+
+        remote_url=$(git config --get remote.origin.url)
+
+        if [[ "$remote_url" == *"github.com:s4izh"* ]]; then
+            echo "Applying script to $dir"
+
+            cd "$dir"
+            bash $SCRIPT_TO_RUN
+        else
+            echo "Skipping $dir, remote URL does not match."
+        fi
+    fi
+done
+

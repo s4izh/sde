@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+git stash
+
+cp -v .git/config .git/config2
+
 git filter-repo --commit-callback "
     if commit.author_email == b'$EMAIL_FROM':
         commit.author_email = b'$EMAIL_TO'
@@ -7,4 +11,8 @@ git filter-repo --commit-callback "
     if commit.committer_email == b'$EMAIL_FROM':
         commit.committer_email = b'$EMAIL_TO'
         commit.committer_name = b'$NAME_TO'
-"
+" --force
+
+mv -v .git/config2 .git/config
+
+git stash pop
