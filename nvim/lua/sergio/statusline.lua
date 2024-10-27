@@ -16,3 +16,5 @@ endfunction
 let &statusline = Statusline_expr()
 set laststatus=2 "show statusbar
 ]])
+
+-- vim.cmd([[set ruf=%30(%=%#LineNr#%.50F\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)]])
