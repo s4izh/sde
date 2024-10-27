@@ -16,3 +16,5 @@ git filter-repo --commit-callback "
 mv -v .git/config2 .git/config
 
 git stash pop
+
+git push --force

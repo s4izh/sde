@@ -5,12 +5,10 @@ if [[ $# -eq 1 ]]; then
 else
     folders=$(find ~/personal ~/uni/mei ~/git ~/devel ~/devel/lanaccess ~/.local/src -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
 
-    scripts=~/.local/scripts
-    dotfiles=~/.dotfiles
     notes=~/notes
     passwords=$PASSWORD_STORE_DIR
 
-    selected=$(printf "$folders\n$scripts\n$dotfiles\n$passwords\n$notes\nnew" | fzf)
+    selected=$(printf "$folders\n$scripts\n$passwords\n$notes\nnew" | fzf)
 fi
 
 if [[ -z $selected ]]; then
