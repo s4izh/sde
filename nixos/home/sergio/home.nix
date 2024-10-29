@@ -26,7 +26,7 @@ in
 
   xdg = {
     enable = true;
-    configFile."mimeapps.list".source = ln "${dotfiles}/.config/mimeapps.list";
+    # configFile."mimeapps.list".source = ln "${dotfiles}/.config/mimeapps.list";
     userDirs = {
       enable = true;
       createDirectories = false;
