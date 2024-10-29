@@ -191,7 +191,7 @@ in
       # monospace = [ "LiterationMono Nerd Font" ];
       # monospace = [ "JetBrains Mono" ];
       # monospace = [ "UbuntuMono Nerd Font" ];
-      monospace = ["Iosevka"];
+      monospace = [ "Iosevka" ];
       # monospace = [ "Liberation Mono" ];
       # monospace = [ "Inconsolata Nerd Font" ];
       # monospace = [ "FreeMono" ];
@@ -202,27 +202,16 @@ in
 
   networking.extraHosts = builtins.readFile hostfile;
 
-  # steam and other FHS-installed packages need portals to be able to
-  # start other programs without trapping them in their own container.
-  # xdg.portal.enable = true;
-  # xdg.portal.xdgOpenUsePortal = true;
-  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  # xdg.portal.config.common.default = "*";
+  programs.ssh = {
+    startAgent = true;
+    enableAskPassword = true;
+    askPassword = "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
+  };
 
-  # system.userActivationScripts.alacrittyLink.text = ''
-  #   if [[ ! -h "$HOME/.config/alacritty" ]]; then
-  #     ln -s "$HOME/.dotfiles/.config/alacritty" "$HOME/.config/alacritty"
-  #   fi
-  # '';
+  services.tailscale = {
+    enable = true;
+  };
 
   # va muy lento con esto
   # documentation.man.generateCaches = true;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  # system.stateVersion = "23.05"; # Did you read the comment?
 }

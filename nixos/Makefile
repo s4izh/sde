@@ -32,6 +32,7 @@ CONFIG_FILES := \
 	.config/zathura \
 	.config/picom \
 	.config/sxhkd \
+	.config/mimeapps.list \
 	.config/dunst
 
 REPO_NAMES := $(notdir $(basename $(GIT_SRCS)))
@@ -76,7 +77,9 @@ create-softlinks: ## Create all softlinks
 			ln -svf $(DOTFILES)/$$file $(HOME)/$$file; \
 		fi \
 	done
-	@ln -svf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.profile;
+	@if [ ! -h $(HOME)/.profile ]; then \
+		@ln -svf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.profile; \
+	fi
 
 remove-softlinks: ## Remove all softlinks
 	@for file in $(CONFIG_FILES); do \
