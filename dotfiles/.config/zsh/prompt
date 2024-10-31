@@ -37,26 +37,30 @@ PROMPT+="%B%(?.%F{grey}.%F{red})%(!.#.$)%f%b "
 
 # PROMPT="%F{yellow}%n"
 # PROMPT+="%F{green}[%m] "
-PROMPT="%F{blue}%~%f%b% "
-PROMPT+="\$vcs_info_msg_0_"
-PROMPT+="$name
-"
-PROMPT+="%F{white}ᛋ "
+# PROMPT="%F{blue}%~%f%b% "
+# PROMPT+="\$vcs_info_msg_0_"
+# PROMPT+="$name
+# "
+# PROMPT+="%F{white}ᛋ "
 
-PROMPT="%F{white}$ "
+# PROMPT="%F{white}$ "
 # PROMPT="%F{white}%n%F{255}:%F{255}%1~ %F{15}$ "
-if [[ "$THEME" == "light" ]]; then
-    PROMPT="%F{235}%n%F{234}:%F{240}%1~ %F{15}$ "
-    PROMPT="%F{white}%1~ %F{white}$ "
-    PROMPT+="\$vcs_info_msg_0_"
-else
-    PROMPT="%F{white}%n%F{255}:%F{white}%1~%F{15}"
-    # PROMPT="%F{255}%1~"
-    # PROMPT+="\$vcs_info_msg_0_"
-    PROMPT+=" %F{15}$ "
-fi
+# if [[ "$THEME" == "light" ]]; then
+#     PROMPT="%F{235}%n%F{234}:%F{240}%1~ %F{15}$ "
+#     PROMPT="%F{white}%1~ %F{white}$ "
+#     PROMPT+="\$vcs_info_msg_0_"
+# else
+#     PROMPT="%F{white}%n%F{255}:%F{white}%1~%F{15}"
+#     # PROMPT="%F{255}%1~"
+#     # PROMPT+="\$vcs_info_msg_0_"
+#     PROMPT+=" %F{15}$ "
+# fi
 
-PROMPT="%n:%1~%  $ "
+# PROMPT="%n:%~% $ "
+PROMPT="%~%  $ "
+
+PROMPT="%B%{$fg[white]%}%n%{$fg[blue]%}@%{$fg[white]%}%m%  %{$fg[white]%}%~% 
+$%{$reset_color%} "
 
 # PROMPT="%F{180}%n%F{white}@%{$fg[blue]%}%M %F{144}%1~ %F{15}$ "
 # PROMPT="%F{15}%1~ %F{15}$ "
@@ -102,12 +106,13 @@ PROMPT="%n:%1~%  $ "
 # zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%}%b%{$fg[blue]%})"
 
 # format our main prompt for hostname current folder, and permissions.
-# c@m="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
-# c@m="%B%{$fg[blue]%}[%{$fg[white]%}s4izh%{$fg[red]%}@%{$fg[white]%}arch%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
-# c@m=" %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
-# c@m="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
-# c@m="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %{$fg[cyan]%}%c%{$fg[blue]%}%]%{$reset_color%}"
-# c@m+="\$vcs_info_msg_0_ "
+# cm="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
+# cm="%B%{$fg[blue]%}[%{$fg[white]%}s4izh%{$fg[red]%}@%{$fg[white]%}arch%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
+# cm=" %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
+# cm="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
+cm="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %{$fg[cyan]%}%c%{$fg[blue]%}%]%{$reset_color%}"
+cm+="\$vcs_info_msg_0_ "
+
 # TODO look into this for more colors
 # https://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
 # also ascii escape codes
@@ -141,22 +146,22 @@ PROMPT="%n:%1~%  $ "
 
 # luke style no []
 # user@host ~ $
-PROMPT="%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[cyan]%}%~"
-PROMPT+="
-%{$reset_color%}$%b "
+# PROMPT="%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[cyan]%}%~"
+# PROMPT+="
+# %{$reset_color%}$%b "
 
 # gerry style
 # user[host] ~ *git
 # $
 
 # gentoo style
-PROMPT="%B%F{green}%n@%m%k %B%F{blue}%~
-%B%F{white}$ %b%f%k"
+# PROMPT="%B%F{green}%n@%m%k %B%F{blue}%~
+# %B%F{white}$ %b%f%k"
 
 # PROMPT="%B%F{green}%n@%m%k %B%F{blue}%~
 # %B%F{white}󰘧 %b%f%k"
 
-if [[ -n $SSH_TTY ]]; then
-    PROMPT="%B%F{green}%n@%m(ssh)%k %B%F{blue}%~
-%B%F{white}$ %b%f%k"
-fi
+# if [[ -n $SSH_TTY ]]; then
+#     PROMPT="%B%F{green}%n@%m(ssh)%k %B%F{blue}%~
+# %B%F{white}$ %b%f%k"
+# fi
