@@ -18,7 +18,6 @@ in
 {
   networking.hostName = "rx"; # Define your hostname.
   networking.networkmanager.enable = true;
-
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.systemd-boot.configurationLimit = 5;

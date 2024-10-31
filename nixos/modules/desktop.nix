@@ -205,13 +205,9 @@ in
   programs.ssh = {
     startAgent = true;
     enableAskPassword = true;
-    askPassword = "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
-  };
-
-  services.tailscale = {
-    enable = true;
+    askPassword = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
   };
 
   # va muy lento con esto
-  # documentation.man.generateCaches = true;
+  documentation.man.generateCaches = true;
 }
