@@ -12,7 +12,7 @@
       "networkmanager"
       "wheel"
     ];
-    shell = pkgs.bash;
+    shell = pkgs.zsh;
     packages = with pkgs; [ ];
   };
 
