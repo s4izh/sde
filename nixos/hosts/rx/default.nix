@@ -28,6 +28,7 @@ in
     "${modules}/river.nix"
     "${modules}/sway.nix"
     "${modules}/stumpwm.nix"
+    "${modules}/vpn.nix"
     # "${modules}/xfce.nix"
     # "${modules}/i3.nix"
     inputs.home-manager.nixosModules.home-manager
