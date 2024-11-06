@@ -13,7 +13,7 @@ return {
     'rafamadriz/friendly-snippets',
   },
   config = function()
-    require("sergio.plugins-config.cmp")
+    require("sergio.plugins.cmp")
   end,
 }
 
