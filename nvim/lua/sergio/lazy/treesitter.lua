@@ -1,6 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   config = function()
-    require("sergio.plugins-config.treesitter")
+    require("sergio.plugins.treesitter")
   end,
 }

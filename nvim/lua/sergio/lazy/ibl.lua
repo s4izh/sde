@@ -1,6 +1,6 @@
 return {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-        require("sergio.plugins-config.ibl")
+        require("sergio.plugins.ibl")
     end
 }

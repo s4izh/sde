@@ -5,6 +5,6 @@ return {
   -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
   -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
   config = function ()
-    require("sergio.plugins-config.oil")
+    require("sergio.plugins.oil")
   end
 }

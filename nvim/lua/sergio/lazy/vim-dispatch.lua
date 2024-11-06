@@ -1,6 +1,6 @@
 return {
   "tpope/vim-dispatch",
   config = function ()
-    require("sergio.plugins-config.dispatch")
+    require("sergio.plugins.dispatch")
   end
 }

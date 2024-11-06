@@ -3,7 +3,7 @@ return {
     "junegunn/fzf.vim",
     commit = '45d96c9',
     config = function()
-      require("sergio.plugins-config.fzf")
+      require("sergio.plugins.fzf")
     end,
   },
   {
