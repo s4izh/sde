@@ -85,3 +85,11 @@ eval "$(direnv hook zsh)"
 # eval "$(starship init zsh)"
 
 [ -f "/home/sergio/.ghcup/env" ] && source "/home/sergio/.ghcup/env" # ghcup-env
+
+_just_completion() {
+    local -a commands
+    commands=($(just --summary))
+    _describe 'command' commands
+}
+
+compdef _just_completion just
