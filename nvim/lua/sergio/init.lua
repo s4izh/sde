@@ -1,4 +1,4 @@
-require("sergio.lazy")
+require("sergio.lazy-setup")
 require("sergio.settings")
 require("sergio.keybinds")
 require("sergio.sudo")
