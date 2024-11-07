@@ -5,6 +5,7 @@
   inputs,
   config,
   pkgs,
+  sde,
   ...
 }:
 let
@@ -37,7 +38,7 @@ in
 
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs;
+      inherit inputs sde;
     };
     users = {
       sergio = import ../../home/sergio/home.nix;

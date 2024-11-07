@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  sde,
   ...
 }:
 let
@@ -74,6 +75,9 @@ let
     pstree
     cloc
   ];
+  testpkgs = [
+    sde.pkgs.test
+  ];
 in
 {
   environment.systemPackages =
@@ -90,4 +94,5 @@ in
     ++ gopkgs
     ++ zigpkgs
     ++ haskellpkgs;
+    # ++ testpkgs;
 }

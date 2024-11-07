@@ -3,10 +3,11 @@
   pkgs,
   lib,
   inputs,
+  sde,
   ...
 }:
 let
-  hostfile = "/home/sergio/personal/sde/dotfiles/etc/hosts";
+  hostfile = "${sde.flakeRoot}/dotfiles/etc/hosts";
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -172,7 +173,6 @@ in
     commit-mono # Commit Mono
     # ubuntu-mono # Ubuntu Mono
     nerdfonts
-    # inconsolata-nerd-font
     texlivePackages.inconsolata-nerd-font
     texlivePackages.gnu-freefont
     victor-mono
@@ -191,8 +191,8 @@ in
       # monospace = [ "LiterationMono Nerd Font" ];
       # monospace = [ "JetBrains Mono" ];
       # monospace = [ "UbuntuMono Nerd Font" ];
-      monospace = [ "Iosevka" ];
-      # monospace = [ "Liberation Mono" ];
+      # monospace = [ "Iosevka" ];
+      monospace = [ "Liberation Mono" ];
       # monospace = [ "Inconsolata Nerd Font" ];
       # monospace = [ "FreeMono" ];
       # monospace = [ "Commit Mono" ];
