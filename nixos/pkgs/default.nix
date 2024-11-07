@@ -1,11 +1,19 @@
 # You can build these directly using 'nix build .#example'
 {
-  pkgs ? import <nixpkgs> { },
+  pkgs ?
+    let
+      # If pkgs is not defined, instantiate nixpkgs from locked commit
+      lock = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.nixpkgs.locked;
+      nixpkgs = fetchTarball {
+        url = "https://github.com/nixos/nixpkgs/archive/${lock.rev}.tar.gz";
+        sha256 = lock.narHash;
+      };
+      system = builtins.currentSystem;
+      overlays = [ ]; # Explicit blank overlay to avoid interference
+    in
+    import nixpkgs { inherit system overlays; },
+  ...
 }:
-rec {
-  #################### Packages with external source ####################
-
-  # cd-gitroot = pkgs.callPackage ./cd-gitroot { };
-  # zhooks = pkgs.callPackage ./zhooks { };
-  # zsh-term-title = pkgs.callPackage ./zsh-term-title { };
+{
+  test = pkgs.callPackage ./test.nix { inherit pkgs; };
 }

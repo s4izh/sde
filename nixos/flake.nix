@@ -44,16 +44,25 @@
             in
             function syspkgs
           );
+
+      sde = rec {
+        flakeRoot = ../.;
+        nixosPrefix = "${flakeRoot}/nixos";
+        pkgs = forAllSystems (pkgs: {
+          default = import ./pkgs { inherit pkgs; };
+        });
+      };
+
     in
     # (system: function nixpkgs.legacyPackages.${system});
     {
       # packages.x86_64-linux.default = import ./shell.nix { inherit pkgs; };
-      packages = forAllSystems (pkgs: {
-        default = import ./shell.nix { inherit pkgs; };
+      devShells = forAllSystems (pkgs: {
+        default = import "${sde.nixosPrefix}/shell.nix" { inherit pkgs; };
       });
+      # packages = forAllSystems (pkgs: sde.pkgs);
       nixosConfigurations =
         let
-          # extraSpecialArgs = { inherit inputs; };
           mkHostConfig =
             { host, arch }:
             {
@@ -61,10 +70,10 @@
               value = lib.nixosSystem {
                 system = arch;
                 specialArgs = {
-                  inherit inputs;
+                  inherit inputs sde;
                 };
                 modules = [
-                  ./hosts/${host}
+                  "${sde.nixosPrefix}/hosts/${host}"
                   {
                     nix.registry.nixpkgs.flake = inputs.nixpkgs; # nix shell to use system flake
                   }
@@ -107,7 +116,7 @@
         sergio = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { system = "x86_64-linux"; };
           modules = [
-            ./home/sergio/home.nix
+            "${sde.nixosPrefix}/home/sergio/home.nix"
             {
               home = {
                 username = "sergio";

@@ -2,8 +2,8 @@
 
 .PHONY: src-dependencies create-softlinks remove-softlinks
 
-SDE_DIR := $(HOME)/personal/sde
-NIX_DIR := $(SDE_DIR)/nixos
+SDE_DIR := $(PWD)/..
+NIX_DIR := $(PWD)
 DOTFILES := $(SDE_DIR)/dotfiles
 SRC_DIR := $(HOME)/.local/src
 
@@ -47,9 +47,11 @@ repl: ## Start a nix repl with the flake loaded
 test: ## Test the flake
 	sudo nixos-rebuild test --flake .# --impure
 switch: src-dependencies create-softlinks ## Switch to the flake
-	sudo nixos-rebuild switch --flake .# --impure
+	sudo nixos-rebuild switch --flake .\?submodules=1# --impure 
 bootstrap: src-dependencies create-softlinks ## First bootstrap, specify NIX_HOSTNAME as env variable
 	sudo nixos-rebuild switch --flake .#$(NIX_HOSTNAME) --impure
+build:
+	nixos-rebuild build --flake .\?submodules=1#
 update: ## Update the flake
 	nix flake update
 gc: ## Run garbage collection
