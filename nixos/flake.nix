@@ -48,9 +48,7 @@
       sde = rec {
         flakeRoot = ../.;
         nixosPrefix = "${flakeRoot}/nixos";
-        pkgs = forAllSystems (pkgs: {
-          default = import ./pkgs { inherit pkgs; };
-        });
+        pkgs = forAllSystems (pkgs: import "${nixosPrefix}/pkgs" { inherit pkgs; });
       };
 
     in
@@ -60,7 +58,7 @@
       devShells = forAllSystems (pkgs: {
         default = import "${sde.nixosPrefix}/shell.nix" { inherit pkgs; };
       });
-      # packages = forAllSystems (pkgs: sde.pkgs);
+      packages = forAllSystems (pkgs: sde.pkgs);
       nixosConfigurations =
         let
           mkHostConfig =
