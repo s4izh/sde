@@ -1,11 +1,11 @@
 #PS1='\u:\W $ '
 
-if [ -z "$INSIDE_EMACS" ]; then
-    set -o vi
-    bind -m vi-command 'Control-l:clear-screen'
-    bind -m vi-insert 'Control-l:clear-screen'
-    eval "$(fzf --bash)"
-fi
+# if [ -z "$INSIDE_EMACS" ]; then
+#     set -o vi
+#     bind -m vi-command 'Control-l:clear-screen'
+#     bind -m vi-insert 'Control-l:clear-screen'
+#     eval "$(fzf --bash)"
+# fi
 
 if [ -f "$HOME/.config/shell/aliases" ]; then
     source "$HOME/.config/shell/aliases"
