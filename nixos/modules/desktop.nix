@@ -188,12 +188,12 @@ in
       #sansSerif = [ "Liberation Mono" ];
       serif = [ "Source Serif Pro" ];
       # monospace = [ "InputMonoCondensed" ];
-      monospace = [ "IBM Plex Mono" ];
+      # monospace = [ "IBM Plex Mono" ];
       # monospace = [ "FiraCode Nerd Font" ];
       # monospace = [ "LiterationMono Nerd Font" ];
       # monospace = [ "JetBrains Mono" ];
       # monospace = [ "UbuntuMono Nerd Font" ];
-      # monospace = [ "Iosevka" ];
+      monospace = [ "Iosevka" ];
       # monospace = [ "Liberation Mono" ];
       # monospace = [ "Inconsolata Nerd Font" ];
       # monospace = [ "FreeMono" ];
