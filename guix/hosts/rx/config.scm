@@ -10,18 +10,25 @@
 ;; Indicate which modules to import to access the variables
 ;; used in this configuration.
 (use-modules (gnu)
+             (gnu home)
+             (gnu packages terminals)
+             (gnu packages fonts)
+             ; (home sergio)
              (nongnu packages linux)
              (nongnu system linux-initrd))
 
 (use-service-modules cups desktop networking ssh xorg)
 
+; (define home-config (load "../../home/config.scm"))
+
 (operating-system
   (kernel linux)
   (initrd microcode-initrd)
   (firmware (list linux-firmware))
-  (locale "en_GB.utf8")
+  (locale "en_US.utf8")
   (timezone "Europe/Madrid")
   (keyboard-layout (keyboard-layout "us" "altgr-intl"))
+  ; (keyboard-layout (keyboard-layout "es" "caps:escape"))
   (host-name "rx")
 
   ;; The list of user accounts ('root' is implicit).
@@ -33,34 +40,55 @@
                   (supplementary-groups '("wheel" "netdev" "audio" "video")))
                 %base-user-accounts))
 
+   ; (fontconfig
+   ;   (config
+   ;     (list
+   ;       (make-fontconfig-alias
+   ;         'monospace "Iosevka"))))
+
   ;; Packages installed system-wide.  Users can also install packages
   ;; under their own account: use 'guix search KEYWORD' to search
   ;; for packages and 'guix install PACKAGE' to install a package.
-  (packages (append (list (specification->package "i3-wm")
-                          (specification->package "i3status")
-                          (specification->package "dmenu")
-                          (specification->package "st")
-                          (specification->package "alacritty")
-                          (specification->package "firefox")
-                          (specification->package "make")
-                          (specification->package "vim")
-                          (specification->package "tmux")
-                          (specification->package "git")
-                          (specification->package "neovim")
-                          (specification->package "gcc-toolchain")
-                          (specification->package "fzf"))
+  (packages (append (specifications->packages (list "i3-wm"
+                                                    "i3status"
+                                                    "dmenu"
+                                                    "st"
+                                                    "alacritty"
+                                                    "firefox"
+                                                    "pavucontrol"
+                                                    "make"
+                                                    "vim"
+                                                    "tmux"
+                                                    "git"
+                                                    "neovim"
+                                                    "gcc-toolchain"
+                                                    "setxkbmap"
+                                                    "font-iosevka"
+                                                    "fzf"))
                     %base-packages))
 
   ;; Below is the list of system services.  To search for available
   ;; services, run 'guix system search KEYWORD' in a terminal.
   (services
-   (append
-    (list
-     ;; To configure OpenSSH, pass an 'openssh-configuration'
-     ;; record as a second argument to 'service' below.
-     (service openssh-service-type)
-     (set-xorg-configuration
-      (xorg-configuration (keyboard-layout keyboard-layout))))
+    (append
+      (list
+        ;; To configure OpenSSH, pass an 'openssh-configuration'
+        ;; record as a second argument to 'service' below.
+        (service openssh-service-type)
+
+        ; (service fontconfig-service-type
+        ;      (fontconfig-configuration
+        ;       (font-aliases
+        ;        (list
+        ;         ;; Alias for monospace to prefer Iosevka
+        ;         (alias
+        ;          (family "monospace")
+        ;          (prefer (family "Iosevka")))))))
+
+        ; (service home-service-type home-config)
+
+        (set-xorg-configuration
+          (xorg-configuration (keyboard-layout keyboard-layout))))
 
    (modify-services %desktop-services
     (guix-service-type config =>
