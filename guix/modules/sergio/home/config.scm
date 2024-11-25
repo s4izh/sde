@@ -14,6 +14,7 @@
   #:use-module (gnu packages)
   #:use-module (gnu services)
   #:use-module (gnu system shadow)
+  #:use-module (sergio utils global)
   #:export     (home-config))
 
 (define dotfiles-dir (canonicalize-path "../dotfiles"))
@@ -44,30 +45,37 @@
                        (bash-profile (list (local-file ".bashrc" 
                                                        "bash_profile")))))
 
-            (service home-files-service-type
-                     `(
-                       (".config/tmux/tmux.conf" ,(local-file (dotfile ".config/tmux/tmux.conf")))
-                       (".inputrc" ,(local-file (dotfile ".inputrc") "inputrc"))
-                       (".guile" ,%default-dotguile)
-                       (".Xdefaults" ,%default-xdefaults)
-                       ; (".config/nvim" ,(local-file "../../nvim")))
-                       ; (".config/tmux/tmux.conf" , (local-file "../../../../dotfiles/.config/tmux/tmux.conf"))
-                       ; (".inputrc" , (local-file "../../../../dotfiles/.inputrc" "inputrc"))
-                       ))
+            ; (service home-files-service-type
+            ;          `(
+            ;            (".config/tmux/tmux.conf" ,(local-file (dotfile ".config/tmux/tmux.conf")))
+            ;            (".inputrc" ,(local-file (dotfile ".inputrc") "inputrc"))
+            ;            (".guile" ,%default-dotguile)
+            ;            (".Xdefaults" ,%default-xdefaults)
+            ;            ; (".config/nvim" ,(local-file "../../nvim")))
+            ;            ; (".config/tmux/tmux.conf" , (local-file "../../../../dotfiles/.config/tmux/tmux.conf"))
+            ;            ; (".inputrc" , (local-file "../../../../dotfiles/.inputrc" "inputrc"))
+            ;            ))
 
-            (service home-xdg-configuration-files-service-type
-                     `(("gdb/gdbinit" ,%default-gdbinit)
-                       ("nano/nanorc" ,%default-nanorc)))))))
+            ;; this fucks up my fonts
+            ; (simple-service 'xdg-files
+            ;  home-xdg-configuration-files-service-type
+            ;          `(("gdb/gdbinit" ,%default-gdbinit)
+            ;            ("nano/nanorc" ,%default-nanorc)))
 
-            ; (simple-service 'link-home-files
-            ;                 home-files-service-type
-            ;                 `(
-            ;                   (".config/tmux/tmux.conf" ,(local-file (dotfile ".config/tmux/tmux.conf")))
-            ;                   (".inputrc" ,(local-file (dotfile ".inputrc") "inputrc"))
-            ;                   ; (".config/nvim" ,(local-file "../../nvim")))
-            ;                   ; (".config/tmux/tmux.conf" , (local-file "../../../../dotfiles/.config/tmux/tmux.conf"))
-            ;                   ; (".inputrc" , (local-file "../../../../dotfiles/.inputrc" "inputrc"))
-            ;                   ))
+            (simple-service 'link-home-files
+                            home-files-service-type
+                            `(
+                              (".config/tmux/tmux.conf" ,(local-file (dotfile ".config/tmux/tmux.conf")))
+                              (".inputrc" ,(local-file (dotfile ".inputrc") "inputrc"))
+                              (".config/nano/nanorc" ,%default-nanorc)
+                              (".config/gdb/gdbinit" ,%default-gdbinit)
+                              (".config/guix/channels.scm" , (local-file channels-file-path))
+                              ; (".guile" ,%default-dotguile)
+                              ; (".Xdefaults" ,%default-xdefaults)
+                              ; (".config/nvim" ,(local-file "../../nvim")))
+                              ; (".config/tmux/tmux.conf" , (local-file "../../../../dotfiles/.config/tmux/tmux.conf"))
+                              ; (".inputrc" , (local-file "../../../../dotfiles/.inputrc" "inputrc"))
+                              ))
 
             (simple-service 'fontconfig
                             home-fontconfig-service-type
