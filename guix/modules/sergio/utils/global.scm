@@ -1,6 +1,6 @@
 (define-module (sergio utils global)
   #:export (channels-file-path)
-  #:export (dotfiles)
+  #:export (dotfile)
   #:export (dotfiles-dir))
 
 ;; relative to the guix directory in this repo
