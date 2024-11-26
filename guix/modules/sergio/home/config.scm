@@ -24,7 +24,13 @@
   (home-environment
     ;; Below is the list of packages that will show up in your
     ;; Home profile, under ~/.guix-home/profile.
-    (packages (specifications->packages (list "alacritty" "neovim" "ripgrep" "tree" "openfortivpn" "discord")))
+    (packages (specifications->packages (list "alacritty"
+                                              "neovim"
+                                              "ripgrep"
+                                              "tree"
+                                              "openfortivpn"
+                                              "discord"
+                                              "remmina")))
 
     ;; Below is the list of Home services.  To search for available
     ;; services, run 'guix home search KEYWORD' in a terminal.
