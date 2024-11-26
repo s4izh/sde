@@ -1,6 +1,7 @@
 .DEFAULT_GOAL := help
 
 MODULES=modules
+HOSTNAME ?= $(shell hostname)
 
 .PHONY: home system system-with-url home-container src-dependencies create-softlinks remove-softlinks
 
@@ -21,42 +22,8 @@ home: ## reconfigure home environment
 home-container: ## container with home environment
 	RUNNING_GUIX_HOME=1 guix home -L $(MODULES) container deploys/$(HOSTNAME)/config.scm 
 
-repl:
-	guix repl -L modules
+repl: ## run a repl with modules on load path
+	guix repl -L $(MODULES)
 
-SDE_DIR := $(HOME)/personal/sde
-NIX_DIR := $(SDE_DIR)/nixos
-DOTFILES := $(SDE_DIR)/dotfiles
-SRC_DIR := $(HOME)/.local/src
-
-HOSTNAME ?= $(shell hostname)
-
-GIT_SRCS := \
-	https://github.com/s4izh/dwm.git \
-	https://github.com/s4izh/dmenu.git \
-	https://github.com/s4izh/dwmblocks.git \
-	https://github.com/s4izh/dwl.git \
-	https://github.com/s4izh/somebar.git \
-	https://github.com/s4izh/st.git
-
-CONFIG_FILES := \
-	.local/scripts \
-	.config/alacritty \
-	templates \
-	.config/zsh \
-	.zprofile \
-	.bashrc \
-	.xinitrc \
-	.editorconfig \
-	.config/tmux \
-	.config/sway \
-	.config/shell \
-	.config/git \
-	.config/libvirt \
-	.config/zathura \
-	.config/picom \
-	.config/sxhkd \
-	.config/dunst
-
-REPO_NAMES := $(notdir $(basename $(GIT_SRCS)))
-
+authorize-nonguix: ## usefull for first deploy
+	sudo guix archive --autorize < substitutes/nonguix.pub
