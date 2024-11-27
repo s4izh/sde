@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+OPTIONS="lock exit"
+
+function wayland_menu () {
+    echo $OPTIONS | tr " " "\n" | bemenu -p "system menu"
+}
+
+function x11_menu () {
+    echo $OPTIONS | tr " " "\n" | dmenu -p "system menu"
+}
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    _menu="wayland_menu"
+    _lock="swaylock"
+    _exit="riverctl exit"
+elif [ "$XDG_SESSION_TYPE" = "x11" ]; then
+    _menu=x11_menu
+    _lock=i3lock
+    _exit="echo unimplemented"
+else
+    echo "Unknown session type: $XDG_SESSION_TYPE"
+fi
+
+echo $_lock
+echo $_menu
+
+action=$(eval $_menu)
+
+case "$action" in
+    "lock") $_lock
+    ;;
+    "exit") $_exit
+    ;;
+esac
