@@ -21,9 +21,14 @@
              (guix channels)
              (nongnu packages linux)
              (nongnu system linux-initrd)
+             (srfi srfi-1) ;; remove
              (sergio home config))
 
-(use-service-modules cups desktop networking ssh xorg)
+(use-service-modules cups
+                     desktop
+                     networking
+                     ssh
+                     xorg)
 
 (define %channels
   (cons* (channel
@@ -53,7 +58,7 @@
     ;; The list of user accounts ('root' is implicit).
     (users (cons* (user-account
                     (name "sergio")
-                    (comment "Sergio")
+                    ; (comment "Sergio")
                     (group "users")
                     (home-directory "/home/sergio")
                     (supplementary-groups '("wheel" "netdev" "audio" "video")))
@@ -68,23 +73,48 @@
     ;; Packages installed system-wide.  Users can also install packages
     ;; under their own account: use 'guix search KEYWORD' to search
     ;; for packages and 'guix install PACKAGE' to install a package.
-    (packages (append (specifications->packages (list "i3-wm"
-                                                      "i3status"
-                                                      "dmenu"
-                                                      "st"
-                                                      "alacritty"
-                                                      "firefox"
-                                                      "pavucontrol"
-                                                      "make"
-                                                      "vim"
-                                                      "tmux"
-                                                      "git"
-                                                      "neovim"
-                                                      "gcc-toolchain"
-                                                      "setxkbmap"
-                                                      "font-iosevka"
-                                                      "fzf"))
-                      %base-packages))
+    ; (packages (append (specifications->packages (list "i3-wm"
+    ;                                                   "i3status"
+    ;                                                   "dmenu"
+    ;                                                   "st"
+    ;                                                   "alacritty"
+    ;                                                   "firefox"
+    ;                                                   "pavucontrol"
+    ;                                                   "make"
+    ;                                                   "vim"
+    ;                                                   "tmux"
+    ;                                                   "git"
+    ;                                                   "neovim"
+    ;                                                   "gcc-toolchain"
+    ;                                                   "setxkbmap"
+    ;                                                   "font-iosevka"
+    ;                                                   "fzf"))
+    ;                   %base-packages))
+
+    (packages (append (specifications->packages (list
+                            "sway"
+                            "river"
+                            "swaybg"
+                            "swayidle"
+                            "swaylock"
+                            "bemenu"
+                            "vim"
+                            "nss-certs"
+                            "git"
+                            "foot"
+                            "alacritty"
+                            "firefox"
+                            "pavucontrol"
+                            "make"
+                            "vim"
+                            "tmux"
+                            "git"
+                            "neovim"
+                            "gcc-toolchain"
+                            "setxkbmap"
+                            "font-iosevka"
+                            "fzf"))
+                            %base-packages))
 
     ;; Below is the list of system services.  To search for available
     ;; services, run 'guix system search KEYWORD' in a terminal.
@@ -100,19 +130,23 @@
           (set-xorg-configuration
             (xorg-configuration (keyboard-layout keyboard-layout))))
 
-        (modify-services %desktop-services
-             (guix-service-type config =>
-                    (guix-configuration
+        (modify-services
+            (remove (lambda (service)
+                      (eq? (service-kind service) gdm-service-type))
+                    %desktop-services)
+
+            (guix-service-type config =>
+                   (guix-configuration
                       ; makes all so slow
                       ; (inherit config)
                       ; (guix (guix-for-channels %channels))
                       ; (channels %channels)
-                      (substitute-urls
-                        (append (list "https://substitutes.nonguix.org")
+                     (substitute-urls
+                       (append (list "https://substitutes.nonguix.org")
                                 %default-substitute-urls))
-                      (authorized-keys
-                        (append (list (local-file "../../substitutes/nonguix.pub"))
-                                %default-authorized-guix-keys)))))))
+                     (authorized-keys
+                       (append (list (local-file "../../substitutes/nonguix.pub"))
+                               %default-authorized-guix-keys)))))))
 
     (bootloader (bootloader-configuration
                   (bootloader grub-efi-bootloader)
