@@ -17,50 +17,62 @@
   #:use-module (gnu services)
   #:use-module (gnu system shadow)
   #:use-module (sergio utils global)
+  #:use-module (sergio packages neovim)
+  #:use-module (sergio packages discord)
   ; #:use-module (sergio packages discord)
   #:export     (home-config))
+
+(define my-packages
+  (append
+      (list neovim-latest
+            discord)))
+      (specifications->packages (list "alacritty"
+                                      "neovim-latest"
+                                      "ripgrep"
+                                      "tree"
+                                      "openfortivpn"
+                                      "wl-clipboard"
+                                      "wlr-randr"
+                                      "kanshi"
+                                      "wayland-utils"
+                                      "remmina"))
 
 (define home-config
   (home-environment
     ;; Below is the list of packages that will show up in your
     ;; Home profile, under ~/.guix-home/profile.
-    (packages (specifications->packages (list "alacritty"
-                                              "neovim"
-                                              "ripgrep"
-                                              "tree"
-                                              "openfortivpn"
-                                              "discord"
-                                              "remmina")))
+    (packages my-packages)
 
     ;; Below is the list of Home services.  To search for available
     ;; services, run 'guix home search KEYWORD' in a terminal.
     (services
       (list
-        (service home-bash-service-type
-                 (home-bash-configuration
-                   (aliases '(("grep" . "grep --color=auto")
-                              ("ip" . "ip -color=auto")
-                              ("ll" . "ls -l")
-                              ("ls" . "ls -p --color=auto")
-                              ("vim" . "nvim")
-                              ("tKs" . "tmux kill-server")
-                              ("tks" . "tmux kill-session")
-                              ("ts" . "tmux-sessionizer")))
-                   (bashrc (list (local-file ".bashrc" "bashrc")))
-                   (bash-profile (list (local-file ".bashrc" 
-                                                   "bash_profile")))))
+        ; (service home-bash-service-type
+        ;          (home-bash-configuration
+                   ; (aliases '(("grep" . "grep --color=auto")
+                   ;            ("ip" . "ip -color=auto")
+                   ;            ("ll" . "ls -l")
+                   ;            ("ls" . "ls -p --color=auto")
+                   ;            ("vim" . "nvim")
+                   ;            ("tKs" . "tmux kill-server")
+                   ;            ("tks" . "tmux kill-session")
+                   ;            ("ts" . "tmux-sessionizer")))
+                   ; (bashrc (list (local-file ".bashrc" "bashrc")))
+                   ; (bash-profile (list (local-file ".bash_profile" 
+                   ;                                 "bash_profile")))))
 
-        (simple-service 'profile-env-vars-service
-                        home-environment-variables-service-type
-                        '( ;; Sort hidden (dot) files first in `ls` listings
+        ; (simple-service 'profile-env-vars-service
+        ;                 home-environment-variables-service-type
+                        ; '( ;; Sort hidden (dot) files first in `ls` listings
                            ; ("LC_COLLATE" . "C")
 
                            ;; Emacs is our editor
-                           ("VISUAL" . "nvim")
-                           ("EDITOR" . "nvim")
+                           ; ("VISUAL" . "nvim")
+                           ; ("EDITOR" . "nvim")
 
                            ;; Add some things to $PATH (maybe integrate into other services?)
-                           ("PATH" . "$HOME/.local/scripts/tmux:$HOME/.local/scripts:$PATH")
+                           ; ("PATH" . "$HOME/.local/scripts/tmux:$HOME/.local/scripts:$PATH")
+                           ; ("TERM" . "xterm-256color")
 
                            ;; Make sure Flatpak apps are visible
                            ; ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share")
@@ -79,9 +91,11 @@
                            ; ("ELM_ENGINE" . "wayland_egl")
                            ; ("ECORE_EVAS_ENGINE" . "wayland-egl")
                            ; ("QT_QPA_PLATFORM" . "wayland-egl")
-                           ))
+                           ; ))
 
         (service home-dbus-service-type)
+
+        ; (remove home-shell-service-type %base-services)
 
         (simple-service 'discord-config-files-service
              home-xdg-configuration-files-service-type
@@ -107,7 +121,6 @@
             ;            (".Xdefaults" ,%default-xdefaults)
             ;            ; (".config/nvim" ,(local-file "../../nvim")))
             ;            ; (".config/tmux/tmux.conf" , (local-file "../../../../dotfiles/.config/tmux/tmux.conf"))
-            ;            ; (".inputrc" , (local-file "../../../../dotfiles/.inputrc" "inputrc"))
             ;            ))
 
             ;; this fucks up my fonts
@@ -120,15 +133,16 @@
                         home-files-service-type
                         `(
                           (".config/tmux/tmux.conf" ,(local-file (dotfile ".config/tmux/tmux.conf")))
-                          (".inputrc" ,(local-file (dotfile ".inputrc") "inputrc"))
+                          (".inputrc" ,(local-file (dotfile ".config/shell/inputrc")))
+                          (".config/foot/foot.ini" ,(local-file (dotfile ".config/foot/foot.ini")))
                           (".config/nano/nanorc" ,%default-nanorc)
+                          ; (".profile" , (local-file ".profile" "profile"))
+                          (".bashrc" , (local-file ".bashrc" "bashrc"))
+                          (".bash_profile" , (local-file ".bash_profile" "bash_profile"))
                           (".config/gdb/gdbinit" ,%default-gdbinit)
                           (".config/guix/channels.scm" ,(local-file channels-file-path))
                           (".guile" ,%default-dotguile)
                           (".Xdefaults" ,%default-xdefaults)
-                          ; (".config/nvim" ,(local-file "../../nvim")))
-                          ; (".config/tmux/tmux.conf" , (local-file "../../../../dotfiles/.config/tmux/tmux.conf"))
-                          ; (".inputrc" , (local-file "../../../../dotfiles/.inputrc" "inputrc"))
                           ))
 
         (simple-service 'fontconfig

@@ -19,12 +19,30 @@ fi
 # Source the system-wide file.
 [ -f /etc/bashrc ] && source /etc/bashrc
 
-alias ls='ls -p --color=auto'
-alias ll='ls -l'
-alias grep='grep --color=auto'
-alias ip='ip -color=auto'
+# ---------- alias ----------------------
+
+alias grep="grep --color=auto"
+alias ip="ip -color=auto"
+alias ll="ls -l"
+alias ls="ls -p --color=auto"
+alias vim="nvim"
+alias tKs="tmux kill-server"
+alias tks="tmux kill-session"
+alias ts="tmux-sessionizer"
+
+# -----------------------------------------
+
+
+# ---------- guix specific ----------------
 
 GUIX_PROFILE="$HOME/.guix-profile"
-. "$GUIX_PROFILE/etc/profile"
+if [ -f "$GUIX_PROFILE/etc/profile" ]; then
+    . "$GUIX_PROFILE/etc/profile"
+fi
 
-export EDITOR=nvim
+# -----------------------------------------
+
+PS1='\u@\h \w${GUIX_ENVIRONMENT:+ [env]}\n\$ '
+
+# cursor returns to beam shape always after a command
+PS0='\[\e[2 q\]'
