@@ -30,6 +30,8 @@
                      ssh
                      xorg)
 
+(use-package-modules wm)
+
 (define %channels
   (cons* (channel
           (name 'nonguix)
@@ -52,6 +54,7 @@
     (locale "en_US.utf8")
     (timezone "Europe/Madrid")
     (keyboard-layout (keyboard-layout "us" "altgr-intl"))
+
     ; (keyboard-layout (keyboard-layout "es" "caps:escape"))
     (host-name "rx")
 
@@ -126,6 +129,13 @@
           (service openssh-service-type)
           (service guix-home-service-type
                    `(("sergio" , home-config)))
+
+          (service screen-locker-service-type
+                   (screen-locker-configuration
+                     (name "swaylock")
+                     (program (file-append swaylock "/bin/swaylock"))
+                     (using-pam? #t)
+                     (using-setuid? #f)))
 
           (set-xorg-configuration
             (xorg-configuration (keyboard-layout keyboard-layout))))
