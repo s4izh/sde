@@ -8,7 +8,7 @@ else
     notes=~/notes
     passwords=$PASSWORD_STORE_DIR
 
-    selected=$(printf "$folders\n$scripts\n$passwords\n$notes\nnew" | fzf)
+    selected=$(printf "$folders\n$notes\nnew" | fzf)
 fi
 
 if [[ -z $selected ]]; then
