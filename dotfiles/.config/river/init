@@ -8,7 +8,9 @@
 # Use the "logo" key as the primary modifier
 mod="Mod4"
 
-riverctl map normal $mod Return spawn 'foot'
+pkill kanshi; kanshi &
+
+riverctl map normal $mod Return spawn 'alacritty'
 
 riverctl map normal $mod+Shift Q exit
 
@@ -21,7 +23,9 @@ riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND _D
 riverctl map normal $mod Q close
 
 # launcher
-riverctl map normal $mod p spawn "dmenu_run"
+riverctl map normal $mod p spawn "bemenu-run"
+
+riverctl keyboard-layout es
 
 # manual network-tray
 # reason being - when spawned, cmst/applet fails to identify the sys-tray's presence
@@ -119,8 +123,6 @@ riverctl map normal $mod Right send-layout-cmd rivertile "main-location right"
 riverctl map normal $mod Down  send-layout-cmd rivertile "main-location bottom"
 riverctl map normal $mod Left  send-layout-cmd rivertile "main-location left"
 
-       
-
 # Declare a passthrough mode. This mode has only a single mapping to return to
 # normal mode. This makes it useful for testing a nested wayland compositor
 riverctl declare-mode passthrough
@@ -171,7 +173,8 @@ done
 
 # Set background and border color
 riverctl background-color 0x282828
-riverctl border-color-focused 0x92a58b
+# riverctl border-color-focused 0x92a58b
+riverctl border-color-focused 0xBBBBBB
 
 # Set repeat rate
 riverctl set-repeat 50 300
@@ -195,7 +198,7 @@ riverctl float-filter-add "float"
 riverctl float-filter-add "popup"
 
 # Set app-ids of views which should use client side decorations
-# riverctl csd-filter-add "firefox"
+riverctl csd-filter-add "firefox"
 #riverctl csd-filter-add "gedit"
 #riverctl csd-filter-add "emacs"
 
