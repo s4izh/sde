@@ -25,7 +25,7 @@
 (define my-packages
   (append
       (list neovim-latest
-            discord)))
+            discord)
       (specifications->packages (list "alacritty"
                                       "neovim-latest"
                                       "ripgrep"
@@ -35,7 +35,7 @@
                                       "wlr-randr"
                                       "kanshi"
                                       "wayland-utils"
-                                      "remmina"))
+                                      "remmina"))))
 
 (define home-config
   (home-environment
