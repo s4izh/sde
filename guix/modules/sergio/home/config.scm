@@ -1,10 +1,3 @@
-;; Este archivo "home-environment" se puede pasar a 'guix home reconfigure'
-;; para reproducir el contenido de su perfil.  Esto es "simbólico": sólo
-;; especifica nombres de paquete.  Para reproducir el mismo perfil exacto,
-;; también necesita capturar los canales que están siendo usados, como son
-;; devueltos por "guix describe".  Vea la sección "Replicando Guix" en el
-;; manual.
-
 (define-module (sergio home config)
   #:use-module (guix gexp)
   #:use-module (gnu home)
@@ -16,32 +9,47 @@
   #:use-module (gnu packages)
   #:use-module (gnu services)
   #:use-module (gnu system shadow)
+  #:use-module (gnu packages admin) ;; fastfetch
   #:use-module (sergio utils global)
   #:use-module (sergio packages neovim)
   #:use-module (sergio packages discord)
-  ; #:use-module (sergio packages discord)
   #:export     (home-config))
 
-(define my-packages
+(define packages-custom
+  (list neovim-latest
+        discord))
+
+(define packages-wayland
+  (specifications->packages
+    (list "wl-clipboard"
+          "wlr-randr"
+          "kanshi"
+          "wayland-utils"
+          "slurp")))
+
+(define packages-general
+  (list fastfetch))
+
+(define packages-general-specifications
+  (specifications->packages
+    (list "alacritty"
+          "ripgrep"
+          "tree"
+          "openfortivpn"
+          "remmina")))
+
+(define packages-home
   (append
-      (list neovim-latest
-            discord)
-      (specifications->packages (list "alacritty"
-                                      "neovim-latest"
-                                      "ripgrep"
-                                      "tree"
-                                      "openfortivpn"
-                                      "wl-clipboard"
-                                      "wlr-randr"
-                                      "kanshi"
-                                      "wayland-utils"
-                                      "remmina"))))
+      packages-custom
+      packages-wayland
+      packages-general
+      packages-general-specifications))
 
 (define home-config
   (home-environment
     ;; Below is the list of packages that will show up in your
     ;; Home profile, under ~/.guix-home/profile.
-    (packages my-packages)
+    (packages packages-home)
 
     ;; Below is the list of Home services.  To search for available
     ;; services, run 'guix home search KEYWORD' in a terminal.
@@ -134,9 +142,9 @@
                         `(
                           (".config/tmux/tmux.conf" ,(local-file (dotfile ".config/tmux/tmux.conf")))
                           (".inputrc" ,(local-file (dotfile ".config/shell/inputrc")))
+                          (".editorconfig" ,(local-file (dotfile ".editorconfig") "editorconfig"))
                           (".config/foot/foot.ini" ,(local-file (dotfile ".config/foot/foot.ini")))
                           (".config/nano/nanorc" ,%default-nanorc)
-                          ; (".profile" , (local-file ".profile" "profile"))
                           (".bashrc" , (local-file ".bashrc" "bashrc"))
                           (".bash_profile" , (local-file ".bash_profile" "bash_profile"))
                           (".config/gdb/gdbinit" ,%default-gdbinit)
