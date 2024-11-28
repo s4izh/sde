@@ -220,7 +220,7 @@ done
 
 riverctl focus-follows-cursor normal
 
-riverctl hide-cursor timeout 5000
+# riverctl hide-cursor timeout 5000
 
 # Set and exec into the default layout generator, rivertile.
 # River will send the process group of the init executable SIGTERM on exit.
