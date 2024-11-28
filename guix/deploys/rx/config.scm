@@ -119,6 +119,9 @@
                             "fzf"))
                             %base-packages))
 
+   ;; Allow resolution of '.local' host names with mDNS
+   (name-service-switch %mdns-host-lookup-nss)
+
     ;; Below is the list of system services.  To search for available
     ;; services, run 'guix system search KEYWORD' in a terminal.
     (services
