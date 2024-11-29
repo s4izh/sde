@@ -40,6 +40,8 @@
 (define packages-general-specifications
   (specifications->packages
     (list "alacritty"
+          "direnv"
+          "emacs"
           "ripgrep"
           "tree"
           "openfortivpn"
