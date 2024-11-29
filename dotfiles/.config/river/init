@@ -25,6 +25,7 @@ riverctl map normal $mod Q close
 # launcher
 riverctl map normal $mod p spawn "bemenu-run"
 
+export XKB_DEFAULT_OPTIONS=caps:escape 
 riverctl keyboard-layout es
 
 # manual network-tray
