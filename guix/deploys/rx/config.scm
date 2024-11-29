@@ -65,6 +65,7 @@
 
     (packages (append (specifications->packages (list "sway"
                                                       "river"
+                                                      "xdg-desktop-portal-wlr"
                                                       "swaybg"
                                                       "swayidle"
                                                       "swaylock"
