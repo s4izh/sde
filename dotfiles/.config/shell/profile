@@ -1,7 +1,2 @@
-# vim: set ft=sh
+# vim: set ft=sh :
 
-os=$(cat /etc/os-release | grep ^ID | cut -d = -f 2)
-
-if [ "$os" == "nixos" ]; then
-    echo "TODO: nixos specific profile settings"
-fi

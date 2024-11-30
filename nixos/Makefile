@@ -79,8 +79,8 @@ create-softlinks: ## Create all softlinks
 			ln -svf $(DOTFILES)/$$file $(HOME)/$$file; \
 		fi \
 	done
-	@if [ ! -h $(HOME)/.profile ]; then \
-		@ln -svf $(DOTFILES)/.config/shell/profile_nix $(HOME)/.profile; \
+	@if [ ! -h $(HOME)/.bash_profile ]; then \
+		ln -svf $(DOTFILES)/.config/shell/bash_profile $(HOME)/.bash_profile; \
 	fi
 
 remove-softlinks: ## Remove all softlinks
@@ -89,3 +89,6 @@ remove-softlinks: ## Remove all softlinks
 			rm -v $(HOME)/$$file; \
 		fi \
 	done
+	@if [ -h $(HOME)/.bash_profile ]; then \
+		rm -v $(HOME)/.bash_profile; \
+	fi
