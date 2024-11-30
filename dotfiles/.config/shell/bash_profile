@@ -1,0 +1,51 @@
+# vim: set ft=sh :
+
+# since bash prefers .bash_profile, source .profile if it's present
+if [ -f ~/.profile ]; then . ~/.profile; fi
+
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export TERM=xterm-256color
+export BROWSER="firefox"
+export READER="zathura"
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/scripts:$PATH"
+export PATH="$HOME/.local/scripts/statusbar:$PATH"
+export PATH="$HOME/.local/scripts/tmux:$PATH"
+export UNI="$HOME/uni"
+[ -e "$UNI/.env" ] && source "$UNI/.env"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+
+os=$(grep ^ID < /etc/os-release | cut -d= -f2)
+
+if [ "$os" == "nixos" ]; then
+    echo "TODO: nixos specific profile settings"
+else
+    if command -v nix &> /dev/null; then
+        echo "source whatever nix needs on a foreign distro"
+    fi
+fi
+
+if command -v guix &> /dev/null; then
+    # merge search-paths from multiple profiles, the order matters.
+    eval "$(guix package --search-paths \
+        -p "$HOME/.config/guix/current" \
+        -p "$HOME/.guix-home/profile" \
+        -p "$HOME/.guix-profile" \
+        -p /run/current-system/profile)"
+    # prepend setuid programs
+    export PATH=/run/setuid-programs:$PATH
+fi
+
+# honor per-interactive-shell startup file
+if [[ "$(tty)" =~ ^/dev/tty ]] || [ -n "$TMUX" ]; then
+    if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+    fi
+fi
