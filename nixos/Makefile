@@ -80,7 +80,7 @@ create-softlinks: ## Create all softlinks
 		fi \
 	done
 	@if [ ! -h $(HOME)/.profile ]; then \
-		@ln -svf $(DOTFILES)/.config/shell/nix_profile $(HOME)/.profile; \
+		@ln -svf $(DOTFILES)/.config/shell/profile_nix $(HOME)/.profile; \
 	fi
 
 remove-softlinks: ## Remove all softlinks
