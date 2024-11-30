@@ -32,10 +32,10 @@ alias tree="tree -a -I '.git|node_modules|target|dist|build|__pycache__'"
 
 # tmux
 alias \
-    tks="tmux kill-session" \
-    tkS="tmux kill-server" \
+    tkss="tmux kill-session" \
+    tkse="tmux kill-server" \
 
 alias \
-    tm='~/.local/scripts/tmux/tmux-main' \
-    tp='~/.local/scripts/tmux/tmux-picker' \
-    ts='~/.local/scripts/tmux/tmux-sessionizer' \
+    ts='tmux-sessionizer' \
+    tm='tmux-main' \
+    tp='tmux-picker'
