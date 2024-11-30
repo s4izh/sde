@@ -26,4 +26,4 @@ repl: ## run a repl with modules on load path
 	guix repl -L $(MODULES)
 
 authorize-nonguix: ## usefull for first deploy
-	sudo guix archive --autorize < substitutes/nonguix.pub
+	sudo guix archive --authorize < substitutes/nonguix.pub
