@@ -78,6 +78,11 @@ let
   testpkgs = [
     sde.pkgs.test
   ];
+  editorspkgs = with pkgs; [
+    vim
+    neovim
+    vscode
+  ];
 in
 {
   environment.systemPackages =
@@ -93,6 +98,7 @@ in
     ++ shpkgs
     ++ gopkgs
     ++ zigpkgs
-    ++ haskellpkgs;
+    ++ haskellpkgs
+    ++ editorspkgs;
     # ++ testpkgs;
 }
