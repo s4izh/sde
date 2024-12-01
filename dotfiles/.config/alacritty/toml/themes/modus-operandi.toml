@@ -23,7 +23,7 @@ white = "#000000"
 yellow = "#70480f"
 
 [colors.primary]
-background = "#ffffff"
+background = "#eeeeee"
 foreground = "#000000"
 
 [colors.selection]
@@ -31,4 +31,5 @@ background = "#bcbcbc"
 text = "#000000"
 
 [env]
-THEME = "light"
+THEME = "modus-operandi"
+THEME_IS_LIGHT = "1"
