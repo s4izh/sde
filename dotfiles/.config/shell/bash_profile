@@ -33,17 +33,18 @@ else
     fi
 fi
 
-# TEMP_PATH=$PATH
 if [ "$os" == "guix" ]; then
     echo "guix" &> /dev/null
     # merge search-paths from multiple profiles, the order matters.
-    eval "$(guix package --search-paths \
-        -p "$HOME/.config/guix/current" \
-        -p "$HOME/.guix-home/profile" \
-        -p "$HOME/.guix-profile" \
-        -p /run/current-system/profile)"
+    # TEMP_PATH=$PATH
+    # eval "$(guix package --search-paths \
+    #     -p "$HOME/.config/guix/current" \
+    #     -p "$HOME/.guix-home/profile" \
+    #     -p "$HOME/.guix-profile" \
+    #     -p /run/current-system/profile)"
     # prepend setuid programs
-    export PATH=/run/setuid-programs:$PATH
+    # export PATH=$TEMP_PATH:/run/setuid-programs:$PATH
+    # unset TEMP_PATH
 else
     if command -v guix &> /dev/null; then
         export PATH="$HOME/.config/guix/current/bin:$PATH"

@@ -46,3 +46,5 @@ PS1='\u@\h \w${GUIX_ENVIRONMENT:+ [env]}\n\$ '
 
 # cursor returns to beam shape always after a command
 PS0='\[\e[2 q\]'
+
+eval "$(direnv hook bash)"
