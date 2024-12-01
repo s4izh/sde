@@ -19,5 +19,9 @@ if command -v guix > /dev/null 2>&1; then
     source_if_exist "$HOME/.guix-profile/etc/profile"
 fi
 
+if [ "$THEME_IS_LIGHT" == "1" ]; then
+    export FZF_DEFAULT_OPTS="--color=light"
+fi
+
 unset source_if_exist
 

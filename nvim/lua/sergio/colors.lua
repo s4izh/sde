@@ -23,7 +23,15 @@ function ColorMyPencils(color)
     vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none", fg = "grey" }) -- Use 'grey' or your preferred color
 end
 
-ColorMyPencils("gruber-darker")
+local theme
+
+if os.getenv("THEME_IS_LIGHT") then
+    theme = "grey"
+else
+    theme = "gruber-darker"
+end
+
+ColorMyPencils(theme)
 
 vim.api.nvim_create_user_command("Theme", function(opts)
     ColorMyPencils(opts.args)
