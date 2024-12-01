@@ -41,4 +41,5 @@ return {
     setup_theme("craftzdog/solarized-osaka.nvim"),
     setup_theme("nanotech/jellybeans.vim"),
     setup_theme("roflolilolmao/oceanic-next.nvim"),
+    setup_theme("aliqyan-21/darkvoid.nvim"),
 }
