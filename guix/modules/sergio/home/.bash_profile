@@ -17,7 +17,9 @@ if command -v guix &> /dev/null; then
 fi
 
 if [[ "$(tty)" =~ ^/dev/tty ]] || [ -n "$TMUX" ]; then
-    . "$HOME/.bashrc"
+    if [ -f "$HOME/.bashrc" ]; then
+        . "$HOME/.bashrc"
+    fi
 fi
 
 export PATH="$HOME/.local/bin":$PATH
