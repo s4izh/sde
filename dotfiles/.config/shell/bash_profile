@@ -13,6 +13,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/scripts:$PATH"
 export PATH="$HOME/.local/scripts/statusbar:$PATH"
 export PATH="$HOME/.local/scripts/tmux:$PATH"
+
 export UNI="$HOME/uni"
 [ -e "$UNI/.env" ] && source "$UNI/.env"
 
@@ -25,14 +26,16 @@ export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 os=$(grep ^ID < /etc/os-release | cut -d= -f2)
 
 if [ "$os" == "nixos" ]; then
-    echo "TODO: nixos specific profile settings"
+    echo "nixos" &> /dev/null
 else
     if command -v nix &> /dev/null; then
         echo "source whatever nix needs on a foreign distro"
     fi
 fi
 
-if command -v guix &> /dev/null; then
+# TEMP_PATH=$PATH
+if [ "$os" == "guix" ]; then
+    echo "guix" &> /dev/null
     # merge search-paths from multiple profiles, the order matters.
     eval "$(guix package --search-paths \
         -p "$HOME/.config/guix/current" \
@@ -41,6 +44,11 @@ if command -v guix &> /dev/null; then
         -p /run/current-system/profile)"
     # prepend setuid programs
     export PATH=/run/setuid-programs:$PATH
+else
+    if command -v guix &> /dev/null; then
+        export PATH="$HOME/.config/guix/current/bin:$PATH"
+        export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
+    fi
 fi
 
 # honor per-interactive-shell startup file
@@ -49,3 +57,5 @@ if [[ "$(tty)" =~ ^/dev/tty ]] || [ -n "$TMUX" ]; then
         . ~/.bashrc
     fi
 fi
+
+[ "$(tty)" = "/dev/tty1" ] && exec startx
