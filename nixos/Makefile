@@ -4,6 +4,7 @@
 
 SDE_DIR := $(PWD)/..
 NIX_DIR := $(PWD)
+GUIX_DIR := $(SDE_DIR)/guix
 DOTFILES := $(SDE_DIR)/dotfiles
 SRC_DIR := $(HOME)/.local/src
 
@@ -82,6 +83,9 @@ create-softlinks: ## Create all softlinks
 	@if [ ! -h $(HOME)/.bash_profile ]; then \
 		ln -svf $(DOTFILES)/.config/shell/bash_profile $(HOME)/.bash_profile; \
 	fi
+	@if [ ! -h $(HOME)/.config/guix/channels.scm ]; then \
+		ln -svf $(GUIX_DIR)/channels.scm $(HOME)/.config/channels.scm; \
+	fi
 
 remove-softlinks: ## Remove all softlinks
 	@for file in $(CONFIG_FILES); do \
@@ -91,4 +95,7 @@ remove-softlinks: ## Remove all softlinks
 	done
 	@if [ -h $(HOME)/.bash_profile ]; then \
 		rm -v $(HOME)/.bash_profile; \
+	fi
+	@if [ -h $(HOME)/.config/guix/channels.scm ]; then \
+		rm -v $(HOME)/.config/guix/channels.scm; \
 	fi
