@@ -13,10 +13,12 @@
   #:use-module (sergio utils global)
   #:use-module (sergio packages neovim)
   #:use-module (sergio packages discord)
+  #:use-module (sergio packages ltex-ls)
+  #:use-module (sergio packages texlab)
   #:export (home-config))
 
 (define packages-custom
-  (list neovim-latest discord))
+  (list neovim-latest discord ltex-ls texlab))
 
 (define packages-wayland
   (specifications->packages
@@ -44,6 +46,7 @@
           "emacs"
           "ripgrep"
           "tree"
+          "tree-sitter-cli"
           "openfortivpn"
           "remmina"
           "grim"
@@ -80,37 +83,38 @@
       ;; (bash-profile (list (local-file ".bash_profile"
       ;; "bash_profile")))))
       
-      ;; (simple-service 'profile-env-vars-service
-      ;; home-environment-variables-service-type
-      ;; '( ;; Sort hidden (dot) files first in `ls` listings
-      ;; ("LC_COLLATE" . "C")
-      
-      ;; Emacs is our editor
-      ;; ("VISUAL" . "nvim")
-      ;; ("EDITOR" . "nvim")
-      
-      ;; Add some things to $PATH (maybe integrate into other services?)
-      ;; ("PATH" . "$HOME/.local/scripts/tmux:$HOME/.local/scripts:$PATH")
-      ;; ("TERM" . "xterm-256color")
-      
-      ;; Make sure Flatpak apps are visible
-      ;; ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share")
-      
-      ;; Make sure JAVA_HOME is set
-      ;; TODO:  Move this to a different service
-      ;; ("JAVA_HOME" . "$(dirname $(dirname $(readlink $(which java))))")
-      
-      ;; Set Wayland-specific environment variables (taken from RDE)
-      ;; ("XDG_CURRENT_DESKTOP" . "sway")
-      ;; ("XDG_SESSION_TYPE" . "wayland")
-      ;; ("RTC_USE_PIPEWIRE" . "true")
-      ;; ("SDL_VIDEODRIVER" . "wayland")
-      ;; ("MOZ_ENABLE_WAYLAND" . "1")
-      ;; ("CLUTTER_BACKEND" . "wayland")
-      ;; ("ELM_ENGINE" . "wayland_egl")
-      ;; ("ECORE_EVAS_ENGINE" . "wayland-egl")
-      ;; ("QT_QPA_PLATFORM" . "wayland-egl")
-      ;; ))
+      (simple-service 'profile-env-vars-service
+         home-environment-variables-service-type
+         '( ;; Sort hidden (dot) files first in `ls` listings
+        ; ("LC_COLLATE" . "C")
+        
+        ;; Emacs is our editor
+        ;; ("VISUAL" . "nvim")
+        ;; ("EDITOR" . "nvim")
+        
+        ;; Add some things to $PATH (maybe integrate into other services?)
+        ;; ("PATH" . "$HOME/.local/scripts/tmux:$HOME/.local/scripts:$PATH")
+        ;; ("TERM" . "xterm-256color")
+        
+        ;; Make sure Flatpak apps are visible
+        ;; ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share")
+        
+        ;; Make sure JAVA_HOME is set
+        ;; TODO:  Move this to a different service
+        ;; ("JAVA_HOME" . "$(dirname $(dirname $(readlink $(which java))))")
+        
+        ;; Set Wayland-specific environment variables (taken from RDE)
+        ;; ("XDG_CURRENT_DESKTOP" . "sway")
+        ("XDG_SESSION_TYPE" . "wayland")
+        ("RTC_USE_PIPEWIRE" . "true")
+        ("SDL_VIDEODRIVER" . "wayland")
+        ("MOZ_ENABLE_WAYLAND" . "1")
+        ("CLUTTER_BACKEND" . "wayland")
+        ("ELM_ENGINE" . "wayland_egl")
+        ("ECORE_EVAS_ENGINE" . "wayland-egl")
+        ("QT_QPA_PLATFORM" . "wayland-egl")
+        ("QT_WAYLAND_DISABLE_WINDOWDECORATION" . "1")
+        ))
       
       (service home-dbus-service-type)
 
