@@ -21,6 +21,7 @@
              (nongnu packages linux)
              (nongnu system linux-initrd)
              (srfi srfi-1) ;remove
+             (sergio packages dwm)
              (sergio home config))
 
 (use-service-modules cups desktop networking ssh xorg)
@@ -85,6 +86,9 @@
                                                       "gcc-toolchain"
                                                       "setxkbmap"
                                                       "font-iosevka"
+                                                      "dmenu"
+                                                      "st"
+                                                      "dwm-custom"
                                                       "fzf")) %base-packages))
 
     ;; Allow resolution of '.local' host names with mDNS
