@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+filetype=$1
+query=$(echo $2 | tr " " "+")
+
+firefox https://github.com/search?q=path%3A*.$1+$query&type=code
+
+
