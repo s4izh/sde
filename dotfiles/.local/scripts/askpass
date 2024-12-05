@@ -1,0 +1,4 @@
+bemenu --prompt "$1" \
+       --password \
+       --noexec \
+       </dev/null
