@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SYSTEM_MENU=${SYSTEM_MENU:-dmenu}
+SYSTEM_MENU=${SYSTEM_MENU:-bemenu}
 
 config_type=$(printf "toml\nyml" | $SYSTEM_MENU -p "choose config type")
 
