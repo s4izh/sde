@@ -13,7 +13,6 @@ in
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    # (firefox.override { nativeMessagingHosts = [ inputs.pipewire-screenaudio.packages.${system}.default ]; })
     alacritty
     discord
     dmenu
@@ -96,11 +95,7 @@ in
 
   programs.firefox = {
     enable = true;
-    package = (
-      pkgs.firefox.override {
-        nativeMessagingHosts = [ inputs.pipewire-screenaudio.packages.${pkgs.system}.default ];
-      }
-    );
+    package = pkgs.firefox;
     preferences = {
       "browser.fullscreen.autohide" = false;
       "browser.compactmode.show" = true;
@@ -172,7 +167,7 @@ in
     # (nerdfonts.override { fonts = [ "LiterationMono Nerd Font Mono" ]; })
     commit-mono # Commit Mono
     # ubuntu-mono # Ubuntu Mono
-    nerdfonts
+    # nerdfonts
     texlivePackages.inconsolata-nerd-font
     texlivePackages.gnu-freefont
     victor-mono
