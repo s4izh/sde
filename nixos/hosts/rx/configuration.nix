@@ -19,39 +19,50 @@ in
   networking.hostName = "rx"; # Define your hostname.
   networking.networkmanager.enable = true;
   # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.systemd-boot.configurationLimit = 5;
 
-  boot.loader.efi.efiSysMountPoint = "/boot";
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.loader.grub = {
+  boot.loader.systemd-boot = {
     enable = true;
-    efiSupport = true;
-    device = "nodev";
     configurationLimit = 5;
-    useOSProber = true;
-    # theme = fallout;
-  };
-
-  boot.loader.grub = {
-    minegrub-world-sel = {
-      enable = false;
-      customIcons = [
-        {
-          name = "nixos";
-          lineTop = "NixOS (23/11/2023, 23:03)";
-          lineBottom = "Survival Mode, No Cheats, Version: 23.11";
-          # Icon: you can use an icon from the remote repo, or load from a local file
-          imgName = "nixos";
-          customImg = builtins.path {
-            path = ./../../extra/nixos-logo.png;
-            name = "nixos";
-          };
-        }
-      ];
+    windows = {
+      "10" = {
+        title = "Windows 10";
+        efiDeviceHandle = "hd0b32768a1";
+      };
     };
   };
+
+  boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
+
+  # boot.loader.efi.efiSysMountPoint = "/boot";
+  # boot.loader.efi.canTouchEfiVariables = true;
+
+  # boot.loader.grub = {
+  #   enable = false;
+  #   efiSupport = true;
+  #   device = "nodev";
+  #   configurationLimit = 5;
+  #   useOSProber = true;
+  #   # theme = fallout;
+  # };
+
+  # boot.loader.grub = {
+  #   minegrub-world-sel = {
+  #     enable = false;
+  #     customIcons = [
+  #       {
+  #         name = "nixos";
+  #         lineTop = "NixOS (23/11/2023, 23:03)";
+  #         lineBottom = "Survival Mode, No Cheats, Version: 23.11";
+  #         # Icon: you can use an icon from the remote repo, or load from a local file
+  #         imgName = "nixos";
+  #         customImg = builtins.path {
+  #           path = ./../../extra/nixos-logo.png;
+  #           name = "nixos";
+  #         };
+  #       }
+  #     ];
+  #   };
+  # };
 
   networking.firewall = {
     enable = true;
