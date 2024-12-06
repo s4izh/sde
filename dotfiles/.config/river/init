@@ -211,6 +211,7 @@ do
   riverctl input $pad events enabled
   riverctl input $pad tap enabled
   riverctl input $pad disable-while-typing enabled
+  riverctl input $pad natural-scroll enabled
 done
 
 for mouse in $(riverctl list-inputs | grep -i pointer )
