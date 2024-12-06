@@ -35,9 +35,9 @@
         src = /home/sergio/.local/src/dwm;
         # src = fetchGit { url = "https://github.com/s4izh/dwm"; };
       });
-      dmenu = prev.dmenu.overrideAttrs (old: {
-        src = /home/sergio/.local/src/dmenu;
-      });
+      # dmenu = prev.dmenu.overrideAttrs (old: {
+      #   src = /home/sergio/.local/src/dmenu;
+      # });
       dwmblocks = prev.dwmblocks.overrideAttrs (old: {
         src = /home/sergio/.local/src/dwmblocks;
       });

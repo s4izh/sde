@@ -49,10 +49,12 @@ test: ## Test the flake
 	sudo nixos-rebuild test --flake .# --impure
 switch: src-dependencies create-softlinks ## Switch to the flake
 	sudo nixos-rebuild switch --flake .\?submodules=1# --impure 
+boot:
+	sudo nixos-rebuild boot --flake .\?submodules=1# --impure 
 bootstrap: src-dependencies create-softlinks ## First bootstrap, specify NIX_HOSTNAME as env variable
 	sudo nixos-rebuild switch --flake .#$(NIX_HOSTNAME) --impure
 build:
-	nixos-rebuild build --flake .\?submodules=1#
+	nixos-rebuild build --flake .\?submodules=1# --impure
 update: ## Update the flake
 	nix flake update
 gc: ## Run garbage collection
@@ -83,8 +85,11 @@ create-softlinks: ## Create all softlinks
 	@if [ ! -h $(HOME)/.bash_profile ]; then \
 		ln -svf $(DOTFILES)/.config/shell/bash_profile $(HOME)/.bash_profile; \
 	fi
+	@if [ ! -h $(HOME)/.inputrc ]; then \
+		ln -svf $(DOTFILES)/.config/shell/inputrc $(HOME)/.inputrc; \
+	fi
 	@if [ ! -h $(HOME)/.config/guix/channels.scm ]; then \
-		ln -svf $(GUIX_DIR)/channels.scm $(HOME)/.config/channels.scm; \
+		ln -svf $(GUIX_DIR)/channels.scm $(HOME)/.config/guix/channels.scm; \
 	fi
 
 remove-softlinks: ## Remove all softlinks
@@ -95,6 +100,9 @@ remove-softlinks: ## Remove all softlinks
 	done
 	@if [ -h $(HOME)/.bash_profile ]; then \
 		rm -v $(HOME)/.bash_profile; \
+	fi
+	@if [ -h $(HOME)/.inputrc ]; then \
+		rm -v $(HOME)/.inputrc; \
 	fi
 	@if [ -h $(HOME)/.config/guix/channels.scm ]; then \
 		rm -v $(HOME)/.config/guix/channels.scm; \
