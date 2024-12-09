@@ -2,13 +2,17 @@
   config,
   pkgs,
   lib,
+  sde,
   ...
 }:
 let
   ln = config.lib.file.mkOutOfStoreSymlink;
   lnDir = config.lib.file.mkOutOfStoreSymlink;
+  gtkExtraCss = builtins.readFile "${sde.flakeRoot}/dotfiles/.config/gtk-3.0/gtk.css";
 in
 {
+  imports = [ ./waybar.nix ];
+
   home.packages = with pkgs; [
     tmux
     fzf
@@ -153,10 +157,16 @@ in
     };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
+      # gtk-dialogs-use-header = false;
+      # gtk-decoration-layout= ":";
     };
+    gtk3.extraCss = gtkExtraCss;
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = true;
+      # gtk-dialogs-use-header = false;
+      # gtk-decoration-layout= ":";
     };
+    gtk4.extraCss = gtkExtraCss;
     gtk3.bookmarks = [
       "file:///mnt"
       "file:///home/sergio/notes"
@@ -174,7 +184,7 @@ in
     # };
   };
 
-  # programs.direnv.enable = true;
+  programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
   home.stateVersion = "23.11";

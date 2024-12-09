@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # This is the example configuration file for river.
 #
@@ -8,7 +8,14 @@
 # Use the "logo" key as the primary modifier
 mod="Mod4"
 
-pkill kanshi; kanshi &
+apps=("kanshi" "waybar" "swayosd-server" "swaync" "nm-applet --indicator" "wpaperd")
+# waybar # "swayidle -w before-sleep 'gtklock -d'")
+
+for app in "${apps[@]}"
+do
+    pkill -f "$app"
+    riverctl spawn "$app" 
+done
 
 riverctl map normal $mod Return spawn 'alacritty'
 
@@ -25,8 +32,7 @@ riverctl map normal $mod Q close
 # launcher
 riverctl map normal $mod p spawn "bemenu-run"
 
-export XKB_DEFAULT_OPTIONS=caps:escape 
-riverctl keyboard-layout es
+riverctl keyboard-layout -model pc105 -variant '' -options caps:escape es
 
 # manual network-tray
 # reason being - when spawned, cmst/applet fails to identify the sys-tray's presence
@@ -156,20 +162,18 @@ do
     # Eject the optical drive
     riverctl map $mode None XF86Eject spawn 'eject -T'
 
-    # Control pulse audio volume
-    riverctl map $mode None XF86AudioRaiseVolume  spawn 'bash ~/.config/system_scripts/volume up'
-    riverctl map $mode None XF86AudioLowerVolume  spawn 'bash ~/.config/system_scripts/volume down'
-    riverctl map $mode None XF86AudioMute spawn 'bash ~/.config/system_scripts/volume mute'
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'swayosd-client --output-volume raise'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'swayosd-client --output-volume lower'
+    riverctl map $mode None XF86AudioMute         spawn 'swayosd-client --output-volume mute-toggle'
 
-    # Control MPRIS aware media players
-    riverctl map $mode None XF86AudioMedia spawn 'bash ~/.config/system_scripts/volume pause'
-    riverctl map $mode None XF86AudioPlay  spawn 'bash ~/.config/system_scripts/volume pause'
-    riverctl map $mode None XF86AudioPrev  spawn 'bash ~/.config/system_scripts/volume prev'
-    riverctl map $mode None XF86AudioNext  spawn 'bash ~/.config/system_scripts/volume next'
+    riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
+    riverctl map $mode None XF86AudioPlay  spawn 'playerctl play-pause'
+    riverctl map $mode None XF86AudioPrev  spawn 'playerctl previous'
+    riverctl map $mode None XF86AudioNext  spawn 'playerctl next'
 
-    # Control screen backlight brighness
-    riverctl map $mode None XF86MonBrightnessUp   spawn 'bash ~/.config/system_scripts/brightness up'
-    riverctl map $mode None XF86MonBrightnessDown spawn 'bash ~/.config/system_scripts/brightness down'
+    riverctl map $mode None XF86MonBrightnessUp   spawn 'swayosd-client --brightness raise'
+    riverctl map $mode None XF86MonBrightnessDown spawn 'swayosd-client --brightness lower'
+
 done
 
 # Set background and border color
@@ -179,9 +183,6 @@ riverctl border-color-focused 0xBBBBBB
 
 # Set repeat rate
 riverctl set-repeat 50 300
-
-# auto starting apps
-riverctl spawn "dunst"
 
 # Clipboard
 # Note : Not auto-starting the copyq program
@@ -195,13 +196,19 @@ riverctl spawn "dunst"
 #riverctl spawn "copyq && copyq hide"
 
 # Set app-ids of views which should float
-riverctl float-filter-add "float"
-riverctl float-filter-add "popup"
+# riverctl float-filter-add "float"
+# riverctl float-filter-add "popup"
 
 # Set app-ids of views which should use client side decorations
-#riverctl csd-filter-add "firefox"
+# riverctl csd-filter-add "firefox"
 #riverctl csd-filter-add "gedit"
 #riverctl csd-filter-add "emacs"
+
+riverctl rule-add -app-id "firefox" ssd
+riverctl rule-add -app-id "pavucontrol" ssd
+riverctl rule-add -app-id "bar" csd
+riverctl rule-add -app-id 'float*' -title 'foo' float
+riverctl rule-add -app-id pavucontrol float
 
 # Set touchpad by grabbing the event
 # The below for-loop was shared by Adarsh (github@theCode-Breaker)
