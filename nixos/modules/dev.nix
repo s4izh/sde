@@ -28,7 +28,10 @@ let
       nixfmt $@
     '') # wrapper script since nixd calls nixpkgs-fmt
   ];
-  luapkgs = with pkgs; [ lua-language-server ];
+  luapkgs = with pkgs; [
+    lua
+    lua-language-server
+  ];
   cpkgs = with pkgs; [
     gcc
     cmake
@@ -75,8 +78,8 @@ let
     pstree
     cloc
   ];
-  testpkgs = [
-    sde.pkgs.test
+  testpkgs = with sde.pkgs.${pkgs.system}; [
+    test
   ];
   editorspkgs = with pkgs; [
     vim
@@ -99,6 +102,6 @@ in
     ++ gopkgs
     ++ zigpkgs
     ++ haskellpkgs
-    ++ editorspkgs;
-    # ++ testpkgs;
+    ++ editorspkgs
+    ++ testpkgs;
 }

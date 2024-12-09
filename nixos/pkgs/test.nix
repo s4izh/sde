@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 pkgs.stdenv.mkDerivation {
   name = "test";
@@ -8,12 +8,12 @@ pkgs.stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
-    echo '#!/bin/sh' > $out/bin/hello
-    echo 'echo "Hello from test package"' >> $out/bin/hello
-    chmod +x $out/bin/hello
+    echo '#!/bin/sh' > $out/bin/my-hello
+    echo 'echo "Hello from test package"' >> $out/bin/my-hello
+    chmod +x $out/bin/my-hello
   '';
 
-  meta = with pkgs.stdenv.lib; {
+  meta = with lib; {
     description = "A test package that prints a message";
     license = licenses.mit;
     maintainers = with maintainers; [ s4izh ];

@@ -24,39 +24,52 @@
       lib = nixpkgs.lib;
 
       forAllSystems =
-        function:
-        lib.genAttrs
-          [
-            "x86_64-linux"
-            "aarch64-linux"
-          ]
-          (
-            system:
+      let
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+        ];
+      in
+        function: pkgs:
+        lib.genAttrs systems (system:
             let
-              syspkgs = import nixpkgs {
+              syspkgs = import pkgs {
                 inherit system;
                 config.allowUnfree = true;
               };
             in
-            function syspkgs
+            function syspkgs system
           );
 
       sde = rec {
         flakeRoot = ../.;
         nixosPrefix = "${flakeRoot}/nixos";
-        pkgs = forAllSystems (pkgs: import "${nixosPrefix}/pkgs" { inherit pkgs; });
+        pkgs = forAllSystems (pkgs: system: import ./pkgs pkgs) nixpkgs;
       };
 
     in
-    # (system: function nixpkgs.legacyPackages.${system});
     {
-      # packages.x86_64-linux.default = import ./shell.nix { inherit pkgs; };
-      devShells = forAllSystems (pkgs: {
+      packages = sde.pkgs;
+      devShells = forAllSystems (pkgs: system: {
         default = import "${sde.nixosPrefix}/shell.nix" { inherit pkgs; } // {
-          nativeBuildInputs = self.packages;
+          nativeBuildInputs = self.packages.${pkgs.system};
         };
-      });
-      packages = forAllSystems (pkgs: sde.pkgs);
+      }) nixpkgs;
+      overlays = import ./overlays {inherit inputs;};
+      # nixosModules = let
+      #   moduleDefaults = [
+      #     ./modules/nixos
+      #     ./modules/sde/nixos
+      #   ];
+
+      #   allModules = map (path: import path) moduleDefaults;
+      #   in
+      #     allModules;
+
+      nixosModules = import ./modules/sde/nixos;
+
+      homeManagerModules = import ./modules/home-manager;
+
       nixosConfigurations =
         let
           mkHostConfig =
@@ -66,9 +79,10 @@
               value = lib.nixosSystem {
                 system = arch;
                 specialArgs = {
-                  inherit inputs sde;
+                  inherit self inputs sde;
                 };
                 modules = [
+                  self.nixosModules
                   "${sde.nixosPrefix}/hosts/${host}"
                   {
                     nix.registry.nixpkgs.flake = inputs.nixpkgs; # nix shell to use system flake
