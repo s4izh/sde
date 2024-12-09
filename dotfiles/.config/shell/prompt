@@ -60,4 +60,13 @@ function _set_prompt() {
     # PS1+="\n$ \e[0m"
 }
 
-# PROMPT_COMMAND=_set_prompt
+function _basic_prompt()
+{
+    ON_SPECIAL_ENV=$IN_NIX_SHELL$GUIX_ENVIRONMENT
+    PS1='\u@\h \w${ON_SPECIAL_ENV:+ [env]}\n\$ '
+    # PS1='\[\e[1m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\n\$\[\e[0m\] '
+    # PS1="\[\e[1m\]\u@\h:\w\$ \[\e[0m\]"
+}
+
+
+PROMPT_COMMAND=_basic_prompt
