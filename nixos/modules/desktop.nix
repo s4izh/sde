@@ -213,6 +213,9 @@ in
     askPassword = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
   };
 
+  xdg.portal.enable = true;
+  xdg.portal.xdgOpenUsePortal = true;
+
   # va muy lento con esto
   # documentation.man.generateCaches = true;
 }

@@ -6,9 +6,9 @@
   ...
 }:
 {
-  wayland.windowManager.river = {
-    enable = true;
-    package = null;
-    extraConfig = builtins.readFile "${sde.flakeRoot}/dotfiles/.config/river/init";
-  };
+  # wayland.windowManager.river = {
+  #   enable = true;
+  #   package = null;
+  #   # extraConfig = builtins.readFile "${sde.flakeRoot}/dotfiles/.config/river/init";
+  # };
 }
