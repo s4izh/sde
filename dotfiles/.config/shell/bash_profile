@@ -29,7 +29,7 @@ if [ "$os" == "nixos" ]; then
     echo "nixos" &> /dev/null
 else
     if command -v nix &> /dev/null; then
-        echo "source whatever nix needs on a foreign distro"
+        echo "source whatever nix needs on a foreign distro" &> /dev/null
     fi
 fi
 
@@ -59,4 +59,6 @@ if [[ "$(tty)" =~ ^/dev/tty ]] || [ -n "$TMUX" ]; then
     fi
 fi
 
-[ "$(tty)" = "/dev/tty1" ] && exec startx
+# [ "$(tty)" = "/dev/tty1" ] && exec startx
+
+[ "$(tty)" = "/dev/tty1" ] && exec launch-desktop-session.sh

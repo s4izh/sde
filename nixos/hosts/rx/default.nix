@@ -18,7 +18,7 @@ in
     ./configuration.nix
     "${modules}/base.nix"
     "${modules}/desktop.nix"
-    "${modules}/dwm.nix"
+    # "${modules}/dwm.nix"
     # "${modules}/dwl.nix"
     "${modules}/hyprland.nix"
     "${modules}/gaming.nix"
@@ -27,7 +27,7 @@ in
     "${modules}/dev.nix"
     "${modules}/nvim.nix"
     "${modules}/river.nix"
-    "${modules}/sway.nix"
+    # "${modules}/sway.nix"
     # "${modules}/stumpwm.nix"
     "${modules}/vpn.nix"
     # "${modules}/xfce.nix"

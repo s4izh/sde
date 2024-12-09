@@ -52,7 +52,9 @@
     {
       # packages.x86_64-linux.default = import ./shell.nix { inherit pkgs; };
       devShells = forAllSystems (pkgs: {
-        default = import "${sde.nixosPrefix}/shell.nix" { inherit pkgs; };
+        default = import "${sde.nixosPrefix}/shell.nix" { inherit pkgs; } // {
+          nativeBuildInputs = self.packages;
+        };
       });
       packages = forAllSystems (pkgs: sde.pkgs);
       nixosConfigurations =
