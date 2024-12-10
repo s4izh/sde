@@ -14,13 +14,20 @@ let
 
     # exec ${pkgs.river}/bin/river &> /tmp/river.log
 
-    systemctl --user import-environment DISPLAY XAUTHORITY
-    if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-        dbus-update-activation-environment DISPLAY XAUTHORITY
-    fi
-    gnome-keyring-daemon --start --components=secrets
+    systemctl --user import-environment \
+    DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP NIXOS_OZONE_WL \
+    MOZ_ENABLE_WAYLAND XDG_SESSION_DESKTOP XDG_SESSION_TYPE \
+    XCURSOR_THEME XCURSOR_SIZE
 
-    dbus-launch --exit-with-session ${pkgs.river}/bin/river 2> /tmp/river.log
+    if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+        dbus-update-activation-environment \
+          DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP NIXOS_OZONE_WL \
+          MOZ_ENABLE_WAYLAND XDG_SESSION_DESKTOP XDG_SESSION_TYPE \
+          XCURSOR_THEME XCURSOR_SIZE
+    fi
+    # gnome-keyring-daemon --start --components=secrets
+
+    dbus-launch --exit-with-session ${pkgs.river}/bin/river &> /tmp/river.log
   '';
 
 in
@@ -28,6 +35,12 @@ in
   programs.river = {
     enable = true;
   };
+
+  # systemd.user.services.xdg-desktop-portal-wlr = {
+  #   enable = true;
+  # };
+
+  # environment.sessionVariables.WAYLAND_DISPLAY = "wayland-1";
 
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.displayManager.gdm.wayland = true;

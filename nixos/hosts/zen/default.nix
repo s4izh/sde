@@ -5,6 +5,7 @@
   inputs,
   config,
   pkgs,
+  sde,
   ...
 }:
 let
@@ -19,9 +20,10 @@ in
     "${modules}/base.nix"
     "${modules}/desktop.nix"
     "${modules}/dev.nix"
-    "${modules}/unity.nix"
+    # "${modules}/unity.nix"
     # "${modules}/gnome.nix"
     "${modules}/dwm.nix"
+    "${modules}/river.nix"
     "${modules}/nvim.nix"
     "${modules}/virtualisation.nix"
     inputs.home-manager.nixosModules.home-manager
@@ -29,7 +31,7 @@ in
 
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs;
+      inherit inputs sde;
     };
     users = {
       sergio = import ../../home/sergio/home.nix;
