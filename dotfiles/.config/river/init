@@ -231,7 +231,13 @@ riverctl focus-follows-cursor normal
 
 # riverctl hide-cursor timeout 5000
 
+dbus-update-activation-environment \
+    DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP NIXOS_OZONE_WL \
+    MOZ_ENABLE_WAYLAND XDG_SESSION_DESKTOP XDG_SESSION_TYPE \
+    XCURSOR_THEME XCURSOR_SIZE
+
 # Set and exec into the default layout generator, rivertile.
 # River will send the process group of the init executable SIGTERM on exit.
+
 riverctl default-layout rivertile
 exec rivertile
