@@ -29,7 +29,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- centre screen after moving through search
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("n", "<leader>n", ":noh<cr>")
+vim.keymap.set("n", "<leader>nh", ":noh<cr>")
 
 -- keep cursor on the same line on J
 vim.keymap.set("n", "J", "mzJ`z")
@@ -88,3 +88,27 @@ vim.keymap.set('v', '<Leader>fs', function()
   vim.cmd('silent grep "' .. query .. '" .')
   vim.cmd('copen')
 end, { noremap = true, silent = true })
+
+
+local function toggle_line_numbers()
+    local is_number = vim.wo.number
+    local is_relativenumber = vim.wo.relativenumber
+
+    if is_number or is_relativenumber then
+        vim.wo.number = false
+        vim.wo.relativenumber = false
+        print("Line numbers disabled")
+    else
+        vim.wo.number = true
+        vim.wo.relativenumber = true
+        print("Line numbers enabled")
+    end
+end
+
+vim.keymap.set("n", "<Leader>tl", toggle_line_numbers, { noremap = true, silent = true })
+
+vim.api.nvim_create_user_command("ToggleLineNumbers", function(opts)
+    toggle_line_numbers()
+end, {
+    nargs = 0,
+})
