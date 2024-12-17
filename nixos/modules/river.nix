@@ -56,12 +56,14 @@ in
     [
       wl-clipboard
       bemenu
-      swayosd
-      swaynotificationcenter
-      playerctl
-      slurp
-      grim
-      kanshi
+      swayosd # volume/brightness gui
+      swaynotificationcenter # notifications
+      playerctl # manage media
+      slurp # screenshots
+      grim # screenshots
+      kanshi # manage monitors
+      wpaperd # wallpapers
+      lswt # window info
     ]
     ++ [ river-launcher ];
 

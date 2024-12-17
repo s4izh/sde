@@ -8,16 +8,25 @@
 # Use the "logo" key as the primary modifier
 mod="Mod4"
 
-apps=("kanshi" "waybar" "swayosd-server" "swaync" "nm-applet --indicator" "wpaperd")
+apps=(
+    "kanshi"
+    "waybar"
+    "swayosd-server"
+    "swaync"
+    "nm-applet --indicator"
+    # "wpaperd"
+)
 # waybar # "swayidle -w before-sleep 'gtklock -d'")
 
-for app in "${apps[@]}"
-do
+for app in "${apps[@]}"; do
     pkill -f "$app"
     riverctl spawn "$app" 
 done
 
 riverctl map normal $mod Return spawn 'alacritty'
+
+riverctl map normal $mod v spawn 'pavucontrol'
+riverctl map normal $mod n spawn "swaync-client -t"
 
 riverctl map normal $mod+Shift Q spawn 'menu-system'
 
@@ -182,7 +191,7 @@ riverctl background-color 0x282828
 riverctl border-color-focused 0xBBBBBB
 
 # Set repeat rate
-riverctl set-repeat 50 300
+# riverctl set-repeat 50 300
 
 # Clipboard
 # Note : Not auto-starting the copyq program
@@ -204,11 +213,25 @@ riverctl set-repeat 50 300
 #riverctl csd-filter-add "gedit"
 #riverctl csd-filter-add "emacs"
 
-riverctl rule-add -app-id "firefox" ssd
-riverctl rule-add -app-id "pavucontrol" ssd
-riverctl rule-add -app-id "bar" csd
+add_ssd_to=(
+    "firefox"
+    "org.pulseaudio.pavucontrol"
+    "org.remmina.Remmina"
+    "chromium-browser"
+)
+for app in "${add_ssd_to[@]}"; do
+    riverctl rule-add -app-id "$app" ssd
+done
+
+float_apps=(
+    "org.pulseaudio.pavucontrol"
+)
+for app in "${float_apps[@]}"; do
+    riverctl rule-add -app-id "$app" float
+done
+
 riverctl rule-add -app-id 'float*' -title 'foo' float
-riverctl rule-add -app-id pavucontrol float
+# riverctl rule-add -app-id "bar" csd
 
 # Set touchpad by grabbing the event
 # The below for-loop was shared by Adarsh (github@theCode-Breaker)
@@ -241,3 +264,4 @@ dbus-update-activation-environment \
 
 riverctl default-layout rivertile
 exec rivertile
+

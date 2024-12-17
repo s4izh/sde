@@ -27,6 +27,7 @@ in
     "${modules}/dev.nix"
     "${modules}/nvim.nix"
     "${modules}/river.nix"
+    "${modules}/dwm.nix"
     # "${modules}/sway.nix"
     # "${modules}/stumpwm.nix"
     "${modules}/vpn.nix"
