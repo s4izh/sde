@@ -37,7 +37,11 @@ vim.keymap.set("n", "J", "mzJ`z")
 -- custom scripts
 vim.keymap.set("n", "<Leader>cc", ":w | !compiler %<cr>")
 vim.keymap.set("n", "<Leader>O", ":!opout %<cr><cr>")
-vim.keymap.set("n", "<Leader>x", ":!chmod +x %<cr><cr>")
+vim.keymap.set("n", "<Leader>X", ":!chmod +x %<cr><cr>")
+
+vim.keymap.set("v", "<Leader><Leader>x", ":source %<cr>")
+vim.keymap.set("n", "<Leader>x", ":.lua<cr>")
+vim.keymap.set("v", "<Leader>x", ":lua<cr>")
 
 -- conceallevel
 vim.keymap.set("n", "<Leader>wc0", ":set conceallevel=0<cr>")
@@ -50,12 +54,12 @@ vim.keymap.set("n", "<Leader>V", ":source ~/.config/nvim/init.lua <cr>")
 
 -- diff config
 if vim.opt.diff:get() then
-  -- Map <leader>1 to :diffget LOCAL<CR>
-  vim.api.nvim_set_keymap('n', '<leader>1', ':diffget LOCAL<CR>', { noremap = true, silent = true })
-  -- Map <leader>2 to :diffget BASE<CR>
-  vim.api.nvim_set_keymap('n', '<leader>2', ':diffget BASE<CR>', { noremap = true, silent = true })
-  -- Map <leader>3 to :diffget REMOTE<CR>
-  vim.api.nvim_set_keymap('n', '<leader>3', ':diffget REMOTE<CR>', { noremap = true, silent = true })
+    -- Map <leader>1 to :diffget LOCAL<CR>
+    vim.api.nvim_set_keymap('n', '<leader>1', ':diffget LOCAL<CR>', { noremap = true, silent = true })
+    -- Map <leader>2 to :diffget BASE<CR>
+    vim.api.nvim_set_keymap('n', '<leader>2', ':diffget BASE<CR>', { noremap = true, silent = true })
+    -- Map <leader>3 to :diffget REMOTE<CR>
+    vim.api.nvim_set_keymap('n', '<leader>3', ':diffget REMOTE<CR>', { noremap = true, silent = true })
 end
 
 vim.keymap.set("n", "<Leader>R", ":set wrap! linebreak!<cr>")
@@ -79,14 +83,14 @@ vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//gc<left><left><left>', { noremap = 
 
 -- vim.keymap.set('v', '<Leader>fs', '"hy:silent grep <C-r>h | copen<CR>', { noremap = true, silent = true })
 vim.keymap.set('v', '<Leader>fs', function()
-  vim.cmd('normal! "hy')
-  local query = vim.fn.getreg('h')
-  query = vim.fn.escape(query, '\\')
-  query = vim.fn.escape(query, '"')
-  query = vim.fn.escape(query, '(')
-  query = vim.fn.escape(query, ')')
-  vim.cmd('silent grep "' .. query .. '" .')
-  vim.cmd('copen')
+    vim.cmd('normal! "hy')
+    local query = vim.fn.getreg('h')
+    query = vim.fn.escape(query, '\\')
+    query = vim.fn.escape(query, '"')
+    query = vim.fn.escape(query, '(')
+    query = vim.fn.escape(query, ')')
+    vim.cmd('silent grep "' .. query .. '" .')
+    vim.cmd('copen')
 end, { noremap = true, silent = true })
 
 
