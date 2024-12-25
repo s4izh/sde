@@ -19,7 +19,7 @@ install_nvim ()
     make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/.local install
 }
 
-sudo apt install fzf tmux direnv
+sudo apt install fzf tmux direnv tree
 
 sudo apt install xdg-utils wslu
 
