@@ -122,3 +122,5 @@ fi
 export PATH="$HOME/.local/nvim/bin/:$PATH"
 export PATH="$HOME/.local/scripts/:$PATH"
 export PATH="$HOME/.local/scripts/tmux:$PATH"
+
+alias open="wslview"
