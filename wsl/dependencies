@@ -21,4 +21,6 @@ install_nvim ()
 
 sudo apt install fzf tmux direnv
 
+sudo apt install xdg-utils wslu
+
 install_nvim
