@@ -13,22 +13,34 @@ local lsp = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local format_group = vim.api.nvim_create_augroup('FormatGroup', {})
 
-lsp.rust_analyzer.setup({
-  capabilities = capabilities,
-})
+if (vim.fn.executable("rust-analyzer") > 0) then
+  lsp.rust_analyzer.setup({
+    capabilities = capabilities,
+  })
+end
 
-lsp.gopls.setup({})
+if (vim.fn.executable("gopls") > 0) then
+  lsp.gopls.setup({})
+end
 
 if (vim.fn.executable("bash-language-server") > 0) then
   lsp.bashls.setup({})
 end
 
-lsp.zls.setup({})
+if (vim.fn.executable("zls") > 0) then
+  lsp.zls.setup({})
+end
 
-lsp.clangd.setup({
-  cmd = { "clangd", "-cross-file-rename" },
-  capabilities = capabilities,
-})
+if (vim.fn.executable("clangd") > 0) then
+  lsp.clangd.setup({
+    cmd = { "clangd", "-cross-file-rename" },
+    capabilities = capabilities,
+  })
+end
+
+if (vim.fn.executable("ctags-lsp") > 0) then
+  lsp.ctags_lsp.setup({})
+end
 
 if (vim.fn.executable("pyright") > 0) then
   lsp.pyright.setup({})
@@ -50,31 +62,37 @@ if (vim.fn.executable("lua-language-server") > 0) then
   })
 end
 
-lsp.ltex.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { "ltex-ls" },
-  filetypes = { "tex", "bib" },
-  settings = {
-    ltex = {
-      language = "es",
+if (vim.fn.executable("ltex-ls") > 0) then
+  lsp.ltex.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "ltex-ls" },
+    filetypes = { "tex", "bib" },
+    settings = {
+      ltex = {
+        language = "es",
+      },
     },
-  },
-})
+  })
+end
 
-lsp.texlab.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { "texlab" },
-  filetypes = { "tex", "bib" },
-})
+if (vim.fn.executable("texlab") > 0) then
+  lsp.texlab.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "texlab" },
+    filetypes = { "tex", "bib" },
+  })
+end
 
-lsp.nixd.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { "nixd" },
-  filetypes = { "nix" },
-})
+if (vim.fn.executable("nixd") > 0) then
+  lsp.nixd.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "nixd" },
+    filetypes = { "nix" },
+  })
+end
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
