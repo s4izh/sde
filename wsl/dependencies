@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+install_nvim ()
+{
+    local src_dir="$HOME/.local/src/neovim"
+    if [ -d "$src_dir" ]; then
+        echo "Neovim installed already"
+        return
+    fi
+
+    git clone https://github.com/neovim/neovim $src_dir
+    cd $src_dir
+
+    sudo apt-get install ninja-build gettext cmake unzip curl build-essential
+    sudo apt install fzf
+
+    mkdir -pv $HOME/.local/nvim
+
+    make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/.local/nvim
+    make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/.local install
+}
+
+install_nvim
