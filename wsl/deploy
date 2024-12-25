@@ -8,6 +8,8 @@ files_to_link=(
     "dotfiles/.config/shell/inputrc:.inputrc"
     "dotfiles/.editorconfig:.editorconfig"
     "dotfiles/.config/git:.config/git"
+    "dotfiles/.config/shell:.config/shell"
+    "wsl/.bashrc:.bashrc"
 )
 
 dirs_to_create=(
