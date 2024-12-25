@@ -28,4 +28,6 @@ set keymap vi-insert
 Control-l: clear-screen
 Control-a: beginning-of-line
 
+"\C-h": "$HOME/"
+
 $endif
