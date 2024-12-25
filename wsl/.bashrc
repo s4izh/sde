@@ -123,5 +123,6 @@ export PATH="$HOME/.local/nvim/bin/:$PATH"
 export PATH="$HOME/.local/scripts/:$PATH"
 export PATH="$HOME/.local/scripts/tmux:$PATH"
 export PATH="$HOME/.config/guix/current/bin:$PATH"
+export PATH="$(go env GOPATH)/bin:$PATH"
 
 alias open="wslview"

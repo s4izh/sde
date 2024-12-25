@@ -21,6 +21,9 @@ install_nvim ()
 
 sudo apt install fzf tmux direnv tree
 
+sudo apt install golang-go universal-ctags
+go install github.com/netmute/ctags-lsp@latest
+
 sudo apt install xdg-utils wslu
 
 install_nvim
