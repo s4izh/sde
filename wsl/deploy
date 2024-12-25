@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+files_to_link=(
+    "nvim:.config/nvim"
+    "guix/channels.scm:.config/guix/channels.scm"
+    "dotfiles/.config/tmux/tmux.conf:.tmux.conf"
+    "dotfiles/.local/scripts:.local/scripts"
+    "dotfiles/.config/shell/inputrc:.inputrc"
+    "dotfiles/.editorconfig:.editorconfig"
+    "dotfiles/.config/git:.config/git"
+)
+
+dirs_to_create=(
+    "$HOME/.config/guix"
+    "$HOME/.local"
+)
+
+for dir in "${dirs_to_create[@]}"; do
+    mkdir -pv "$dir"
+done
+
+for pair in "${files_to_link[@]}"; do
+    src="${pair%%:*}"
+    dest="${pair##*:}"
+    rm -v $HOME/$dest
+done
+
+for pair in "${files_to_link[@]}"; do
+    src="${pair%%:*}"
+    dest="${pair##*:}"
+    ln -svf $HOME/personal/sde/$src $HOME/$dest
+done
