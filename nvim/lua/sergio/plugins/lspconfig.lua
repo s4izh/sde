@@ -30,7 +30,11 @@ lsp.clangd.setup({
   capabilities = capabilities,
 })
 
-lsp.pyright.setup({})
+if (vim.fn.executable("pyright") > 0) then
+  lsp.pyright.setup({})
+elseif (vim.fn.executable("pylsp") > 0) then
+  lsp.pylsp.setup({})
+end
 
 if (vim.fn.executable("lua-language-server") > 0) then
   lsp.lua_ls.setup({
