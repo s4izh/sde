@@ -16,7 +16,7 @@ install_nvim ()
     mkdir -pv $HOME/.local/nvim
 
     make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/.local/nvim
-    make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/.local install
+    make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$HOME/.local/nvim install
 }
 
 sudo apt install fzf tmux direnv tree
