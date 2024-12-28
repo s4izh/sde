@@ -31,6 +31,14 @@ if (vim.fn.executable("zls") > 0) then
   lsp.zls.setup({})
 end
 
+if (vim.fn.executable("marksman") > 0) then
+  lsp.marksman.setup({
+    cmd = { "marksman", "server" },
+    filetypes = { "markdown" },
+    capabilities = capabilities,
+  })
+end
+
 if (vim.fn.executable("clangd") > 0) then
   lsp.clangd.setup({
     cmd = { "clangd", "-cross-file-rename" },
@@ -115,9 +123,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, opts)
     if client.server_capabilities.hoverProvider then
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    else
-      vim.keymap.set('n', 'K', show_documentation, { silent = true })
     end
+    -- else
+    --   vim.keymap.set('n', 'K', show_documentation, { silent = true })
+    -- end
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<leader>vls', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
