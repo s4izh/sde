@@ -64,6 +64,7 @@ in
     groff
     aspell
     obsidian
+    marksman
 
     libreoffice-fresh
     rclone
