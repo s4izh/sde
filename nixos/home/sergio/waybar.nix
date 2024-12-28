@@ -69,13 +69,16 @@
           };
         };
         "cpu" = {
-          "format" = " {usage}% ";
+          # "format" = " {usage}% ";
+          "format" = "cpu: {usage}%";
         };
-        "memory" = { "format" = "{}% "; };
+        # "memory" = { "format" = "{}% "; };
+        "memory" = { "format" = "mem: {}%"; };
         "temperature" = {
           "critical-threshold" = 80;
-          "format" = "{temperatureC}°C {icon}";
-          "format-icons" = [ "" "" "" ];
+          "format" = "{temperatureC}°C";
+          # "format" = "{temperatureC}°C {icon}";
+          # "format-icons" = [ "" "" "" ];
         };
         "backlight" = {
           "format" = "{percent}% {icon}";
