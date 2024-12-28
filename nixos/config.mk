@@ -27,7 +27,7 @@ LINKS_FROM_SDE_TO_HOME := \
 	dotfiles/.zprofile:.zprofile \
 	dotfiles/templates:templates \
 	nvim:.config/nvim \
-    guix/channels.scm:.config/guix/channels.scm
+	guix/channels.scm:.config/guix/channels.scm
 
 DIRS_TO_CREATE_IN_HOME := \
 	.local \
