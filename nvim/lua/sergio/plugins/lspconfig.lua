@@ -9,6 +9,23 @@ local function show_documentation()
   end
 end
 
+local function create_format_autocmd(extension, callback)
+  if callback == nil then
+    callback = function()
+      vim.lsp.buf.format { async = true }
+    end
+  end
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    pattern = "*." .. extension,
+    callback = callback,
+  })
+end
+
+local auto_format_extensions = {
+  "lua",
+  "nix",
+}
+
 local lsp = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local format_group = vim.api.nvim_create_augroup('FormatGroup', {})
@@ -148,12 +165,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.api.nvim_set_hl(0, 'FloatBorder', { link = 'Normal' })
 
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      pattern = "*.lua",
-      callback = function()
-        vim.lsp.buf.format { async = true }
-      end,
-    })
+    -- local bufname = vim.api.nvim_buf_get_name(ev.buf)
+    local ext = vim.fn.expand('%:e')
+
+    if vim.tbl_contains(auto_format_extensions, ext) then
+      create_format_autocmd(ext)
+    end
   end,
 })
 
