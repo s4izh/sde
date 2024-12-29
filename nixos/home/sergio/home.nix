@@ -11,7 +11,10 @@ let
   gtkExtraCss = builtins.readFile "${sde.flakeRoot}/dotfiles/.config/gtk-3.0/gtk.css";
 in
 {
-  imports = [ ./waybar.nix ./river.nix ];
+  imports = [
+    ./waybar.nix
+    ./river.nix
+  ];
 
   home.packages = with pkgs; [
     tmux

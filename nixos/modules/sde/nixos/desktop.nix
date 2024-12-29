@@ -8,7 +8,7 @@
 #   cfg = config.test.services.desktop;
 # in
 {
-  imports = [];
+  imports = [ ];
 
   options = {
     cfg.enable = lib.mkEnableOption "Enable SDE desktop";

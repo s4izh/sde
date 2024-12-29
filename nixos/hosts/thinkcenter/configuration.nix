@@ -51,8 +51,11 @@
   users.users.sergio = {
     isNormalUser = true;
     description = "sergio";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -79,7 +82,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.permitRootLogin = "yes";  # You can also use "prohibit-password" to allow only key-based login
+  services.openssh.permitRootLogin = "yes"; # You can also use "prohibit-password" to allow only key-based login
 
   services.cockpit = {
     enable = true;
@@ -97,9 +100,12 @@
   # Configure sudo rules for a specific user
   security.sudo.extraRules = [
     {
-      users = [ "sergio" ];  # Replace with your user
+      users = [ "sergio" ]; # Replace with your user
       commands = [
-        { command = "/run/current-system/sw/bin/nixos-rebuild"; options = [ "NOPASSWD" ]; }
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
       ];
     }
   ];

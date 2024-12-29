@@ -24,22 +24,23 @@
       lib = nixpkgs.lib;
 
       forAllSystems =
-      let
-        systems = [
-          "x86_64-linux"
-          "aarch64-linux"
-        ];
-      in
+        let
+          systems = [
+            "x86_64-linux"
+            "aarch64-linux"
+          ];
+        in
         function: pkgs:
-        lib.genAttrs systems (system:
-            let
-              syspkgs = import pkgs {
-                inherit system;
-                config.allowUnfree = true;
-              };
-            in
-            function syspkgs system
-          );
+        lib.genAttrs systems (
+          system:
+          let
+            syspkgs = import pkgs {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          in
+          function syspkgs system
+        );
 
       sde = rec {
         flakeRoot = ../.;
@@ -55,7 +56,7 @@
           nativeBuildInputs = self.packages.${pkgs.system};
         };
       }) nixpkgs;
-      overlays = import ./overlays {inherit inputs;};
+      overlays = import ./overlays { inherit inputs; };
       # nixosModules = let
       #   moduleDefaults = [
       #     ./modules/nixos

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   programs.waybar = {
@@ -8,7 +13,14 @@
         layer = "top";
         height = 10;
         spacing = 1;
-        modules-left = [ "sway/workspaces" "sway/mode" "sway/window" "river/tags" "river/window" "river/layout" ];
+        modules-left = [
+          "sway/workspaces"
+          "sway/mode"
+          "sway/window"
+          "river/tags"
+          "river/window"
+          "river/layout"
+        ];
         modules-center = [ ];
         modules-right = [
           "tray"
@@ -31,7 +43,9 @@
             "unlocked" = "";
           };
         };
-        "sway/mode" = { "format" = ''<span style="italic">{}</span>''; };
+        "sway/mode" = {
+          "format" = ''<span style="italic">{}</span>'';
+        };
         "sway/window" = {
           "format" = "{title}";
           "max-length" = 50;
@@ -42,7 +56,9 @@
           "separate-outputs" = true;
           "max-length" = 200;
         };
-        "tray" = { "spacing" = 10; };
+        "tray" = {
+          "spacing" = 10;
+        };
         "clock" = {
           "format" = "{:%d/%m/%y %H:%M}  ";
           "format-alt" = "{:%A, %B %d, %Y (%R)}";
@@ -73,7 +89,9 @@
           "format" = "cpu: {usage}%";
         };
         # "memory" = { "format" = "{}% "; };
-        "memory" = { "format" = "mem: {}%"; };
+        "memory" = {
+          "format" = "mem: {}%";
+        };
         "temperature" = {
           "critical-threshold" = 80;
           "format" = "{temperatureC}°C";
@@ -82,7 +100,10 @@
         };
         "backlight" = {
           "format" = "{percent}% {icon}";
-          "format-icons" = [ "" "" ];
+          "format-icons" = [
+            ""
+            ""
+          ];
         };
         "battery" = {
           "states" = {
@@ -93,7 +114,13 @@
           "format-charging" = "{capacity}% ";
           "format-plugged" = "{capacity}% ";
           "format-alt" = "{time} {icon}";
-          "format-icons" = [ "" "" "" "" "" ];
+          "format-icons" = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
         "network" = {
           "format-wifi" = "{essid} ({signalStrength}%) ";
@@ -117,14 +144,17 @@
             "phone" = "";
             "portable" = "";
             "car" = "";
-            "default" = [ "" "" "" ];
+            "default" = [
+              ""
+              ""
+              ""
+            ];
           };
           "on-click" = "pavucontrol";
         };
         "custom/power" = {
           "format" = "";
-          "on-click" =
-            "fuzzelpoweroffmenu";
+          "on-click" = "fuzzelpoweroffmenu";
         };
       };
     };
@@ -132,4 +162,3 @@
     style = builtins.readFile (./waybar-style.css);
   };
 }
-
