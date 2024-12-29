@@ -75,8 +75,8 @@ let
     gnumake
     direnv
     jq
-    pstree
     cloc
+    plantuml
   ];
   testpkgs = with sde.pkgs.${pkgs.system}; [
     test
