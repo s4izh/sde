@@ -14,7 +14,7 @@ LINKS_FROM_SDE_TO_HOME := \
 	dotfiles/.config/mimeapps.list:.config/mimeapps.list \
 	dotfiles/.config/picom:.config/picom \
 	dotfiles/.config/river:.config/river \
-	dotfiles/.config/shell/.bash_profile:.bash_profile \
+	dotfiles/.config/shell/bash_profile:.bash_profile \
 	dotfiles/.config/shell:.config/shell \
 	dotfiles/.config/sway:.config/sway \
 	dotfiles/.config/sxhkd:.config/sxhkd \
