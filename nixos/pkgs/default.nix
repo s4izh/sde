@@ -16,4 +16,5 @@
 }:
 {
   test = pkgs.callPackage ./test.nix { inherit pkgs; };
+  ctags-lsp = pkgs.callPackage ./ctags-lsp.nix { inherit pkgs; };
 }
