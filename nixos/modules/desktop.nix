@@ -15,6 +15,7 @@ in
 
   environment.systemPackages = with pkgs; [
     alacritty
+    kitty
     discord
     dmenu
     w3m
@@ -70,9 +71,6 @@ in
     rclone
     # vimb
     pdftk
-
-    # -- vpn --
-    openfortivpn
 
     # -- notifications --
     dunst
