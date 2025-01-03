@@ -4,19 +4,19 @@
   lib,
   ...
 }:
-# let
-#   cfg = config.test.services.desktop;
-# in
+let
+  cfg = config.sde.desktop;
+in
 {
   imports = [ ];
 
   options = {
-    cfg.enable = lib.mkEnableOption "Enable SDE desktop";
+    sde.desktop.enable = lib.mkEnableOption "Enable SDE desktop";
   };
 
-  # config = {
-  #   environment.systemPackages = lib.mkIf cfg.enable [
-  #     pkgs.helix
-  #   ];
-  # };
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      guile
+    ];
+  };
 }

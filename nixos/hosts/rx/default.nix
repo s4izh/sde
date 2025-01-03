@@ -37,6 +37,8 @@ in
     # inputs.minegrub-world-sel-theme.nixosModules.default
   ];
 
+  sde.desktop.enable = true;
+
   home-manager = {
     extraSpecialArgs = {
       inherit inputs sde;
