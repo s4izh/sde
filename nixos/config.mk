@@ -10,6 +10,7 @@ LINKS_FROM_SDE_TO_HOME := \
 	dotfiles/.config/dunst:.config/dunst \
 	dotfiles/.config/git:.config/git \
 	dotfiles/.config/kanshi:.config/kanshi \
+	dotfiles/.config/kitty:.config/kitty \
 	dotfiles/.config/libvirt:.config/libvirt \
 	dotfiles/.config/mimeapps.list:.config/mimeapps.list \
 	dotfiles/.config/picom:.config/picom \
