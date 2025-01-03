@@ -63,11 +63,14 @@
       #     ./modules/sde/nixos
       #   ];
 
+      # nixosModules.default = [ ];
+      nixosModules.sde = import ./modules/sde/nixos;
+
       #   allModules = map (path: import path) moduleDefaults;
       #   in
       #     allModules;
 
-      nixosModules = import ./modules/sde/nixos;
+      # nixosModules = import ./modules/sde/nixos;
 
       homeManagerModules = import ./modules/home-manager;
 
@@ -83,7 +86,7 @@
                   inherit self inputs sde;
                 };
                 modules = [
-                  self.nixosModules
+                  self.nixosModules.sde
                   "${sde.nixosPrefix}/hosts/${host}"
                   {
                     nix.registry.nixpkgs.flake = inputs.nixpkgs; # nix shell to use system flake
