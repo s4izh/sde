@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [ -n "$1" ] && [ "$1" == "git" ]; then
+    THEMES_PATH=$HOME/git/kitty-themes/themes
+    theme=$(ls "$THEMES_PATH" | fzf)
+    if [ -n "$theme" ]; then
+        ln -sf "$THEMES_PATH/$theme" "$HOME/.config/kitty/theme.conf"
+    fi
+    exit 0
+fi
+
+KITTY_PATH=$HOME/.config/kitty/
+THEMES_PATH=$HOME/.config/kitty/themes/
+theme=$(ls "$THEMES_PATH" | fzf)
+if [ -n "$theme" ]; then
+    cd "$KITTY_PATH" || exit
+    ln -sf themes/"$theme" theme.conf
+fi
