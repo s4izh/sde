@@ -5,6 +5,10 @@
   ...
 }:
 {
+  environment.systemPackages = with pkgs; [
+    openfortivpn
+  ];
+
   services.tailscale = {
     enable = true;
   };
