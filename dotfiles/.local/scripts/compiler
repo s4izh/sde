@@ -49,6 +49,7 @@ case "$ext" in
     py)   python3 "$file" ;;
     rs)   cargo run ;;
     tex)  pdflatex "$file";;
+    puml) plantuml "$file";;
     *)    handlebang ;;
     # default) exit ;;
 esac

@@ -4,6 +4,7 @@ set -x
 
 READER="${READER:=zathura}"
 BROWSER="${BROWSER:=firefox}"
+IMAGE_VIEWER="${IMAGE_VIEWER:=sxiv}"
 
 file=$(readlink -f "$1")
 basename="${file%.*}"
@@ -14,6 +15,9 @@ case "$1" in
         ;;
     *.html)
         setsid "$BROWSER" --new--window "$basename".html >/dev/null 2>&1 &
+        ;;
+    *.puml)
+        setsid "$IMAGE_VIEWER" -r "$basename".png >/dev/null 2>&1 &
         ;;
 esac
 
