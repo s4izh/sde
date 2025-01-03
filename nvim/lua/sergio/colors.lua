@@ -3,6 +3,25 @@ vim.opt.background = "dark"
 
 vim.g.gruvbox_contrast_dark = 'hard'
 
+local accent_config = function()
+  -- vim.g.accent_colour = 'yellow' -- the default
+  -- vim.g.accent_colour = 'orange'
+  -- vim.g.accent_colour = 'red'
+  -- vim.g.accent_colour = 'green'
+  -- vim.g.accent_colour = 'blue'
+  -- vim.g.accent_colour = 'magenta'
+  -- vim.g.accent_colour = 'cyan'
+
+  -- Configure accent darkening (makes the background and some text colors darker)
+  -- vim.g.accent_darken = 0 -- the default
+  -- vim.g.accent_darken = 1 -- Uncomment to enable darkening
+
+  -- Configure accent invert status (inverts the color of the status line text)
+  -- vim.g.accent_invert_status = 0 -- the default
+  -- vim.g.accent_invert_status = 1 -- Uncomment to enable inversion
+end
+
+
 function ColorMyPencils(color)
   color = color or "rose-pine"
   vim.cmd.colorscheme(color)
@@ -25,12 +44,15 @@ end
 
 local theme
 
+accent_config()
+
 if os.getenv("THEME_IS_LIGHT") then
   theme = "grey"
 else
-  theme = "ziggy"
+  theme = "zenburn"
 end
 
+ColorMyPencils("zenbones")
 ColorMyPencils(theme)
 
 vim.api.nvim_create_user_command("Theme", function(opts)
