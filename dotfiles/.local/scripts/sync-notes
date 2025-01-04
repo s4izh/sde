@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# set -x
+
+NOTES="${NOTES:$HOME/notes}"
+
+cd "$NOTES" || exit 1
+
+find . -name "*.md" -exec git add {} +
+
+git commit -m "$(date '+%Y-%m-%d %H:%M:%S')"
+
+git stash
+
+git pull --rebase
+git push
+
+git stash pop

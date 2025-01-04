@@ -45,6 +45,7 @@
       sde = rec {
         flakeRoot = ../.;
         nixosPrefix = "${flakeRoot}/nixos";
+        scripts = "${flakeRoot}/dotfiles/.local/scripts";
         pkgs = forAllSystems (pkgs: system: import ./pkgs pkgs) nixpkgs;
       };
 
