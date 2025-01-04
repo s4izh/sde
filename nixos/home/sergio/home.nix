@@ -14,6 +14,7 @@ in
   imports = [
     ./waybar.nix
     ./river.nix
+    ./notes.nix
   ];
 
   home.packages = with pkgs; [
