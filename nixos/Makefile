@@ -33,7 +33,7 @@ repl: ## Start a nix repl with the flake loaded
 test: ## Test the flake
 	sudo nixos-rebuild test --flake .# --impure
 
-switch: src-dependencies create-softlinks ## Switch to the flake
+switch: src-dependencies ## Switch to the flake
 	sudo nixos-rebuild switch --flake .\?submodules=1# --impure 
 
 boot:
