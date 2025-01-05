@@ -42,6 +42,7 @@ riverctl map normal $mod Q close
 riverctl map normal $mod p spawn "bemenu-run"
 
 riverctl keyboard-layout -model pc105 -variant '' -options caps:escape es
+# riverctl keyboard-layout -model pc105 -variant altgr-intl -options caps:escape us
 
 # manual network-tray
 # reason being - when spawned, cmst/applet fails to identify the sys-tray's presence
