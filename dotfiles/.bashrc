@@ -20,6 +20,8 @@ fi
 #     source_if_exist "$HOME/.guix-profile/etc/profile"
 # fi
 
+export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
+
 if [ "$THEME_IS_LIGHT" == "1" ]; then
     export FZF_DEFAULT_OPTS="--color=light"
 fi

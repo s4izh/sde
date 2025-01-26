@@ -23,6 +23,7 @@ LINKS_FROM_SDE_TO_HOME := \
 	dotfiles/.config/zathura:.config/zathura \
 	dotfiles/.config/zsh:.config/zsh \
 	dotfiles/.editorconfig:.editorconfig \
+	dotfiles/.guile:.guile \
 	dotfiles/.local/scripts:.local/scripts \
 	dotfiles/.xinitrc:.xinitrc \
 	dotfiles/.zprofile:.zprofile \
