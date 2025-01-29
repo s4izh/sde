@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+CHOICE=$(echo -e "es\nus" | bemenu -p layout)
+
+case "$CHOICE" in
+	es) riverctl keyboard-layout -model pc105 -variant '' -options caps:escape es ;;
+	us) riverctl keyboard-layout -model pc105 -variant altgr-intl -options caps:escape us ;;
+esac
