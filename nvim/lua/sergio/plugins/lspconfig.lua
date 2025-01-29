@@ -129,8 +129,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
-    vim.keymap.set("n", "<Leader>vla", ":LspStop<cr>")
-    vim.keymap.set("n", "<Leader>vlr", ":LspRestart<cr>")
+    vim.keymap.set('n', '<Leader>ls', ":LspStop<cr>", opts)
+    vim.keymap.set("n", "<Leader>lrr", ":LspRestart<cr>")
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
     vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist)
@@ -155,13 +155,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>vrn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>vca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<space>lrn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<space>la', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', '<space>lf', function()
       vim.lsp.buf.format { async = true }
     end, opts)
 
-    vim.keymap.set('n', '<space>ls', ":LspStop<cr>", opts)
+    vim.keymap.set('n', '<leader>lo', ':lua vim.lsp.buf.document_symbol()<CR>',
+      { noremap = true, silent = true, buffer = ev.buf })
 
     vim.api.nvim_set_hl(0, 'FloatBorder', { link = 'Normal' })
 
@@ -203,4 +204,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- lsp.markdown_oxide.setup({
 --   capabilities = capabilities,
 --   on_attach = on_attach,
+-- })
 -- })
