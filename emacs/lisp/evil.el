@@ -1,81 +1,52 @@
-(global-set-key (kbd "C-M-u") 'universal-argument)
-;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+;;; evil.el --- evil mode -*- no-byte-compile: t; lexical-binding: t; -*-
 
-(defun my/evil-scroll-down-and-center ()
-  "Scroll and center the buffer"
-  (interactive)
-  (evil-scroll-down evil-scroll-count)
-  (recenter))
-
-(defun my/evil-scroll-up-and-center ()
-  "Scroll down and center the buffer"
-  (interactive)
-  (evil-scroll-up evil-scroll-count)
-  (recenter))
+;; evil-want-keybinding must be declared before Evil and Evil Collection
+(setq evil-want-keybinding nil)
 
 (use-package evil
-  :demand t
-  ;; :bind (("<escape>" . keyboard-escape-quit))
+  :ensure t
   :init
-  (setq evil-search-module 'evil-search)
-  (setq evil-want-keybinding nil)
-  ;; (setq evil-want-minibuffer t)
   (setq evil-undo-system 'undo-fu)
-  ;;(setq evil-undo-system 'undo-tree)
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
-  (setq evil-respect-visual-line-mode t) ;; basically gj gk etc
-  (setq evil-want-Y-yank-to-eol t)
-  (setq evil-want-C-i-jump nil)
+  :custom
+  (evil-want-Y-yank-to-eol t)
   :config
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-normal-state-map (kbd "<escape>") 'abort-minibuffers)
-  (evil-define-key 'normal 'global "K" 'man)
-  (define-key evil-normal-state-map (kbd "C-d") 'my/evil-scroll-down-and-center)
-  (define-key evil-visual-state-map (kbd "C-d") 'my/evil-scroll-down-and-center)
-  (define-key evil-normal-state-map (kbd "C-u") 'my/evil-scroll-up-and-center)
-  (define-key evil-visual-state-map (kbd "C-u") 'my/evil-scroll-up-and-center)
-  ;; (define-key evil-normal-state-map (kbd "/") 'consult-line)
-  ;; (define-key evil-normal-state-map (kbd "?") 'consult-line)
-  ;; (define-key evil-insert-state-map (kbd "C-n") 'vertico-next)
-  ;; (define-key evil-insert-state-map (kbd "C-p") 'vertico-previous)
-  ;; (define-key evil-insert-state-map (kbd "C-y") 'corfu-complete)
+  (evil-select-search-module 'evil-search-module 'evil-search)
   (evil-mode 1))
-
-
-(with-eval-after-load 'evil
-  (define-key evil-normal-state-map (kbd "H") 'previous-buffer)
-  (define-key evil-normal-state-map (kbd "L") 'next-buffer)
-  (define-key evil-normal-state-map (kbd "C-y") nil)
-  (define-key evil-visual-state-map (kbd "C-y") nil)
-  (define-key evil-insert-state-map (kbd "C-y") nil)
-  (define-key evil-motion-state-map (kbd "C-y") nil))
-  ;; (define-key minibuffer-local-completion-map (kbd "C-n") 'vertico-next))
-  ;; (define-key minibuffer-local-map (kbd "C-p") 'vertico-previous))
 
 (use-package evil-collection
   :after evil
+  :ensure t
   :config
-  (setq evil-want-integration t)
   (evil-collection-init))
 
-(use-package evil-commentary
-  :after evil
-  :bind (:map evil-normal-state-map
-              ("gc" . evil-commentary)))
+(use-package undo-fu
+  :ensure t
+  :commands (undo-fu-only-undo
+             undo-fu-only-redo
+             undo-fu-only-redo-all
+             undo-fu-disable-checkpoint)
+  :custom
+  ;; 3 times the default values
+  (undo-limit (* 3 160000))
+  (undo-strong-limit (* 3 240000)))
 
-(use-package repeat
-  ;; :ensure t
-  :defer 10
-  :init
-  (repeat-mode +1))
-
-;; tab widths
-(setq-default tab-width 2)
-(setq-default evil-shift-width tab-width)
-;; spaces instead of tabs
-(setq-default indent-tabs-mode nil)
-
-(use-package evil-god-state
-  :after evil
+(use-package undo-fu-session
+  :ensure t
   :config
-  (evil-define-key 'normal 'global (kbd ",") 'evil-execute-in-god-state))
+  (undo-fu-session-global-mode))
+
+;; replaces evil-commentary packages
+(with-eval-after-load "evil"
+  (evil-define-operator my-evil-comment-or-uncomment (beg end)
+    "Toggle comment for the region between BEG and END."
+    (interactive "<r>")
+    (comment-or-uncomment-region beg end))
+  (evil-define-key 'normal 'global (kbd "gc") 'my-evil-comment-or-uncomment))
+
+;; (use-package vim-tab-bar
+;;   :ensure t
+;;   :commands vim-tab-bar-mode
+;;   :hook (after-init . vim-tab-bar-mode))
