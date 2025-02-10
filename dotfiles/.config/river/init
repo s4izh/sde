@@ -145,7 +145,7 @@ riverctl map normal $mod Left  send-layout-cmd rivertile "main-location left"
 riverctl declare-mode passthrough
 
 # Mod+F11 to enter passthrough mode
-riverctl map normal $mod i enter-mode passthrough
+riverctl map normal $mod F10 enter-mode passthrough
 
 # Mod+F11 to return to normal mode
 riverctl map passthrough $mod F11 enter-mode normal
