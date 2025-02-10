@@ -47,5 +47,25 @@ in
     };
   };
 
+  #environment.systemPackages = with pkgs; [
+  #  ollama-rocm
+  #  (writeShellScriptBin "ollama-serve-rocm" ''
+  #    #!/usr/bin/env bash
+  #    HSA_OVERRIDE_GFX_VERSION=10.3.0 ollama serve
+  #  '')
+  #  alpaca
+  #];
+
+  services.ollama = {
+    enable = true;
+    acceleration = "rocm";
+    loadModels = [
+      "mistral"
+      "mistral:instruct"
+      "deepseek-r1:14b"
+    ];
+    rocmOverrideGfx = "10.3.0";
+  };
+
   system.stateVersion = "23.11";
 }
