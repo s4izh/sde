@@ -92,6 +92,10 @@ in
 
     chromium
     qmk
+
+    aria2
+
+    wtype # similar to xdotool for wayland
   ];
 
   # programs.starship.enable = true;
