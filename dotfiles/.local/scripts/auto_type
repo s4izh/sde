@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+
+auto_type() {
+  local TEXT="$1"
+  local DELAY="${2:-3}"
+  
+  sleep "$DELAY"
+
+  if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    wtype "$TEXT"
+    wtype -k Return
+  else
+    xdotool type --delay 100 "$TEXT"
+    xdotool key Return
+  fi
+}
+
+# Function to simulate a key press sequence
+auto_keypress() {
+  local KEYS="$1"
+  local DELAY="${2:-1}"  # Optional delay between keys
+
+  echo "Simulating key presses: $KEYS"
+  sleep "$DELAY"
+  xdotool type --delay 100 "$KEYS"
+  xdotool key Return
+}
+
+# Function to open a specific program (e.g., Firefox)
+open_program() {
+  local PROGRAM="$1"
+  echo "Opening program: $PROGRAM"
+  sleep 1
+  $PROGRAM &
+}
+
+# Function to shutdown the system
+shutdown_system() {
+  echo "Shutting down system..."
+  sleep 1
+  shutdown now
+}
+
+show_menu() {
+    MENU=$(echo -e "login\npass" | bemenu -p "Choose an action:")
+    case "$MENU" in
+        "login")
+            ;;
+        "pass")
+            ;;
+        "Open Program")
+            ;;
+        "Shutdown System")
+            ;;
+        *)
+            echo "Invalid choice or no choice made."
+            ;;
+    esac
+}
+
+handle_args() {
+  local OPTION="$1"
+  shift  # Shift to get the arguments for the selected option
+
+  case "$OPTION" in
+    "auto_type")
+      auto_type "$@"  # Pass all remaining arguments
+      ;;
+    "auto_keypress")
+      auto_keypress "$@"  # Pass all remaining arguments
+      ;;
+    "open_program")
+      open_program "$@"  # Pass all remaining arguments
+      ;;
+    "shutdown_system")
+      shutdown_system
+      ;;
+    *)
+      echo "Invalid option. Use one of: auto_type, auto_keypress, open_program, shutdown_system"
+      exit 1
+      ;;
+  esac
+}
+
+if [ "$#" -gt 0 ]; then
+  handle_args "$@"
+else
+  show_menu
+fi
