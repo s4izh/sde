@@ -18,7 +18,7 @@ in
     ./configuration.nix
     "${modules}/base.nix"
     "${modules}/desktop.nix"
-    "${modules}/dwm.nix"
+    # "${modules}/dwm.nix"
     # "${modules}/dwl.nix"
     "${modules}/hyprland.nix"
     "${modules}/gaming.nix"

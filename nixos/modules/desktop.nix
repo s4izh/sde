@@ -148,7 +148,7 @@ in
   # sound.enable = true;
 
   # services.pulseaudio.enable = false;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -202,9 +202,9 @@ in
         # monospace = [ "IBM Plex Mono" ];
         # monospace = [ "FiraCode Nerd Font" ];
         # monospace = [ "LiterationMono Nerd Font" ];
-        # monospace = [ "JetBrains Mono" ];
+        monospace = [ "JetBrains Mono" ];
         # monospace = [ "UbuntuMono Nerd Font" ];
-        monospace = [ "Iosevka" ];
+        # monospace = [ "Iosevka" ];
         # monospace = [ "Liberation Mono" ];
         # monospace = [ "Inconsolata Nerd Font" ];
         # monospace = [ "FreeMono" ];
