@@ -17,6 +17,8 @@ in
     ./notes.nix
   ];
 
+  # home.backupFileExtension = "backup";
+
   home.packages = with pkgs; [
     tmux
     fzf
@@ -143,17 +145,16 @@ in
     theme = {
       name = "adw-gtk3-dark";
       package = pkgs.adw-gtk3;
-      # name = "Qogir";
-      # package = pkgs.qogir-theme;
     };
     iconTheme = {
-      name = "Qogir-dark";
+      # name = "Papirus-dark";
+      name = "Adwaita";
       # package = pkgs.papirus-icon-theme;
-      package = pkgs.qogir-icon-theme;
+      package = pkgs.adwaita-icon-theme;
     };
     cursorTheme = {
-      name = "Qogir";
-      package = pkgs.qogir-icon-theme;
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
     };
     font = {
       name = "monospace";
@@ -161,12 +162,14 @@ in
     };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
+      # gtk-application-prefer-light-theme = true;
       # gtk-dialogs-use-header = false;
       # gtk-decoration-layout= ":";
     };
     gtk3.extraCss = gtkExtraCss;
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = true;
+      # gtk-application-prefer-light-theme = true;
       # gtk-dialogs-use-header = false;
       # gtk-decoration-layout= ":";
     };
@@ -179,13 +182,33 @@ in
     ];
   };
 
+  # copiado del Toomoch
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 24;
+    x11 = {
+      enable = true;
+      defaultCursor = "Adwaita";
+    };
+    gtk.enable = true;
+  };
+
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
+      # color-scheme = "prefer-light";
     };
     # "org/gnome/desktop/wm/preferences" = {
     #   button-layout = "appmenu";
     # };
+  };
+
+  programs.mpv = {
+    enable = true;
+    config = {
+      hwdec = "auto";
+    };
   };
 
   programs.direnv.enable = true;
