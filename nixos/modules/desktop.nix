@@ -101,6 +101,7 @@ in
   # programs.starship.enable = true;
 
   programs.nix-ld.enable = true;
+  services.envfs.enable = true;
 
   programs.firefox = {
     enable = true;
@@ -135,11 +136,17 @@ in
   environment.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
 
   programs.npm.enable = true;
+
   programs.thunar.enable = true;
+  programs.thunar.plugins = with pkgs.xfce; [
+    thunar-media-tags-plugin
+    thunar-archive-plugin
+    thunar-volman
+  ];
 
   # automounting
-  # services.gvfs.enable = true;
-  # services.dbus.enable = true;
+  services.gvfs.enable = true;
+  services.dbus.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -156,6 +163,7 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
