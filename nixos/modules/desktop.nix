@@ -210,9 +210,9 @@ in
         # monospace = [ "IBM Plex Mono" ];
         # monospace = [ "FiraCode Nerd Font" ];
         # monospace = [ "LiterationMono Nerd Font" ];
-        monospace = [ "JetBrains Mono" ];
+        # monospace = [ "JetBrains Mono" ];
         # monospace = [ "UbuntuMono Nerd Font" ];
-        # monospace = [ "Iosevka" ];
+        monospace = [ "Iosevka" ];
         # monospace = [ "Liberation Mono" ];
         # monospace = [ "Inconsolata Nerd Font" ];
         # monospace = [ "FreeMono" ];
@@ -232,6 +232,27 @@ in
 
   xdg.portal.enable = true;
   xdg.portal.xdgOpenUsePortal = true;
+
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd launch-desktop-session.sh";
+  #       user = "sergio";
+  #     };
+  #   };
+  # };
+
+  # systemd.services.greetd.serviceConfig = {
+  #   Type = "idle";
+  #   StandardInput = "tty";
+  #   StandardOutput = "tty";
+  #   StandardError = "journal"; # Without this errors will spam on screen
+  #   # Without these bootlogs will spam on screen
+  #   TTYReset = true;
+  #   TTYVHangup = true;
+  #   TTYVTDisallocate = true;
+  # };
 
   # va muy lento con esto
   # documentation.man.generateCaches = true;
