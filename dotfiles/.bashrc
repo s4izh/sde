@@ -26,5 +26,9 @@ if [ "$THEME_IS_LIGHT" == "1" ]; then
     export FZF_DEFAULT_OPTS="--color=light"
 fi
 
+if command -v fzf 2>&1 >/dev/null; then
+    eval "$(fzf --bash)"
+fi
+
 unset source_if_exist
 
