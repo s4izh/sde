@@ -19,7 +19,8 @@ apps=(
 # waybar # "swayidle -w before-sleep 'gtklock -d'")
 
 for app in "${apps[@]}"; do
-    pkill -f "$app"
+    pname=$(echo "$app" | awk '{print $1}')
+    pkill -f "$pname"
     riverctl spawn "$app" 
 done
 
