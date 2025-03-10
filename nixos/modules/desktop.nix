@@ -109,10 +109,9 @@ in
     preferences = {
       "browser.fullscreen.autohide" = false;
       "browser.compactmode.show" = true;
+      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     };
   };
-
-  services.guix.enable = true;
 
   services.xserver = {
     xkb.layout = "es";
