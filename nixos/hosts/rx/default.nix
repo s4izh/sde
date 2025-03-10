@@ -27,6 +27,7 @@ in
     "${modules}/dev.nix"
     "${modules}/nvim.nix"
     "${modules}/river.nix"
+    "${modules}/guix.nix"
     # "${modules}/sway.nix"
     # "${modules}/stumpwm.nix"
     "${modules}/vpn.nix"
@@ -71,7 +72,7 @@ in
   services.open-webui = {
     enable = true;
     host = "0.0.0.0";
-    port = 8080;
+    port = 10000;
     environment = {
       ANONYMIZED_TELEMETRY = "False";
       DO_NOT_TRACK = "True";

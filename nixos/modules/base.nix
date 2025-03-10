@@ -30,8 +30,12 @@
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 15d";
+      persistent = true;
     };
   };
+
+  nixpkgs.flake.setNixPath = true;
+  nixpkgs.flake.setFlakeRegistry = true;
 
   nixpkgs.config.allowUnfree = true;
 

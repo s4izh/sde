@@ -19,12 +19,12 @@
   virtualisation.docker.enable = true;
 
   programs.dconf.enable = true;
-  programs.dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
-    };
-  };
+  # programs.dconf.settings = {
+  #   "org/virt-manager/virt-manager/connections" = {
+  #     autoconnect = [ "qemu:///system" ];
+  #     uris = [ "qemu:///system" ];
+  #   };
+  # };
   virtualisation.libvirtd.enable = true;
   users.users.sergio.extraGroups = [
     "libvirtd"
