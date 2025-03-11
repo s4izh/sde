@@ -6,6 +6,16 @@
   ...
 }:
 let
+  vscode-insiders = (pkgs.vscode.override { isInsiders = true; }).overrideAttrs (oldAttrs: {
+    src = (
+      builtins.fetchTarball {
+        url = "https://code.visualstudio.com/sha/download?build=insider&os=linux-x64";
+        sha256 = "sha256:0vmndc40z0ahijjghpfb52kkkydcr107rbsg0hlan4yg5db1kl8n";
+      }
+    );
+    version = "1.99-insider";
+  });
+
   rustpkgs = with pkgs; [
     rustup
     cargo
@@ -77,6 +87,7 @@ let
     jq
     cloc
     plantuml
+    wireshark
   ];
   testpkgs = with sde.pkgs.${pkgs.system}; [
     test
@@ -85,6 +96,7 @@ let
     vim
     neovim
     vscode
+    vscode-insiders
   ];
 in
 {

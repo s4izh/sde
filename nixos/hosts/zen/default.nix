@@ -20,6 +20,7 @@ in
     "${modules}/base.nix"
     "${modules}/desktop.nix"
     "${modules}/dev.nix"
+    "${modules}/vpn.nix"
     # "${modules}/unity.nix"
     # "${modules}/gnome.nix"
     "${modules}/dwm.nix"
@@ -36,6 +37,11 @@ in
     users = {
       sergio = import ../../home/sergio/home.nix;
     };
+  };
+
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
   };
 
   # This value determines the NixOS release from which the default

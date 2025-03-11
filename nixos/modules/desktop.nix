@@ -96,6 +96,9 @@ in
     aria2
 
     wtype # similar to xdotool for wayland
+
+    tree-sitter
+    # tree-sitter-grammars
   ];
 
   # programs.starship.enable = true;
@@ -231,6 +234,15 @@ in
 
   xdg.portal.enable = true;
   xdg.portal.xdgOpenUsePortal = true;
+
+  qt = {
+    enable = true;
+    style = "adwaita-dark";
+  };
+
+  environment.sessionVariables = {
+    QT_STYLE_OVERRIDE = "adwaita-dark";
+  };
 
   # services.greetd = {
   #   enable = true;
