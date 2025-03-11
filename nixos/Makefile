@@ -34,7 +34,8 @@ test: ## Test the flake
 	sudo nixos-rebuild test --flake .# --impure
 
 switch: src-dependencies ## Switch to the flake
-	sudo nixos-rebuild switch --flake .\?submodules=1# --impure 
+	# sudo nixos-rebuild switch --flake .\?submodules=1# --impure 
+	nh os switch --ask .\?submodules=1 -- --impure
 
 boot:
 	sudo nixos-rebuild boot --flake .\?submodules=1# --impure 
