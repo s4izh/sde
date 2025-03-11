@@ -18,3 +18,15 @@ function def() {
 function mygit () {
     git clone git@github.com:s4izh/"$1" $2
 }
+
+function nsh() {
+    command="\"nixpkgs#${1}\""
+    shift
+    for pkg in "$@"; do
+        command="${command} \"nixpkgs#${pkg}\""
+    done
+
+    nix_command="nix shell ${command}"
+    eval "$nix_command"
+}
+
