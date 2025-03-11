@@ -16,9 +16,9 @@
         modules-left = [
           "sway/workspaces"
           "sway/mode"
-          "sway/window"
+          # "sway/window"
           "river/tags"
-          "river/window"
+          # "river/window"
           "river/layout"
         ];
         modules-center = [ ];
