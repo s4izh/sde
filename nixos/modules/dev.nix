@@ -88,6 +88,7 @@ let
     cloc
     plantuml
     wireshark
+    yaml-language-server
   ];
   testpkgs = with sde.pkgs.${pkgs.system}; [
     test
@@ -96,7 +97,7 @@ let
     vim
     neovim
     vscode
-    vscode-insiders
+    # vscode-insiders
   ];
 in
 {
