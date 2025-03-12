@@ -17,7 +17,7 @@
     oversteer
 
     obs-studio
-    kdenlive
+    kdePackages.kdenlive
     ffmpeg
     lutris
     # webcord
