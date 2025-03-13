@@ -222,6 +222,7 @@ add_ssd_to=(
     "chromium-browser"
     "thunar"
     "obsidian"
+    "*"
 )
 for app in "${add_ssd_to[@]}"; do
     riverctl rule-add -app-id "$app" ssd
