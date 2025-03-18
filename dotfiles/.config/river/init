@@ -230,6 +230,7 @@ done
 
 float_apps=(
     "org.pulseaudio.pavucontrol"
+    ".blueman-manager-wrapped"
 )
 for app in "${float_apps[@]}"; do
     riverctl rule-add -app-id "$app" float
