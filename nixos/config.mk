@@ -20,6 +20,7 @@ LINKS_FROM_SDE_TO_HOME := \
 	dotfiles/.config/sway:.config/sway \
 	dotfiles/.config/sxhkd:.config/sxhkd \
 	dotfiles/.config/tmux:.config/tmux \
+	dotfiles/.config/xkb:.config/xkb \
 	dotfiles/.config/zathura:.config/zathura \
 	dotfiles/.config/zsh:.config/zsh \
 	dotfiles/.editorconfig:.editorconfig \
