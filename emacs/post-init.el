@@ -381,3 +381,46 @@
 
 (use-package vterm
   :defer t)
+
+(defun eval-and-show-inline ()
+  "Evaluate the expression at point and display the result next to it."
+  (interactive)
+  (let ((expr (thing-at-point 'line t)))
+    (when expr
+      (let ((result (eval (read expr))))
+        (end-of-line)
+        (insert " ;; => " (prin1-to-string result))))))
+
+(defvar my-eval-overlays nil
+  "List of overlays for showing evaluation results.")
+
+(defun eval-and-show-virtual-text ()
+  "Evaluate the expression at point and display the result as virtual text."
+  (interactive)
+  (let ((expr (thing-at-point 'line t)))  ;; Get the expression at point
+    (when expr
+      (let* ((result (eval (read expr)))  ;; Evaluate the expression
+             (result-str (prin1-to-string result))  ;; Convert result to string
+             (overlay (make-overlay (line-end-position) (line-end-position))))  ;; Create overlay after the expression
+        ;; Set overlay to show the result with custom styling
+        (overlay-put overlay 'after-string (concat " => " result-str))
+        ;; (overlay-put overlay 'face '(:foreground "blue" :weight bold))  ;; Apply styling to the virtual text
+        ;; Store the overlay in a list to remove later
+        (push overlay my-eval-overlays)))))
+
+(defun remove-all-eval-overlays ()
+  "Remove all displayed evaluation overlays."
+  (interactive)
+  (dolist (overlay my-eval-overlays)
+    (delete-overlay overlay))  ;; Remove each overlay
+  (setq my-eval-overlays nil))  ;; Clear the list of overlays
+
+(defun eval-and-copy-to-clipboard ()
+  "Evaluate the expression at point, then copy the result to the clipboard."
+  (interactive)
+  (let ((expr (thing-at-point 'line t)))  ;; Get the expression at point
+    (when expr
+      (let* ((result (eval (read expr)))  ;; Evaluate the expression
+             (result-str (prin1-to-string result)))  ;; Convert result to string
+        (kill-new result-str)  ;; Copy result to the clipboard
+        (message "Result copied to clipboard: %s" result-str)))))  ;; Display confirmation message
