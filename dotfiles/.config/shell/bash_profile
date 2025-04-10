@@ -54,8 +54,10 @@ fi
 
 # honor per-interactive-shell startup file
 if [[ "$(tty)" =~ ^/dev/tty ]] || [ -n "$TMUX" ]; then
-    if [ -f ~/.bashrc ]; then
-        . ~/.bashrc
+    if [ -f "$HOME"/.bashrc ] && [ -z "$BASHRC_SOURCED" ]; then
+        # echo "sourcing $HOME/.bashrc"
+        # export BASHRC_SOURCED=1
+        source "$HOME"/.bashrc
     fi
 fi
 

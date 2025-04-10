@@ -1,6 +1,12 @@
 # source the system-wide file
 [ -f /etc/bashrc ] && source /etc/bashrc
 
+if [[ -f "$HOME"/.bash_profile ]] && [[ -z "$BASH_PROFILE_SOURCED" ]]; then
+    echo "sourcing $HOME/.bash_profile"
+    export BASH_PROFILE_SOURCED=1
+    source "$HOME"/.bash_profile
+fi
+
 PS1='\u@\h \w${GUIX_ENVIRONMENT:+ [env]}\n\$ '
 PS0='\[\e[2 q\]'
 
