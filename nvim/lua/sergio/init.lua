@@ -1,5 +1,6 @@
 require("sergio.lazy-setup")
 require("sergio.settings")
+require("sergio.clipboard")
 require("sergio.keybinds")
 require("sergio.sudo")
 require("sergio.statusline")
