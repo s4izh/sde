@@ -34,13 +34,6 @@
     };
   };
 
-  programs.nh = {
-    enable = true;
-    # clean.enable = true;
-    # clean.extraArgs = "--keep-since 4d --keep 5";
-    # flake = "/";
-  };
-
   nixpkgs.flake.setNixPath = true;
   nixpkgs.flake.setFlakeRegistry = true;
 
