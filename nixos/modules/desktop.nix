@@ -91,6 +91,8 @@ in
     ueberzugpp # image preview
 
     chromium
+    google-chrome
+
     qmk
 
     aria2
@@ -99,6 +101,8 @@ in
 
     tree-sitter
     # tree-sitter-grammars
+
+    sde.pkgs.${pkgs.system}.zen-browser
   ];
 
   # programs.starship.enable = true;

@@ -15,12 +15,11 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./configuration.nix
     "${modules}/base.nix"
     "${modules}/desktop.nix"
     # "${modules}/dwm.nix"
     # "${modules}/dwl.nix"
-    "${modules}/hyprland.nix"
+    # "${modules}/hyprland.nix"
     "${modules}/gaming.nix"
     "${modules}/virtualisation.nix"
     "${modules}/android.nix"
@@ -28,10 +27,11 @@ in
     "${modules}/nvim.nix"
     "${modules}/river.nix"
     "${modules}/guix.nix"
+    # "${modules}/gnome.nix"
     # "${modules}/sway.nix"
-    # "${modules}/stumpwm.nix"
+    "${modules}/stumpwm.nix"
     "${modules}/vpn.nix"
-    # "${modules}/xfce.nix"
+    # "${modules}/xfcei3.nix"
     # "${modules}/i3.nix"
     inputs.home-manager.nixosModules.home-manager
     # inputs.minegrub-world-sel-theme.nixosModules.default
@@ -60,6 +60,8 @@ in
   services.ollama = {
     enable = true;
     acceleration = "rocm";
+    host = "0.0.0.0";
+    port = 11434;
     loadModels = [
       "mistral"
       "mistral:instruct"
@@ -82,7 +84,52 @@ in
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 8080 ];
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      10000
+      11434
+    ];
+  };
+
+  networking.hostName = "rx";
+  networking.networkmanager.enable = true;
+
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 5;
+    windows = {
+      "10" = {
+        title = "Windows 10";
+        efiDeviceHandle = "hd0b32768a1";
+      };
+    };
+  };
+
+  boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
+
+  services.openssh = {
+    enable = true;
+  };
+
+  environment.etc = {
+    "resolv.conf".text = "nameserver 8.8.8.8\n";
+  };
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  hardware.graphics.enable = true;
+
+  environment.systemPackages = with pkgs; [ amdgpu_top ];
+
+  hardware.cpu.amd.updateMicrocode = true;
+  hardware.keyboard.qmk.enable = true;
+
+  # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+  # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
+  # hardware.nvidia.modesetting.enable = true;
 
   system.stateVersion = "23.11";
 }

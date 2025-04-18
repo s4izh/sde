@@ -46,7 +46,7 @@
         flakeRoot = ../.;
         nixosPrefix = "${flakeRoot}/nixos";
         scripts = "${flakeRoot}/dotfiles/.local/scripts";
-        pkgs = forAllSystems (pkgs: system: import ./pkgs pkgs) nixpkgs;
+        pkgs = forAllSystems (pkgs: system: import ./pkgs pkgs system) nixpkgs;
       };
 
     in
@@ -96,10 +96,10 @@
               };
             };
           hosts = [
-            {
-              host = "z390";
-              arch = "x86_64-linux";
-            }
+            # {
+            #   host = "z390";
+            #   arch = "x86_64-linux";
+            # }
             {
               host = "rx";
               arch = "x86_64-linux";
@@ -108,24 +108,26 @@
               host = "zen";
               arch = "x86_64-linux";
             }
-            {
-              host = "jsc";
-              arch = "x86_64-linux";
-            }
-            {
-              host = "vm";
-              arch = "x86_64-linux";
-            }
-            {
-              host = "thinkcenter";
-              arch = "x86_64-linux";
-            }
+            # {
+            #   host = "jsc";
+            #   arch = "x86_64-linux";
+            # }
+            # {
+            #   host = "vm";
+            #   arch = "x86_64-linux";
+            # }
+            # {
+            #   host = "thinkcenter";
+            #   arch = "x86_64-linux";
+            # }
           ];
           autoMachineConfigs = map mkHostConfig hosts;
 
           machineConfigs = autoMachineConfigs ++ [ ];
         in
         builtins.listToAttrs machineConfigs;
+
+      hosts = builtins.attrNames self.nixosConfigurations;
 
       homeManagerConfigurations = {
         sergio = home-manager.lib.homeManagerConfiguration {
