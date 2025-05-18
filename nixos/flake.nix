@@ -7,10 +7,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # minegrub-world-sel-theme = {
-    #   url = "github:Lxtharia/minegrub-world-sel-theme";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nixos-hardware = {
+      url = "github:nixos/nixos-hardware/master";
+    };
   };
 
   outputs =

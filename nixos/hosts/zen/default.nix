@@ -16,18 +16,20 @@ in
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./configuration.nix
-    ./battery.nix
+    # ./battery.nix
     "${modules}/base.nix"
     "${modules}/desktop.nix"
     "${modules}/dev.nix"
     "${modules}/vpn.nix"
     # "${modules}/unity.nix"
     # "${modules}/gnome.nix"
-    "${modules}/dwm.nix"
+    # "${modules}/dwm.nix"
+    "${modules}/hyprland.nix"
     "${modules}/river.nix"
     "${modules}/nvim.nix"
     "${modules}/virtualisation.nix"
     inputs.home-manager.nixosModules.home-manager
+    inputs.nixos-hardware.nixosModules.asus-battery
   ];
 
   home-manager = {
@@ -42,6 +44,11 @@ in
   programs.localsend = {
     enable = true;
     openFirewall = true;
+  };
+
+  hardware.asus.battery = {
+    chargeUpto = 85;
+    enableChargeUptoScript = true;
   };
 
   # This value determines the NixOS release from which the default

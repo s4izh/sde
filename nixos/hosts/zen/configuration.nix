@@ -33,13 +33,21 @@
     HandlePowerKey=ignore
   '';
 
-  hardware.asus.battery = {
-    enableChargeUptoScript = true;
-    chargeUpto = 85;
-  };
-
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 5900 ];
+  };
+
+  # check
+  # /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+  # /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
+  services.tlp = {
+    enable = true;
+    settings = {
+      PCIE_ASPM_ON_AC = "powersave";
+      PCIE_ASPM_ON_BAT = "powersave";
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+    };
   };
 }
