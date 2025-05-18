@@ -64,8 +64,12 @@ in
       kanshi # manage monitors
       wpaperd # wallpapers
       lswt # window info
+      waylock
     ]
     ++ [ river-launcher ];
+
+  # needed for waylock to work
+  security.pam.services.waylock = { };
 
   environment.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
