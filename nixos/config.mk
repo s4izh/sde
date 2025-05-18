@@ -9,6 +9,7 @@ LINKS_FROM_SDE_TO_HOME := \
 	dotfiles/.config/alacritty:.config/alacritty \
 	dotfiles/.config/dunst:.config/dunst \
 	dotfiles/.config/git:.config/git \
+	dotfiles/.config/hypr:.config/hypr \
 	dotfiles/.config/kanshi:.config/kanshi \
 	dotfiles/.config/kitty:.config/kitty \
 	dotfiles/.config/libvirt:.config/libvirt \
