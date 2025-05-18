@@ -29,6 +29,7 @@ in
     redshift
     networkmanagerapplet
     gnome-calculator
+    gnome-keyring
     nautilus
     xclip
     maim
@@ -68,6 +69,7 @@ in
     aspell
     obsidian
     marksman
+    zotero
 
     libreoffice-fresh
     rclone
@@ -102,6 +104,9 @@ in
     tree-sitter
     # tree-sitter-grammars
 
+    # system resources
+    resources
+
     sde.pkgs.${pkgs.system}.zen-browser
   ];
 
@@ -117,6 +122,7 @@ in
       "browser.fullscreen.autohide" = false;
       "browser.compactmode.show" = true;
       "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+      "sidebar.verticalTabs" = true;
     };
   };
 
