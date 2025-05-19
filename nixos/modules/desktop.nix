@@ -91,22 +91,16 @@ in
     # -- terminal goodies --
     yazi
     ueberzugpp # image preview
-
+    # browsers
     chromium
     google-chrome
-
     qmk
-
     aria2
-
     wtype # similar to xdotool for wayland
-
     tree-sitter
     # tree-sitter-grammars
-
-    # system resources
-    resources
-
+    resources # system resources
+    numbat # high precision terminal calculator
     sde.pkgs.${pkgs.system}.zen-browser
   ];
 
