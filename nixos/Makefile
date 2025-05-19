@@ -50,7 +50,10 @@ update: ## Update the flake
 	nix flake update
 
 gc: ## Run garbage collection
+	sudo nix-store --gc
+	sudo nix-collect-garbage -d
 	nix-store --gc
+	nix-collect-garbage -d
 
 user: ## Switch to the flake as a user
 	nix build ".#homeManagerConfigurations.sergio.activationPackage" --impure
