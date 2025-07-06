@@ -49,10 +49,10 @@ accent_config()
 if os.getenv("THEME_IS_LIGHT") then
   theme = "grey"
 else
-  theme = "zenburn"
+  theme = "gruber-darker"
 end
 
-ColorMyPencils("zenbones")
+-- ColorMyPencils("zenbones")
 ColorMyPencils(theme)
 
 vim.api.nvim_create_user_command("Theme", function(opts)

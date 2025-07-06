@@ -29,7 +29,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- centre screen after moving through search
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("n", "<leader>nh", ":noh<cr>")
+vim.keymap.set("n", "<leader>th", ":noh<cr>")
 
 -- keep cursor on the same line on J
 vim.keymap.set("n", "J", "mzJ`z")
