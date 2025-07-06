@@ -10,6 +10,10 @@
 (use-package gruber-darker-theme :defer t)
 (use-package naysayer-theme :defer t)
 
+(use-package ef-themes :defer t)
+
+(use-package modus-themes :defer t)
+
 (use-package spaceway-theme
   ;; :disabled t
   :ensure nil
@@ -19,7 +23,7 @@
   ;; (set-cursor-color "#dc322f"))
   ;; (load-theme 'spaceway t))
 
-(setq my/current-theme 'spaceway)
+(setq my/current-theme 'tango-dark)
 
 (defun my/load-theme (theme)
   (interactive
@@ -32,3 +36,14 @@
   (load-theme theme t))
 
 (my/load-theme my/current-theme)
+
+;; (use-package nerd-icons
+;;   :ensure t)
+
+;; (use-package nerd-icons-corfu
+;;   :ensure t
+;;   :after corfu
+;;   :config
+;;   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
+;; (use-package mood-line)

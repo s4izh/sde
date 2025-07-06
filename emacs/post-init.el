@@ -27,7 +27,7 @@
 
   :config
   ;; Optimizations
-  (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
+  ;; (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
   (fset #'jsonrpc--log-event #'ignore)
   (setq jsonrpc-event-hook nil))
 
@@ -104,9 +104,9 @@
 (use-package dired
   :ensure nil
   :commands (dired)
-  :hook ((dired-mode . hl-line-mode)
-         (dired-mode . dired-omit-mode)
-         (dired-mode . dired-hide-details-mode))
+  ;; :hook ((dired-mode . hl-line-mode)
+  ;;        (dired-mode . dired-omit-mode)
+  ;;        (dired-mode . dired-hide-details-mode))
   :bind (:map dired-mode-map
               ("-" . dired-up-directory))
   :init
@@ -313,6 +313,12 @@
   :ensure nil
   :hook (compilation-filter . ansi-color-compilation-filter)) 
 
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (when (eq major-mode 'compilation-mode)
+    (ansi-color-apply-on-region (point-min) (point-max))))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
 (defun generic-compiler ()
   (concat "compiler "
           (if buffer-file-name
@@ -382,7 +388,7 @@
 (use-package vterm
   :defer t)
 
-(defun eval-and-show-inline ()
+(defun ss/eval-and-show-inline ()
   "Evaluate the expression at point and display the result next to it."
   (interactive)
   (let ((expr (thing-at-point 'line t)))
@@ -391,10 +397,10 @@
         (end-of-line)
         (insert " ;; => " (prin1-to-string result))))))
 
-(defvar my-eval-overlays nil
+(defvar ss/my-eval-overlays nil
   "List of overlays for showing evaluation results.")
 
-(defun eval-and-show-virtual-text ()
+(defun ss/eval-and-show-virtual-text ()
   "Evaluate the expression at point and display the result as virtual text."
   (interactive)
   (let ((expr (thing-at-point 'line t)))  ;; Get the expression at point
@@ -408,7 +414,7 @@
         ;; Store the overlay in a list to remove later
         (push overlay my-eval-overlays)))))
 
-(defun remove-all-eval-overlays ()
+(defun ss/remove-all-eval-overlays ()
   "Remove all displayed evaluation overlays."
   (interactive)
   (dolist (overlay my-eval-overlays)
@@ -451,3 +457,124 @@
               ;; Follow a backlink for the current file
               ("C-c C-b" . obsidian-backlink-jump)))
 
+(use-package magit
+  :ensure t
+  :defer t)
+
+(use-package rust-mode
+  :ensure t
+  :defer t)
+
+(use-package lua-mode
+  :ensure t
+  :defer t)
+
+(use-package rmsbolt
+  :ensure t
+  :defer t)
+
+(use-package general
+  :ensure t
+  :config
+  (general-create-definer my/leader
+    :prefix "SPC"))
+
+(my/leader
+  :keymaps 'normal
+  "p"  '(:ignore t :which-key "project")
+  "p f" 'project-find-file
+  "p F" 'project-find-regexp
+  "p b" 'project-switch-to-buffer
+  "p d" 'project-dired
+  "p e" 'project-eshell
+  "p s" 'project-shell
+  "p c" 'project-compile
+  "p r" 'project-recompile
+  "p p" 'project-switch-project
+  "p k" 'project-kill-buffers)
+
+(use-package org-embed
+  :ensure nil
+  :load-path "lisp/org-embed")
+(defun ethan/append-to-list (list-var elements)
+  "Append ELEMENTS to the end of LIST-VAR.
+	The return value is the new value of LIST-VAR."
+  (unless (consp elements)
+    (error "ELEMENTS must be a list"))
+  (let ((list (symbol-value list-var)))
+    (if list
+	(setcdr (last list) elements)
+      (set list-var elements)))
+  (symbol-value list-var))
+
+(use-package mixed-pitch
+  :ensure t
+  :hook((LaTeX-mode . mixed-pitch-mode)
+	      (org-mode . mixed-pitch-mode))
+  :config
+  (ethan/append-to-list 'mixed-pitch-fixed-pitch-faces
+			'(solaire-line-number-face
+			  org-date
+			  org-footnote
+			  org-special-keyword
+			  org-property-value
+			  org-ref-cite-face
+			  org-tag
+			  org-todo-keyword-todo
+			  org-todo-keyword-habt
+			  org-todo-keyword-done
+			  org-todo-keyword-wait
+			  org-todo-keyword-kill
+			  org-todo-keyword-outd
+			  org-todo
+			  org-done
+			  org-modern-priority
+			  org-modern-tag
+			  org-modern-done
+			  org-modern-date-active
+			  org-modern-date-inactive
+			  org-modern-time-active
+			  org-modern-time-inactive
+			  org-drawer
+			  font-lock-comment-face
+			  )))
+
+(use-package fontaine
+  :ensure t
+  :config
+  ;; The concise one which relies on "implicit fallback values"
+  (setq fontaine-presets
+	'((regular
+	   :default-height 100)
+	  ;; settinging some font for a smaller screen
+	  (small-screen
+	   :default-weight semilight
+	   :default-height 140)
+	  ;; settinging some font for a larger screen
+	  (larger-screen
+	   :default-weight semilight
+	   :default-height 155)
+	  (large
+	   :default-weight semilight
+	   :default-height 180
+	   :bold-weight extrabold)
+	  (t ; our shared fallback properties
+	   :default-family "monospace"
+	   :default-weight medium
+	   ;; I just really like computer modern font
+	   :variable-pitch-family "CMU Serif"
+	   :variable-pitch-height 1.5)))
+  ;; now set the preset
+  ;; if is my laptop or lab machine, the screens are a bit smaller and I am sitting
+  ;; a bit closer so will make the font a tad larger
+  ;; you can simplify this on your end if you want, just need to call
+  ;; `(fontaine-set-preset 'VALUE) 
+  ;; with whatever you called your display setting
+  (if (or (equal (system-name) "lab") (equal (system-name) "mover"))
+      (fontaine-set-preset 'small-screen)
+    ;; otherwise at home with a screen that is a touch bigger
+    ;; and am sitting a bit further away so make font bigger
+    (fontaine-set-preset 'larger-screen)))
+
+(global-set-key (kbd "<mouse-9>") 'next-buffer)
+(global-set-key (kbd "<mouse-8>") 'previous-buffer)
