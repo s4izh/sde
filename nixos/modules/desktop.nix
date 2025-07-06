@@ -206,6 +206,9 @@ in
       font-awesome
       noto-fonts-emoji
       rubik
+      comic-mono # Comic Mono
+      mononoki # Monoki
+      julia-mono
       # FiraCode Nerd Font
     ];
     fontconfig = {
@@ -218,12 +221,17 @@ in
         # monospace = [ "LiterationMono Nerd Font" ];
         # monospace = [ "JetBrains Mono" ];
         # monospace = [ "UbuntuMono Nerd Font" ];
-        monospace = [ "Iosevka" ];
+        # monospace = [ "Fantasque Sans Mono" ];
+        # monospace = [ "Comic Mono" ];
+        monospace = [ "Mononoki" ];
+        # monospace = [ "Julia Mono" ];
+        # monospace = [ "Iosevka" ];
         # monospace = [ "Liberation Mono" ];
         # monospace = [ "Inconsolata Nerd Font" ];
         # monospace = [ "FreeMono" ];
         # monospace = [ "Commit Mono" ];
         # monospace = [ "Victor Mono" ];
+        # monospace = [ "Source Code Pro" ];
       };
     };
   };
