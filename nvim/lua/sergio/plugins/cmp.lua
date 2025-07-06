@@ -11,6 +11,7 @@ cmp.setup({
     { name = 'pandoc' },
     { name = 'luasnip' }, -- For luasnip users.
     { name = 'buffer' },
+    -- { name = 'obsidian' },
   }),
   mapping = cmp.mapping.preset.insert({
     ['<C-p>'] = function(fallback)
@@ -40,13 +41,13 @@ cmp.setup({
   }),
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)     -- For `luasnip` users.
+      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
-  -- window = {
-  --   completion = cmp.config.window.bordered(),
-  --   documentation = cmp.config.window.bordered(),
-  -- },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
   formatting = {
     format = function(entry, vim_item)
       vim_item.abbr = string.sub(vim_item.abbr, 1, 30)

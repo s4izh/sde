@@ -30,7 +30,17 @@ local markdown_toc = {
   "mzlogin/vim-markdown-toc",
 }
 
+local vim_table_mode = {
+  "dhruvasagar/vim-table-mode",
+  ft = { "markdown" },
+  config = function()
+    vim.keymap.set("n", "<Leader>tm", ":TableModeToggle<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<Leader>tr", ":TableModeRealign<CR>", { noremap = true, silent = true })
+  end,
+}
+
 return {
-  render_markdown,
-  markdown_toc
+  -- render_markdown,
+  markdown_toc,
+  vim_table_mode,
 }

@@ -22,9 +22,15 @@ local function create_format_autocmd(extension, callback)
 end
 
 local auto_format_extensions = {
-  "lua",
-  "nix",
+  -- "lua",
+  -- "nix",
 }
+
+local add_lsp = function(executable_name, lsp_name, config)
+  if (vim.fn.executable(executable_name) > 0) then
+    lsp[lsp_name].setup(config)
+  end
+end
 
 local lsp = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -68,6 +74,10 @@ if (vim.fn.executable("ctags-lsp") > 0) then
   lsp.ctags_lsp.setup({})
 end
 
+if (vim.fn.executable("vhdl_ls") > 0) then
+  lsp.vhdl_ls.setup({})
+end
+
 if (vim.fn.executable("pyright") > 0) then
   lsp.pyright.setup({})
 elseif (vim.fn.executable("pylsp") > 0) then
@@ -96,7 +106,7 @@ if (vim.fn.executable("ltex-ls") > 0) then
     filetypes = { "tex", "bib" },
     settings = {
       ltex = {
-        language = "es",
+        language = "en",
       },
     },
   })
