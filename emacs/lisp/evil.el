@@ -14,6 +14,23 @@
   (evil-want-Y-yank-to-eol t)
   :config
   (evil-select-search-module 'evil-search-module 'evil-search)
+  ;; (defun my-evil-scroll-up-and-center ()
+  ;;   "Scroll the buffer up a half-window and center the cursor."
+  ;;   (interactive)
+  ;;   (scroll-up-command) ; Scroll up by half the window height
+  ;;   (recenter))            ; Center the cursor in the window
+  ;; 
+  ;; (defun my-evil-scroll-down-and-center ()
+  ;;   "Scroll the buffer down a half-window and center the cursor."
+  ;;   (interactive)
+  ;;   (scroll-down-command)          ; Scroll down by half the window height
+  ;;   (recenter))            ; Center the cursor in the window
+  ;; 
+  ;; (define-key evil-normal-state-map (kbd "C-u") 'my-evil-scroll-up-and-center)
+  ;; (define-key evil-visual-state-map (kbd "C-u") 'my-evil-scroll-up-and-center)
+  ;; 
+  ;; (define-key evil-normal-state-map (kbd "C-d") 'my-evil-scroll-down-and-center)
+  ;; (define-key evil-visual-state-map (kbd "C-d") 'my-evil-scroll-down-and-center)
   (evil-mode 1))
 
 (use-package evil-collection
