@@ -39,8 +39,18 @@ local vim_table_mode = {
   end,
 }
 
+local markdown_preview = {
+  "iamcco/markdown-preview.nvim",
+  build = "cd app && yarn install",
+  init = function()
+    vim.g.mkdp_filetypes = { "markdown" }
+  end,
+  ft = { "markdown" },
+}
+
 return {
   -- render_markdown,
   markdown_toc,
   vim_table_mode,
+  markdown_preview,
 }
