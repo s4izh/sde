@@ -1,7 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   networking.hostName = "zen";
   networking.networkmanager.enable = true;
@@ -41,8 +46,9 @@
   # check
   # /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
   # /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
+
   services.tlp = {
-    enable = true;
+    enable = lib.mkDefault true;
     settings = {
       PCIE_ASPM_ON_AC = "powersave";
       PCIE_ASPM_ON_BAT = "powersave";
