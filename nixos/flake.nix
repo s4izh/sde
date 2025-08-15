@@ -10,6 +10,7 @@
     nixos-hardware = {
       url = "github:nixos/nixos-hardware/master";
     };
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
