@@ -17,11 +17,11 @@ end
 vim.api.nvim_set_keymap('n', '<Leader>q', ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
 
 vim.cmd[[
-function! s:FilterQuickfixList(bang, pattern)
+function! s:FilterQuickfixListByFile(bang, pattern)
   let cmp = a:bang ? '!~#' : '=~#'
   call setqflist(filter(getqflist(), "bufname(v:val['bufnr']) " . cmp . " a:pattern"))
 endfunction
-command! -bang -nargs=1 -complete=file QFilter call s:FilterQuickfixList(<bang>0, <q-args>)
+command! -bang -nargs=1 -complete=file QFilterFile call s:FilterQuickfixListByFile(<bang>0, <q-args>)
 ]]
 
 vim.cmd[[
@@ -63,8 +63,7 @@ function! s:FilterQuickfixListByText(bang, pattern)
   endtry
 endfunction
 
-" Define the command :QFilterText
 " -bang: enables the ! for negation
 " -nargs=1: requires exactly one argument (the pattern)
-command! -bang -nargs=1 QFilterText call s:FilterQuickfixListByText(<bang>0, <q-args>)
+command! -bang -nargs=1 QFilter call s:FilterQuickfixListByText(<bang>0, <q-args>)
 ]]
