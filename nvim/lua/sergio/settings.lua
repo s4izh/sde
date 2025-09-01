@@ -36,6 +36,8 @@ vim.opt.incsearch = true
 
 vim.o.path = vim.o.path .. "**"
 
+vim.o.winborder = "rounded"
+
 -- disable autocomment on next line
 -- vim.cmd[[
 --     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
