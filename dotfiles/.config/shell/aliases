@@ -39,3 +39,5 @@ alias \
     ts='tmux-sessionizer' \
     tm='tmux-main' \
     tp='tmux-picker'
+
+alias tiomenu="tio -b 115200 \$(FZF_DEFAULT_COMMAND='find /dev/serial/by-id | tail -n +2 ' fzf --header=\"Pick a serial port\")"
