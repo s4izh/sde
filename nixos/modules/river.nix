@@ -12,7 +12,7 @@ let
     export XDG_CURRENT_DESKTOP=river
     export XDG_SESSION_DESKTOP=river
 
-    # exec ${pkgs.river}/bin/river &> /tmp/river.log
+    # exec ${pkgs.river-classic}/bin/river &> /tmp/river.log
 
     systemctl --user import-environment \
     DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP NIXOS_OZONE_WL \
@@ -27,12 +27,12 @@ let
     fi
     # gnome-keyring-daemon --start --components=secrets
 
-    dbus-launch --exit-with-session ${pkgs.river}/bin/river &> /tmp/river.log
+    dbus-launch --exit-with-session ${pkgs.river-classic}/bin/river &> /tmp/river.log
   '';
 
 in
 {
-  programs.river = {
+  programs.river-classic = {
     enable = true;
   };
 
