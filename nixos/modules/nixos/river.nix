@@ -11,7 +11,7 @@
   #   displayManager.lightdm.enable = true;
   # };
 
-  programs.river = {
+  programs.river-classic = {
     enable = true;
   };
 
