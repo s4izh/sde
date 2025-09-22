@@ -54,9 +54,9 @@ cmp.setup({
       return vim_item
     end
   },
-  -- completion = {
-  --   autocomplete = false,
-  -- },
+  completion = {
+    autocomplete = false,
+  },
 })
 require("luasnip.loaders.from_vscode").lazy_load()
 
