@@ -48,3 +48,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 vim.opt.tags = "./tags;tags"
+
+vim.o.exrc = true
+vim.o.secure = true
