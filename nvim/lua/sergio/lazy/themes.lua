@@ -44,4 +44,5 @@ return {
   setup_theme("roflolilolmao/oceanic-next.nvim"),
   setup_theme("aliqyan-21/darkvoid.nvim"),
   setup_theme("vague2k/vague.nvim"),
+  setup_theme("Carcuis/darcula.nvim"),
 }
