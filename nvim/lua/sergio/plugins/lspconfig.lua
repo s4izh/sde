@@ -55,6 +55,10 @@ if (vim.fn.executable("zls") > 0) then
   lsp.zls.setup({})
 end
 
+if (vim.fn.executable("svls") > 0) then
+  lsp.svls.setup({})
+end
+
 if (vim.fn.executable("marksman") > 0) then
   lsp.marksman.setup({
     cmd = { "marksman", "server" },
