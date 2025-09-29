@@ -14,6 +14,8 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.cursorline = false
 
+vim.opt.completeopt = "fuzzy,menu,menuone,noselect,noinsert"
+
 vim.g.editorconfig = true
 
 -- annoying things
