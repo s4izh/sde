@@ -102,6 +102,7 @@ in
     resources # system resources
     numbat # high precision terminal calculator
     sde.pkgs.${pkgs.system}.zen-browser
+    graphviz
   ];
 
   # programs.starship.enable = true;
