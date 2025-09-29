@@ -50,6 +50,7 @@ case "$ext" in
     rs)   cargo run ;;
     tex)  pdflatex "$file";;
     puml) plantuml "$file";;
+    dot)  dot -Tpng "$file" -o "$base".png ;;
     *)    handlebang ;;
     # default) exit ;;
 esac
