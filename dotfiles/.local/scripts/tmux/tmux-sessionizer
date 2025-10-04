@@ -6,7 +6,7 @@ select_project() {
         return
     fi
 
-    local folders=$(find ~/personal ~/uni/"$CURRENT_Q" ~/git ~/devel ~/devel/lanaccess ~/.local/src -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
+    local folders=$(find ~/personal ~/uni/mei ~/uni/miri ~/git ~/devel ~/devel/lanaccess ~/.local/src -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
     local scripts=~/.local/scripts
     local nvim=~/.config/nvim
     local notes=~/notes
