@@ -64,32 +64,36 @@
                     (supplementary-groups '("wheel" "netdev" "audio" "video")))
                   %base-user-accounts))
 
-    (packages (append (specifications->packages (list "sway"
-                                                      "river"
-                                                      "xdg-desktop-portal-wlr"
-                                                      "swaybg"
-                                                      "swayidle"
-                                                      "swaylock"
-                                                      "bemenu"
-                                                      "vim"
-                                                      "nss-certs"
-                                                      "git"
-                                                      "foot"
-                                                      "alacritty"
-                                                      "firefox"
-                                                      "pavucontrol"
-                                                      "make"
-                                                      "vim"
-                                                      "tmux"
-                                                      "git"
-                                                      "neovim"
-                                                      "gcc-toolchain"
-                                                      "setxkbmap"
-                                                      "font-iosevka"
-                                                      "dmenu"
-                                                      "st"
-                                                      "dwm-custom"
-                                                      "fzf")) %base-packages))
+    (packages
+     (append
+      (specifications->packages
+       (list "sway"
+             "river"
+             "xdg-desktop-portal-wlr"
+             "swaybg"
+             "swayidle"
+             "swaylock"
+             "bemenu"
+             "vim"
+             "nss-certs"
+             "git"
+             "foot"
+             "alacritty"
+             "firefox"
+             "pavucontrol"
+             "make"
+             "vim"
+             "tmux"
+             "git"
+             "neovim"
+             "gcc-toolchain"
+             "setxkbmap"
+             "font-iosevka"
+             "dmenu"
+             "st"
+             "dwm-custom"
+             "fzf"))
+      %base-packages))
 
     ;; Allow resolution of '.local' host names with mDNS
     (name-service-switch %mdns-host-lookup-nss)
