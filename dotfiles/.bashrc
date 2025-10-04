@@ -28,9 +28,12 @@ fi
 
 export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
 
+# TODO: use a file for that
 if [ "$THEME_IS_LIGHT" == "1" ]; then
     export FZF_DEFAULT_OPTS="--color=light"
 fi
+
+# export FZF_DEFAULT_OPTS="--color=bw"
 
 if command -v fzf 2>&1 >/dev/null; then
     eval "$(fzf --bash)"
