@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("sergio.lazy", {
   install = {
-    missing = false,
+    missing = true,
   },
   change_detection = { notify = false },
   rocks = {
