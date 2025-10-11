@@ -53,7 +53,7 @@ let
   erlangpkgs = with pkgs; [
     rebar3
     erlang
-    erlang-ls
+    erlang-language-platform
   ];
   linuxpkgs = with pkgs; [
     man-pages
@@ -77,6 +77,8 @@ let
   gitpkgs = with pkgs; [
     git
     python312Packages.git-filter-repo
+    gh # github cli
+    glab # gitlab cli
   ];
   devpkgs = with pkgs; [
     tmux
