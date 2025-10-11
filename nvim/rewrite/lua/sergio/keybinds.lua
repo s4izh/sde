@@ -62,29 +62,17 @@ vim.keymap.set("n", "<leader>wl", ":r!~/notes/utils/link-note % 2>/dev/null<cr>"
 
 vim.keymap.set("n", "<leader>fw", ":silent grep <C-R><C-W> | copen<cr>")
 
-local function toggle_line_numbers()
-  local is_number = vim.wo.number
-  local is_relativenumber = vim.wo.relativenumber
-
-  if is_number or is_relativenumber then
-    vim.wo.number = false
-    vim.wo.relativenumber = false
-    print("Line numbers disabled")
-  else
-    vim.wo.number = true
-    vim.wo.relativenumber = true
-    print("Line numbers enabled")
-  end
-end
-
 -- TOGGLES
 
+local toggles = require("sergio.toggles")
+
 -- linenumber configs toggle
-vim.keymap.set("n", "<leader>tla", toggle_line_numbers, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>tlr", ":set relativenumber!<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tcc", toggles.toggle_color_column, { noremap = true, silent = true, desc = "toggle color column" })
+vim.keymap.set("n", "<leader>tla", toggles.toggle_line_numbers, { noremap = true, silent = true, desc = "toggle line numbers column" })
+vim.keymap.set("n", "<leader>tlr", ":set relativenumber!<cr>", { noremap = true, silent = true, desc = "toggle relative number" })
 
 -- line wrapping
-vim.keymap.set("n", "<leader>tw", ":set wrap! linebreak!<cr>")
+vim.keymap.set("n", "<leader>tw", ":set wrap! linebreak!<cr>"color )
 
 -- search highlights
 vim.keymap.set("n", "<leader>th", ":noh<cr>")
@@ -94,14 +82,3 @@ vim.keymap.set("n", "<leader>tcC", ":set cursorcolumn!<cr>", { noremap = true, s
 vim.keymap.set("n", "<leader>tcl", ":set cursorline!<cr>", { noremap = true, silent = true })
 
 -- vim.keymap.set("n", "<leader>tcl", ":set cursorline!<cr>", { noremap = true, silent = true })
-
-local function toggle_color_column()
-  local col = vim.opt.colorcolumn._value
-  if col == "0" then
-    vim.opt.colorcolumn = "100"
-  else
-    vim.opt.colorcolumn = "0"
-  end
-end
-
-vim.keymap.set("n", "<leader>tcc", toggle_color_column, { noremap = true, silent = true })
