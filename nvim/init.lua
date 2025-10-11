@@ -16,6 +16,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+local lastplace_group = vim.api.nvim_create_augroup('Lastplace', {})
+vim.api.nvim_create_autocmd({'BufWinEnter'}, {
+  group = lastplace_group,
+  desc = 'return cursor to where it was last time closing the file',
+  pattern = '*',
+  -- there is a mark at '"' register
+  command = 'silent! normal! g`"zv',
+})
+
 vim.api.nvim_set_option("grepprg", "rg --vimgrep --smart-case --hidden")
 vim.api.nvim_set_option("grepformat", "%f:%l:%c:%m,%f:%l:%m")
 

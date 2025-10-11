@@ -33,8 +33,8 @@ local add_lsp = function(executable_name, lsp_name, config)
 end
 
 local lsp = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
--- local capabilities = nil
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = nil
 local format_group = vim.api.nvim_create_augroup('FormatGroup', {})
 
 if (vim.fn.executable("rust-analyzer") > 0) then
@@ -55,9 +55,16 @@ if (vim.fn.executable("zls") > 0) then
   lsp.zls.setup({})
 end
 
-if (vim.fn.executable("svls") > 0) then
-  lsp.svls.setup({})
+-- if (vim.fn.executable("svls") > 0) then
+--   lsp.svls.setup({})
+-- end
+
+if (vim.fn.executable("verible-verilog-ls") > 0) then
+  lsp.verible.setup({
+    cmd = { 'verible-verilog-ls', '--rules_config_search' },
+  })
 end
+
 
 if (vim.fn.executable("marksman") > 0) then
   lsp.marksman.setup({
