@@ -136,10 +136,10 @@ in
     ];
   };
 
-  programs.emacs = {
-    enable = true;
-    # package = pkgs.emacs30-gtk3;
-  };
+  # programs.emacs = {
+  #   enable = true;
+  #   package = pkgs.emacs30-gtk3;
+  # };
 
   gtk = {
     enable = true;

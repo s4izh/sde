@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -21,7 +22,7 @@ let
     cargo
     cargo-watch
     cargo-make
-    rust-analyzer
+    # rust-analyzer
     rustfmt
     rustc
   ];
@@ -49,6 +50,7 @@ let
     clang-tools
     gdb
     universal-ctags
+    ctags-lsp
   ];
   erlangpkgs = with pkgs; [
     rebar3
@@ -97,8 +99,9 @@ let
   ];
   editorspkgs = with pkgs; [
     vim
-    neovim
+    # neovim
     vscode
+    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
     # vscode-insiders
   ];
 in

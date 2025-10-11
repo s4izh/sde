@@ -15,6 +15,8 @@ set wrap
 set textwidth=79
 set formatoptions=tcqrn1
 
+set completeopt=menu,menuone,noselect,noinsert
+
 set autoindent
 set tabstop=4
 set shiftwidth=4

@@ -47,6 +47,7 @@
     git
     pciutils # lspci setpci
     usbutils # lsusb
+    hwloc
     pstree
     lshw
     file
