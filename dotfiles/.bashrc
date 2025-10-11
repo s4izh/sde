@@ -2,7 +2,7 @@
 [ -f /etc/bashrc ] && source /etc/bashrc
 
 if [[ -f "$HOME"/.bash_profile ]] && [[ -z "$BASH_PROFILE_SOURCED" ]]; then
-    echo "sourcing $HOME/.bash_profile"
+    # echo "sourcing $HOME/.bash_profile"
     export BASH_PROFILE_SOURCED=1
     source "$HOME"/.bash_profile
 fi
