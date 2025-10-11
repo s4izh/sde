@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# source "$HOME/.bash_profile"
+
 # This is the example configuration file for river.
 #
 # See the river(1), riverctl(1), and rivertile(1) man pages for complete

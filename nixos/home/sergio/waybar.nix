@@ -18,6 +18,8 @@
           "sway/mode"
           # "sway/window"
           "river/tags"
+          "hyprland/workspaces"
+          "hyprland/window"
           # "river/window"
           "river/layout"
         ];
@@ -50,6 +52,16 @@
           "format" = "{title}";
           "max-length" = 50;
           "icon" = true;
+        };
+        "river/window" = {
+          "format" = "{title}";
+          "max-length" = 50;
+          "icon" = true;
+        };
+        "hyprland/workspaces" = {
+          "format" = "{name}";
+          "all-outputs" = false;
+          "active-only" = false;
         };
         "hyprland/window" = {
           "format" = "{}";

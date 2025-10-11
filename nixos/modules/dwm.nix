@@ -35,9 +35,9 @@
         src = /home/sergio/.local/src/dwm;
         # src = fetchGit { url = "https://github.com/s4izh/dwm"; };
       });
-      # dmenu = prev.dmenu.overrideAttrs (old: {
-      #   src = /home/sergio/.local/src/dmenu;
-      # });
+      dmenu = prev.dmenu.overrideAttrs (old: {
+        src = /home/sergio/.local/src/dmenu;
+      });
       dwmblocks = prev.dwmblocks.overrideAttrs (old: {
         src = /home/sergio/.local/src/dwmblocks;
       });
@@ -53,6 +53,8 @@
     settings = {
       PCIE_ASPM_ON_AC = "powersave";
       PCIE_ASPM_ON_BAT = "powersave";
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
     };
   };
 

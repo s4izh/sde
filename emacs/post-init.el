@@ -457,6 +457,7 @@
               ;; Follow a backlink for the current file
               ("C-c C-b" . obsidian-backlink-jump)))
 
+<<<<<<< Updated upstream
 (use-package magit
   :ensure t
   :defer t)
@@ -578,3 +579,16 @@
 
 (global-set-key (kbd "<mouse-9>") 'next-buffer)
 (global-set-key (kbd "<mouse-8>") 'previous-buffer)
+=======
+;; Create note
+(define-key obsidian-mode-map (kbd "C-c o c") 'obsidian-capture)
+;; If you prefer you can use `obsidian-insert-wikilink'
+(define-key obsidian-mode-map (kbd "C-c o l") 'obsidian-insert-link)
+;; Open file pointed to by link at point
+(define-key obsidian-mode-map (kbd "C-c C-o") 'obsidian-follow-link-at-point)
+;; Open a note note from vault
+(define-key obsidian-mode-map (kbd "C-c o j") 'obsidian-jump)
+;; Follow a backlink for the current file
+(define-key obsidian-mode-map (kbd "C-c o b") 'obsidian-backlink-jump)
+
+>>>>>>> Stashed changes
