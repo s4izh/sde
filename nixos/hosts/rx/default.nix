@@ -125,6 +125,8 @@ in
   hardware.cpu.amd.updateMicrocode = true;
   hardware.keyboard.qmk.enable = true;
 
+  services.hardware.openrgb.enable = true;
+
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
   # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
