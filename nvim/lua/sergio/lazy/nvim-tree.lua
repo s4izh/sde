@@ -1,5 +1,6 @@
 return {
   "nvim-tree/nvim-tree.lua",
+  dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
   config = function()
     vim.g.nvim_tree_show_icons = {
       git = 0,
