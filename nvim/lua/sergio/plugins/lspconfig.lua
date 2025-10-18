@@ -81,9 +81,9 @@ if (vim.fn.executable("clangd") > 0) then
   })
 end
 
-if (vim.fn.executable("ctags-lsp") > 0) then
-  lsp.ctags_lsp.setup({})
-end
+-- if (vim.fn.executable("ctags-lsp") > 0) then
+--   lsp.ctags_lsp.setup({})
+-- end
 
 if (vim.fn.executable("vhdl_ls") > 0) then
   lsp.vhdl_ls.setup({})
