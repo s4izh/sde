@@ -14,6 +14,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/scripts:$PATH"
 export PATH="$HOME/.local/scripts/statusbar:$PATH"
 export PATH="$HOME/.local/scripts/tmux:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 export UNI="$HOME/uni"
 [ -e "$UNI/.env" ] && source "$UNI/.env"
@@ -62,9 +63,9 @@ if [[ "$(tty)" =~ ^/dev/tty ]] || [ -n "$TMUX" ]; then
     fi
 fi
 
-[ "$(tty)" = "/dev/tty1" ] && exec startx
+# [ "$(tty)" = "/dev/tty1" ] && exec startx
 
-# [ "$(tty)" = "/dev/tty1" ] && exec launch-desktop-session.sh
+[ "$(tty)" = "/dev/tty1" ] && exec launch-desktop-session.sh
 
 # [ "$(tty)" = "/dev/tty1" ] && exec dbus-launch --exit-with-session Hyprland &> /tmp/hyprland.log
 
