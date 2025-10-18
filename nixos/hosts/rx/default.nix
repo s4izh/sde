@@ -28,7 +28,7 @@ in
     "${modules}/river.nix"
     "${modules}/guix.nix"
     # "${modules}/gnome.nix"
-    # "${modules}/sway.nix"
+    "${modules}/sway.nix"
     # "${modules}/stumpwm.nix"
     "${modules}/vpn.nix"
     # "${modules}/xfcei3.nix"
@@ -58,7 +58,7 @@ in
   #];
 
   services.ollama = {
-    enable = true;
+    enable = false;
     acceleration = "rocm";
     host = "0.0.0.0";
     port = 11434;
@@ -72,7 +72,7 @@ in
   };
 
   services.open-webui = {
-    enable = true;
+    enable = false;
     host = "0.0.0.0";
     port = 10000;
     environment = {
