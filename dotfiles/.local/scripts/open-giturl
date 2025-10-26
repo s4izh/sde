@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# look at tmux pane only if an arg --tmux is passed
+if [ "$1" == "--tmux" ]; then
+  if [ -z "$TMUX" ]; then
+    echo "Error: Not running inside a tmux session." >&2
+    exit 1
+  fi
+  cd $(tmux run "echo #{pane_start_path}")
+fi
+
+url=$(git remote get-url origin)
+
+if [ -z "$url" ]; then
+  echo "Error: Could not get the remote URL for 'origin'." >&2
+  echo "Please make sure you are in a git repository with a configured remote." >&2
+  exit 1
+fi
+
+browser_url="${url%.git}"
+
+if [[ "$browser_url" == git@* ]]; then
+  browser_url="https://""$(echo "$browser_url" | sed 's/^git@//; s/:/\//')"
+fi
+
+# echo "Opening repository in browser: $browser_url"
+
+if command -v xdg-open &> /dev/null; then
+  xdg-open "$browser_url" &> /dev/null  # For Linux
+elif command -v open &> /dev/null; then
+  open "$browser_url"      # For macOS
+elif command -v start &> /dev/null; then
+  start "$browser_url"     # For Windows
+else
+  echo "Error: Could not find a command to open the URL." >&2
+  echo "You can manually open the URL: $browser_url" >&2
+  exit 1
+fi
