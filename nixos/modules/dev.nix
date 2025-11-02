@@ -16,7 +16,10 @@ let
     );
     version = "1.99-insider";
   });
-
+  hardwarepkgs = with pkgs; [
+    surfer
+    gtkwave
+  ];
   rustpkgs = with pkgs; [
     rustup
     cargo
@@ -99,9 +102,8 @@ let
   ];
   editorspkgs = with pkgs; [
     vim
-    # neovim
+    neovim
     vscode
-    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
     # vscode-insiders
   ];
 in
@@ -121,5 +123,6 @@ in
     ++ zigpkgs
     ++ haskellpkgs
     ++ editorspkgs
+    ++ hardwarepkgs
     ++ testpkgs;
 }
