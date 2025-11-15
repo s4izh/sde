@@ -271,5 +271,4 @@ dbus-update-activation-environment \
 # River will send the process group of the init executable SIGTERM on exit.
 
 riverctl default-layout rivertile
-exec rivertile
-
+exec rivertile -view-padding 0 -outer-padding 1 -main-ratio 0.5
