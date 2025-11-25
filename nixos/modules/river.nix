@@ -62,6 +62,7 @@ in
       slurp # screenshots
       grim # screenshots
       kanshi # manage monitors
+      wlr-randr # manage monitors
       wpaperd # wallpapers
       lswt # window info
       waylock
