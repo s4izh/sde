@@ -1,5 +1,6 @@
-profile "Single Monitor" {
-    output HDMI-A-1 mode 1920x1080@200
+profile "Combo" {
+    output HDMI-A-1 mode 1920x1080@200 position 0,0
+    output DP-3 mode 1920x1080@200 position 1920,0
 }
 
 profile {
