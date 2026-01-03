@@ -43,6 +43,72 @@ if (vim.fn.executable("rust-analyzer") > 0) then
   })
 end
 
+local on_attach = function(client, bufnr)
+  if client.server_capabilities.inlayHintProvider then
+    local inlay_hints_group = vim.api.nvim_create_augroup('sergio/toggle_inlay_hints', { clear = false })
+    
+    -- Track if the user has manually disabled hints for this buffer
+    -- vim.g.inlay_hints_enabled = true -- we could use a global variable, instead of a per buffer
+    vim.b[bufnr].inlay_hints_enabled = true 
+
+    -- Initial setup
+    vim.defer_fn(function()
+      local mode = vim.api.nvim_get_mode().mode
+      vim.lsp.inlay_hint.enable(mode == 'n' or mode == 'v', { bufnr = bufnr })
+    end, 500)
+
+    -- Keybind to toggle the "Master Switch"
+    vim.keymap.set('n', '<leader>lh', function()
+      vim.b[bufnr].inlay_hints_enabled = not vim.b[bufnr].inlay_hints_enabled
+      vim.lsp.inlay_hint.enable(vim.b[bufnr].inlay_hints_enabled, { bufnr = bufnr })
+      print("Inlay hints: " .. (vim.b[bufnr].inlay_hints_enabled and "ON" or "OFF"))
+    end, { buffer = bufnr, desc = "Toggle Inlay Hints" })
+
+    vim.api.nvim_create_autocmd('InsertEnter', {
+      group = inlay_hints_group,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('InsertLeave', {
+      group = inlay_hints_group,
+      buffer = bufnr,
+      callback = function()
+        -- Only re-enable on InsertLeave if the master switch is ON
+        if vim.b[bufnr].inlay_hints_enabled then
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
+      end,
+    })
+  end
+end
+
+lsp.rust_analyzer.setup({
+  on_attach = on_attach,
+  settings = {
+    ["rust-analyzer"] = {
+      inlayHints = {
+        bindingModeHints = { enable = false },
+        chainingHints = { enable = true },
+        closingBraceHints = { enable = true, minLines = 25 },
+        closureReturnTypeHints = { enable = "never" },
+        lifetimeElisionHints = { enable = "never", useParameterNames = false },
+        maxLength = 25,
+        parameterHints = { enable = true },
+        reborrowHints = { enable = "never" },
+        renderColons = true,
+        typeHints = {
+          enable = true,
+          hideClosureInitialization = false,
+          hideNamedConstructor = false,
+        },
+      },
+    }
+  }
+})
+
 if (vim.fn.executable("gopls") > 0) then
   lsp.gopls.setup({})
 end
