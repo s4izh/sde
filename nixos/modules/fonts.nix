@@ -19,7 +19,7 @@
       # gnu-freefont
       fantasque-sans-mono # Fantasque Sans Mono
       input-fonts
-      # fira-code-nerd-font # FiraCode Nerd Font
+      fira-code
       # (nerdfonts.override { fonts = [ "LiterationMono Nerd Font Mono" ]; })
       commit-mono # Commit Mono
       # ubuntu-mono # Ubuntu Mono
@@ -30,11 +30,13 @@
       liberation_ttf
       ibm-plex
       font-awesome
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       rubik
       comic-mono # Comic Mono
       mononoki # Monoki
       julia-mono
+      # _0xproto
+      nerd-fonts._0xproto
       # FiraCode Nerd Font
     ];
     fontconfig = {
@@ -43,7 +45,7 @@
         serif = [ "Source Serif Pro" ];
         # monospace = [ "InputMonoCondensed" ];
         # monospace = [ "IBM Plex Mono" ];
-        # monospace = [ "FiraCode Nerd Font" ];
+        monospace = [ "Fira Code" ];
         # monospace = [ "LiterationMono Nerd Font" ];
         # monospace = [ "JetBrains Mono" ];
         # monospace = [ "UbuntuMono Nerd Font" ];
@@ -51,7 +53,8 @@
         # monospace = [ "Comic Mono" ];
         # monospace = [ "Mononoki" ];
         # monospace = [ "Julia Mono" ];
-        monospace = [ "Iosevka" ];
+        # monospace = [ "Iosevka" ];
+        # monospace = [ "0xProto Nerd Font Mono" ];
         # monospace = [ "Liberation Mono" ];
         # monospace = [ "Inconsolata Nerd Font" ];
         # monospace = [ "FreeMono" ];

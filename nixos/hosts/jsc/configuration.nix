@@ -1,18 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, ... }:
-{
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
 
+{ config, pkgs, ... }:
+
+{
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  # Use latest kernel.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "jsc"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -43,27 +41,17 @@
   };
 
   # Enable the X11 windowing system.
+  # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "es";
-    xkbVariant = "";
-    libinput = {
-      enable = true;
-      mouse = {
-        accelProfile = "flat";
-        naturalScrolling = true;
-      };
-      touchpad = {
-        accelProfile = "flat";
-        naturalScrolling = true;
-      };
-    };
+    variant = "";
   };
 
   # Configure console keymap
@@ -73,9 +61,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  # services.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -97,20 +83,24 @@
   users.users.javier = {
     isNormalUser = true;
     description = "javier";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
-      google-chrome
-      kate
-      chromium
-    ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJeQfTgmLkyFn+QJ2G85//oLRyeCYScPs0WfWiF1TN6s sergiosanz234@gmail.com"
     ];
   };
+
+  # Install firefox.
+  programs.firefox.enable = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    google-chrome
+  ];
 
   nix = {
     settings = {
@@ -124,27 +114,9 @@
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 15d";
+      persistent = true;
     };
   };
-
-  # system.autoUpgrade.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    kazam
-    mpv
-    yt-dlp
-    kdenlive
-    ffmpeg
-    git
-    tree
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -157,10 +129,8 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-  };
+  services.openssh.enable = true;
+  services.openssh.settings.PermitRootLogin = "yes";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

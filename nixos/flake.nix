@@ -39,7 +39,7 @@
               config.allowUnfree = true;
             };
           in
-          function syspkgs system
+          function syspkgs syspkgs.stdenv.hostPlatform.system
         );
 
       sde = rec {
@@ -108,10 +108,10 @@
               host = "zen";
               arch = "x86_64-linux";
             }
-            # {
-            #   host = "jsc";
-            #   arch = "x86_64-linux";
-            # }
+            {
+              host = "jsc";
+              arch = "x86_64-linux";
+            }
             # {
             #   host = "vm";
             #   arch = "x86_64-linux";
