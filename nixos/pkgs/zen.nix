@@ -5,7 +5,7 @@
   fetchTarball,
   makeWrapper,
   copyDesktopItems,
-  wrapGAppsHook,
+  wrapGAppsHook3,
   # Below are the runtime libraries needed
   alsa-lib,
   atk,
@@ -126,7 +126,7 @@ stdenv.mkDerivation {
   nativeBuildInputs = [
     makeWrapper
     copyDesktopItems
-    wrapGAppsHook
+    wrapGAppsHook3
   ];
 
   # Note: No separate buildPhase needed as we are using pre-built binaries
@@ -179,7 +179,7 @@ stdenv.mkDerivation {
       --set MOZ_LEGACY_PROFILES 1 \
       --set MOZ_ALLOW_DOWNGRADE 1 \
       --set MOZ_APP_LAUNCHER zen \
-      --prefix XDG_DATA_DIRS : "$GSETTINGS_SCHEMAS_PATH" # GSETTINGS_SCHEMAS_PATH comes from wrapGAppsHook
+      --prefix XDG_DATA_DIRS : "$GSETTINGS_SCHEMAS_PATH" # GSETTINGS_SCHEMAS_PATH comes from wrapGAppsHook3
 
     patchelf --set-interpreter "$dynamicLinker" $out/bin/zen-bin
     wrapProgram $out/bin/zen-bin \

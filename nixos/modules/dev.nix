@@ -104,6 +104,7 @@ let
     vim
     neovim
     vscode
+    emacs
     # vscode-insiders
   ];
 in

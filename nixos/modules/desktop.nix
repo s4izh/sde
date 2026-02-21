@@ -98,7 +98,7 @@ in
     # browsers
     chromium
     google-chrome
-    qmk
+    # qmk
     aria2
     wtype # similar to xdotool for wayland
     tree-sitter

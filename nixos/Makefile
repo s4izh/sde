@@ -60,9 +60,13 @@ user: ## Switch to the flake as a user
 	./result/activate
 	rm -rf result
 
-deploy:
+deploy-thinkcenter:
 	sudo nixos-rebuild switch --flake ".#thinkcenter" --impure \
 		--target-host root@192.168.1.176 --build-host root@192.168.1.176
+
+deploy-jsc:
+	sudo nixos-rebuild switch --flake ".#jsc" --impure \
+		--target-host root@192.168.1.146 --build-host root@192.168.1.146
 
 src-dependencies: ## Download impure source dependencies
 	@if [ ! -d $(SRC_DIR) ]; then mkdir -p $(SRC_DIR); fi

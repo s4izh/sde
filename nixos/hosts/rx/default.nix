@@ -17,16 +17,16 @@ in
     ./hardware-configuration.nix
     "${modules}/base.nix"
     "${modules}/desktop.nix"
-    "${modules}/dwm.nix"
+    # "${modules}/dwm.nix"
     # "${modules}/dwl.nix"
-    # "${modules}/hyprland.nix"
+    "${modules}/hyprland.nix"
     "${modules}/gaming.nix"
     "${modules}/virtualisation.nix"
     "${modules}/android.nix"
     "${modules}/dev.nix"
     "${modules}/nvim.nix"
     "${modules}/river.nix"
-    "${modules}/guix.nix"
+    # "${modules}/guix.nix"
     # "${modules}/gnome.nix"
     "${modules}/sway.nix"
     # "${modules}/stumpwm.nix"
@@ -57,28 +57,42 @@ in
   #  alpaca
   #];
 
+  nixpkgs.config.rocmSupport = true;
+
   services.ollama = {
-    enable = false;
-    acceleration = "rocm";
+    package = pkgs.ollama-rocm;
+    enable = true;
     host = "0.0.0.0";
     port = 11434;
     loadModels = [
-      "mistral"
-      "mistral:instruct"
-      "deepseek-r1:14b"
-      "llama3"
+      "gemma2:9b"
+      "qwen2.5-coder:14b"
+      "mistral-small:22b-instruct-2409-q4_K_M"
     ];
     rocmOverrideGfx = "10.3.0";
   };
 
   services.open-webui = {
-    enable = false;
+    enable = true;
     host = "0.0.0.0";
     port = 10000;
     environment = {
+      WEBUI_AUTH = "False";
       ANONYMIZED_TELEMETRY = "False";
       DO_NOT_TRACK = "True";
       SCARF_NO_ANALYTICS = "True";
+
+      # 1. Disable Gravatar (Stops sending your email hash to Gravatar servers)
+      ENABLE_GRAVATAR = "False";
+      # 2. Disable Update Checks (Stops pinging GitHub/Home to check for new versions)
+      CHECK_UPDATES = "False";
+      # 3. Disable Community Sharing (Prevents accidental sharing of prompts/tools to the public site)
+      ENABLE_COMMUNITY_SHARING = "False";
+      # 4. Security: Disable New Signups (Crucial!)
+      # Once you have recovered your account, set this to False.
+      # This prevents anyone else on your network from creating an account on your LLM.
+      ENABLE_SIGNUP = "False";
+
       OLLAMA_API_BASE_URL = "http://127.0.0.1:11434/api";
       OLLAMA_BASE_URL = "http://127.0.0.1:11434";
     };
@@ -123,7 +137,7 @@ in
   environment.systemPackages = with pkgs; [ amdgpu_top ];
 
   hardware.cpu.amd.updateMicrocode = true;
-  hardware.keyboard.qmk.enable = true;
+  # hardware.keyboard.qmk.enable = true;
 
   services.hardware.openrgb.enable = true;
 
@@ -132,6 +146,13 @@ in
 
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   # hardware.nvidia.modesetting.enable = true;
+
+  services.scx = {
+    enable = true;
+    # lattency aware virtual deadline steam deck scheduler
+    # scheduler = "scx_lavd"; 
+    # scheduler = "scx_bore"; 
+  };
 
   system.stateVersion = "23.11";
 }

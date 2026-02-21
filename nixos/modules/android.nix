@@ -7,6 +7,6 @@
 {
   environment.systemPackages = [ ];
 
-  programs.adb.enable = true;
+  # programs.adb.enable = true;
   users.users.sergio.extraGroups = [ "adbusers" ];
 }

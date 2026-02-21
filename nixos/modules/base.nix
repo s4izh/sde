@@ -56,8 +56,11 @@
     ripgrep
     tmux
     tree
-    du-dust
+    dust
     tldr
+    traceroute
+    mtr
+    lsof
   ];
 
   # Set your time zone.
