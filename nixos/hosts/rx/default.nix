@@ -19,7 +19,7 @@ in
     "${modules}/desktop.nix"
     # "${modules}/dwm.nix"
     # "${modules}/dwl.nix"
-    "${modules}/hyprland.nix"
+    # "${modules}/hyprland.nix"
     "${modules}/gaming.nix"
     "${modules}/virtualisation.nix"
     "${modules}/android.nix"
@@ -28,7 +28,7 @@ in
     "${modules}/river.nix"
     # "${modules}/guix.nix"
     # "${modules}/gnome.nix"
-    "${modules}/sway.nix"
+    # "${modules}/sway.nix"
     # "${modules}/stumpwm.nix"
     "${modules}/vpn.nix"
     # "${modules}/xfcei3.nix"
@@ -66,8 +66,8 @@ in
     port = 11434;
     loadModels = [
       "gemma2:9b"
+      "qwen2.5-coder:7b"
       "qwen2.5-coder:14b"
-      "mistral-small:22b-instruct-2409-q4_K_M"
     ];
     rocmOverrideGfx = "10.3.0";
   };

@@ -45,7 +45,7 @@
         serif = [ "Source Serif Pro" ];
         # monospace = [ "InputMonoCondensed" ];
         # monospace = [ "IBM Plex Mono" ];
-        monospace = [ "Fira Code" ];
+        # monospace = [ "Fira Code" ];
         # monospace = [ "LiterationMono Nerd Font" ];
         # monospace = [ "JetBrains Mono" ];
         # monospace = [ "UbuntuMono Nerd Font" ];
@@ -53,7 +53,7 @@
         # monospace = [ "Comic Mono" ];
         # monospace = [ "Mononoki" ];
         # monospace = [ "Julia Mono" ];
-        # monospace = [ "Iosevka" ];
+        monospace = [ "Iosevka" ];
         # monospace = [ "0xProto Nerd Font Mono" ];
         # monospace = [ "Liberation Mono" ];
         # monospace = [ "Inconsolata Nerd Font" ];

@@ -36,7 +36,7 @@ let
   ];
   nixpkgs = with pkgs; [
     nixd
-    nixfmt-rfc-style
+    nixfmt
     (writeShellScriptBin "nixpkgs-fmt" ''
       #!/usr/bin/env bash
       nixfmt $@
