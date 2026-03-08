@@ -26,7 +26,7 @@ pkgs.mkShell {
     gnumake
     tmux
     vim
-    nixfmt-rfc-style
+    nixfmt
   ];
 
   shellHook = ''

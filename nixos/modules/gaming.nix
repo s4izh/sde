@@ -7,7 +7,7 @@
 {
   environment.systemPackages = with pkgs; [
     legendary-gl
-    wineWowPackages.stable
+    # wineWowPackages64.stable
     # dxvk
     heroic
     bottles

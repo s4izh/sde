@@ -151,7 +151,7 @@ in
   programs.npm.enable = true;
 
   programs.thunar.enable = true;
-  programs.thunar.plugins = with pkgs.xfce; [
+  programs.thunar.plugins = with pkgs; [
     thunar-media-tags-plugin
     thunar-archive-plugin
     thunar-volman
