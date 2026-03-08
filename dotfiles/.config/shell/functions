@@ -30,3 +30,63 @@ function nsh() {
     eval "$nix_command"
 }
 
+function nixcd() {
+    if [ $# -ne 1 ]; then
+        echo "usage: nixcd <nixpkgs-attr>" >&2
+        return 2
+    fi
+
+    local dir
+    if ! dir="$(nix eval --raw "nixpkgs#$1.outPath" 2>/dev/null)"; then
+        echo "nixcd: attribute '$1' not found" >&2
+        return 1
+    fi
+
+    if [ ! -d "$dir" ]; then
+        echo "nixcd: $dir is not a directory" >&2
+        return 1
+    fi
+
+    cd -- "$dir" || return
+}
+
+function nixfiles() {
+    if [ $# -lt 1 ]; then
+        echo "usage: nixfiles <attr> [depth]" >&2
+        return 2
+    fi
+
+    local attr="$1"
+    local depth="${2:-2}"
+    local path
+
+    # ensure package exists in store
+    if ! path=$(nix build --no-link --print-out-paths "nixpkgs#$attr" 2>/dev/null); then
+        echo "nixfiles: failed to build or find '$attr'" >&2
+        return 1
+    fi
+
+    path="$(nix eval --raw "nixpkgs#$attr.outPath")" || return
+
+    if ! [ -d "$path" ]; then
+        echo "nixfiles: output not a directory (package not installed probably): $path" >&2
+        return 1
+    fi
+
+    (
+        cd "$path" || exit 1
+        if command -v tree >/dev/null && false; then
+            tree -L "$depth" "$path"
+        else
+            cd "$path" || exit
+            find . -maxdepth "$depth"
+        fi
+        # find . -mindepth 1 -maxdepth "$depth"
+    )
+}
+
+function nixsrc() {
+    local src
+    src=$(nix eval --raw "nixpkgs#$1.src.outPath" 2>/dev/null) || return
+    cd "$src"
+}
