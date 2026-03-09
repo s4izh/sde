@@ -21,7 +21,7 @@ in
     alacritty
     kitty
     discord
-    discord-canary
+    # discord-canary
     dmenu
     w3m
     pavucontrol

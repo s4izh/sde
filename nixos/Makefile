@@ -20,6 +20,8 @@ ifeq ($(GIT_SRCS),)
   $(error GIT_SRCS is not set. Please define it before running this Makefile.)
 endif
 
+STATE_FILE := $(HOME)/.cache/sde/links
+
 # REPO_NAMES := $(notdir $(basename $(GIT_SRCS)))
 
 help:
@@ -78,21 +80,32 @@ src-dependencies: ## Download impure source dependencies
 	done
 
 create-dirs: ## Create expected directories
-	@for dir in $(DIRS); do \
-		mkdir -pv $$dir; \
+	@for dir in $(DIRS_TO_CREATE_IN_HOME); do \
+		mkdir -pv $(HOME)/$$dir; \
 	done
 
-create-softlinks: remove-softlinks create-dirs ## Create all softlinks
-	@for pair in $(LINKS_FROM_SDE_TO_HOME); do \
+softlinks-create: softlinks-remove create-dirs ## Create all softlinks
+	@rm -f $(STATE_FILE); \
+	for pair in $(LINKS_FROM_SDE_TO_HOME); do \
 		src=$${pair%%:*}; \
 		dest=$${pair##*:}; \
 		ln -svf $(SDE_DIR)/$$src $(HOME)/$$dest; \
-	done
+		echo $(HOME)/$$dest >> $(STATE_FILE); \
+	done 
 
-remove-softlinks: ## Remove all softlinks
-	@for pair in $(LINKS_FROM_SDE_TO_HOME); do \
-		dest=$${pair##*:}; \
-		if [ -h $(HOME)/$$dest ]; then \
-			rm -v $(HOME)/$$dest; \
-		fi; \
-	done
+softlinks-remove: ## Remove all softlinks
+	@if [ -f $(STATE_FILE) ]; then \
+		while IFS= read -r dest; do \
+			if [ -h "$$dest" ]; then \
+				rm -v "$$dest"; \
+			fi; \
+		done < $(STATE_FILE); \
+		rm -f $(STATE_FILE); \
+	else \
+		for pair in $(LINKS_FROM_SDE_TO_HOME); do \
+			dest=$${pair##*:}; \
+			if [ -h $(HOME)/$$dest ]; then \
+				rm -v $(HOME)/$$dest; \
+			fi; \
+		done \
+	fi
