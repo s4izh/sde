@@ -1,4 +1,4 @@
-;;; spaceway-theme.el --- Spaceway theme for GNU Emacs 24 (deftheme)
+;;; spaceway-theme.el --- --- Spaceway theme for GNU Emacs 24 (deftheme) -*- no-byte-compile: t; lexical-binding: t; -*-
 
 ;; Author: Mark Tran <mark.tran@gmail.com>
 ;; URL: http://github.com/marktran/color-theme-spaceway

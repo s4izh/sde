@@ -14,6 +14,12 @@
   (evil-want-Y-yank-to-eol t)
   :config
   (evil-select-search-module 'evil-search-module 'evil-search)
+  (setq evil-normal-state-cursor   'box
+        evil-insert-state-cursor   'box
+        evil-visual-state-cursor   'box
+        evil-motion-state-cursor   'box
+        evil-replace-state-cursor  'box
+        evil-operator-state-cursor 'box)
   ;; (defun my-evil-scroll-up-and-center ()
   ;;   "Scroll the buffer up a half-window and center the cursor."
   ;;   (interactive)

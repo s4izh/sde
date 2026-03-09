@@ -23,7 +23,7 @@
   ;; (set-cursor-color "#dc322f"))
   ;; (load-theme 'spaceway t))
 
-(setq my/current-theme 'tango-dark)
+(setq my/current-theme 'modus-vivendi-tinted)
 
 (defun my/load-theme (theme)
   (interactive
