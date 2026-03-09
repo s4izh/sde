@@ -8,11 +8,13 @@ LINKS_FROM_SDE_TO_HOME := \
 	dotfiles/.bashrc:.bashrc \
 	dotfiles/.config/alacritty:.config/alacritty \
 	dotfiles/.config/dunst:.config/dunst \
+	dotfiles/.config/foot:.config/foot \
 	dotfiles/.config/git:.config/git \
 	dotfiles/.config/hypr:.config/hypr \
 	dotfiles/.config/kanshi:.config/kanshi \
 	dotfiles/.config/kitty:.config/kitty \
 	dotfiles/.config/libvirt:.config/libvirt \
+	dotfiles/.config/mango:.config/mango \
 	dotfiles/.config/mimeapps.list:.config/mimeapps.list \
 	dotfiles/.config/picom:.config/picom \
 	dotfiles/.config/river:.config/river \
@@ -35,7 +37,8 @@ LINKS_FROM_SDE_TO_HOME := \
 
 DIRS_TO_CREATE_IN_HOME := \
 	.local \
-	.config/guix
+	.config/guix \
+	.cache/sde \
 
 GIT_SRCS := \
 	https://github.com/s4izh/dwm.git \

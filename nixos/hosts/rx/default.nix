@@ -10,6 +10,8 @@
 }:
 let
   modules = ../../modules;
+  wm = ../../modules/wm;
+  enableOllama = false;
 in
 {
   imports = [
@@ -25,14 +27,17 @@ in
     "${modules}/android.nix"
     "${modules}/dev.nix"
     "${modules}/nvim.nix"
-    "${modules}/river.nix"
-    # "${modules}/guix.nix"
-    # "${modules}/gnome.nix"
-    # "${modules}/sway.nix"
-    # "${modules}/stumpwm.nix"
+
+    "${wm}/river.nix"
+    "${wm}/mangowc.nix"
+    # "${wm}/gnome.nix"
+    # "${wm}/sway.nix"
+    # "${wm}/stumpwm.nix"
+    # "${wm}/i3.nix"
+    # "${wm}/xfcei3.nix"
+
     "${modules}/vpn.nix"
-    # "${modules}/xfcei3.nix"
-    # "${modules}/i3.nix"
+    # "${modules}/guix.nix"
     inputs.home-manager.nixosModules.home-manager
     # inputs.minegrub-world-sel-theme.nixosModules.default
   ];
@@ -57,11 +62,11 @@ in
   #  alpaca
   #];
 
-  nixpkgs.config.rocmSupport = true;
+  nixpkgs.config.rocmSupport = enableOllama;
 
   services.ollama = {
     package = pkgs.ollama-rocm;
-    enable = true;
+    enable = enableOllama;
     host = "0.0.0.0";
     port = 11434;
     loadModels = [
@@ -73,7 +78,7 @@ in
   };
 
   services.open-webui = {
-    enable = true;
+    enable = enableOllama;
     host = "0.0.0.0";
     port = 10000;
     environment = {
