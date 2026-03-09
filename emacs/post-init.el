@@ -13,6 +13,9 @@
 (load (concat user-emacs-directory
               "lisp/appearance.el"))
 
+(load (concat user-emacs-directory
+              "lisp/org.el"))
+
 (use-package eglot
   :ensure nil
   :defer t
@@ -433,6 +436,7 @@
 
 (use-package obsidian
   :ensure t
+  :disabled t
   :config
   (global-obsidian-mode t)
   (obsidian-backlinks-mode t)
@@ -456,6 +460,12 @@
               ("C-c C-p" . obsidian-jump)
               ;; Follow a backlink for the current file
               ("C-c C-b" . obsidian-backlink-jump)))
+
+;; (define-key obsidian-mode-map (kbd "C-c o c") 'obsidian-capture)
+;; (define-key obsidian-mode-map (kbd "C-c o l") 'obsidian-insert-link)
+;; (define-key obsidian-mode-map (kbd "C-c C-o") 'obsidian-follow-link-at-point)
+;; (define-key obsidian-mode-map (kbd "C-c o j") 'obsidian-jump)
+;; (define-key obsidian-mode-map (kbd "C-c o b") 'obsidian-backlink-jump)
 
 (use-package magit
   :ensure t
@@ -578,14 +588,3 @@
 
 (global-set-key (kbd "<mouse-9>") 'next-buffer)
 (global-set-key (kbd "<mouse-8>") 'previous-buffer)
-
-;; Create note
-(define-key obsidian-mode-map (kbd "C-c o c") 'obsidian-capture)
-;; If you prefer you can use `obsidian-insert-wikilink'
-(define-key obsidian-mode-map (kbd "C-c o l") 'obsidian-insert-link)
-;; Open file pointed to by link at point
-(define-key obsidian-mode-map (kbd "C-c C-o") 'obsidian-follow-link-at-point)
-;; Open a note note from vault
-(define-key obsidian-mode-map (kbd "C-c o j") 'obsidian-jump)
-;; Follow a backlink for the current file
-(define-key obsidian-mode-map (kbd "C-c o b") 'obsidian-backlink-jump)
