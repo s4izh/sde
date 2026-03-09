@@ -18,6 +18,9 @@
           "sway/mode"
           # "sway/window"
           "river/tags"
+          "dwl/tags"
+          "dwl/window"
+
           "hyprland/workspaces"
           "hyprland/window"
           # "river/window"
