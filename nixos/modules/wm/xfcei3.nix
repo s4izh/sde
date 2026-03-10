@@ -33,7 +33,7 @@
   # environment.systemPackages = with pkgs; [
   #   dmenu
   #   # sxhkd
-  #   xorg.xwininfo
+  #   xwininfo
   # ];
 
   # nixpkgs.overlays = [

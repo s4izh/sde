@@ -26,7 +26,7 @@
     dmenu
     st
     sxhkd
-    xorg.xwininfo
+    xwininfo
   ];
 
   nixpkgs.overlays = [
