@@ -25,7 +25,7 @@
 
   services.openssh = {
     enable = true;
-    settings.PasswordAuthentication = false;
+    settings.PasswordAuthentication = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -34,9 +34,9 @@
     brightnessctl
   ];
 
-  services.logind.extraConfig = ''
-    HandlePowerKey=ignore
-  '';
+  services.logind.settings.Login = {
+    HandlePowerKey = "ignore";
+  };
 
   networking.firewall = {
     enable = true;

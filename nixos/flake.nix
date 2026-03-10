@@ -11,6 +11,7 @@
       url = "github:nixos/nixos-hardware/master";
     };
     flake-utils.url = "github:numtide/flake-utils";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs =
@@ -96,10 +97,6 @@
               };
             };
           hosts = [
-            # {
-            #   host = "z390";
-            #   arch = "x86_64-linux";
-            # }
             {
               host = "rx";
               arch = "x86_64-linux";
@@ -112,14 +109,6 @@
               host = "jsc";
               arch = "x86_64-linux";
             }
-            # {
-            #   host = "vm";
-            #   arch = "x86_64-linux";
-            # }
-            # {
-            #   host = "thinkcenter";
-            #   arch = "x86_64-linux";
-            # }
           ];
           autoMachineConfigs = map mkHostConfig hosts;
 

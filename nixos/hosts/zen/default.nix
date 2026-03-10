@@ -11,6 +11,7 @@
 }:
 let
   modules = ../../modules;
+  wm = ../../modules/wm;
 in
 {
   imports = [
@@ -24,15 +25,16 @@ in
     "${modules}/vpn.nix"
     # "${modules}/unity.nix"
     # "${modules}/gnome.nix"
-    "${modules}/dwm.nix"
-    "${modules}/hyprland.nix"
-    "${modules}/river.nix"
+    # "${wm}/dwm.nix"
+    "${wm}/river.nix"
+    "${wm}/mangowc.nix"
     "${modules}/nvim.nix"
-    "${modules}/virtualisation.nix"
-    "${modules}/guix.nix"
+    # "${modules}/guix.nix"
     inputs.home-manager.nixosModules.home-manager
     inputs.nixos-hardware.nixosModules.asus-battery
   ];
+
+  sde.virtualization.docker.enable = true;
 
   home-manager = {
     extraSpecialArgs = {
@@ -53,39 +55,5 @@ in
     enableChargeUptoScript = true;
   };
 
-  # specialisation = {
-  #   silvia.configuration = {
-  #     system.nixos.tags = [ "silvia" ];
-  #     users.users.silvia = {
-  #       isNormalUser = true;
-  #       extraGroups = [
-  #         "networkmanager"
-  #         "video"
-  #       ];
-  #       initialPassword = "<PLACEHOLDER_FOR_PASSWORD>";
-  #     };
-  #     services.xserver = {
-  #       enable = true;
-  #       desktopManager.gnome.enable = true;
-  #       displayManager.gdm.enable = true;
-  #     };
-  #     # services.displayManager.defaultSession = "xfce";
-  #     services.tlp.enable = lib.mkForce false;
-  #     environment.systemPackages = with pkgs; [
-  #       firefox
-  #       google-chrome
-  #       chromium
-  #       alacritty
-  #       gnome-tweaks
-  #     ];
-  #   };
-  # };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11";
 }

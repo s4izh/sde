@@ -186,7 +186,6 @@ in
   };
 
   # check the names with fc-list
-
   networking.extraHosts = builtins.readFile hostfile;
 
   programs.ssh = {
