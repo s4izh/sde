@@ -49,6 +49,7 @@
     usbutils # lsusb
     hwloc
     pstree
+    psmisc # killall
     lshw
     file
     fastfetch

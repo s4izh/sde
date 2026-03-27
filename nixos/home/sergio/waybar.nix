@@ -10,23 +10,27 @@
     enable = true;
     settings = {
       mainBar = {
+        # output = [ "DP-3" "HDMI-A-1" ];
         layer = "top";
         height = 10;
         spacing = 1;
         modules-left = [
-          "sway/workspaces"
-          "sway/mode"
+          # "sway/workspaces"
+          # "sway/mode"
           # "sway/window"
-          "river/tags"
+          # "river/tags"
           "dwl/tags"
           "dwl/window"
-
-          "hyprland/workspaces"
-          "hyprland/window"
+          # "dwl/layout"
+          # "custom/wm_layout"
+          # "hyprland/workspaces"
+          # "hyprland/window"
           # "river/window"
-          "river/layout"
+          # "river/layout"
         ];
-        modules-center = [ ];
+        # modules-center = [
+        #   "wlr/language"
+        # ];
         modules-right = [
           "tray"
           "pulseaudio"
@@ -47,6 +51,12 @@
             "locked" = "";
             "unlocked" = "";
           };
+        };
+        "custom/wm_layout" = {
+          exec = "python3 ~/.local/scripts/waybar/layout.py {name} --debug 2>&1 | tee /tmp/layout.log";
+          format = "{}";
+          tooltip = false;
+          restart-interval = 1;
         };
         "sway/mode" = {
           "format" = ''<span style="italic">{}</span>'';

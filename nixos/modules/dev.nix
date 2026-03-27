@@ -104,7 +104,7 @@ let
     vim
     neovim
     vscode
-    emacs
+    # emacs
   ];
 in
 {
