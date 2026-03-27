@@ -23,4 +23,4 @@ for app in "${apps[@]}"; do
     run_bg "$app"
 done
 
-swaybg -i /path/to/wall.png &
+# swaybg -i /path/to/wall.png &

@@ -1,13 +1,13 @@
-local apps = {
+apps = {
     "kanshi",
     "waybar",
     "swayosd-server",
     "swaync",
     "nm-applet --indicator",
-    "swaybg -i /path/to/wall.png"
+    -- "swaybg -i /path/to/wall.png"
 }
 
-local function run_bg(cmd)
+function run_bg(cmd)
     local p_name = cmd:match("%S+")
     os.execute("pkill " .. p_name .. " > /dev/null 2>&1")
     os.execute(cmd .. " &")
