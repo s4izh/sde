@@ -46,10 +46,16 @@ local theme
 
 accent_config()
 
-if os.getenv("THEME_IS_LIGHT") then
+-- readfile returns a table with the lines, just grab the first one
+local mode = vim.fn.readfile(os.getenv("HOME") .. "/.cache/sde/theme_mode")[1]
+if mode == "light" then
   theme = "grey"
+  -- theme = "shine"
 else
-  theme = "gruber-darker"
+  -- theme = "vague"
+  theme = "nord"
+  -- theme = "spaceway2"
+  -- theme = "slate"
 end
 
 -- ColorMyPencils("zenbones")

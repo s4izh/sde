@@ -17,6 +17,7 @@ return {
   setup_theme("thimc/gruber-darker.nvim"),
   setup_theme("eemed/sitruuna.vim"),
   setup_theme("morhetz/gruvbox"),
+  setup_theme("sainnhe/gruvbox-material");
   setup_theme("RMichelsen/cyanide"),
   setup_theme("tjdevries/colorbuddy.vim"),
   setup_theme("tjdevries/gruvbuddy.nvim"),
@@ -45,4 +46,11 @@ return {
   setup_theme("aliqyan-21/darkvoid.nvim"),
   setup_theme("vague2k/vague.nvim"),
   setup_theme("Carcuis/darcula.nvim"),
+  setup_theme("NLKNguyen/papercolor-theme"),
+  setup_theme("dylanaraps/wal.vim"),
+  setup_theme("nordtheme/vim"),
+  setup_theme("oonamo/ef-themes.nvim"),
+  setup_theme("kdheepak/monochrome.nvim"),
+  setup_theme("kvrohit/rasmus.nvim"),
+  setup_theme("chriskempson/vim-tomorrow-theme"),
 }

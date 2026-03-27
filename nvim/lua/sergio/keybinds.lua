@@ -117,3 +117,7 @@ vim.api.nvim_create_user_command("ToggleLineNumbers", function(opts)
 end, {
   nargs = 0,
 })
+
+vim.cmd([[vnoremap <leader>ma :s/\s*\\$/\=repeat(' ', 80-virtcol('.')).'\'<CR>]])
+
+vim.keymap.set("n", "<Leader>tg", ":Goyo<cr>")
