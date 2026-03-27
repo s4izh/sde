@@ -21,6 +21,7 @@ in
     alacritty
     kitty
     discord
+    whatsapp-electron
     # discord-canary
     dmenu
     w3m
@@ -107,6 +108,7 @@ in
     numbat # high precision terminal calculator
     sde.pkgs.${pkgs.system}.zen-browser
     graphviz
+    ghostscript
 
     thunderbird
   ];

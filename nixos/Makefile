@@ -62,11 +62,11 @@ user: ## Switch to the flake as a user
 	./result/activate
 	rm -rf result
 
-deploy-thinkcenter:
+deploy-thinkcenter: ## Deploy thinkcenter machine
 	sudo nixos-rebuild switch --flake ".#thinkcenter" --impure \
 		--target-host root@192.168.1.176 --build-host root@192.168.1.176
 
-deploy-jsc:
+deploy-jsc: ## Deploy jsc machine
 	sudo nixos-rebuild switch --flake ".#jsc" --impure \
 		--target-host root@192.168.1.146 --build-host root@192.168.1.146
 
@@ -79,12 +79,12 @@ src-dependencies: ## Download impure source dependencies
 		fi; \
 	done
 
-create-dirs: ## Create expected directories
+dirs-create: ## Create expected directories
 	@for dir in $(DIRS_TO_CREATE_IN_HOME); do \
 		mkdir -pv $(HOME)/$$dir; \
 	done
 
-softlinks-create: softlinks-remove create-dirs ## Create all softlinks
+softlinks-create: softlinks-remove dirs-create ## Create all softlinks
 	@rm -f $(STATE_FILE); \
 	for pair in $(LINKS_FROM_SDE_TO_HOME); do \
 		src=$${pair%%:*}; \

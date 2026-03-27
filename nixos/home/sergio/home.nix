@@ -15,6 +15,7 @@ in
     ./waybar.nix
     ./river.nix
     ./notes.nix
+    ./screen-control.nix
   ];
 
   # home.backupFileExtension = "backup";
@@ -136,10 +137,10 @@ in
     ];
   };
 
-  # programs.emacs = {
-  #   enable = true;
-  #   package = pkgs.emacs30-gtk3;
-  # };
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs30-gtk3;
+  };
 
   gtk = {
     enable = true;
