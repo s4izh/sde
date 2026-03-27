@@ -1,7 +1,14 @@
-profile "Combo" {
+profile "horizontal" {
+    output DP-3 mode 1920x1080@200 position -1920,0
     output HDMI-A-1 mode 1920x1080@200 position 0,0
-    output DP-3 mode 1920x1080@200 position 1920,0
+    output DP-1 mode 1920x1080@200 position 1920,0
 }
+
+# profile "vertical-left" {
+#     output DP-3 transform 270 mode 1920x1080@200 position -1080,-420
+#     output HDMI-A-1 mode 1920x1080@200 position 0,0
+#     output DP-1 mode 1920x1080@200 position 1920,0
+# }
 
 profile {
     output HDMI-A-1 enable mode 2560x1440@75Hz
@@ -13,4 +20,3 @@ profile {
     output DP-2 enable mode 1920x1080@165Hz position 0,0
     output HDMI-A-1 enable mode 1920x1080@60Hz position 1920,0
 }
-
