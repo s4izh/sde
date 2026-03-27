@@ -5,6 +5,8 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
+vim.opt.laststatus = 2
+
 vim.opt.conceallevel = 0
 
 -- number column

@@ -1,15 +1,10 @@
-require("oil").setup({
+local config = {
   -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
   -- Set to false if you still want to use netrw.
   default_file_explorer = true,
   -- Id is automatically added at the beginning, and name at the end
   -- See :help oil-columns
-  columns = {
-    "icon",
-    -- "permissions",
-    -- "size",
-    -- "mtime",
-  },
+  columns = { },
   -- Buffer-local options to use for oil buffers
   buf_options = {
     buflisted = false,
@@ -25,6 +20,8 @@ require("oil").setup({
     list = false,
     conceallevel = 3,
     concealcursor = "nvic",
+    number = false,
+    relativenumber = false,
   },
   -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
   delete_to_trash = false,
@@ -77,7 +74,7 @@ require("oil").setup({
   use_default_keymaps = true,
   view_options = {
     -- Show files and directories that start with "."
-    show_hidden = false,
+    show_hidden = true,
     -- This function defines what is considered a "hidden" file
     is_hidden_file = function(name, bufnr)
       return vim.startswith(name, ".")
@@ -174,6 +171,36 @@ require("oil").setup({
   keymaps_help = {
     border = "rounded",
   },
-})
+}
+
+local oil = require("oil")
+
+oil.setup(config)
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+local detailed = false
+
+local function toggle_oil_details()
+  detailed = not detailed
+
+  if detailed then
+    config.columns = { "icon", "permissions", "size", "mtime" }
+  else
+    config.columns = { }
+  end
+  oil.setup(config)
+  require("oil.actions").refresh.callback()
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "oil",
+  callback = function(args)
+    vim.keymap.set(
+      "n",
+      "gd",
+      toggle_oil_details,
+      { buffer = args.buf, desc = "Toggle Oil details" }
+    )
+  end,
+})

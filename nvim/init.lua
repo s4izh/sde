@@ -29,3 +29,31 @@ vim.api.nvim_set_option("grepprg", "rg --vimgrep --smart-case --hidden")
 vim.api.nvim_set_option("grepformat", "%f:%l:%c:%m,%f:%l:%m")
 
 vim.g.git_base = "HEAD"
+
+local concealing_group = vim.api.nvim_create_augroup("Concealing", { clear = true })
+
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+--   group = concealing_group,
+--   pattern = { "*.md", "*.tex", "*.latex" },
+--   command = "setlocal conceallevel=0",
+--   -- callback = function()
+--   --   vim.opt_local.conceallevel = 0
+--   -- end,
+-- })
+-- vim.api.nvim_create_autocmd("InsertLeave", {
+--   group = concealing_group,
+--   pattern = { "*.md", "*.tex", "*.latex" },
+--   command = "setlocal conceallevel=2",
+-- })
+
+vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
+  group = concealing_group,
+  pattern = { "*.md", "*.tex", "*.latex" },
+  callback = function(args)
+    if args.event == "InsertEnter" then
+      vim.opt_local.conceallevel = 0
+    else
+      vim.opt_local.conceallevel = 0
+    end
+  end,
+})

@@ -8,7 +8,22 @@ return {
       files = 0,
       folder_arrows = 0,
     }
-    require("nvim-tree").setup({})
+    local config = {
+      sort = {
+        sorter = "case_sensitive",
+      },
+      view = {
+        width = 40,
+        side = "right",
+      },
+      renderer = {
+        group_empty = true,
+      },
+      filters = {
+        dotfiles = false,
+      },
+    }
+    require("nvim-tree").setup(config)
     vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<cr>")
   end
 }

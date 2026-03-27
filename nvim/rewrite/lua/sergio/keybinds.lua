@@ -72,7 +72,7 @@ vim.keymap.set("n", "<leader>tla", toggles.toggle_line_numbers, { noremap = true
 vim.keymap.set("n", "<leader>tlr", ":set relativenumber!<cr>", { noremap = true, silent = true, desc = "toggle relative number" })
 
 -- line wrapping
-vim.keymap.set("n", "<leader>tw", ":set wrap! linebreak!<cr>"color )
+vim.keymap.set("n", "<leader>tw", ":set wrap! linebreak!<cr>")
 
 -- search highlights
 vim.keymap.set("n", "<leader>th", ":noh<cr>")

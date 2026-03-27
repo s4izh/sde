@@ -1,11 +1,11 @@
 require("ibl").setup({
   enabled = false,
   indent = {
-    char = '▏',
+    -- char = '▏',
   },
   scope = {
-    enabled = false,
-    char = '▏',
-    show_start = false,
+    enabled = true,
+    -- char = '▏',
+    -- show_start = false,
   }
 })
