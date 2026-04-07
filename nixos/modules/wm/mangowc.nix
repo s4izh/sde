@@ -5,7 +5,7 @@
   ...
 }:
 let
-  mango-launcher = pkgs.writeShellScriptBin "launch-desktop-session.sh" ''
+  mango-launcher2 = pkgs.writeShellScriptBin "launch-desktop-session.sh" ''
     #!/usr/bin/env bash
 
     export XDG_SESSION_TYPE=wayland
@@ -30,6 +30,36 @@ let
     # dbus-launch --exit-with-session ${pkgs.mangowc}/bin/mango &> /tmp/mango.log
     exec ${pkgs.mangowc}/bin/mango &> /tmp/mango.log
   '';
+
+    mango-sync-env = pkgs.writeShellScriptBin "mango-sync-env" ''
+      #!/usr/bin/env bash
+      # Wait for the Wayland socket to actually appear in the filesystem
+      while [ ! -S "$XDG_RUNTIME_DIR/wayland-0" ] && [ ! -S "$XDG_RUNTIME_DIR/wayland-1" ]; do
+        sleep 0.5
+      done
+
+      # Detect which one was created
+      W_DISPLAY=$(ls $XDG_RUNTIME_DIR/wayland-* | head -n 1 | xargs basename)
+
+      # Inject the variables into the systemd and dbus environments
+      systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY=$W_DISPLAY XDG_CURRENT_DESKTOP=wlroots
+
+      # CRITICAL: Restart the portals now that the environment is valid
+      systemctl --user restart xdg-desktop-portal xdg-desktop-portal-wlr
+    '';
+
+  mango-launcher = pkgs.writeShellScriptBin "launch-desktop-session.sh" ''
+    #!/usr/bin/env bash
+    export XDG_SESSION_TYPE=wayland
+    export XDG_CURRENT_DESKTOP=wlroots # Change this to wlroots
+    export XDG_SESSION_DESKTOP=wlroots
+
+    # Start the sync script in the background
+    ${mango-sync-env}/bin/mango-sync-env &
+
+    exec ${pkgs.mangowc}/bin/mango &> /tmp/mango.log
+  '';
 in
 {
   programs.mangowc.enable = true;
@@ -45,13 +75,17 @@ in
     ];
     config = {
       common = {
-        default = [ "gtk" "wlr" ];
+        default = [ "wlr" "gtk" ];
       };
-      mango.default = [ "gtk" ];
-      # mango = {
-      #   "org.freedesktop.impl.portal.ScreenCast" = "wlr";
-      #   "org.freedesktop.impl.portal.Screenshot" = "wlr";
-      # };
+      # mango.default = [ "gtk" ];
+      wlroots = {
+        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+        "org.freedesktop.impl.portal.Screenshot" = "wlr";
+      };
+      mango = {
+        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+        "org.freedesktop.impl.portal.Screenshot" = "wlr";
+      };
     };
   };
 
