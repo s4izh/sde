@@ -29,11 +29,6 @@ let
     rustfmt
     rustc
   ];
-  latexpkgs = with pkgs; [
-    texlive.combined.scheme-full
-    texlab
-    ltex-ls
-  ];
   nixpkgs = with pkgs; [
     nixd
     nixfmt
@@ -112,7 +107,6 @@ in
     devpkgs
     ++ gitpkgs
     ++ rustpkgs
-    ++ latexpkgs
     ++ nixpkgs
     ++ luapkgs
     ++ cpkgs

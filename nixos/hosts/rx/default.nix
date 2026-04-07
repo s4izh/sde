@@ -26,8 +26,10 @@ in
     "${modules}/android.nix"
     "${modules}/dev.nix"
     "${modules}/nvim.nix"
+    # "${modules}/gnome.nix"
+    # "${modules}/kde.nix"
 
-    "${wm}/river.nix"
+    # "${wm}/river.nix"
     "${wm}/mangowc.nix"
     "${modules}/vpn.nix"
     inputs.home-manager.nixosModules.home-manager
@@ -36,6 +38,7 @@ in
   sde.desktop.enable = true;
   sde.virtualization.docker.enable = true;
   sde.virtualization.podman.enable = true;
+  sde.latex.enable = true;
 
   home-manager = {
     extraSpecialArgs = {
@@ -90,8 +93,8 @@ in
   services.scx = {
     enable = true;
     # lattency aware virtual deadline steam deck scheduler
-    # scheduler = "scx_lavd"; 
-    # scheduler = "scx_bore"; 
+    # scheduler = "scx_lavd";
+    # scheduler = "scx_bore";
   };
 
   hardware.i2c.enable = true;
