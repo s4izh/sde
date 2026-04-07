@@ -6,7 +6,7 @@
 
 (define apps
   '("kanshi"
-    "waybar"
+    ; "waybar"
     "swayosd-server"
     "swaync"
     ; "swaybg -i ~/git/wallpapers/wallhaven-q6p667.jpg"
@@ -14,11 +14,11 @@
     ; "swaybg -o HDM1-A-1 ~/pix/fotos/sara_horizontal.jpg -m fill"
     ; "swaybg -o DP-1 ~/pix/fotos/familia_coche.jpg -m fill"
     "wpaperd"
-    "discord"
-    "whatsapp-electron"
+    "discord"))
+    ; "whatsapp-electron"))
     ; "kitty --first-terminal"
     ; "swww img ~/git/wallpapers/viktor.jpg"
-    "nm-applet --indicator"))
+    ; "nm-applet --indicator"))
 
 (define (run-bg cmd)
   (let* ((pname (car (string-split cmd #\space))))
@@ -30,6 +30,11 @@
     (system (string-append cmd)))
 
 (for-each run-bg apps)
+
+(sleep 1)
+
+(run-bg "waybar")
+(run-bg "nm-applet --indicator")
 
 (define (spawn-and-move app-command target-tag target-monitor)
   (system (string-append app-command " &"))
