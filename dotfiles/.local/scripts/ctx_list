@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+LIST_FILE=".chat_files"
+
+if [[ ! -f "$LIST_FILE" ]]; then
+    echo "Error: couldn't find '$LIST_FILE'. Add files first."
+    exit 1
+fi
+
+SORTED_UNIQUE_FILES=$(sort -u "$LIST_FILE")
+OUTPUT=""
+
+while IFS= read -r file || [[ -n "$file" ]]; do
+    file=$(echo "$file" | xargs)
+    
+    [[ -z "$file" || "$file" == \#* ]] && continue
+    
+    if [[ -f "$file" ]]; then
+        OUTPUT+="### File: \`${file}\`\n"
+        OUTPUT+="\`\`\`\n"
+        OUTPUT+="$(cat "$file")\n"
+        OUTPUT+="\`\`\`\n\n"
+        echo "  -> Packed: $file"
+    else
+        echo "  Couldn't find: '$file'" >&2
+    fi
+done <<< "$SORTED_UNIQUE_FILES"
+
+if command -v wl-copy > /dev/null 2>&1; then
+    echo -e "$OUTPUT" | wl-copy
+elif command -v xclip > /dev/null 2>&1; then
+    echo -e "$OUTPUT" | xclip -sel clip
+elif command -v pbcopy > /dev/null 2>&1; then
+    echo -e "$OUTPUT" | pbcopy
+else
+    echo "Error: couldn't find pbcopy, xclip or wl-copy in PATH"
+    exit 1
+fi
+
+echo "Context copied"
