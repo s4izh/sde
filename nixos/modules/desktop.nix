@@ -197,7 +197,6 @@ in
   };
 
   xdg.portal.enable = true;
-  xdg.portal.xdgOpenUsePortal = true;
 
   qt = {
     enable = true;
@@ -207,6 +206,8 @@ in
   environment.sessionVariables = {
     QT_STYLE_OVERRIDE = "adwaita-dark";
   };
+
+  programs.dconf.enable = true;
 
   # services.greetd = {
   #   enable = true;

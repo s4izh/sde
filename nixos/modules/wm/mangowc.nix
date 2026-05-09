@@ -43,17 +43,17 @@ let
 
       # Inject the variables into the systemd and dbus environments
       systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-      dbus-update-activation-environment --systemd WAYLAND_DISPLAY=$W_DISPLAY XDG_CURRENT_DESKTOP=wlroots
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY=$W_DISPLAY XDG_CURRENT_DESKTOP=mango
 
       # CRITICAL: Restart the portals now that the environment is valid
-      systemctl --user restart xdg-desktop-portal xdg-desktop-portal-wlr
+      systemctl --user restart xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk
     '';
 
   mango-launcher = pkgs.writeShellScriptBin "launch-desktop-session.sh" ''
     #!/usr/bin/env bash
     export XDG_SESSION_TYPE=wayland
-    export XDG_CURRENT_DESKTOP=wlroots # Change this to wlroots
-    export XDG_SESSION_DESKTOP=wlroots
+    export XDG_CURRENT_DESKTOP=mango
+    export XDG_SESSION_DESKTOP=mango
 
     # Start the sync script in the background
     ${mango-sync-env}/bin/mango-sync-env &
@@ -75,14 +75,12 @@ in
     ];
     config = {
       common = {
-        default = [ "wlr" "gtk" ];
-      };
-      # mango.default = [ "gtk" ];
-      wlroots = {
+        default = [ "gtk" ];
         "org.freedesktop.impl.portal.ScreenCast" = "wlr";
         "org.freedesktop.impl.portal.Screenshot" = "wlr";
       };
       mango = {
+        default = [ "gtk" ];
         "org.freedesktop.impl.portal.ScreenCast" = "wlr";
         "org.freedesktop.impl.portal.Screenshot" = "wlr";
       };

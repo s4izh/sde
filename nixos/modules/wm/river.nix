@@ -5,7 +5,7 @@
   ...
 }:
 let
-  river-launcher = pkgs.writeShellScriptBin "launch-desktop-session.sh" ''
+  river-launcher = pkgs.writeShellScriptBin "launch-desktop-session-river.sh" ''
     #!/usr/bin/env bash
 
     export XDG_SESSION_TYPE=wayland
