@@ -6,7 +6,7 @@
   (org-directory "~/notes/org/")
   (org-agenda-files (list org-directory))
   (org-return-follows-link t)
-  (org-hide-leading-stars t)
+  ;; (org-hide-leading-stars t)
   ;; (org-startup-indented t)
   (org-src-fontify-natively t)
   (org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
