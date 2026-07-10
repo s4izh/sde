@@ -21,6 +21,6 @@
 (load "completion")
 (load "programming")
 (load "tools")
-(load "notes")
+(load "writing")
 (load "ai")
 (load "keybindings")
