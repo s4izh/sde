@@ -588,3 +588,8 @@
 
 (global-set-key (kbd "<mouse-9>") 'next-buffer)
 (global-set-key (kbd "<mouse-8>") 'previous-buffer)
+
+(setq package-vc-allow-build-commands t)
+(use-package reader
+  :vc (:url "https://codeberg.org/MonadicSheep/emacs-reader"
+  	        :make "all"))

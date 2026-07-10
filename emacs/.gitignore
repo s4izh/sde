@@ -5,5 +5,14 @@ etc
 transient
 var
 custom-vars.el
+custom.el
 undo-fu-session
 straight
+backups
+bookmarks
+history
+places
+projects
+tutorial
+agent
+.agent-shell
