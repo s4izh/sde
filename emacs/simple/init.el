@@ -10,10 +10,32 @@
 (tooltip-mode -1)
 (menu-bar-mode -1)
 
-(global-display-line-numbers-mode 1) ; mostrar números de línea en el margen
+(global-display-line-numbers-mode 0) ; mostrar números de línea en el margen
 (column-number-mode)                 ; mostrar el número de columna abajo
 (setq make-backup-files nil)         ; no llenar las carpetas de archivos terminados en ~
 (setq auto-save-default nil)         ; no crear archivos de autoguardado #molestos#
+
+;; autorefresh buffers
+(setq global-auto-revert-non-file-buffers t)
+(global-auto-revert-mode 1)
+
+;; native emacs smooth scrolling
+(pixel-scroll-precision-mode 1)
+
+(setq scroll-margin 6)
+(setq scroll-conservatively 101) ;; only 1 line scroll
+(setq scroll-up-aggressively 0.01)
+(setq scroll-down-aggressively 0.01)
+
+(setq-default display-line-numbers-width 4)
+(setq-default display-line-numbers-grow-only t)
+
+(defun ssm/toggle-line-numbers ()
+  "Activa o desactiva los números de línea en el buffer actual."
+  (interactive)
+  (display-line-numbers-mode 'toggle))
+
+(global-set-key (kbd "C-c l") 'ssm/toggle-line-numbers)
 
 (load-theme 'modus-vivendi)
 (set-face-attribute 'default nil :font "JetBrains Mono" :height 75)
@@ -62,18 +84,15 @@
   (which-key-idle-delay 1.0))
 
 (use-package eglot
-  :ensure nil ; Eglot es nativo en Emacs 29+, no lo descargamos de MELPA
+  :ensure nil
   :hook
-  ;; Activar Eglot automáticamente al abrir archivos C y C++
   ((c-mode . eglot-ensure)
    (c++-mode . eglot-ensure))
   :custom
-  ;; OPTIMIZACIONES CRÍTICAS DE RENDIMIENTO
   (eglot-events-buffer-size 0) ; Desactivar el log del servidor LSP (evita bloqueos de RAM)
   (eglot-autoshutdown t)       ; Matar el proceso clangd al cerrar el último archivo
   (eglot-sync-connect 1)       ; No congelar la UI si el servidor tarda 1 seg en arrancar
   :config
-  ;; Parámetros de línea de comandos para hacer que Clangd vuele en C++
   (add-to-list 'eglot-server-programs
                '((c-mode c++-mode)
                  . ("clangd"
@@ -87,15 +106,11 @@
 
 (use-package consult
   :ensure t
-  ;; Remapeamos algunas funciones nativas de Emacs para que usen la versión dopada de Consult
-  :bind (("C-x b" . consult-buffer)      ; Mejor cambio de buffers
-         ("C-s"   . consult-line)        ; Mejor búsqueda en el archivo
-         ("M-g i" . consult-imenu)       ; Saltar a funciones/clases del archivo
-         ("M-s r" . consult-ripgrep)))   ; Buscar texto en todo el proyecto (requiere tener 'rg' instalado en tu SO)
+  :bind (;("C-x b" . consult-buffer)
+         ;("C-s"   . consult-line)
+         ("M-g i" . consult-imenu)
+         ("M-s r" . consult-ripgrep)))
 
-;; ==========================================
-;; 11. MOTOR DE SNIPPETS (YASNIPPET)
-;; ==========================================
 ;; (use-package yasnippet
 ;;  :ensure t
 ;;  :init
@@ -119,3 +134,10 @@
   :ensure t
   :custom
   (wgrep-auto-save-buffer t))
+
+(unless (package-installed-p 'agent-shell)
+  (package-vc-install "https://github.com/xenodium/agent-shell"))
+
+(use-package agent-shell
+  :ensure nil
+  :bind (("C-c a" . agent-shell))) ; Atajo para invocar tu agente rápido
