@@ -48,8 +48,11 @@
     sr = submodule update --recursive --remote
     # open in editor every file that is modified (M), added (A) or unmerged (U)
     edit = !$EDITOR $(git status --short | awk '$1 ~ /^M|A|U/ {print $2}' )
+[fetch]
+	prune = true
 [pull]
     rebase = true
+    prune = true
 [push]
     # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote
     autoSetupRemote = true
