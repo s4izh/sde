@@ -25,3 +25,8 @@
 (save-place-mode 1)
 (savehist-mode 1)
 (setq history-length 25)
+
+
+(use-package dired
+  :ensure nil
+  :hook (dired-mode . dired-hide-details-mode))

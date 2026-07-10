@@ -1,8 +1,13 @@
 ;;; appearance.el --- basic appearance settings -*- no-byte-compile: t; lexical-binding: t; -*-
 
+;; (set-face-attribute 'default nil
+;;                     :family "monospace"
+;;                     :height 140)
+
 (set-face-attribute 'default nil
-                    :family "monospace"
-                    :height 140)
+                    ;; :family "InputMonoCondensed"
+                    :family "JetBrainsMono Nerd Font"
+                    :height 90)
 
 (use-package doom-themes
   :defer t)
