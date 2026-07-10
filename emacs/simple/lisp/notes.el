@@ -7,6 +7,7 @@
   (org-agenda-files (list org-directory))
   (org-return-follows-link t)
   (org-hide-leading-stars t)
+  ;; (org-startup-indented t)
   (org-src-fontify-natively t)
   (org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
   (org-capture-templates
@@ -16,6 +17,13 @@
   (("C-c o c" . org-capture)
    ("C-c o a" . org-agenda)
    ("C-c o l" . org-store-link)))
+
+(use-package org-modern
+  :disabled t
+  :hook ((org-mode . org-modern-mode)
+         (org-agenda-finalize . org-modern-agenda))
+  :custom
+  (org-modern-star '("◉" "○" "✸" "✿" "◈")))
 
 (use-package denote
   :custom
