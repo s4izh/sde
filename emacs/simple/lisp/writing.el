@@ -1,4 +1,4 @@
-;;; notes.el --- org-mode tasks/agenda and denote notes -*- lexical-binding: t; -*-
+;;; writing.el --- org-mode tasks/agenda, denote notes, and markdown -*- lexical-binding: t; -*-
 
 (use-package org
   :ensure nil
@@ -35,3 +35,6 @@
    ("C-c n b" . denote-find-backlink)
    ("C-c n B" . denote-link-backlinks)
    ("C-c n r" . denote-rename-file)))
+
+(use-package markdown-mode
+  :mode ("README\\.md\\'" . gfm-mode))
