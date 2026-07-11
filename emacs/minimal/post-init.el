@@ -16,6 +16,11 @@
 (load (concat user-emacs-directory
               "lisp/org.el"))
 
+(load (concat user-emacs-directory
+              "lisp/ai.el"))
+
+(server-start)
+
 (use-package eglot
   :ensure nil
   :defer t
@@ -314,7 +319,7 @@
 
 (use-package ansi-color
   :ensure nil
-  :hook (compilation-filter . ansi-color-compilation-filter)) 
+  :hook (compilation-filter . ansi-color-compilation-filter))
 
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()
@@ -513,72 +518,72 @@
     (error "ELEMENTS must be a list"))
   (let ((list (symbol-value list-var)))
     (if list
-	(setcdr (last list) elements)
-      (set list-var elements)))
+     (setcdr (last list) elements)
+     (set list-var elements)))
   (symbol-value list-var))
 
 (use-package mixed-pitch
   :ensure t
   :hook((LaTeX-mode . mixed-pitch-mode)
-	      (org-mode . mixed-pitch-mode))
+        (org-mode . mixed-pitch-mode))
   :config
   (ethan/append-to-list 'mixed-pitch-fixed-pitch-faces
-			'(solaire-line-number-face
-			  org-date
-			  org-footnote
-			  org-special-keyword
-			  org-property-value
-			  org-ref-cite-face
-			  org-tag
-			  org-todo-keyword-todo
-			  org-todo-keyword-habt
-			  org-todo-keyword-done
-			  org-todo-keyword-wait
-			  org-todo-keyword-kill
-			  org-todo-keyword-outd
-			  org-todo
-			  org-done
-			  org-modern-priority
-			  org-modern-tag
-			  org-modern-done
-			  org-modern-date-active
-			  org-modern-date-inactive
-			  org-modern-time-active
-			  org-modern-time-inactive
-			  org-drawer
-			  font-lock-comment-face
-			  )))
+      '(solaire-line-number-face
+        org-date
+        org-footnote
+        org-special-keyword
+        org-property-value
+        org-ref-cite-face
+        org-tag
+        org-todo-keyword-todo
+        org-todo-keyword-habt
+        org-todo-keyword-done
+        org-todo-keyword-wait
+        org-todo-keyword-kill
+        org-todo-keyword-outd
+        org-todo
+        org-done
+        org-modern-priority
+        org-modern-tag
+        org-modern-done
+        org-modern-date-active
+        org-modern-date-inactive
+        org-modern-time-active
+        org-modern-time-inactive
+        org-drawer
+        font-lock-comment-face)))
+
 
 (use-package fontaine
   :ensure t
   :config
   ;; The concise one which relies on "implicit fallback values"
   (setq fontaine-presets
-	'((regular
-	   :default-height 100)
-	  ;; settinging some font for a smaller screen
-	  (small-screen
-	   :default-weight semilight
-	   :default-height 140)
-	  ;; settinging some font for a larger screen
-	  (larger-screen
-	   :default-weight semilight
-	   :default-height 155)
-	  (large
-	   :default-weight semilight
-	   :default-height 180
-	   :bold-weight extrabold)
-	  (t ; our shared fallback properties
-	   :default-family "monospace"
-	   :default-weight medium
-	   ;; I just really like computer modern font
-	   :variable-pitch-family "CMU Serif"
-	   :variable-pitch-height 1.5)))
+   '((regular
+      :default-height 100)
+    ;; settinging some font for a smaller screen
+     (small-screen
+      :default-weight semilight
+      :default-height 140)
+    ;; settinging some font for a larger screen
+     (larger-screen
+      :default-weight semilight
+      :default-height 155)
+     (large
+      :default-weight semilight
+      :default-height 180
+      :bold-weight extrabold)
+     (t ; our shared fallback properties
+      :default-family "monospace"
+      :default-weight medium
+   ;; I just really like computer modern font
+      :variable-pitch-family "CMU Serif"
+      :variable-pitch-height 1.5)))
   ;; now set the preset
   ;; if is my laptop or lab machine, the screens are a bit smaller and I am sitting
   ;; a bit closer so will make the font a tad larger
   ;; you can simplify this on your end if you want, just need to call
-  ;; `(fontaine-set-preset 'VALUE) 
+  ;; `(fontaine-set-preset 'VALUE)
   ;; with whatever you called your display setting
   (if (or (equal (system-name) "lab") (equal (system-name) "mover"))
       (fontaine-set-preset 'small-screen)
@@ -592,4 +597,14 @@
 (setq package-vc-allow-build-commands t)
 (use-package reader
   :vc (:url "https://codeberg.org/MonadicSheep/emacs-reader"
-  	        :make "all"))
+            :make "all"))
+
+(use-package claude-code-ide
+  :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
+  :bind ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
+  :config
+  (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
+
+(use-package reader
+   :vc t
+   :load-path "~/git/emacs-reader")

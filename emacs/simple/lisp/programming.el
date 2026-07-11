@@ -22,3 +22,18 @@
 
 (setq-default c-default-style "linux"
               c-basic-offset 4)
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
+;; Prefer the tree-sitter mode when its grammar is installed; otherwise the
+;; nix-mode association above stays in effect. nix-mode has no built-in
+;; tree-sitter derivation, so this is a separate package rather than a flag.
+(use-package nix-ts-mode
+  :when (treesit-language-available-p 'nix)
+  :mode "\\.nix\\'")
+
+(use-package rust-mode
+  :mode "\\.rs\\'"
+  :custom
+  (rust-mode-treesitter-derive t)) ; use the tree-sitter grammar when available
