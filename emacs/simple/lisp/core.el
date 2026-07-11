@@ -30,3 +30,11 @@
 (use-package dired
   :ensure nil
   :hook (dired-mode . dired-hide-details-mode))
+
+;; Start the Emacs server so `emacsclient' can reuse this session. Guarded so a
+;; second instance doesn't error trying to start an already-running server.
+(use-package server
+  :ensure nil
+  :config
+  (unless (server-running-p)
+    (server-start)))

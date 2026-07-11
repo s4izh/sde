@@ -1,10 +1,9 @@
 ;;; appearance.el --- visual chrome, scrolling, theme and font -*- lexical-binding: t; -*-
 
-(setq inhibit-startup-message t)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
+;; Frame chrome (menu/tool/scroll bars), the default font and
+;; `inhibit-startup-message' are handled in early-init.el, before the first
+;; frame is created. `tooltip-mode' is not a frame parameter, so it stays here.
 (tooltip-mode -1)
-(menu-bar-mode -1)
 
 (global-display-line-numbers-mode 0) ; show line numbers in the margin
 (column-number-mode)                 ; show column number in the mode line
@@ -33,7 +32,7 @@
 (use-package ef-themes
   :defer t)
 
-(setq ssm/current-theme 'modus-vivendi)
+(setq ssm/current-theme 'ef-elea-dark)
 
 (defun ssm/load-theme (theme)
   (interactive
@@ -46,4 +45,3 @@
   (load-theme theme t))
 
 (ssm/load-theme ssm/current-theme)
-(set-face-attribute 'default nil :font "JetBrains Mono" :height 75)
