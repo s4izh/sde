@@ -26,7 +26,7 @@ in
     # "${modules}/unity.nix"
     # "${modules}/gnome.nix"
     # "${wm}/dwm.nix"
-    "${wm}/river.nix"
+    # "${wm}/river.nix"
     "${wm}/mangowc.nix"
     "${modules}/nvim.nix"
     # "${modules}/guix.nix"

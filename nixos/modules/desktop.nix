@@ -191,7 +191,7 @@ in
   networking.extraHosts = builtins.readFile hostfile;
 
   programs.ssh = {
-    startAgent = true;
+    # startAgent = true;
     enableAskPassword = true;
     askPassword = "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
   };

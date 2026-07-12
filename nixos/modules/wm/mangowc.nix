@@ -100,13 +100,16 @@ in
     playerctl # manage media
     slurp # screenshots
     grim # screenshots
-    kanshi # manage monitors
-    wlr-randr # manage monitors
+    kanshi # monitors auto
+    wlr-randr # monitors cli
+    wdisplays # monitors GUI
     wpaperd # wallpapers
     swww # wallpapers
     swaybg # wallpapers
     lswt # window info
     waylock
+    swaylock
+    swayidle
     wmenu
     foot
     nsxiv # images
@@ -125,6 +128,7 @@ in
 
   # needed for waylock to work
   security.pam.services.waylock = { };
+  security.pam.services.swaylock = { };
 
   services.cron = {
     enable = true;
