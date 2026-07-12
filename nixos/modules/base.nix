@@ -82,5 +82,10 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  console.keyMap = "es";
+  services.xserver.xkb = {
+    layout = "es";
+    # options = "caps:escape";
+    options = "ctrl:nocaps";
+  };
+  console.useXkbConfig = true;
 }

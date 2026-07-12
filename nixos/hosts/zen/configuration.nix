@@ -38,6 +38,12 @@
     HandlePowerKey = "ignore";
   };
 
+  environment.sessionVariables = {
+    XKB_DEFAULT_LAYOUT = "es";
+    # XKB_DEFAULT_OPTIONS = "caps:escape";
+    XKB_DEFAULT_OPTIONS = "ctrl:nocaps";
+  };
+
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 5900 ];
@@ -54,6 +60,20 @@
       PCIE_ASPM_ON_BAT = "powersave";
       CPU_SCALING_GOVERNOR_ON_AC = "powersave";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
+      PLATFORM_PROFILE_ON_AC = "balanced";
+      PLATFORM_PROFILE_ON_BAT = "low-power";
+      WIFI_PWR_ON_BAT = "on";
+      RUNTIME_PM_ON_BAT = "auto";
+      USB_AUTOSUSPEND = 1;
+
+      STOP_CHARGE_THRESH_BAT0 = 85;
     };
   };
+
+  services.upower.enable = lib.mkDefault true;
 }

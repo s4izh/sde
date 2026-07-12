@@ -139,7 +139,22 @@ in
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs30-gtk3;
+    # pgtk = native Wayland (no XWayland). Good on wlroots (mango): the
+    # compositor draws server-side decorations. On GNOME/Mutter there are NO
+    # decorations (Mutter won't draw SSD, Emacs can't draw its own CSD), so on
+    # a GNOME host switch to emacs30-gtk3 to get the normal title bar via X11.
+    package = pkgs.emacs30-pgtk;
+
+    extraPackages = epkgs: [
+      epkgs.treesit-grammars.with-all-grammars
+    ];
+    
+    # (epkgs.treesit-grammars.with-plugins (p: [
+    #  p.tree-sitter-nix
+    #  p.tree-sitter-python
+    #  p.tree-sitter-rust
+    #  p.tree-sitter-typescript
+    # ]))
   };
 
   gtk = {

@@ -13,4 +13,6 @@
 
   environment.systemPackages = with pkgs; [
   ];
+
+  services.tlp.enable = false;
 }

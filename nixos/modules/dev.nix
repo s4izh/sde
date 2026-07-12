@@ -91,6 +91,7 @@ let
     plantuml
     wireshark
     yaml-language-server
+    guile
   ];
   testpkgs = with sde.pkgs.${pkgs.system}; [
     test
