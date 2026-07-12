@@ -121,3 +121,6 @@ end, {
 vim.cmd([[vnoremap <leader>ma :s/\s*\\$/\=repeat(' ', 80-virtcol('.')).'\'<CR>]])
 
 vim.keymap.set("n", "<Leader>tg", ":Goyo<cr>")
+
+-- thank you, https://heitorpb.github.io/bla/format-tables-in-vim/
+vim.keymap.set("v", "<Leader>mtf", [[:'<,'>!tr -s " " | column -t -s '|' -o '|' <CR>]], { noremap = true, silent = true })

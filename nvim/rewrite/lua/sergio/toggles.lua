@@ -4,6 +4,12 @@ M.opts = {
   colorcolumn = "100"
 }
 
+M.setup = function(opts)
+  if opts ~= nil
+
+  end
+end
+
 M.toggle_line_numbers = function()
   local is_number = vim.wo.number
   local is_relativenumber = vim.wo.relativenumber
