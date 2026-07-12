@@ -29,7 +29,7 @@
    ("C-c o e" . ssm/org-toggle-emphasis-markers)))
 
 (use-package org-modern
-;  :disabled t
+  :disabled t
   :hook ((org-mode . org-modern-mode)
          (org-agenda-finalize . org-modern-agenda)))
   ; :custom
@@ -45,6 +45,12 @@
    ("C-c n b" . denote-find-backlink)
    ("C-c n B" . denote-link-backlinks)
    ("C-c n r" . denote-rename-file)))
+
+(use-package denote-org
+  :after denote
+  :bind
+  (("C-c n i" . denote-org-dblock-insert-links)
+   ("C-c n I" . denote-org-dblock-insert-missing-links)))
 
 (use-package citar
   :custom
