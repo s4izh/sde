@@ -7,6 +7,7 @@
 (define apps
   '("kanshi"
     ; "waybar"
+    "swayidle -w timeout 300 'swaylock -f' before-sleep 'swaylock -f'"
     "swayosd-server"
     "swaync"
     ; "swaybg -i ~/git/wallpapers/wallhaven-q6p667.jpg"
