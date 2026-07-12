@@ -11,12 +11,17 @@
 ;; native emacs smooth scrolling
 (pixel-scroll-precision-mode 1)
 
-(setq scroll-margin 6)
-(setq scroll-conservatively 101) ;; only 1 line scroll
-(setq scroll-up-aggressively 0.01)
-(setq scroll-down-aggressively 0.01)
+;; a non-zero scroll-margin fights pixel-scroll-precision-mode's mouse-wheel
+;; scrolling, making point warp mid-scroll -- keeping it at 0 in exchange for
+;; giving up look-ahead margin on keyboard scrolling
+(setq scroll-margin 0)
+(setq auto-window-vscroll nil)
 
-(setq-default display-line-numbers-width 4)
+;; scroll 1 line at a time (minimal) once inside the margin, instead of
+;; recentering in a jump
+(setq scroll-conservatively 101)
+
+(setq-default display-line-numbers-width 3)
 (setq-default display-line-numbers-grow-only t)
 
 (use-package spaceway-theme
