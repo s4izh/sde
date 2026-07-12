@@ -51,7 +51,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
 })
 
-vim.opt.tags = "./tags;tags"
+-- comma separated in vim
+vim.opt.tags = { "./tags", "tags", "./TAGS", "TAGS", "./.tags", ".tags" }
 
 vim.o.exrc = true
 vim.o.secure = true

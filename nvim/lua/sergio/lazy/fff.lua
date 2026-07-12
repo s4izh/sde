@@ -12,6 +12,7 @@ return {
   -- No need to lazy-load with lazy.nvim.
   -- This plugin initializes itself lazily.
   lazy = false,
+  enabled = false,
   keys = {
     {
       "FF", -- try it if you didn't it is a banger keybinding for a picker
