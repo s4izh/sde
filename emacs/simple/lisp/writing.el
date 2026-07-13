@@ -28,6 +28,36 @@
    ("C-c o l" . org-store-link)
    ("C-c o e" . ssm/org-toggle-emphasis-markers)))
 
+(defun ssm/org-faces ()
+    (set-face-attribute 'org-todo nil :height 0.8)
+    (set-face-attribute 'org-level-1 nil :height 1.2)
+    (set-face-attribute 'org-level-2 nil :height 1.1))
+
+;; Source - https://stackoverflow.com/a/76642982
+;; (custom-set-faces
+;;   '(org-level-1 ((t (:inherit outline-1 :height 2.0))))
+;;   '(org-level-2 ((t (:inherit outline-2 :height 1.8))))
+;;   '(org-level-3 ((t (:inherit outline-3 :height 1.6))))
+;;   '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
+;;   '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+;;   (set-face-attribute 'org-document-title nil :height 2.0))
+
+(add-hook 'org-mode-hook #'ssm/org-faces)
+
+(use-package olivetti
+  :disabled t
+  :hook (org-mode . olivetti-mode)
+  :config
+  ;; Set the width of the text area (can be an integer for characters, or a float for % of window)
+  (setq olivetti-body-width 110))
+
+(use-package org-superstar
+  :ensure t
+  :hook (org-mode . org-superstar-mode))
+  ;; :config
+  ;; ;; Customize the look of your headline bullets
+  ;; (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✿" "✤" "✜")))
+
 (use-package org-modern
   :disabled t
   :hook ((org-mode . org-modern-mode)
