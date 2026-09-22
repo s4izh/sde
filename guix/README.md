@@ -13,3 +13,7 @@ Example:
 ```
 guix build -L modules '(@ (sergio packages neovim) neovim-latest))
 ```
+
+## Locking channels
+
+See the `ubuntu/guix` subdir of this repo to check how it's done.
