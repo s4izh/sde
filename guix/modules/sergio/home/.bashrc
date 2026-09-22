@@ -29,6 +29,7 @@ alias vim="nvim"
 alias tKs="tmux kill-server"
 alias tks="tmux kill-session"
 alias ts="tmux-sessionizer"
+alias tp="tmux-picker"
 
 # -----------------------------------------
 
