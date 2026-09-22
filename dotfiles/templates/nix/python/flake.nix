@@ -14,18 +14,13 @@
       devShell = pkgs.mkShell {
         buildInputs = with pkgs; [
           (python311.withPackages(ps: with ps; [
-                              numpy
-                              pandas
-                              scikit-learn
-                              matplotlib
-                              pygments
+            streamlit
+            watchdog          # For monitoring file changes
+            python-frontmatter # For parsing YAML frontmatter
+            websockets        # For the live-reload communication
+            pandas            # Often useful with Streamlit
           ]))
-          pkgs.texlive.combined.scheme-full
           pyright
-          nixd
-          ltex-ls
-          texlab
-          gnumake
         ];
       };
     }
