@@ -1,2 +1,0 @@
-set norelativenumber
-set nonumber
