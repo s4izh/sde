@@ -36,6 +36,15 @@ LINKS_FROM_SDE_TO_HOME := \
 	nvim:.config/nvim \
 	guix/channels.scm:.config/guix/channels.scm
 
+# per-host links, falling back to hosts/default.conf if the host has no file
+HOST := $(shell hostname)
+
+ifneq ($(wildcard $(DOTFILES)/.config/mango/hosts/$(HOST).conf),)
+  LINKS_FROM_SDE_TO_HOME += dotfiles/.config/mango/hosts/$(HOST).conf:.config/mango/host.conf
+else
+  LINKS_FROM_SDE_TO_HOME += dotfiles/.config/mango/hosts/default.conf:.config/mango/host.conf
+endif
+
 DIRS_TO_CREATE_IN_HOME := \
 	.local \
 	.config/guix \
