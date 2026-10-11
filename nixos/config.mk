@@ -7,7 +7,6 @@ SRC_DIR := $(HOME)/.local/src
 LINKS_FROM_SDE_TO_HOME := \
 	dotfiles/.bashrc:.bashrc \
 	dotfiles/.config/alacritty:.config/alacritty \
-	dotfiles/.config/dunst:.config/dunst \
 	dotfiles/.config/foot:.config/foot \
 	dotfiles/.config/git:.config/git \
 	dotfiles/.config/hypr:.config/hypr \
@@ -26,12 +25,10 @@ LINKS_FROM_SDE_TO_HOME := \
 	dotfiles/.config/wpaperd:.config/wpaperd \
 	dotfiles/.config/xkb:.config/xkb \
 	dotfiles/.config/zathura:.config/zathura \
-	dotfiles/.config/zsh:.config/zsh \
 	dotfiles/.editorconfig:.editorconfig \
 	dotfiles/.guile:.guile \
 	dotfiles/.local/scripts:.local/scripts \
 	dotfiles/.xinitrc:.xinitrc \
-	dotfiles/.zprofile:.zprofile \
 	dotfiles/templates:templates \
 	nvim:.config/nvim \
 	guix/channels.scm:.config/guix/channels.scm
