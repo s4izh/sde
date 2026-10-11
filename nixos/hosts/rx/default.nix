@@ -73,6 +73,7 @@ in
   environment.etc = {
     "resolv.conf".text = "nameserver 8.8.8.8\n";
   };
+  networking.resolvconf.enable = false;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
@@ -112,4 +113,11 @@ in
     ];
     packages = with pkgs; [ ddcutil ];
   };
+
+  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+  boot.kernelModules = [ "v4l2loopback" ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=10 card_label="FX Cam" exclusive_caps=1
+    '';
+
 }
