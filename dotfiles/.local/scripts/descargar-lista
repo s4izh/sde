@@ -1,0 +1,173 @@
+#!/usr/bin/env bash
+# Descarga una lista de videos con yt-dlp desde un fichero de texto.
+#
+# Cada linea del fichero tiene la URL y (opcionalmente) el nombre de salida:
+#
+#   https://youtu.be/xxxxxxx   musica/algo/cancion
+#   https://youtu.be/yyyyyyy   charlas/2024/keynote
+#   https://youtu.be/zzzzzzz              # sin nombre -> usa el titulo del video
+#
+# El nombre puede llevar directorios (se crean solos) y espacios.
+# Las lineas vacias y las que empiezan por # se ignoran.
+#
+# Los videos ya descargados se apuntan en un fichero (por defecto
+# DESTINO/.descargados.txt) y se saltan en las siguientes ejecuciones, asi que
+# puedes ir añadiendo lineas a la lista y volver a lanzarlo sin repetir nada.
+
+set -uo pipefail
+
+usage() {
+    cat <<EOF
+Uso: $(basename "$0") -i lista.txt [-o directorio] [opciones]
+
+Opciones:
+  -i FICHERO   fichero con la lista de videos (obligatorio)
+  -o DIR       directorio de destino (por defecto: el actual)
+  -a           solo audio (extrae mp3)
+  -r FICHERO   registro de descargados (por defecto: DESTINO/.descargados.txt)
+  -f           forzar: vuelve a descargar aunque este en el registro
+  -n           dry-run: enseña lo que haria sin descargar
+  -h           esta ayuda
+
+Formato de cada linea del fichero:
+  URL [separador] nombre/con/directorios
+
+El separador puede ser espacios, tabulador o "|".
+Si no pones nombre, se usa el titulo del video.
+
+Los videos que se descargan bien quedan apuntados en el registro y en la
+siguiente ejecucion se saltan solos.
+EOF
+}
+
+lista=""
+destino="."
+registro=""
+solo_audio=0
+forzar=0
+dry_run=0
+
+while getopts ":i:o:r:afnh" opt; do
+    case "$opt" in
+        i) lista=$OPTARG ;;
+        o) destino=$OPTARG ;;
+        r) registro=$OPTARG ;;
+        a) solo_audio=1 ;;
+        f) forzar=1 ;;
+        n) dry_run=1 ;;
+        h) usage; exit 0 ;;
+        :) echo "Error: la opcion -$OPTARG necesita un argumento." >&2; usage >&2; exit 1 ;;
+        \?) echo "Error: opcion desconocida -$OPTARG." >&2; usage >&2; exit 1 ;;
+    esac
+done
+
+if ! command -v yt-dlp >/dev/null 2>&1; then
+    echo "Error: yt-dlp no esta instalado." >&2
+    exit 1
+fi
+
+if [ -z "$lista" ]; then
+    echo "Error: falta el fichero de lista (-i)." >&2
+    usage >&2
+    exit 1
+fi
+
+if [ ! -r "$lista" ]; then
+    echo "Error: no puedo leer '$lista'." >&2
+    exit 1
+fi
+
+mkdir -p "$destino" || exit 1
+
+: "${registro:=$destino/.descargados.txt}"
+
+opciones_extra=()
+if [ "$solo_audio" -eq 1 ]; then
+    opciones_extra+=(--extract-audio --audio-format mp3)
+fi
+
+# yt-dlp apunta en el registro cada video que baja bien y se salta los que ya
+# estan apuntados.
+#
+# Con -f queremos bajarlo todo igualmente pero SIN perder el apunte, y yt-dlp no
+# tiene un "salta la comprobacion pero apunta": o usa el registro entero o
+# ninguno. Asi que le damos un registro temporal vacio (no se salta nada) y al
+# final fusionamos lo nuevo en el registro de verdad.
+touch "$registro" || exit 1
+registro_yt="$registro"
+
+if [ "$forzar" -eq 1 ]; then
+    registro_yt=$(mktemp) || exit 1
+    trap 'rm -f "$registro_yt"' EXIT
+    opciones_extra+=(--force-overwrites)
+fi
+
+opciones_extra+=(--download-archive "$registro_yt")
+
+fusionar_registro() {
+    [ "$forzar" -eq 1 ] || return 0
+    [ -s "$registro_yt" ] || return 0
+    # solo las lineas que no estuvieran ya apuntadas (leer antes de escribir)
+    local nuevas
+    nuevas=$(grep -vxF -f "$registro" "$registro_yt")
+    [ -n "$nuevas" ] && printf '%s\n' "$nuevas" >> "$registro"
+    return 0
+}
+
+total=0
+ok=0
+fallos=()
+
+# El fichero puede no acabar en salto de linea: el [ -n "$linea" ] cubre ese caso.
+while IFS= read -r linea || [ -n "$linea" ]; do
+    # quitar comentarios de linea completa y espacios de los bordes
+    linea="${linea%%$'\r'}"
+    case "$linea" in
+        ''|'#'*) continue ;;
+    esac
+
+    url="${linea%%[[:space:]|]*}"
+    nombre="${linea#"$url"}"
+    nombre="${nombre#"${nombre%%[![:space:]|]*}"}"   # quitar separador y espacios iniciales
+    nombre="${nombre%"${nombre##*[![:space:]]}"}"    # quitar espacios finales
+
+    case "$url" in
+        http://*|https://*) ;;
+        *) echo "Aviso: me salto una linea que no parece una URL: $linea" >&2; continue ;;
+    esac
+
+    total=$((total + 1))
+
+    if [ -n "$nombre" ]; then
+        plantilla="$destino/$nombre.%(ext)s"
+        etiqueta="$nombre"
+    else
+        plantilla="$destino/%(title)s.%(ext)s"
+        etiqueta="(titulo del video)"
+    fi
+
+    echo ":: [$total] $url -> $etiqueta"
+
+    if [ "$dry_run" -eq 1 ]; then
+        ok=$((ok + 1))
+        continue
+    fi
+
+    if yt-dlp "${opciones_extra[@]}" -o "$plantilla" -- "$url"; then
+        ok=$((ok + 1))
+    else
+        fallos+=("$url")
+        echo "   fallo al descargar: $url" >&2
+    fi
+done < "$lista"
+
+fusionar_registro
+
+echo
+echo "Descargados $ok de $total."
+
+if [ "${#fallos[@]}" -gt 0 ]; then
+    echo "Fallaron:" >&2
+    printf '  %s\n' "${fallos[@]}" >&2
+    exit 1
+fi

@@ -15,6 +15,7 @@ in
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./configuration.nix
+    ./ssh.nix
   ];
 
   # This value determines the NixOS release from which the default

@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: src-dependencies create-softlinks remove-softlinks
+.PHONY: src-dependencies softlinks-create softlinks-remove
 
 -include config.mk
 
@@ -36,11 +36,11 @@ test: ## Test the flake
 	sudo nixos-rebuild test --flake .# --impure
 
 switch: src-dependencies ## Switch to the flake
-	sudo nixos-rebuild switch --flake .\?submodules=1# --impure 
+	sudo nixos-rebuild switch --flake .\?submodules=1# --impure
 	@#nh os switch --ask .\?submodules=1 -- --impure
 
 boot:
-	sudo nixos-rebuild boot --flake .\?submodules=1# --impure 
+	sudo nixos-rebuild boot --flake .\?submodules=1# --impure
 
 bootstrap: src-dependencies create-softlinks ## First bootstrap, specify NIX_HOSTNAME as env variable
 	sudo nixos-rebuild switch --flake .#$(NIX_HOSTNAME) --impure
@@ -68,7 +68,11 @@ deploy-thinkcenter: ## Deploy thinkcenter machine
 
 deploy-jsc: ## Deploy jsc machine
 	sudo nixos-rebuild switch --flake ".#jsc" --impure \
-		--target-host root@192.168.1.146 --build-host root@192.168.1.146
+		--target-host root@192.168.1.133 --build-host root@192.168.1.133
+
+boot-jsc: ## Boot jsc machine
+	sudo nixos-rebuild boot --flake ".#jsc" --impure \
+		--target-host root@192.168.1.133 --build-host root@192.168.1.133
 
 src-dependencies: ## Download impure source dependencies
 	@if [ ! -d $(SRC_DIR) ]; then mkdir -p $(SRC_DIR); fi
@@ -91,7 +95,7 @@ softlinks-create: softlinks-remove dirs-create ## Create all softlinks
 		dest=$${pair##*:}; \
 		ln -svf $(SDE_DIR)/$$src $(HOME)/$$dest; \
 		echo $(HOME)/$$dest >> $(STATE_FILE); \
-	done 
+	done
 
 softlinks-remove: ## Remove all softlinks
 	@if [ -f $(STATE_FILE) ]; then \

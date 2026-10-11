@@ -2,8 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, sde, ... }:
 
+let
+  # script en dotfiles/.local/scripts/descargar-lista
+  descargar-lista = pkgs.writeShellScriptBin "descargar-lista" (
+    builtins.readFile "${sde.scripts}/descargar-lista"
+  );
+in
 {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -91,6 +97,10 @@
   # Install firefox.
   programs.firefox.enable = true;
 
+  # KDE Connect: pair the phone once, then browse/edit its files in Dolphin
+  # over WiFi (SFTP, read/write). Also opens firewall ports 1714-1764.
+  programs.kdeconnect.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -100,6 +110,16 @@
     vim
     wget
     google-chrome
+    kdePackages.kdenlive
+    krusader
+    vlc
+    zip
+    unzip
+
+    # descargar-lista y sus dependencias
+    descargar-lista
+    yt-dlp
+    ffmpeg # yt-dlp lo necesita para juntar video+audio y para -a (mp3)
   ];
 
   nix = {
@@ -128,9 +148,7 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.settings.PermitRootLogin = "yes";
+  # OpenSSH y claves autorizadas: ./ssh.nix
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
