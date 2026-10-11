@@ -61,7 +61,7 @@ let
     man-db
   ];
   shpkgs = with pkgs; [
-    nodePackages_latest.bash-language-server
+    bash-language-server
     shellcheck
     shfmt
   ];

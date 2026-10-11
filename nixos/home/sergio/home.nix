@@ -41,6 +41,12 @@ in
     userDirs = {
       enable = true;
       createDirectories = false;
+      # Keep exporting XDG_DESKTOP_DIR, XDG_DOWNLOAD_DIR, etc. as session env
+      # vars (systemd user env + session variables) so any process can read
+      # them from $ENV. The home-manager default flipped true -> false; we
+      # pin true to preserve the old behavior (false would only write
+      # ~/.config/user-dirs.dirs without exporting the paths).
+      setSessionVariables = true;
       desktop = "${config.home.homeDirectory}/dt";
       download = "${config.home.homeDirectory}/dl";
       documents = "${config.home.homeDirectory}/docs";
@@ -115,22 +121,20 @@ in
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        setEnv = {
+        SetEnv = {
           TERM = "xterm-256color";
         };
-        extraOptions = {
-          AddKeysToAgent = "yes";
-        };
+        AddKeysToAgent = "yes";
       };
       # "sistemes" = {
-      #   hostname = "192.168.122.10";
-      #   user = "alumne";
-      #   identityFile = "~/.ssh/sistemes";
-      #   port = 22;
-      #   forwardX11 = true;
-      #   forwardX11Trusted = true;
+      #   HostName = "192.168.122.10";
+      #   User = "alumne";
+      #   IdentityFile = "~/.ssh/sistemes";
+      #   Port = 22;
+      #   ForwardX11 = true;
+      #   ForwardX11Trusted = true;
       # };
     };
     includes = [
@@ -149,7 +153,7 @@ in
     extraPackages = epkgs: [
       epkgs.treesit-grammars.with-all-grammars
     ];
-    
+
     # (epkgs.treesit-grammars.with-plugins (p: [
     #  p.tree-sitter-nix
     #  p.tree-sitter-python
@@ -195,8 +199,10 @@ in
     gtk3.bookmarks = [
       "file:///mnt"
       "file:///home/sergio/notes"
+      "file:///home/sergio/notes/docs"
       "file:///home/sergio/uni/mei"
       "file:///home/sergio/uni/gei"
+      "file:///home/sergio/personal/tfm"
     ];
   };
 

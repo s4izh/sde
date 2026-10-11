@@ -104,7 +104,7 @@ in
     wlr-randr # monitors cli
     wdisplays # monitors GUI
     wpaperd # wallpapers
-    swww # wallpapers
+    awww # wallpapers (renamed from swww)
     swaybg # wallpapers
     lswt # window info
     waylock

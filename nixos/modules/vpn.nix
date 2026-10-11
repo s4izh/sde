@@ -12,6 +12,9 @@
   services.tailscale = {
     enable = true;
   };
+
+  services.cloudflare-warp.enable = true;
+
   # allow VPN traffic routing
   networking.firewall.checkReversePath = "loose";
   # networking.firewall.allowedUDPPorts = [ 41641 ];

@@ -24,8 +24,8 @@
       commit-mono # Commit Mono
       # ubuntu-mono # Ubuntu Mono
       # nerdfonts
-      texlivePackages.inconsolata-nerd-font
-      texlivePackages.gnu-freefont
+      # texlivePackages.inconsolata-nerd-font
+      # texlivePackages.gnu-freefont
       victor-mono
       liberation_ttf
       ibm-plex
@@ -46,16 +46,16 @@
         # monospace = [ "InputMonoCondensed" ];
         # monospace = [ "IBM Plex Mono" ];
         # monospace = [ "Fira Code" ];
-        # monospace = [ "LiterationMono Nerd Font" ];
+        # monospace = [ "LiterationMono Nerd Font" ];# no usar
         # monospace = [ "JetBrains Mono" ];
         # monospace = [ "UbuntuMono Nerd Font" ];
         # monospace = [ "Fantasque Sans Mono" ];
         # monospace = [ "Comic Mono" ];
         # monospace = [ "Mononoki" ];
         # monospace = [ "Julia Mono" ];
-        monospace = [ "Iosevka" ];
+        # monospace = [ "Iosevka" ];
         # monospace = [ "0xProto Nerd Font Mono" ];
-        # monospace = [ "Liberation Mono" ];
+        monospace = [ "Liberation Mono" ];
         # monospace = [ "Inconsolata Nerd Font" ];
         # monospace = [ "FreeMono" ];
         # monospace = [ "Commit Mono" ];
