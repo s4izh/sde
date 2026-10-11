@@ -24,3 +24,4 @@
 (load "writing")
 (load "ai")
 (load "keybindings")
+;; (load "evil-setup")

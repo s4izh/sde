@@ -17,7 +17,7 @@
 
 ;; The font belongs here too: setting it post-init resizes the frame once the
 ;; default face changes its character dimensions.
-(push '(font . "JetBrains Mono-12") default-frame-alist)
+(push '(font . "monospace-12") default-frame-alist)
 
 ;; Emacs resizes the frame whenever a font or chrome change alters its pixel
 ;; size. Nothing here needs that, and it costs a visible reflow at startup.

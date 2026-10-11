@@ -22,10 +22,24 @@
 
 (setq create-lockfiles nil)
 
+;; Undo as a tree rather than a linear ring: C-x u opens the visualizer, where
+;; you can move between branches created by undoing and then editing again.
+;; Not evil-specific -- evil-setup.el just points `evil-undo-system' at it.
+(use-package undo-tree
+  :disabled t
+  :config
+  (setq undo-tree-visualizer-timestamps t
+        undo-tree-visualizer-diff t
+        ;; Keep the .~undo-tree~ history files out of the source directories.
+        undo-tree-history-directory-alist
+        `(("." . ,(expand-file-name "undo-tree" user-emacs-directory))))
+  (global-undo-tree-mode 1))
+
 (save-place-mode 1)
 (savehist-mode 1)
 (setq history-length 25)
 
+(setq tramp-use-connection-sharing t)
 
 (use-package dired
   :ensure nil

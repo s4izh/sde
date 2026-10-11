@@ -35,8 +35,8 @@
   (scroll-down-command)
   (recenter))
 
-(global-set-key (kbd "C-v") 'ssm/scroll-up-and-recenter)
-(global-set-key (kbd "M-v") 'ssm/scroll-down-and-recenter)
+;; (global-set-key (kbd "C-v") 'ssm/scroll-up-and-recenter)
+;; (global-set-key (kbd "M-v") 'ssm/scroll-down-and-recenter)
 
 (defvar ssm/quick-access-locations
   '(("emacs" . "~/.emacs.d/lisp")
@@ -70,3 +70,55 @@ keybinding required.")
 
 (global-set-key (kbd "C-c c d") 'ssm/quick-access-dired)
 (global-set-key (kbd "C-c c f") 'ssm/quick-access-find-file)
+
+;; Compile. `compile' prompts for a shell command (default `make -k') and runs
+;; it from the current buffer's directory; `recompile' silently re-runs the
+;; last one. Project-wide builds stay on the built-in C-x p c (project-compile).
+;; f5/f6 mirror the leader keys for one-press access; recompile is the fast one.
+(global-set-key (kbd "C-c c c") 'compile)     ; SPC c c
+(global-set-key (kbd "C-c c r") 'recompile)   ; SPC c r
+(global-set-key (kbd "<f5>")    'compile)
+(global-set-key (kbd "<f6>")    'recompile)
+
+(defun ssm/set-project-compile-command (command)
+  "Write COMMAND as the buffer-local `compile-command' into .dir-locals.el.
+The file is created at the project root (or `default-directory' when not in a
+project), so `compile'/`recompile' in any buffer under it default to COMMAND.
+Merges into an existing .dir-locals.el rather than clobbering it."
+  (interactive
+   (list (read-shell-command "Project compile command: "
+                             (if (boundp 'compile-command) compile-command "make -k"))))
+  (let* ((root (or (when-let ((pr (project-current))) (project-root pr))
+                   default-directory))
+         (default-directory root))
+    ;; add-dir-local-variable is the built-in that safely edits .dir-locals.el;
+    ;; it opens the file in a buffer, so save it and report where it landed.
+    (save-window-excursion
+      (add-dir-local-variable nil 'compile-command command)
+      (save-buffer))
+    (message "compile-command set in %s.dir-locals.el" root)))
+
+(global-set-key (kbd "C-c c l") 'ssm/set-project-compile-command)  ; SPC c l (dir-Locals)
+
+;; The C-c map doubles as the evil leader (see evil-setup.el), so these are
+;; reachable as both C-c <key> and SPC <key>. Single letters on C-c are
+;; reserved for the user, so nothing here fights a package.
+
+(global-set-key (kbd "C-c SPC") 'execute-extended-command)  ; SPC SPC -> M-x
+(global-set-key (kbd "C-c k")   'kill-current-buffer)
+(global-set-key (kbd "C-c g")   'magit-status)
+
+;; C-c f <key>: find things. Plain Emacs commands on the lowercase key --
+;; vertico and orderless already make `switch-to-buffer' and `find-file' good.
+;; Shift gets the consult variant, so it's a toggle within the same prefix
+;; when you want previews and consult's extra sources (recent files, bookmarks).
+(global-set-key (kbd "C-c f f") 'project-find-file)
+(global-set-key (kbd "C-c f F") 'find-file)
+(global-set-key (kbd "C-c f b") 'switch-to-buffer)
+(global-set-key (kbd "C-c f B") 'consult-buffer)
+(global-set-key (kbd "C-c f l") 'consult-line)     ; find a line in this buffer
+(global-set-key (kbd "C-c f g") 'consult-ripgrep)  ; grep across the project
+(global-set-key (kbd "C-c f i") 'consult-imenu)    ; find a definition here
+
+;; No C-c w window bindings: C-x o / C-x 1 / C-x 2 / C-x 3 already cover it,
+;; and evil keeps vim's C-w on top of that. C-c w is left free.

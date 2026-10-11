@@ -37,6 +37,9 @@
 (use-package ef-themes
   :defer t)
 
+(use-package doom-themes
+  :defer t)
+
 (setq ssm/current-theme 'ef-elea-dark)
 
 (defun ssm/load-theme (theme)
