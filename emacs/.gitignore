@@ -16,3 +16,7 @@ projects
 tutorial
 agent
 .agent-shell
+minimal-emacs.d
+simple/tramp
+simple/undo-tree
+*.elc
