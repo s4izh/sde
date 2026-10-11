@@ -10,12 +10,14 @@ export BROWSER="firefox"
 export READER="zathura"
 export MANPAGER="nvim +Man!"
 
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.npm/bin/:$PATH"
+
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/scripts:$PATH"
 export PATH="$HOME/.local/scripts/statusbar:$PATH"
 export PATH="$HOME/.local/scripts/tmux:$PATH"
 export PATH="$HOME/.local/scripts/rice:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
 
 export UNI="$HOME/uni"
 [ -e "$UNI/.env" ] && source "$UNI/.env"
@@ -55,14 +57,19 @@ else
     fi
 fi
 
-# honor per-interactive-shell startup file
-if [[ "$(tty)" =~ ^/dev/tty ]] || [ -n "$TMUX" ]; then
-    if [ -f "$HOME"/.bashrc ] && [ -z "$BASHRC_SOURCED" ]; then
-        # echo "sourcing $HOME/.bashrc"
-        # export BASHRC_SOURCED=1
-        source "$HOME"/.bashrc
-    fi
-fi
+# honor per-interactive-shell startup file (covers SSH /dev/pts, console, tmux)
+case $- in
+    *i*)
+        if [ -f "$HOME"/.bashrc ] && [ -z "$BASHRC_SOURCED" ]; then
+            # echo "sourcing $HOME/.bashrc"
+            # NOT exported: this must only guard against re-sourcing within
+            # this same process. Exporting leaks it into child shells (e.g.
+            # tmux inherits it via its server) and suppresses .bashrc there.
+            BASHRC_SOURCED=1
+            source "$HOME"/.bashrc
+        fi
+    ;;
+esac
 
 # [ "$(tty)" = "/dev/tty1" ] && exec mango
 [ "$(tty)" = "/dev/tty1" ] && exec launch-desktop-session.sh

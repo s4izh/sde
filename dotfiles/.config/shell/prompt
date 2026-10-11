@@ -65,6 +65,9 @@ function _basic_prompt()
     ON_SPECIAL_ENV=$IN_NIX_SHELL$GUIX_ENVIRONMENT
     # PS1='\u@\h \w${ON_SPECIAL_ENV:+ [env]}\n\$ '
     PS1='\[\e[32m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\n\[\e[37m\]\$ '
+    # PS1='\[\e[32m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\[\e[37m\]\n> '
+    # PS1='\[\e[32m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\[\e[37m\] > '
+    # PS1='\[\e[32m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\[\e[37m\] > '
     # PS1='\[\e[1m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\n\$\[\e[0m\] '
     # PS1="\[\e[1m\]\u@\h:\w\$ \[\e[0m\]"
 }

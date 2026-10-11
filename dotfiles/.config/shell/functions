@@ -85,6 +85,18 @@ function nixfiles() {
     )
 }
 
+function cde() {
+    # cd to the directory the running emacs server is currently in, i.e. the
+    # default-directory of the buffer shown in its selected window.
+    local dir
+    dir=$(emacsclient --eval \
+        '(with-current-buffer (window-buffer (selected-window)) (expand-file-name default-directory))' \
+        2>/dev/null) || { echo "cde: no emacs server running" >&2; return 1; }
+    dir=${dir%\"}; dir=${dir#\"}   # strip the surrounding quotes emacsclient prints
+    [ -d "$dir" ] || { echo "cde: not a directory: $dir" >&2; return 1; }
+    cd "$dir"
+}
+
 function nixsrc() {
     local src
     src=$(nix eval --raw "nixpkgs#$1.src.outPath" 2>/dev/null) || return

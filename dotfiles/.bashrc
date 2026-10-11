@@ -3,12 +3,21 @@
 
 if [[ -f "$HOME"/.bash_profile ]] && [[ -z "$BASH_PROFILE_SOURCED" ]]; then
     # echo "sourcing $HOME/.bash_profile"
-    export BASH_PROFILE_SOURCED=1
+    # NOT exported: same-process re-source guard only; see note in bash_profile.
+    BASH_PROFILE_SOURCED=1
     source "$HOME"/.bash_profile
 fi
 
+# Inside Emacs (M-x shell / comint is a "dumb" terminal): skip cursor-shape
+# escapes, readline vi mode, and tty-only widgets that would print garbage.
+if [ "$TERM" = "dumb" ] || [ -n "$INSIDE_EMACS" ]; then
+    DUMB_SHELL=1
+fi
+
 PS1='\u@\h \w${GUIX_ENVIRONMENT:+ [env]}\n\$ '
-PS0='\[\e[2 q\]'
+# steady block cursor; sent before each command so anything that changes the
+# cursor shape (nvim, less, ...) gets reset on return to the prompt.
+[ -z "$DUMB_SHELL" ] && PS0='\[\e[2 q\]'
 
 source_if_exist () { [ -f "$1" ] && source "$1"; }
 
@@ -38,8 +47,13 @@ export FZF_DEFAULT_OPTS="--color=dark"
 # # export FZF_DEFAULT_OPTS="--color=bw"
 # export FZF_DEFAULT_OPTS="--no-color"
 
-if command -v fzf 2>&1 >/dev/null; then
+if [ -z "$DUMB_SHELL" ] && command -v fzf 2>&1 >/dev/null; then
     eval "$(fzf --bash)"
 fi
 
-unset source_if_exist
+if [[ -n "$DUMB_SHELL" || -n "$INSIDE_EMACS" ]]; then
+    set -o emacs
+    PS0=''
+fi
+
+unset source_if_exist DUMB_SHELL
