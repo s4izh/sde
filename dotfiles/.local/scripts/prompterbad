@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: $0 <ext1> <ext2> ..."
+  exit 1
+fi
+
+prompt=""
+
+extensions=("$@")
+
+find_args=()
+for ext in "${extensions[@]}"; do
+  find_args+=(-o -name "*.$ext")
+done
+
+unset find_args[0]
+
+while IFS= read -r file; do
+  prompt+="----------------\n"
+  prompt+="filename: $file\n"
+  prompt+="----------------\n"
+  prompt+=$(<"$file")
+  prompt+=$'\n'
+# done < <(find . -type f \( "${find_args[@]}" \))
+done < <(find . -type f)
+
+echo -e "$prompt"

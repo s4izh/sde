@@ -8,12 +8,12 @@ select_project() {
 
     local folders=$(find ~/personal ~/personal/sde ~/uni/mei ~/uni/miri ~/git ~/devel ~/devel/lanaccess ~/.local/src -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
     local scripts=~/.local/scripts
-    local nvim=~/.config/nvim
+    # local nvim=~/.config/nvim
     local notes=~/notes
     local passwords=$PASSWORD_STORE_DIR
 
     local selected
-    selected=$(printf "%s\n" "$folders" "$scripts" "$dotfiles" "$passwords" "$notes" "$nvim" "new" | fzf)
+    selected=$(printf "%s\n" "$folders" "$scripts" "$dotfiles" "$passwords" "$notes" "$nvim" "new" "vpn" | fzf)
 
     [[ -z "$selected" ]] && exit 0
 
@@ -40,6 +40,13 @@ handle_new_project() {
     else
         exit 0
     fi
+}
+
+handle_vpn_session() {
+    local session_name="VPN"
+    local vpn_dir="$HOME/vpn"
+    mkdir -p "$vpn_dir"
+    echo "$vpn_dir"
 }
 
 find_and_run_custom_handler() {
@@ -119,6 +126,14 @@ main() {
 
     if [[ "$selected_path" == "new" ]]; then
         selected_path=$(handle_new_project)
+    elif [[ "$selected_path" == "vpn" ]]; then
+        local vpn_data
+        vpn_data=$(handle_vpn_session)
+        local session_name="${vpn_data}"
+        local target_path="${vpn_data}"
+        # create_or_attach_session "$session_name" "$target_path"
+        find_and_run_custom_handler "$vpn_data"
+        exit 0
     fi
 
     selected_path="${selected_path/#\~/$HOME}"

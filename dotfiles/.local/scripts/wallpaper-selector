@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+WALL_DIR="$HOME/git/wallpapers/"
+
+cd "$WALL_DIR" || exit 1
+
+# We use 'chafa' for the previewer; it's fast and supports Wayland/Sixel/Kitty protocols
+SELECTED_WALL=$(fzfub $WALL_DIR)
+
+# fzf --preview 'catimg --size 60x60 {}' \
+
+echo $SELECTED_WALL
+
+if [ -n "$SELECTED_WALL" ]; then
+    pkill swaybg
+    swaybg -m fill -i "$SELECTED_WALL" > /dev/null 2>&1 &
+    echo "Wallpaper set to: $(basename "$SELECTED_WALL")"
+fi

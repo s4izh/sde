@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Determine the target output based on the argument ("next" or "prev")
+target_output=$(riverctl focus-output $1 && riverctl get-focused-output)
+
+# Get the active workspace on the target output
+target_workspace=$(riverctl get-focused-tags --output "$target_output")
+
+# Send the currently focused window to the target workspace
+riverctl set-focused-tags "$target_workspace"
+riverctl send-to-output $1

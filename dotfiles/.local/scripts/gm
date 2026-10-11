@@ -69,13 +69,13 @@ else
     usage
 fi
 
-if [ "$LEVEL" -eq "$MAX_LEVEL" ]; then
-    notify-send "Reached level $LEVEL"
-fi
-
-if [ "$LEVEL" -eq "0" ]; then
-    notify-send "Reached level $LEVEL"
-fi
+# if [ "$LEVEL" -eq "$MAX_LEVEL" ]; then
+#     notify-send "Reached level $LEVEL"
+# fi
+#
+# if [ "$LEVEL" -eq "0" ]; then
+#     notify-send "Reached level $LEVEL"
+# fi
 
 echo -e "TEMP=$TEMP\nBRIGHTNESS=$BRIGHTNESS\nLEVEL=$LEVEL" > $SETTINGS
 echo -e "TEMP=$TEMP\nBRIGHTNESS=$BRIGHTNESS\nLEVEL=$LEVEL"

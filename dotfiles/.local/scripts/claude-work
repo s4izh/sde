@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Wrapper so programs expecting a `claude` binary use my personal config dir.
+exec env CLAUDE_CONFIG_DIR="$HOME/.claude-work" npx @anthropic-ai/claude-code "$@"

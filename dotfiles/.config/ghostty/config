@@ -1,0 +1,21 @@
+font-size = 14
+
+# follows the system light/dark preference; browse with `ghostty +list-themes`
+theme = dark:Zenbones Dark,light:Zenbones Light
+
+# block cursor, no blinking
+cursor-style = block
+cursor-style-blink = false
+
+# ghostty's shell integration otherwise appends "\e[5 q" (blinking bar) to PS1
+# and "\e[0 q" (reset) to PS0, which overrides cursor-style and the PS0 block
+# set in .bashrc. Only shows up outside tmux, where the integration is injected.
+shell-integration-features = no-cursor
+
+confirm-close-surface = false
+window-decoration = none
+
+# ligatures off (matches the kitty config)
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig

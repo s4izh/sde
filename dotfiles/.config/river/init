@@ -28,6 +28,10 @@ done
 
 riverctl map normal $mod Return spawn "$TERMINAL"
 
+# Reuse the running Emacs server (started from simple/lisp/core.el); -c opens a
+# new frame, -a emacs falls back to a plain Emacs if no server is up yet.
+riverctl map normal $mod e spawn "emacsclient -c -a emacs"
+
 riverctl map normal $mod v spawn 'pavucontrol'
 riverctl map normal $mod n spawn "swaync-client -t"
 

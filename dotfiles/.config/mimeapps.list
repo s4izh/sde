@@ -1,7 +1,7 @@
 [Default Applications]
 text/rust=nvim.desktop
 application/json=nvim.desktop
-text/plain=nvim.desktop
+text/plain=emacsclient-mail.desktop
 application/pdf=org.pwmt.zathura.desktop
 text/markdown=nvim.desktop
 image/png=sxiv.desktop;
@@ -12,10 +12,11 @@ x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/about=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Added Associations]
 text/rust=code.desktop;nvim.desktop;
 application/json=nvim.desktop;
-text/plain=nvim.desktop;
+text/plain=nvim.desktop;emacsclient-mail.desktop;
 application/pdf=com.github.xournalpp.xournalpp.desktop;
 application/x-shellscript=nvim.desktop;

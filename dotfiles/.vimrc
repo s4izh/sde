@@ -53,6 +53,7 @@ set smartcase
 " set showmatch
 " map <leader>n :let @/=''<cr> " clear search
 map <leader>n :noh<cr>
+map <leader>e :Ex<cr>
 
 " Formatting
 map <leader>q gqip

@@ -1,4 +1,17 @@
-[any]
-path = "/home/sergio/git/wallpapers"
-duration = "60m"
+# [any]
+# path = "/home/sergio/git/wallpapers"
+# duration = "60m"
 # mode = "fill"
+
+# [DP-1]
+# path = "/home/danyspin97/github_octupus.png"
+
+[DP-3]
+# path = "~/pix/fotos/sara_vertical.jpg"
+path = "~/pix/fotos/sara_horizontal.jpg"
+
+[DP-1]
+path = "~/pix/fotos/familia_coche.jpg"
+
+[HDMI-A-1]
+path = "~/git/wallpapers/wallhaven-q6p667.jpg"

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+default_prefix=$(tmux show-option -gv prefix 2>/dev/null || echo "C-b")
+
+NEW_PREFIX=${1:-}
+
+if [ -z "$NEW_PREFIX" ]; then
+    read -p "Enter new tmux prefix (e.g., C-a, C-b, M-x): " NEW_PREFIX
+fi
+
+if tmux list-sessions &>/dev/null; then
+    tmux set-option -g prefix $NEW_PREFIX
+    tmux unbind-key $default_prefix
+    tmux bind-key $NEW_PREFIX send-prefix
+    echo "Tmux prefix changed from $default_prefix to $NEW_PREFIX"
+else
+    echo "Tmux is not running. Start a tmux session and try again."
+    exit 1
+fi

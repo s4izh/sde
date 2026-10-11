@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+# slightly scuffed wallpaper picker menu for use with pywal - uses nsxiv if installed, otherwise uses dmenu
+
+FOLDER=~/git/wallpapers # wallpaper folder
+# SCRIPT=~/scripts/pywal16 # script to run after wal for refreshing programs, etc.
+SCRIPT=ls # script to run after wal for refreshing programs, etc.
+
+THEME_MODE=$HOME/.cache/sde/theme_mode
+
+menu() {
+    if command -v nsxiv >/dev/null; then
+        CHOICE=$(nsxiv -g 1600x900 -N floating_sxiv -otb $FOLDER/*)
+    else
+        CHOICE=$(echo -e "Random\n$(command ls -v $FOLDER)" | dmenu -l 15 -i -p "Wallpaper: ")
+    fi
+
+    PROMPTER="wofi --show dmenu"
+    PROMPTER="wmenu"
+    PROMPTER="bemenu"
+
+    MODE=$(echo -e "dark\nlight" | $PROMPTER -p "Theme mode:" | tr '[:upper:]' '[:lower:]')
+    if [ "$MODE" = "light" ]; then
+        wal_flags_extra="-l"
+        echo "light" > $THEME_MODE
+    else
+        echo "dark" > $THEME_MODE
+    fi
+
+    wal_flags="--contrast 3.0"
+
+    case $CHOICE in
+        Random)
+            # setsid swaybg -i "$FOLDER"/"$CHOICE" &
+            wal $wal_flags $wal_flags_extra -i "$FOLDER" -o $SCRIPT # dmenu random option
+            ;;
+        *.*)
+            setsid swaybg -i "$CHOICE" &
+            # wal --contrast 3.0 -l -i "$CHOICE" -o $SCRIPT ;;
+            wal $wal_flags $wal_flags_extra -i "$CHOICE" -o $SCRIPT
+            ln -sf "$HOME"/.cache/wal/colors-kitty.conf "$HOME"/.config/kitty/theme.conf
+            ;;
+        *) exit 0 ;;
+    esac
+}
+
+# If given arguments:
+# First argument will be used by pywal as wallpaper/dir path
+# Second will be used as theme (use wal --theme to view built-in themes)
+
+case "$#" in
+    0) menu ;;
+    1) wal -i "$1" -o $SCRIPT ;;
+    2) wal -i "$1" --theme $2 -o $SCRIPT ;;
+    *) exit 0 ;;
+esac

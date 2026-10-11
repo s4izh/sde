@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+if [ "$EUID" -ne 0 ]; then
+  echo "Error: Please run as root (sudo)."
+  exit 1
+fi
+
+echo "=========================================================="
+echo "                HARDWARE REPORT"
+echo "   Generated on: $(date)"
+echo "=========================================================="
+
+check_run() {
+    local cmd="$1"
+    echo -e "Running: $@"
+
+    if command -v "$cmd" >/dev/null 2>&1; then
+        "$@"
+    else
+        echo -e "MISSING COMMAND: $cmd"
+        return 1
+    fi
+}
+
+echo -e "\n[1. SYSTEM & MOTHERBOARD]"
+check_run dmidecode -t baseboard | grep -E "Manufacturer|Product|Version" | sed 's/^[ \t]*//'
+check_run dmidecode -t bios | grep -E "Vendor|Version|Release Date" | sed 's/^[ \t]*//'
+
+echo -e "\n[CPU ARCHITECTURE]"
+echo -e "Running: lscpu (filtered)"
+if command -v lscpu >/dev/null 2>&1; then
+    lscpu | grep -E "Model name|Arch|CPU\(s\):|Thread\(s\) per core|Socket\(s\)|BogoMIPS" | sed 's/^[ \t]*//'
+    echo "Virtualization: $(lscpu | grep -qiE "vmx|svm" && echo "Supported" || echo "Not Supported/Disabled")"
+else
+    echo -e "MISSING COMMAND: lscpu"
+    cat /proc/cpuinfo | grep "model name" | head -n1
+fi
+
+echo -e "\n[MEMORY (RAM)]"
+check_run free -h | grep "Mem:" | awk '{print "OS Visible RAM: " $2}'
+check_run dmidecode -t memory | grep -E "Size|Type|Speed|Configured Voltage|Part Number" | grep -v "No Module Installed" | sed 's/^[ \t]*//'
+
+echo -e "\n[STORAGE DEVICES]"
+check_run lsblk -d -o NAME,SIZE,TYPE,ROTA,TRAN,MODEL
+
+echo -e "\n[DISK HEALTH & AGE]"
+if command -v lsblk >/dev/null 2>&1; then
+    for disk in $(lsblk -dnp -o NAME); do
+        echo "--- Device: $disk ---"
+        check_run smartctl -i "$disk" | grep -E "Model Family|Device Model|Rotation Rate|User Capacity|Namespace 1 Size" | sed 's/^[ \t]*//'
+        check_run smartctl -A "$disk" | grep -E "Power_On_Hours|Percentage_Used" | awk '{print $1, $2, $10}'
+    done
+else
+    echo -e "MISSING COMMAND: lsblk"
+fi
+
+echo -e "\n[PCI BUS & CHIPSET]"
+check_run lspci | grep -E "Host bridge|PCI bridge|ISA bridge|VGA|Ethernet|SATA|NVMe"
+
+echo -e "\n[NETWORK INTERFACES]"
+if command -v ip >/dev/null 2>&1; then
+    check_run ip -brief link
+else
+    check_run ls /sys/class/net
+fi
+
+echo -e "\n[USB DEVICES]"
+check_run lsusb | grep -i "hub" -v
+
+echo "=========================================================="
+echo "                END OF REPORT"
+echo "=========================================================="
