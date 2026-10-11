@@ -16,6 +16,7 @@ in
     ./river.nix
     ./notes.nix
     ./screen-control.nix
+    ./beets.nix
   ];
 
   # home.backupFileExtension = "backup";

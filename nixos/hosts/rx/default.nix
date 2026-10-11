@@ -26,6 +26,7 @@ in
     "${modules}/android.nix"
     "${modules}/dev.nix"
     "${modules}/nvim.nix"
+    "${modules}/music.nix"
     # "${modules}/gnome.nix"
     # "${modules}/kde.nix"
 
