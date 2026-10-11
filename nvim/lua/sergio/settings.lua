@@ -5,10 +5,6 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
-vim.opt.laststatus = 2
-
-vim.opt.conceallevel = 0
-
 -- number column
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -16,9 +12,11 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.cursorline = false
 
-vim.opt.completeopt = "fuzzy,menu,menuone,noselect,noinsert"
-
 vim.g.editorconfig = true
+
+-- project-local config (.nvim.lua / .nvimrc / .exrc); gated by the trust db + secure
+vim.o.exrc = true
+vim.o.secure = true
 
 -- annoying things
 vim.opt.swapfile = false
@@ -38,21 +36,9 @@ vim.opt.wrap = false
 vim.opt.hlsearch = true -- :noh to stop highlighting
 vim.opt.incsearch = true
 
+-- vim.opt.formatoptions:remove({ "c", "r", "o" }) -- moved to autocommands.lua
+
+vim.opt.colorcolumn = "100"
+
 vim.o.path = vim.o.path .. "**"
-
-vim.o.winborder = "rounded"
-
--- disable autocomment on next line
--- vim.cmd[[
---     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
--- ]]
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "*" },
-  command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-})
-
--- comma separated in vim
-vim.opt.tags = { "./tags", "tags", "./TAGS", "TAGS", "./.tags", ".tags" }
-
-vim.o.exrc = true
-vim.o.secure = true
+vim.opt.tags = "./tags;tags"

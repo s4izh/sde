@@ -1,20 +1,15 @@
--- status bar
--- this is from Gavin Freeborn
-vim.cmd([[
-function! Statusline_expr()
-	let mod  = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
-	let ft   = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
-	let fug  = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
-	let job  = "%2*%{exists('g:job') ? '[Job Running!]' : ''}%*"
-	let zoom = "%3*%{exists('t:maximize_hidden_save') ? '[Z]' : ''}%*"
-	let sep  = ' %= '
-	let pos  = ' %-14.(%l,%c%V%) '
-	let pct  = ' %P'
+-- mini.statusline: minimal statusline that follows the active colorscheme
+vim.pack.add({
+  -- icon provider, used by mini.statusline (and picked up by oil.nvim too)
+  { src = "https://github.com/nvim-mini/mini.icons" },
+  { src = "https://github.com/nvim-mini/mini.statusline" },
+})
 
-	return '%<%f %<'.mod.fug.job.zoom.sep.pos.pct
-endfunction
-let &statusline = Statusline_expr()
-set laststatus=2 "show statusbar
-]])
+require("mini.icons").setup()
 
--- vim.cmd([[set ruf=%30(%=%#LineNr#%.50F\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)]])
+-- let plugins that ask for nvim-web-devicons use mini.icons instead
+MiniIcons.mock_nvim_web_devicons()
+
+require("mini.statusline").setup({
+  use_icons = true,
+})

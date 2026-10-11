@@ -1,59 +1,27 @@
-vim.g.mapleader = " "
+vim.g.mapleader   = " "
 vim.opt.guicursor = ""
 
-require("sergio")
-
--- highlight when yanking text
-local yank_group = vim.api.nvim_create_augroup('HighlightYank', {})
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = yank_group,
-  pattern = '*',
-  callback = function()
-    vim.highlight.on_yank({
-      higroup = 'IncSearch',
-      timeout = 40,
-    })
-  end,
-})
-
-local lastplace_group = vim.api.nvim_create_augroup('Lastplace', {})
-vim.api.nvim_create_autocmd({'BufWinEnter'}, {
-  group = lastplace_group,
-  desc = 'return cursor to where it was last time closing the file',
-  pattern = '*',
-  -- there is a mark at '"' register
-  command = 'silent! normal! g`"zv',
-})
-
-vim.api.nvim_set_option("grepprg", "rg --vimgrep --smart-case --hidden")
-vim.api.nvim_set_option("grepformat", "%f:%l:%c:%m,%f:%l:%m")
-
-vim.g.git_base = "HEAD"
-
-local concealing_group = vim.api.nvim_create_augroup("Concealing", { clear = true })
-
--- vim.api.nvim_create_autocmd("InsertEnter", {
---   group = concealing_group,
---   pattern = { "*.md", "*.tex", "*.latex" },
---   command = "setlocal conceallevel=0",
---   -- callback = function()
---   --   vim.opt_local.conceallevel = 0
---   -- end,
--- })
--- vim.api.nvim_create_autocmd("InsertLeave", {
---   group = concealing_group,
---   pattern = { "*.md", "*.tex", "*.latex" },
---   command = "setlocal conceallevel=2",
--- })
-
-vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
-  group = concealing_group,
-  pattern = { "*.md", "*.tex", "*.latex" },
-  callback = function(args)
-    if args.event == "InsertEnter" then
-      vim.opt_local.conceallevel = 0
-    else
-      vim.opt_local.conceallevel = 0
+-- Escape hatch for machines where the plugins come from somewhere else (Nix,
+-- distro packages...): with NVIM_NO_PACK=1 nothing is downloaded or written to
+-- ~/.local/share/nvim.
+--
+--   NVIM_NO_PACK=1 nvim          one-off
+--   environment.variables        to make it permanent on NixOS
+--
+-- The packadd is what keeps this usable with the current layout: vim.pack
+-- installs into pack/core/opt, and it is vim.pack.add() that puts those on the
+-- runtimepath, so dropping it entirely would stop every already-installed
+-- plugin from loading. Plugins provided by Nix as `start` packages are on the
+-- runtimepath already and the packadd is simply a no-op for them.
+if vim.env.NVIM_NO_PACK == "1" then
+  vim.pack.add = function(specs)
+    for _, spec in ipairs(specs or {}) do
+      local src = type(spec) == "table" and spec.src or spec
+      local name = type(spec) == "table" and spec.name
+        or src:gsub("%.git$", ""):match("([^/]+)$")
+      pcall(vim.cmd, "packadd " .. name)
     end
-  end,
-})
+  end
+end
+
+require("sergio")

@@ -1,12 +1,11 @@
 -- general
--- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.keymap.set('n', "<leader>fv", ":find *")
 
 -- clipboard shortcuts
 vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
-
 -- delete without saving to any register
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
@@ -29,98 +28,57 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- centre screen after moving through search
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("n", "<leader>th", ":noh<cr>")
 
 -- keep cursor on the same line on J
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- custom scripts
-vim.keymap.set("n", "<Leader>cc", ":w | !compiler %<cr>")
-vim.keymap.set("n", "<Leader>O", ":!opout %<cr><cr>")
-vim.keymap.set("n", "<Leader>X", ":!chmod +x %<cr><cr>")
+vim.keymap.set("n", "<leader>cc", ":w | !compiler %<cr>")
+vim.keymap.set("n", "<leader>O", ":!opout %<cr><cr>")
+vim.keymap.set("n", "<leader>X", ":!chmod +x %<cr><cr>")
 
-vim.keymap.set("v", "<Leader><Leader>x", ":source %<cr>")
-vim.keymap.set("n", "<Leader>x", ":.lua<cr>")
-vim.keymap.set("v", "<Leader>x", ":lua<cr>")
+vim.keymap.set("v", "<leader><Leader>x", ":source %<cr>")
+vim.keymap.set("n", "<leader>x", ":.lua<cr>")
+vim.keymap.set("v", "<leader>x", ":lua<cr>")
 
 -- conceallevel
-vim.keymap.set("n", "<Leader>wc0", ":set conceallevel=0<cr>")
-vim.keymap.set("n", "<Leader>wc2", ":set conceallevel=2<cr>")
+vim.keymap.set("n", "<leader>wc0", ":set conceallevel=0<cr>")
+vim.keymap.set("n", "<leader>wc2", ":set conceallevel=2<cr>")
 
+-- substution sugar
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("v", '<leader>s', '"hy:%s/<C-r>h//gc<left><left><left>', { noremap = true, silent = true })
 
 -- resource config
-vim.keymap.set("n", "<Leader>V", ":source ~/.config/nvim/init.lua <cr>")
-
--- diff config
-if vim.opt.diff:get() then
-  -- Map <leader>1 to :diffget LOCAL<CR>
-  vim.api.nvim_set_keymap('n', '<leader>1', ':diffget LOCAL<CR>', { noremap = true, silent = true })
-  -- Map <leader>2 to :diffget BASE<CR>
-  vim.api.nvim_set_keymap('n', '<leader>2', ':diffget BASE<CR>', { noremap = true, silent = true })
-  -- Map <leader>3 to :diffget REMOTE<CR>
-  vim.api.nvim_set_keymap('n', '<leader>3', ':diffget REMOTE<CR>', { noremap = true, silent = true })
-end
-
-vim.keymap.set("n", "<Leader>R", ":set wrap! linebreak!<cr>")
+vim.keymap.set("n", "<leader>V", ":source ~/.config/nvim/init.lua <cr>")
 
 -- writing
-vim.keymap.set("n", "<Leader>wsc", ":setlocal spell spelllang=ca<cr>")
-vim.keymap.set("n", "<Leader>wse", ":setlocal spell spelllang=es<cr>")
-vim.keymap.set("n", "<Leader>wsi", ":setlocal spell spelllang=en<cr>")
-vim.keymap.set("n", "<Leader>wS", ":setlocal nospell<cr>")
-vim.keymap.set("n", "<Leader>wT", ":r!~/notes/utils/template %<cr>ggdd")
-vim.keymap.set("n", "<Leader>wl", ":r!~/notes/utils/link-note % 2>/dev/null<cr>")
-vim.keymap.set("n", "<Leader>wn", ":r!~/notes/utils/new-note  % 2>/dev/null<cr>")
+vim.keymap.set("n", "<leader>wsc", ":setlocal spell spelllang=ca<cr>")
+vim.keymap.set("n", "<leader>wse", ":setlocal spell spelllang=es<cr>")
+vim.keymap.set("n", "<leader>wsi", ":setlocal spell spelllang=en<cr>")
+vim.keymap.set("n", "<leader>wS", ":setlocal nospell<cr>")
+vim.keymap.set("n", "<leader>wT", ":r!~/notes/utils/template %<cr>ggdd")
+vim.keymap.set("n", "<leader>wl", ":r!~/notes/utils/link-note % 2>/dev/null<cr>")
 
+vim.keymap.set("n", "<leader>fw", ":silent grep <C-R><C-W> | copen<cr>", { silent = true })
 
-vim.keymap.set("n", "<Leader>fw", ":silent grep <C-R><C-W> | copen<cr>")
---vim.keymap.set("v", "<Leader>fs", ":grep -r <C-r>h | copen<cr>")
+-- TOGGLES
 
-vim.keymap.set("n", "<Leader>r", ":luafile %<cr>")
-vim.keymap.set("n", "<Leader>vc", ":e ~/.config/nvim/init.lua<cr>")
+local toggles = require("sergio.toggles")
 
-vim.keymap.set('v', '<C-r>', '"hy:%s/<C-r>h//gc<left><left><left>', { noremap = true, silent = true })
+-- linenumber configs toggle
+vim.keymap.set("n", "<leader>tcc", toggles.toggle_color_column, { noremap = true, silent = true, desc = "toggle color column" })
+vim.keymap.set("n", "<leader>tla", toggles.toggle_line_numbers, { noremap = true, silent = true, desc = "toggle line numbers column" })
+vim.keymap.set("n", "<leader>tlr", ":set relativenumber!<cr>", { noremap = true, silent = true, desc = "toggle relative number" })
 
--- vim.keymap.set('v', '<Leader>fs', '"hy:silent grep <C-r>h | copen<CR>', { noremap = true, silent = true })
-vim.keymap.set('v', '<Leader>fs', function()
-  vim.cmd('normal! "hy')
-  local query = vim.fn.getreg('h')
-  query = vim.fn.escape(query, '\\')
-  query = vim.fn.escape(query, '"')
-  query = vim.fn.escape(query, '(')
-  query = vim.fn.escape(query, ')')
-  vim.cmd('silent grep "' .. query .. '" .')
-  vim.cmd('copen')
-end, { noremap = true, silent = true })
+-- line wrapping
+vim.keymap.set("n", "<leader>tw", ":set wrap! linebreak!<cr>")
 
+-- search highlights
+vim.keymap.set("n", "<leader>th", ":noh<cr>")
 
-local function toggle_line_numbers()
-  local is_number = vim.wo.number
-  local is_relativenumber = vim.wo.relativenumber
+-- cursor
+vim.keymap.set("n", "<leader>tcC", ":set cursorcolumn!<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tcl", ":set cursorline!<cr>", { noremap = true, silent = true })
 
-  if is_number or is_relativenumber then
-    vim.wo.number = false
-    vim.wo.relativenumber = false
-    print("Line numbers disabled")
-  else
-    vim.wo.number = true
-    vim.wo.relativenumber = true
-    print("Line numbers enabled")
-  end
-end
-
-vim.keymap.set("n", "<Leader>tl", toggle_line_numbers, { noremap = true, silent = true })
-
-vim.api.nvim_create_user_command("ToggleLineNumbers", function(opts)
-  toggle_line_numbers()
-end, {
-  nargs = 0,
-})
-
-vim.cmd([[vnoremap <leader>ma :s/\s*\\$/\=repeat(' ', 80-virtcol('.')).'\'<CR>]])
-
-vim.keymap.set("n", "<Leader>tg", ":Goyo<cr>")
-
--- thank you, https://heitorpb.github.io/bla/format-tables-in-vim/
-vim.keymap.set("v", "<Leader>mtf", [[:'<,'>!tr -s " " | column -t -s '|' -o '|' <CR>]], { noremap = true, silent = true })
+-- vim.keymap.set("n", "<leader>tcl", ":set cursorline!<cr>", { noremap = true, silent = true })

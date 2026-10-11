@@ -1,0 +1,6 @@
+---@type vim.lsp.Config
+return {
+  cmd = { "verible-verilog-ls", "--rules_config_search" },
+  filetypes = { "verilog", "systemverilog" },
+  root_markers = { ".git" },
+}
