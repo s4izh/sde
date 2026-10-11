@@ -249974,7 +249974,7 @@
 0.0.0.0 static.fdel11-1.fna.fbcdn.net
 0.0.0.0 static.fsea1-1.fna.fbcdn.net
 0.0.0.0 static.thefacebook.com
-0.0.0.0 static.xx.fbcdn.net
+# 0.0.0.0 static.xx.fbcdn.net
 0.0.0.0 staticxx.facebook.com
 0.0.0.0 stormberg.m.facebook.com
 0.0.0.0 sv-se.facebook.com
@@ -251494,3 +251494,4 @@
 # 'example.com':
 
 # 0.0.0.0 example.com
+127.0.0.1 liftbite.vm.local liftbite.api.vm.local
