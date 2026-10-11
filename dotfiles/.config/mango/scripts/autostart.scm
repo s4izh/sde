@@ -36,6 +36,7 @@
 
 (run-bg "waybar")
 (run-bg "nm-applet --indicator")
+(run-bg "blueman-applet")
 
 (define (spawn-and-move app-command target-tag target-monitor)
   (system (string-append app-command " &"))
