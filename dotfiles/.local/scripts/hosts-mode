@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Switch /etc/hosts between variants without a nixos rebuild.
+# /etc/hosts -> /etc/static/hosts -> /etc/hosts.current -> /etc/hosts.{default,focus}
+
+set -euo pipefail
+
+CURRENT=/etc/hosts.current
+
+usage() {
+    echo "usage: $(basename "$0") [default|focus|toggle|status]" >&2
+    exit 1
+}
+
+status() {
+    basename "$(readlink "$CURRENT")" | sed 's/^hosts\.//'
+}
+
+link() {
+    local mode="$1"
+    [ -e "/etc/hosts.$mode" ] || {
+        echo "missing /etc/hosts.$mode (rebuild needed?)" >&2
+        exit 1
+    }
+    sudo ln -sfn "/etc/hosts.$mode" "$CURRENT"
+    echo "hosts -> $mode"
+}
+
+case "${1:-status}" in
+    default|focus) link "$1" ;;
+    toggle)
+        if [ "$(status)" = "focus" ]; then
+            link default
+        else
+            link focus
+        fi
+        ;;
+    status) status ;;
+    *) usage ;;
+esac
