@@ -66,8 +66,9 @@ Real chain: `.bashrc` → `shell/bash_profile` → `functions`, `aliases`, `prom
       document it as a toggle.
 - [ ] Commented code: `completion.el:53-58`, `keybindings.el:38-49`,
       `writing.el:37-43, 59`.
-- [ ] `backup-directory-alist` writes notes backups into `simple/backups/` inside
-      the repo; move it out.
+- [ ] The rest of Emacs state (`elpa/`, `eln-cache/`, `history`, `places`,
+      `tramp`, `auto-save-list/`...) is still written into `simple/`, i.e. the
+      repo. Move it to XDG dirs (backups already go to `~/.local/state/emacs`).
 
 ## Dotfiles cleanup
 

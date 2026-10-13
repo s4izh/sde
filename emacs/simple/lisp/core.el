@@ -1,6 +1,5 @@
 ;;; core.el --- persistence and baseline behavior -*- lexical-binding: t; -*-
 
-(setq make-backup-files nil)         ; don't clutter directories with ~ backup files
 (setq auto-save-default nil)         ; don't create annoying #autosave# files
 
 ;; no gui dialogs
@@ -12,7 +11,11 @@
 (setq global-auto-revert-non-file-buffers t)
 (global-auto-revert-mode 1)
 
-(setq backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory)))
+;; Backups go to $XDG_STATE_HOME, not ~/.emacs.d: that is a symlink into the
+;; sde repo, and backups include notes and other private files.
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name "emacs/backups/"
+                                  (or (getenv "XDG_STATE_HOME") "~/.local/state"))))
       make-backup-files t    ; keep making backups for safety...
       vc-make-backup-files t ; even for files tracked by Git
       version-control t      ; use version numbers for backups
