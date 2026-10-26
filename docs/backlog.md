@@ -22,8 +22,8 @@ Real chain: `.bashrc` → `shell/bash_profile` → `functions`, `aliases`, `prom
       /dev/null. Keep the foreign-distro guix branch; define `GUIX_LOCPATH` once
       (it's also in `.bashrc:38`).
 - [ ] `shell/bash_profile:8`: `export TERM=xterm-256color` overrides kitty/foot.
-- [ ] `shell/aliases`: duplicated `grep` (13, 25) and `tree` (29, 31) aliases.
-- [ ] `claude-personal` alias duplicates the `claude` script. Keep one.
+- [x] `shell/aliases`: duplicated `grep` (13, 25) and `tree` (29, 31) aliases.
+- [x] `claude-personal` alias duplicates the `claude` script. Keep one.
 - [ ] `shell/inputrc`: drop commented settings; add `inputrc:.inputrc` to
       `config.mk` (current link was made by hand).
 - [ ] Archive `dotfiles/.bash_aliases` (Arch-only, not linked); move `psmem`/`df -h`
