@@ -19,11 +19,13 @@
           # "sway/mode"
           # "sway/window"
           # "river/tags"
-          "dwl/tags"
-          "dwl/window"
+          # mango >= 0.18 dropped dwl-ipc, tags come through ext-workspace-v1
+          "ext/workspaces"
+          # "dwl/tags"
+          # "dwl/window"
           # "dwl/layout"
           # "custom/wm_layout"
-          "river/tags"
+          # "river/tags"
           # "dwl/tags"
           # "dwl/window"
           # "hyprland/workspaces"
@@ -73,6 +75,12 @@
           "format" = "{title}";
           "max-length" = 50;
           "icon" = true;
+        };
+        "ext/workspaces" = {
+          "format" = "{name}";
+          "on-click" = "activate";
+          "ignore-hidden" = true;
+          "sort-by-id" = true;
         };
         "hyprland/workspaces" = {
           "format" = "{name}";
