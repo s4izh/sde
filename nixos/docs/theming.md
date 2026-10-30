@@ -48,6 +48,7 @@ All under `sde.theming`, set from a host through
 | `stylixSchemeLight` | `"gruvbox-light-medium"` | Same, light mode. |
 | `kitty.dark` | `null` | Kitty theme for dark mode, a file in `dotfiles/.config/kitty/themes` without `.conf`. `null` keeps `theme.conf`. |
 | `kitty.light` | `"zenbones-light"` | Same, light mode. |
+| `lockImage` | `null` | swaylock background, a path read when locking. `null` generates one in the theme accent. |
 
 Listing and previewing the base16 schemes: see the comment next to
 `stylixScheme` in `hosts/rx/default.nix`.
@@ -136,6 +137,7 @@ current mode.
 | emacs | polarity file | yes | `file-notify` in `emacs/simple/lisp/appearance.el` |
 | bash / fzf | polarity file | new shells | `dotfiles/.bashrc` |
 | fuzzel | `~/.config/fuzzel/fuzzel.ini` | next launch | re-reads its config every time it opens |
+| swaylock | `~/.config/swaylock/config` | next lock | started fresh on every lock |
 
 ### kitty
 
@@ -167,6 +169,14 @@ session menu `fuzzelpoweroffmenu` (`SUPER+SHIFT+q`, waybar's power button).
 `home/sergio/fuzzel.nix` has the layout and the menu; `theming.nix` sets the
 font, the icon theme and colors: a dark or light palette plus the theme's
 `accent`. With `stylix`, Stylix's own fuzzel target colors it instead.
+
+### swaylock
+
+`theming.nix` colors the indicator with the theme accent and a dark or light
+inside, and sets the background: `sde.theming.lockImage` if given, otherwise
+an image built with ImageMagick (a blurred fractal from dark to the accent, or
+from the accent to light; fixed seed, so every build gives the same image).
+With `stylix`, Stylix's swaylock target colors it instead.
 
 ### neovim and emacs
 

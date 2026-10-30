@@ -44,7 +44,7 @@ in
   # colloid manjaro stylix
   home-manager.sharedModules = [
     {
-      sde.theming.theme = "manjaro";
+      sde.theming.theme = "breeze";
       # only for stylix, any file in pkgs.base16-schemes/share/themes
       # sde.theming.stylixScheme = "catppuccin-mocha";
       # sde.theming.stylixSchemeLight = "catppuccin-latte";
@@ -53,6 +53,9 @@ in
       # .conf. dark = null keeps theme.conf (ignored with stylix)
       # sde.theming.kitty.dark = "gruvbox-dark-hard";
       # sde.theming.kitty.light = "Modus_Operandi";
+
+      # swaylock background, null (default) generates one in the theme accent
+      # sde.theming.lockImage = "~/git/wallpapers/wallhaven-q6p667.jpg";
       #
       # list the schemes (run from nixos/):
       #   ls $(nix build --no-link --print-out-paths .#nixosConfigurations.rx.pkgs.base16-schemes)/share/themes

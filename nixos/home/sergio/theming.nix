@@ -278,6 +278,21 @@ let
     '';
   };
 
+  # lock screen background: a soft fractal in the theme accent, dark to
+  # accent or accent to light depending on the mode. fixed seed, same image
+  # on every build
+  lockImage =
+    pkgs.runCommand "sde-lock-${cfg.theme}-${cfg.polarity}.png"
+      {
+        nativeBuildInputs = [ pkgs.imagemagick ];
+      }
+      ''
+        magick -seed 7 -size 1920x1080 plasma:fractal -blur 0x6 \
+          -colorspace gray -auto-level -sigmoidal-contrast 4,50% \
+          +level-colors '${pick "#0b100f" "#f2f7f6"}','#${theme.accent}' \
+          -modulate ${pick "85" "100"} $out
+      '';
+
   useStylix = cfg.theme == "stylix";
   kittyTheme = pick cfg.kitty.dark cfg.kitty.light;
   theme = themes.${cfg.theme} or { };
@@ -345,6 +360,16 @@ in
       example = "Modus_Operandi";
       description = "Like kitty.dark, for the light mode.";
     };
+  };
+
+  options.sde.theming.lockImage = lib.mkOption {
+    type = lib.types.nullOr lib.types.str;
+    default = null;
+    example = "~/git/wallpapers/wallhaven-q6p667.jpg";
+    description = ''
+      Image for swaylock, read when locking (it is not copied to the store).
+      null uses one generated in the theme accent color.
+    '';
   };
 
   options.sde.theming.toggle = lib.mkOption {
@@ -451,6 +476,9 @@ in
             pick "prefer-dark" "prefer-light"
           );
 
+          # colored below, or by stylix's swaylock target
+          programs.swaylock.enable = true;
+
           # theme-mode reads the active polarity from here
           xdg.dataFile."sde/polarity".text = cfg.polarity + "\n";
         }
@@ -474,6 +502,55 @@ in
             gtk.enable = true;
             # also link the theme into ~/.icons, some older apps only look there
             dotIcons.enable = true;
+          };
+
+          # swaylock -f from the session menu and SUPER+ALT+l
+          programs.swaylock = {
+            settings =
+              let
+                a = theme.accent;
+                none = "00000000";
+              in
+              {
+                image = if cfg.lockImage != null then cfg.lockImage else "${lockImage}";
+                scaling = "fill";
+                font = "monospace";
+                font-size = 22;
+                indicator-radius = 110;
+                indicator-thickness = 8;
+                indicator-idle-visible = true;
+                show-failed-attempts = true;
+                ignore-empty-password = true;
+
+                ring-color = a;
+                ring-ver-color = a;
+                ring-clear-color = "e5c07b";
+                ring-wrong-color = "e06c75";
+                ring-caps-lock-color = "e5c07b";
+                key-hl-color = pick "ffffff" "1e1e1e";
+                bs-hl-color = "e06c75";
+                caps-lock-key-hl-color = pick "ffffff" "1e1e1e";
+                caps-lock-bs-hl-color = "e06c75";
+
+                inside-color = pick "000000aa" "ffffffaa";
+                inside-ver-color = pick "000000aa" "ffffffaa";
+                inside-clear-color = pick "000000aa" "ffffffaa";
+                inside-wrong-color = pick "000000aa" "ffffffaa";
+                inside-caps-lock-color = pick "000000aa" "ffffffaa";
+
+                text-color = pick "ffffff" "1e1e1e";
+                text-ver-color = pick "ffffff" "1e1e1e";
+                text-clear-color = pick "ffffff" "1e1e1e";
+                text-wrong-color = "e06c75";
+                text-caps-lock-color = "e5c07b";
+
+                line-color = none;
+                line-ver-color = none;
+                line-clear-color = none;
+                line-wrong-color = none;
+                line-caps-lock-color = none;
+                separator-color = none;
+              };
           };
 
           # fuzzel.nix has the rest of the fuzzel config
