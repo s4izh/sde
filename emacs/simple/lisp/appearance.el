@@ -40,16 +40,57 @@
 (use-package doom-themes
   :defer t)
 
-(setq ssm/current-theme 'ef-elea-dark)
+;; light/dark comes from ~/.local/share/sde/polarity, written by the nix
+;; theming (theme-mode in nixos/home/sergio/theming.nix). THEME_IS_LIGHT from
+;; the kitty theme is the fallback when the file is not there.
+(defvar ssm/polarity-file
+  (expand-file-name "sde/polarity" (or (getenv "XDG_DATA_HOME") "~/.local/share")))
+
+(defvar ssm/themes '((dark . ef-elea-dark) (light . modus-operandi))
+  "Theme loaded for each polarity.")
+
+(defun ssm/read-polarity ()
+  "Return `light' or `dark' from `ssm/polarity-file', nil if unreadable.
+Home-manager swaps the symlink on every toggle, so it can be missing for
+a moment."
+  (when (file-readable-p ssm/polarity-file)
+    (with-temp-buffer
+      (insert-file-contents ssm/polarity-file)
+      (pcase (string-trim (buffer-string))
+        ("light" 'light)
+        ("dark" 'dark)))))
+
+(defvar ssm/polarity
+  (or (ssm/read-polarity)
+      (if (equal (getenv "THEME_IS_LIGHT") "1") 'light 'dark)))
+
+(setq ssm/current-theme (alist-get ssm/polarity ssm/themes))
 
 (defun ssm/load-theme (theme)
+  "Load THEME. Picked by hand, it becomes the theme of the current polarity."
   (interactive
    (list
     (intern (completing-read "Load custom theme: "
                              (mapcar #'symbol-name
                                      (custom-available-themes))))))
+  (when (called-interactively-p 'any)
+    (setf (alist-get ssm/polarity ssm/themes) theme))
   (disable-theme ssm/current-theme)
   (setq ssm/current-theme theme)
   (load-theme theme t))
 
 (ssm/load-theme ssm/current-theme)
+
+(defun ssm/polarity-changed (_event)
+  (let ((p (ssm/read-polarity)))
+    (when (and p (not (eq p ssm/polarity)))
+      (setq ssm/polarity p)
+      (ssm/load-theme (alist-get p ssm/themes)))))
+
+;; watch the directory, not the file: the symlink gets replaced, which would
+;; drop a watch on the file itself after the first toggle. works the same in
+;; the daemon, no need to go through emacsclient
+(require 'filenotify)
+(let ((dir (file-name-directory ssm/polarity-file)))
+  (when (file-directory-p dir)
+    (file-notify-add-watch dir '(change) #'ssm/polarity-changed)))

@@ -1,5 +1,26 @@
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
+
+-- light/dark comes from ~/.local/share/sde/polarity, written by the nix
+-- theming (theme-mode in nixos/home/sergio/theming.nix). THEME_IS_LIGHT from
+-- the kitty theme is the fallback when the file is not there.
+local polarity_file = vim.g.sde_polarity_file
+  or (vim.env.XDG_DATA_HOME or vim.fn.expand("~/.local/share")) .. "/sde/polarity"
+
+-- nil when the file is missing or half written, home-manager swaps the
+-- symlink on every toggle
+local function read_polarity()
+  local f = io.open(polarity_file)
+  if not f then
+    return nil
+  end
+  local p = f:read("*l")
+  f:close()
+  if p == "light" or p == "dark" then
+    return p
+  end
+end
+
+vim.opt.background = read_polarity() or (vim.env.THEME_IS_LIGHT == "1" and "light" or "dark")
 
 vim.pack.add({
   { src = "https://github.com/rose-pine/neovim", name = "rose-pine" },
@@ -31,18 +52,23 @@ require("rose-pine").setup({
 
 local M = {}
 
-local CURRENT_COLOR = "vscode"
+-- colorscheme per background, :Theme changes the one of the current mode.
+-- vscode follows 'background', so the same name works for both
+local COLORS = { dark = "vscode", light = "vscode" }
+
+local is_transparent = true
 
 function M.standard(color)
-  vim.cmd.colorscheme(color or CURRENT_COLOR)
+  vim.cmd.colorscheme(color or COLORS[vim.o.background])
 end
 
 function M.transparent(color)
-  vim.cmd.colorscheme(color or CURRENT_COLOR)
+  local fg = vim.o.background == "dark" and "white" or "black"
+  vim.cmd.colorscheme(color or COLORS[vim.o.background])
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
   vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-  vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "white", bg = "none" })
+  vim.api.nvim_set_hl(0, "CursorLineNr", { fg = fg, bg = "none" })
   vim.api.nvim_set_hl(0, "LineNr", { bg = "none", ctermbg = "none", fg = "grey" })
   vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
   vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none", fg = "grey" })
@@ -50,25 +76,49 @@ function M.transparent(color)
   vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none", fg = "grey" })
 end
 
-M.transparent()
+function M.apply(color)
+  if is_transparent then
+    M.transparent(color)
+  else
+    M.standard(color)
+  end
+end
 
-local is_transparent = true
+M.apply()
+
+-- watch the directory, not the file: the symlink gets replaced, which would
+-- drop a watch on the file itself after the first toggle
+local function watch_polarity()
+  local dir = vim.fs.dirname(polarity_file)
+  if not vim.uv.fs_stat(dir) then
+    return
+  end
+  local watcher = vim.uv.new_fs_event()
+  if not watcher then
+    return
+  end
+  watcher:start(dir, {}, vim.schedule_wrap(function(err)
+    if err then
+      return
+    end
+    local p = read_polarity()
+    if p and p ~= vim.o.background then
+      vim.o.background = p
+      M.apply()
+    end
+  end))
+end
+
+watch_polarity()
+
 vim.keymap.set("n", "<leader>tt", function()
   is_transparent = not is_transparent
-  if is_transparent then
-    M.transparent()
-  else
-    M.standard()
-  end
+  M.apply()
 end, { desc = "toggle transparent background" })
 
 vim.api.nvim_create_user_command("Theme", function(opts)
-  if is_transparent then
-    M.transparent(opts.args)
-  else
-    M.standard(opts.args)
-  end
-  CURRENT_COLOR = opts.args
+  M.apply(opts.args)
+  COLORS[vim.o.background] = opts.args
 end, {
   nargs = 1,
   complete = function(arg_lead)
