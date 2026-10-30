@@ -162,10 +162,7 @@ in
   };
 
   dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-      # color-scheme = "prefer-light";
-    };
+    # color-scheme is set by theming.nix (sde.theming.polarity)
     # "org/gnome/desktop/wm/preferences" = {
     #   button-layout = "appmenu";
     # };

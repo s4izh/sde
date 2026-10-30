@@ -37,12 +37,12 @@ fi
 
 export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
 
-# TODO: use a file for that
-if [ "$THEME_IS_LIGHT" == "1" ]; then
+# light/dark from the nix theming (theme-mode), or from the terminal theme
+if [ "$(cat ~/.local/share/sde/polarity 2>/dev/null)" = light ] || [ "$THEME_IS_LIGHT" == "1" ]; then
     export FZF_DEFAULT_OPTS="--color=light"
+else
+    export FZF_DEFAULT_OPTS="--color=dark"
 fi
-
-export FZF_DEFAULT_OPTS="--color=dark"
 # export FZF_DEFAULT_OPTS="--color=base16"
 # # export FZF_DEFAULT_OPTS="--color=bw"
 # export FZF_DEFAULT_OPTS="--no-color"

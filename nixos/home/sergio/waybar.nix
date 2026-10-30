@@ -195,6 +195,62 @@
       };
     };
 
-    style = builtins.readFile (./waybar-style.css);
+    # waybar-style.css is the dark bar, the light mode (sde.theming.polarity)
+    # overrides its base colors. theme-mode reloads waybar with SIGUSR2
+    style =
+      builtins.readFile ./waybar-style.css
+      + lib.optionalString (config.sde.theming.enable && config.sde.theming.polarity == "light") ''
+
+        /* light mode */
+        window#waybar {
+          background-color: rgba(250, 250, 250, 0.85);
+          border-bottom: 3px rgba(250, 250, 250, 0.85);
+          color: #1e1e1e;
+        }
+
+        button:hover {
+          box-shadow: inset 0 -3px #1e1e1e;
+        }
+
+        #workspaces button,
+        #clock,
+        #battery,
+        #cpu,
+        #memory,
+        #disk,
+        #temperature,
+        #backlight,
+        #network,
+        #pulseaudio,
+        #custom-media,
+        #custom-power,
+        #tray,
+        #mode,
+        #idle_inhibitor,
+        #scratchpad,
+        #mpd {
+          color: #1e1e1e;
+        }
+
+        #workspaces button:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+
+        #workspaces button.visible:not(.focused) {
+          background-color: #dcdcdc;
+          box-shadow: inset 0 -3px #1e1e1e;
+        }
+
+        #workspaces button.focused,
+        #workspaces button.active {
+          background-color: #b9c6cf;
+          box-shadow: inset 0 -3px #1e1e1e;
+        }
+
+        #battery.charging,
+        #battery.plugged {
+          color: #0a8a3a;
+        }
+      '';
   };
 }

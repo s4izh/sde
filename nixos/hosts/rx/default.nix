@@ -40,6 +40,27 @@ in
   sde.virtualization.docker.enable = true;
   sde.virtualization.podman.enable = true;
   sde.latex.enable = true;
+  # themes: adwaita (default) breeze gruvbox nordic catppuccin tokyonight
+  # colloid manjaro stylix
+  home-manager.sharedModules = [
+    {
+      sde.theming.theme = "manjaro";
+      # only for stylix, any file in pkgs.base16-schemes/share/themes
+      # sde.theming.stylixScheme = "catppuccin-mocha";
+      # sde.theming.stylixSchemeLight = "catppuccin-latte";
+
+      # kitty theme per mode, a file in dotfiles/.config/kitty/themes without
+      # .conf. dark = null keeps theme.conf (ignored with stylix)
+      # sde.theming.kitty.dark = "gruvbox-dark-hard";
+      # sde.theming.kitty.light = "Modus_Operandi";
+      #
+      # list the schemes (run from nixos/):
+      #   ls $(nix build --no-link --print-out-paths .#nixosConfigurations.rx.pkgs.base16-schemes)/share/themes
+      # preview the palettes in the terminal:
+      #   d=$(nix build --no-link --print-out-paths .#nixosConfigurations.rx.pkgs.base16-schemes)/share/themes
+      #   for f in $d/*.yaml; do printf '%-36s' "$(basename $f .yaml)"; grep -oE 'base0[0-9A-F]: "#[0-9a-fA-F]{6}"' $f | grep -oE '[0-9a-fA-F]{6}' | while read h; do printf '\e[48;2;%d;%d;%dm  \e[0m' 0x${h:0:2} 0x${h:2:2} 0x${h:4:2}; done; echo; done | less -R
+    }
+  ];
 
   home-manager = {
     extraSpecialArgs = {

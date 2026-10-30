@@ -214,15 +214,6 @@ in
 
   xdg.portal.enable = true;
 
-  qt = {
-    enable = true;
-    style = "adwaita-dark";
-  };
-
-  environment.sessionVariables = {
-    QT_STYLE_OVERRIDE = "adwaita-dark";
-  };
-
   programs.dconf.enable = true;
 
   # services.greetd = {

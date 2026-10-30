@@ -32,6 +32,9 @@
 
 (for-each run-bg apps)
 
+;; a switch or login activates the default polarity, put back the last one
+(run-ipc "theme-mode restore")
+
 (sleep 1)
 
 (run-bg "waybar")

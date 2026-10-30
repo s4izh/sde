@@ -11,6 +11,10 @@
       url = "github:nixos/nixos-hardware/master";
     };
     flake-utils.url = "github:numtide/flake-utils";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
