@@ -17,6 +17,7 @@ in
     ./screen-control.nix
     ./beets.nix
     ./theming.nix
+    ./fuzzel.nix
   ];
 
   # home.backupFileExtension = "backup";

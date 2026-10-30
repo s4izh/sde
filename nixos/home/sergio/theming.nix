@@ -18,13 +18,15 @@ let
   isDark = cfg.polarity == "dark";
   pick = dark: light: if isDark then dark else light;
 
-  # each theme sets gtk, icons, cursor and qt for the current polarity.
+  # each theme sets gtk, icons, cursor and qt for the current polarity, and
+  # an accent color (RRGGBB) for the programs colored here (fuzzel).
   # qt is one of:
   #   { style = ...; package = ...; platformTheme = ...; }  plain qt style
   #   { kvantum = { name = ...; package = ...; }; }          kvantum svg theme
   #   { platformTheme = "gtk3"; }                            qt copies the gtk theme
   themes = {
     adwaita = {
+      accent = pick "78aeed" "3584e4";
       gtk = {
         name = pick "adw-gtk3-dark" "adw-gtk3";
         package = pkgs.adw-gtk3;
@@ -48,6 +50,7 @@ let
 
     # plasma look outside plasma, qt apps take the colors from kdeglobals
     breeze = {
+      accent = "3daee9";
       gtk = {
         name = pick "Breeze-Dark" "Breeze";
         package = pkgs.kdePackages.breeze-gtk;
@@ -69,6 +72,7 @@ let
 
     # no light kvantum theme, light qt follows the gtk theme
     gruvbox = {
+      accent = pick "d79921" "b57614";
       gtk = {
         name = pick "Gruvbox-Dark" "Gruvbox-Light";
         package = pkgs.gruvbox-gtk-theme;
@@ -91,6 +95,7 @@ let
 
     # same, nordic only ships dark kvantum themes
     nordic = {
+      accent = pick "88c0d0" "5e81ac";
       gtk = {
         name = pick "Nordic" "Nordic-Polar";
         package = pkgs.nordic;
@@ -116,6 +121,7 @@ let
         flavor = pick "mocha" "latte";
       in
       {
+        accent = pick "cba6f7" "8839ef";
         gtk = {
           name = "catppuccin-${flavor}-mauve-standard";
           package = pkgs.catppuccin-gtk.override {
@@ -145,6 +151,7 @@ let
 
     # no kvantum theme in nixpkgs for these, qt follows the gtk theme
     tokyonight = {
+      accent = pick "7aa2f7" "2e7de9";
       gtk = {
         name = pick "Tokyonight-Dark" "Tokyonight-Light";
         package = pkgs.tokyonight-gtk-theme;
@@ -158,6 +165,7 @@ let
     };
 
     colloid = {
+      accent = "3c84f7";
       gtk = {
         name = pick "Colloid-Dark" "Colloid-Light";
         package = pkgs.colloid-gtk-theme;
@@ -172,6 +180,7 @@ let
 
     # manjaro xfce look: matcha sea + papirus maia
     manjaro = {
+      accent = "2eb398";
       gtk = {
         name = pick "Matcha-dark-sea" "Matcha-light-sea";
         package = pkgs.matcha-gtk-theme;
@@ -465,6 +474,41 @@ in
             gtk.enable = true;
             # also link the theme into ~/.icons, some older apps only look there
             dotIcons.enable = true;
+          };
+
+          # fuzzel.nix has the rest of the fuzzel config
+          programs.fuzzel.settings = {
+            main = {
+              font = "monospace:size=12";
+              icon-theme = theme.icons.name;
+            };
+            colors =
+              let
+                a = theme.accent;
+              in
+              pick
+                {
+                  background = "1e1e1ef2";
+                  text = "dcdcdcff";
+                  prompt = "${a}ff";
+                  input = "ffffffff";
+                  match = "${a}ff";
+                  selection = "3a3a3aff";
+                  selection-text = "ffffffff";
+                  selection-match = "${a}ff";
+                  border = "${a}ff";
+                }
+                {
+                  background = "f6f6f6f2";
+                  text = "2a2a2aff";
+                  prompt = "${a}ff";
+                  input = "000000ff";
+                  match = "${a}ff";
+                  selection = "dcdcdcff";
+                  selection-text = "000000ff";
+                  selection-match = "${a}ff";
+                  border = "${a}ff";
+                };
           };
 
           qt = {
