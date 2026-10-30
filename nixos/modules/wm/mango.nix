@@ -25,7 +25,6 @@ let
           MOZ_ENABLE_WAYLAND XDG_SESSION_DESKTOP XDG_SESSION_TYPE \
           XCURSOR_THEME XCURSOR_SIZE
     fi
-    # gnome-keyring-daemon --start --components=secrets
 
     # dbus-launch --exit-with-session ${pkgs.mangowc}/bin/mango &> /tmp/mango.log
     exec ${pkgs.mangowc}/bin/mango &> /tmp/mango.log
@@ -74,6 +73,28 @@ in
     wants = [ "graphical-session-pre.target" ];
     after = [ "graphical-session-pre.target" ];
   };
+
+  # password prompt for apps that ask polkit for privileges (mounting disks,
+  # gparted, ...). without an agent those requests fail silently. plasma has
+  # its own, so only for the mango session
+  systemd.user.services.polkit-gnome-agent = {
+    description = "polkit authentication agent";
+    wantedBy = [ "mango-session.target" ];
+    partOf = [ "mango-session.target" ];
+    after = [ "mango-session.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+    };
+  };
+
+  # let's apps ask via pkexec to execute a command as root
+  security.polkit.enablePkexecWrapper = true;
+
+  # secrets for browsers, electron apps, nm, git... login's pam unlocks the
+  # keyring with the tty password, apps start the daemon through dbus
+  services.gnome.gnome-keyring.enable = true;
+
   # programs.regreet.enable = true;
   # services.greetd.enable = true;
 
