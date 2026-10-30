@@ -15,7 +15,9 @@ telescope.setup({
 -- Load the fzf-native extension, building its C library first if it is missing
 -- (safety net in case the PackChanged build hook did not run yet).
 local function fzf_native_dir()
-  for _, p in ipairs(vim.pack.get()) do
+  -- info = false: only the path is needed, the default asks git for the
+  -- revision of every plugin and costs ~300ms on each startup
+  for _, p in ipairs(vim.pack.get(nil, { info = false })) do
     if p.spec.name == "telescope-fzf-native.nvim" then
       return p.path
     end
