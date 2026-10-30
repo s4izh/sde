@@ -14,6 +14,7 @@
   environment.systemPackages = with pkgs; [
     dmenu
     picom
+    dunst
     st
     sxhkd
     xwininfo

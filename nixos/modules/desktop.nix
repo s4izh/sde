@@ -81,7 +81,8 @@ in
     pdftk
 
     # -- notifications --
-    dunst
+    # the daemon comes with the wm module (swaync for mango, dunst for X11):
+    # with two installed dbus activates whichever it finds first
     libnotify
 
     # other

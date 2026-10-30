@@ -28,7 +28,6 @@ in
     shfmt
     gnumake
     sxhkd
-    dunst
     libnotify
     direnv
     git
