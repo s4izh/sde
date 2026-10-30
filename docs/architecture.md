@@ -29,18 +29,23 @@ Two independent layers:
 
 | Path | Role |
 |------|------|
-| `flake.nix` | Inputs (nixpkgs unstable, home-manager, nixos-hardware) and one `nixosConfiguration` per host |
+| `flake.nix` | Inputs (nixpkgs unstable, home-manager, nixos-hardware, stylix) and one `nixosConfiguration` per host |
 | `hosts/<host>/` | Per-machine entry point: imports modules, hardware config, host-only services |
 | `modules/*.nix` | Feature modules imported directly by hosts (`desktop.nix`, `dev.nix`, `music.nix`, ...) |
 | `modules/wm/` | One module per window manager (mango, river, ...) |
 | `modules/sde/nixos/` | Option-based modules (`sde.desktop.enable`, `sde.virtualization.*`, `sde.latex.enable`) |
 | `home/sergio/` | home-manager config: programs that need generated config (beets, ssh, waybar, ...) |
 | `pkgs/` | Custom packages, exposed as `packages.<system>.*` |
+| `docs/` | Docs for parts of the nixos config ([theming](../nixos/docs/theming.md)) |
 | `parts/` | Experimental flake-parts version of the flake, not in use |
 
 Every host gets a special arg `sde` with repo paths (`flakeRoot`,
 `nixosPrefix`, `scripts`) so modules can read files from outside `nixos/`
 (e.g. `dotfiles/etc/hosts`).
+
+GTK/Qt themes, icons, cursor and the light/dark toggle that kitty, waybar,
+nvim and emacs follow are described in
+[`nixos/docs/theming.md`](../nixos/docs/theming.md).
 
 The flake is evaluated from the git tree: **new files must be `git add`ed**
 before a rebuild can see them.
