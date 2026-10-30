@@ -27,7 +27,7 @@ in
     # "${modules}/gnome.nix"
     # "${wm}/dwm.nix"
     # "${wm}/river.nix"
-    "${wm}/mangowc.nix"
+    "${wm}/mango.nix"
     "${modules}/nvim.nix"
     # "${modules}/guix.nix"
     inputs.home-manager.nixosModules.home-manager

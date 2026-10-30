@@ -13,6 +13,8 @@
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
 
+  sde.desktop.fullEnvironment = true;
+
   environment.systemPackages = with pkgs; [
   ];
 }

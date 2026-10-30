@@ -21,6 +21,7 @@ ifeq ($(GIT_SRCS),)
 endif
 
 STATE_FILE := $(HOME)/.cache/sde/links
+SWITCH_LOG := $(HOME)/.cache/sde/switch.log
 
 # REPO_NAMES := $(notdir $(basename $(GIT_SRCS)))
 
@@ -35,8 +36,9 @@ repl: ## Start a nix repl with the flake loaded
 test: ## Test the flake
 	sudo nixos-rebuild test --flake .# --impure
 
-switch: src-dependencies ## Switch to the flake
-	sudo nixos-rebuild switch --flake .\?submodules=1# --impure
+switch: src-dependencies ## Switch to the flake (log in $(SWITCH_LOG))
+	@mkdir -p $(dir $(SWITCH_LOG))
+	set -o pipefail; sudo nixos-rebuild switch --flake .\?submodules=1# --impure 2>&1 | tee $(SWITCH_LOG)
 	@#nh os switch --ask .\?submodules=1 -- --impure
 
 boot:
@@ -56,6 +58,9 @@ gc: ## Run garbage collection
 	sudo nix-collect-garbage -d
 	nix-store --gc
 	nix-collect-garbage -d
+
+gc-docker: ## Run docker gc TODO
+	docker builder prune
 
 user: ## Switch to the flake as a user
 	nix build ".#homeManagerConfigurations.sergio.activationPackage" --impure

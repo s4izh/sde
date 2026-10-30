@@ -45,6 +45,10 @@ let
       systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       dbus-update-activation-environment --systemd WAYLAND_DISPLAY=$W_DISPLAY XDG_CURRENT_DESKTOP=mango
 
+      # portals are Requisite=graphical-session.target, which can't be started
+      # by hand, so bring it up through mango-session.target
+      systemctl --user start mango-session.target
+
       # CRITICAL: Restart the portals now that the environment is valid
       systemctl --user restart xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk
     '';
@@ -62,7 +66,14 @@ let
   '';
 in
 {
-  programs.mangowc.enable = true;
+  programs.mango.enable = true;
+
+  systemd.user.targets.mango-session = {
+    description = "mango compositor session";
+    bindsTo = [ "graphical-session.target" ];
+    wants = [ "graphical-session-pre.target" ];
+    after = [ "graphical-session-pre.target" ];
+  };
   # programs.regreet.enable = true;
   # services.greetd.enable = true;
 
@@ -119,7 +130,7 @@ in
     # dms-shell
     # quickshell
     # cava # audio viewer
-    dgop # process status
+    dux-gop # process status
     # matugen # color generator
     # dsearch # cli file searcher
 

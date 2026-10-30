@@ -31,7 +31,7 @@ in
     # "${modules}/kde.nix"
 
     # "${wm}/river.nix"
-    "${wm}/mangowc.nix"
+    "${wm}/mango.nix"
     "${modules}/vpn.nix"
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -73,6 +73,17 @@ in
   environment.etc = {
     "resolv.conf".text = "nameserver 8.8.8.8\n";
   };
+
+  # monitor layout for plasma, same as the kanshi "horizontal" profile
+  sde.kde.kscreenArgs = [
+    "output.DP-3.mode.1920x1080@200"
+    "output.DP-3.position.0,0"
+    "output.HDMI-A-1.mode.1920x1080@200"
+    "output.HDMI-A-1.position.1920,0"
+    "output.HDMI-A-1.priority.1"
+    "output.DP-1.mode.1920x1080@200"
+    "output.DP-1.position.3840,0"
+  ];
   networking.resolvconf.enable = false;
 
   services.xserver.videoDrivers = [ "amdgpu" ];

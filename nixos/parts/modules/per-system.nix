@@ -6,7 +6,7 @@
   ...
 }:
 {
-  packages = import "${config.sde.nixosPrefix}/pkgs" pkgs pkgs.system;
+  packages = import "${config.sde.nixosPrefix}/pkgs" pkgs pkgs.stdenv.hostPlatform.system;
   devShells.default = import "${config.sde.nixosPrefix}/shell.nix" { inherit pkgs; } // {
     nativeBuildInputs = self'.packages;
   };

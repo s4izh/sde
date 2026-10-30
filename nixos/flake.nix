@@ -55,7 +55,7 @@
       packages = sde.pkgs;
       devShells = forAllSystems (pkgs: system: {
         default = import "${sde.nixosPrefix}/shell.nix" { inherit pkgs; } // {
-          nativeBuildInputs = self.packages.${pkgs.system};
+          nativeBuildInputs = self.packages.${pkgs.stdenv.hostPlatform.system};
         };
       }) nixpkgs;
       overlays = import ./overlays { inherit inputs; };

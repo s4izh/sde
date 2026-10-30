@@ -11,6 +11,8 @@
     displayManager.gdm.enable = true;
   };
 
+  sde.desktop.fullEnvironment = true;
+
   environment.systemPackages = with pkgs; [
   ];
 

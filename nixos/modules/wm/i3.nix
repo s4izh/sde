@@ -13,6 +13,7 @@
 
   environment.systemPackages = with pkgs; [
     dmenu
+    picom
     st
     sxhkd
     xwininfo

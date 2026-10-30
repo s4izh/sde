@@ -8,7 +8,6 @@
 let
   ln = config.lib.file.mkOutOfStoreSymlink;
   lnDir = config.lib.file.mkOutOfStoreSymlink;
-  gtkExtraCss = builtins.readFile "${sde.flakeRoot}/dotfiles/.config/gtk-3.0/gtk.css";
 in
 {
   imports = [
@@ -17,6 +16,7 @@ in
     ./notes.nix
     ./screen-control.nix
     ./beets.nix
+    ./theming.nix
   ];
 
   # home.backupFileExtension = "backup";
@@ -148,7 +148,7 @@ in
     # compositor draws server-side decorations. On GNOME/Mutter there are NO
     # decorations (Mutter won't draw SSD, Emacs can't draw its own CSD), so on
     # a GNOME host switch to emacs30-gtk3 to get the normal title bar via X11.
-    package = pkgs.emacs30-pgtk;
+    package = pkgs.emacs-pgtk;
 
     extraPackages = epkgs: [
       epkgs.treesit-grammars.with-all-grammars
@@ -160,62 +160,6 @@ in
     #  p.tree-sitter-rust
     #  p.tree-sitter-typescript
     # ]))
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "adw-gtk3-dark";
-      package = pkgs.adw-gtk3;
-    };
-    iconTheme = {
-      # name = "Papirus-dark";
-      name = "Adwaita";
-      # package = pkgs.papirus-icon-theme;
-      package = pkgs.adwaita-icon-theme;
-    };
-    cursorTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
-    };
-    font = {
-      name = "monospace";
-      size = 10;
-    };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-      # gtk-application-prefer-light-theme = true;
-      # gtk-dialogs-use-header = false;
-      # gtk-decoration-layout= ":";
-    };
-    gtk3.extraCss = gtkExtraCss;
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-      # gtk-application-prefer-light-theme = true;
-      # gtk-dialogs-use-header = false;
-      # gtk-decoration-layout= ":";
-    };
-    gtk4.extraCss = gtkExtraCss;
-    gtk3.bookmarks = [
-      "file:///mnt"
-      "file:///home/sergio/notes"
-      "file:///home/sergio/notes/docs"
-      "file:///home/sergio/uni/mei"
-      "file:///home/sergio/uni/gei"
-      "file:///home/sergio/personal/tfm"
-    ];
-  };
-
-  # copiado del Toomoch
-  home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-    size = 24;
-    x11 = {
-      enable = true;
-      defaultCursor = "Adwaita";
-    };
-    gtk.enable = true;
   };
 
   dconf.settings = {

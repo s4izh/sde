@@ -53,9 +53,9 @@
         # monospace = [ "Comic Mono" ];
         # monospace = [ "Mononoki" ];
         # monospace = [ "Julia Mono" ];
-        # monospace = [ "Iosevka" ];
+        monospace = [ "Iosevka" ];
         # monospace = [ "0xProto Nerd Font Mono" ];
-        monospace = [ "Liberation Mono" ];
+        # monospace = [ "Liberation Mono" ];
         # monospace = [ "Inconsolata Nerd Font" ];
         # monospace = [ "FreeMono" ];
         # monospace = [ "Commit Mono" ];

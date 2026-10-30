@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-
-npx @earendil-works/pi-coding-agent $@
+# Pinned while learning (santuario/docs/08-learning-pi.md). Update deliberately:
+# check the CHANGELOG, bump here and re-vendor santuario/vendor/pi-<version>/.
+npx @earendil-works/pi-coding-agent@1.4.0 "$@"

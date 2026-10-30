@@ -22,6 +22,7 @@
 
   environment.systemPackages = with pkgs; [
     dwm
+    picom
     dwmblocks
     dmenu
     st

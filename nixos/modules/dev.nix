@@ -52,7 +52,7 @@ let
   ];
   erlangpkgs = with pkgs; [
     rebar3
-    erlang
+    beamPackages.erlang
     erlang-language-platform
   ];
   linuxpkgs = with pkgs; [
@@ -93,7 +93,7 @@ let
     yaml-language-server
     guile
   ];
-  testpkgs = with sde.pkgs.${pkgs.system}; [
+  testpkgs = with sde.pkgs.${pkgs.stdenv.hostPlatform.system}; [
     test
   ];
   editorspkgs = with pkgs; [

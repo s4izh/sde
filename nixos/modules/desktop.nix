@@ -47,7 +47,6 @@ in
     mpv
     yt-dlp
     xdotool
-    picom
     headsetcontrol
     sxiv
     htop
@@ -75,9 +74,8 @@ in
     aspell
     obsidian
     marksman
-    zotero
 
-    libreoffice-fresh
+    libreoffice-stable
     rclone
     # vimb
     pdftk
@@ -107,7 +105,7 @@ in
     # tree-sitter-grammars
     resources # system resources
     numbat # high precision terminal calculator
-    sde.pkgs.${pkgs.system}.zen-browser
+    sde.pkgs.${pkgs.stdenv.hostPlatform.system}.zen-browser
     graphviz
     ghostscript
 
