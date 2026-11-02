@@ -8,10 +8,6 @@
   sde,
   ...
 }:
-let
-  modules = ../../modules;
-  wm = ../../modules/wm;
-in
 {
   system.stateVersion = "23.11";
 
@@ -20,26 +16,23 @@ in
     ./hardware-configuration.nix
     ./ollama.nix
     ./server.nix
-    "${modules}/base.nix"
-    "${modules}/desktop.nix"
-    "${modules}/gaming.nix"
-    "${modules}/android.nix"
-    "${modules}/dev.nix"
-    "${modules}/nvim.nix"
-    "${modules}/music.nix"
-    # "${modules}/gnome.nix"
-    # "${modules}/kde.nix"
-
-    # "${wm}/river.nix"
-    "${wm}/mango.nix"
-    "${modules}/vpn.nix"
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  sde.desktop.enable = true;
-  sde.virtualization.docker.enable = true;
-  sde.virtualization.podman.enable = true;
-  sde.latex.enable = true;
+  sde = {
+    base.enable = true;
+    desktop.enable = true;
+    gaming.enable = true;
+    android.enable = true;
+    dev.enable = true;
+    nvim.enable = true;
+    music.enable = true;
+    wm.mango.enable = true;
+    vpn.enable = true;
+    virtualization.docker.enable = true;
+    virtualization.podman.enable = true;
+    latex.enable = true;
+  };
   # themes: adwaita (default) breeze gruvbox nordic catppuccin tokyonight
   # colloid manjaro stylix
   home-manager.sharedModules = [

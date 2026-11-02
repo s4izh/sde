@@ -6,29 +6,25 @@
   sde,
   ...
 }:
-let
-  modules = ../../modules;
-  wm = ../../modules/wm;
-in
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./configuration.nix
-    "${modules}/base.nix"
-    "${modules}/desktop.nix"
-    "${modules}/dev.nix"
-    "${modules}/nvim.nix"
-    "${modules}/vpn.nix"
-    "${wm}/mango.nix"
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  sde.desktop.enable = true;
-  sde.virtualization.docker.enable = true;
-  sde.virtualization.podman.enable = true;
-  sde.latex.enable = true;
-  sde.work.bsc.enable = true;
+  sde = {
+    base.enable = true;
+    desktop.enable = true;
+    dev.enable = true;
+    nvim.enable = true;
+    vpn.enable = true;
+    wm.mango.enable = true;
+    virtualization.docker.enable = true;
+    virtualization.podman.enable = true;
+    latex.enable = true;
+    work.bsc.enable = true;
+  };
 
   home-manager.sharedModules = [
     {

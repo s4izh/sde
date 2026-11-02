@@ -9,32 +9,24 @@
   lib,
   ...
 }:
-let
-  modules = ../../modules;
-  wm = ../../modules/wm;
-in
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./configuration.nix
-    # ./battery.nix
-    "${modules}/base.nix"
-    "${modules}/desktop.nix"
-    "${modules}/dev.nix"
-    "${modules}/vpn.nix"
-    # "${modules}/unity.nix"
-    # "${modules}/gnome.nix"
-    # "${wm}/dwm.nix"
-    # "${wm}/river.nix"
-    "${wm}/mango.nix"
-    "${modules}/nvim.nix"
-    # "${modules}/guix.nix"
     inputs.home-manager.nixosModules.home-manager
     inputs.nixos-hardware.nixosModules.asus-battery
   ];
 
-  sde.virtualization.docker.enable = true;
+  sde = {
+    base.enable = true;
+    desktop.enable = true;
+    dev.enable = true;
+    vpn.enable = true;
+    wm.mango.enable = true;
+    nvim.enable = true;
+    virtualization.docker.enable = true;
+  };
 
   home-manager = {
     extraSpecialArgs = {

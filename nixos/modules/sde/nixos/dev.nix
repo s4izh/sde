@@ -7,6 +7,8 @@
   ...
 }:
 let
+  cfg = config.sde.dev;
+
   vscode-insiders = (pkgs.vscode.override { isInsiders = true; }).overrideAttrs (oldAttrs: {
     src = (
       builtins.fetchTarball {
@@ -35,7 +37,7 @@ let
     (writeShellScriptBin "nixpkgs-fmt" ''
       #!/usr/bin/env bash
       nixfmt $@
-    '') # wrapper script since nixd calls nixpkgs-fmt
+    '')
   ];
   luapkgs = with pkgs; [
     lua
@@ -77,8 +79,8 @@ let
   gitpkgs = with pkgs; [
     git
     python312Packages.git-filter-repo
-    gh # github cli
-    glab # gitlab cli
+    gh
+    glab
   ];
   devpkgs = with pkgs; [
     tmux
@@ -100,24 +102,29 @@ let
     vim
     neovim
     vscode
-    # emacs
   ];
 in
 {
-  environment.systemPackages =
-    devpkgs
-    ++ gitpkgs
-    ++ rustpkgs
-    ++ nixpkgs
-    ++ luapkgs
-    ++ cpkgs
-    ++ erlangpkgs
-    ++ linuxpkgs
-    ++ shpkgs
-    ++ gopkgs
-    ++ zigpkgs
-    ++ haskellpkgs
-    ++ editorspkgs
-    ++ hardwarepkgs
-    ++ testpkgs;
+  options.sde.dev = {
+    enable = lib.mkEnableOption "SDE development environment (compilers, toolchains, debuggers, manpages)";
+  };
+
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages =
+      devpkgs
+      ++ gitpkgs
+      ++ rustpkgs
+      ++ nixpkgs
+      ++ luapkgs
+      ++ cpkgs
+      ++ erlangpkgs
+      ++ linuxpkgs
+      ++ shpkgs
+      ++ gopkgs
+      ++ zigpkgs
+      ++ haskellpkgs
+      ++ editorspkgs
+      ++ hardwarepkgs
+      ++ testpkgs;
+  };
 }

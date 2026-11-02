@@ -4,19 +4,17 @@
   pkgs,
   ...
 }:
-let
-  modules = ../../modules;
-in
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./configuration.nix
-    "${modules}/base.nix"
-    "${modules}/desktop.nix"
-    "${modules}/dwm.nix"
     inputs.home-manager.nixosModules.home-manager
   ];
+
+  sde = {
+    base.enable = true;
+    desktop.enable = true;
+  };
 
   home-manager = {
     extraSpecialArgs = {

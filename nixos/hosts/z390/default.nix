@@ -1,29 +1,23 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   inputs,
   config,
   pkgs,
   ...
 }:
-let
-  modules = ../../modules;
-in
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./configuration.nix
-    "${modules}/base.nix"
-    "${modules}/desktop.nix"
-    "${modules}/dwm.nix"
-    "${modules}/gaming.nix"
-    "${modules}/virtualisation.nix"
-    "${modules}/android.nix"
-    # "${modules}/i3.nix"
     inputs.home-manager.nixosModules.home-manager
   ];
+
+  sde = {
+    base.enable = true;
+    desktop.enable = true;
+    gaming.enable = true;
+    android.enable = true;
+    virtualization.docker.enable = true;
+  };
 
   home-manager = {
     extraSpecialArgs = {

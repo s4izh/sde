@@ -60,9 +60,6 @@ in
     variant = "";
   };
 
-  # Configure console keymap
-  console.keyMap = "es";
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 

@@ -78,7 +78,10 @@
 
       # nixosModules = import ./modules/sde/nixos;
 
-      homeManagerModules = import ./modules/home-manager;
+      homeManagerModules = {
+        default = import ./modules/sde/home-manager;
+        sde = import ./modules/sde/home-manager;
+      };
 
       nixosConfigurations =
         let
