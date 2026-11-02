@@ -71,8 +71,8 @@
               isLocal = rel != toString decl;
             in
             if isLocal then {
-              url = "${repoUrl}/blob/main/${rel}";
-              name = rel;
+              url = "${repoUrl}/blob/main/nixos/${rel}";
+              name = "nixos/${rel}";
             } else {
               url = toString decl;
               name = toString decl;
