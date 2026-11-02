@@ -54,9 +54,30 @@
         pkgs = forAllSystems (pkgs: system: import ./pkgs pkgs system) nixpkgs;
       };
 
+      sdeDocs = pkgs:
+        let
+          eval = lib.evalModules {
+            modules = [
+              { _module.check = false; }
+              self.nixosModules.sde
+            ];
+          };
+        in
+        pkgs.nixosOptionsDoc {
+          options = eval.options.sde;
+          transformOptions = opt: opt // {
+            declarations = map (decl: lib.removePrefix "${toString self}/" (toString decl)) opt.declarations;
+          };
+        };
+
     in
     {
-      packages = sde.pkgs;
+      packages = forAllSystems (pkgs: system:
+        (import ./pkgs pkgs system) // {
+          docs = (sdeDocs pkgs).optionsCommonMark;
+          docs-json = (sdeDocs pkgs).optionsJSON;
+        }
+      ) nixpkgs;
       devShells = forAllSystems (pkgs: system: {
         default = import "${sde.nixosPrefix}/shell.nix" { inherit pkgs; } // {
           nativeBuildInputs = self.packages.${pkgs.stdenv.hostPlatform.system};
@@ -105,15 +126,15 @@
             };
           hosts = [
             {
-              host = "dell";
-              arch = "x86_64-linux";
-            }
-            {
               host = "rx";
               arch = "x86_64-linux";
             }
             {
               host = "zen";
+              arch = "x86_64-linux";
+            }
+            {
+              host = "dell";
               arch = "x86_64-linux";
             }
             {
