@@ -44,7 +44,7 @@ switch: src-dependencies ## Switch to the flake (log in $(SWITCH_LOG))
 boot:
 	sudo nixos-rebuild boot --flake .\?submodules=1# --impure
 
-bootstrap: src-dependencies create-softlinks ## First bootstrap, specify NIX_HOSTNAME as env variable
+bootstrap: src-dependencies softlinks-create ## First bootstrap, specify NIX_HOSTNAME as env variable
 	sudo nixos-rebuild switch --flake .#$(NIX_HOSTNAME) --impure
 
 build:

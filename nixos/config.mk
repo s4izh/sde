@@ -25,6 +25,7 @@ LINKS_FROM_SDE_TO_HOME := \
 	dotfiles/.config/wpaperd:.config/wpaperd \
 	dotfiles/.config/xkb:.config/xkb \
 	dotfiles/.config/zathura:.config/zathura \
+	dotfiles/.config/shell/inputrc:.inputrc \
 	dotfiles/.editorconfig:.editorconfig \
 	dotfiles/.guile:.guile \
 	dotfiles/.local/scripts:.local/scripts \

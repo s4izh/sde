@@ -102,6 +102,10 @@
             };
           hosts = [
             {
+              host = "dell";
+              arch = "x86_64-linux";
+            }
+            {
               host = "rx";
               arch = "x86_64-linux";
             }

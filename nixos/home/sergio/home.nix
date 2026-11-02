@@ -18,6 +18,7 @@ in
     ./beets.nix
     ./theming.nix
     ./fuzzel.nix
+    ./work/bsc.nix
   ];
 
   # home.backupFileExtension = "backup";
