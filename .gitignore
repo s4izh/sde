@@ -1,4 +1,5 @@
 guix/tags
 nvim/.luarc.json
 dotfiles/.local/scripts/test.sh
+dotfiles/.config/shell/rc.d
 *.so

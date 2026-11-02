@@ -28,6 +28,12 @@ in
           email = "sergio.sanz.martinez@bsc.es"
     '';
 
+    xdg.configFile."shell/rc.d/bsc.bash".text = ''
+      export BSC_ENV=1
+      export PATH="$HOME/.opencode/bin:$PATH"
+      # export PATH="$HOME/work/bin:$PATH"
+    '';
+
     # SSH entries for BSC hosts. Each machine keeps its own private key; only
     # the public key is uploaded to the BSC GitLab/cluster.
     programs.ssh.matchBlocks = {

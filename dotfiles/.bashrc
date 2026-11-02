@@ -26,6 +26,15 @@ source_if_exist "$HOME/.config/shell/aliases"
 source_if_exist "$HOME/.config/shell/prompt"
 source_if_exist "$HOME/.config/shell/completions"
 
+if [ -d "$HOME/.config/shell/rc.d" ]; then
+    for f in "$HOME/.config/shell/rc.d/"*.bash; do
+        [ -f "$f" ] && source "$f"
+    done
+    unset f
+fi
+
+source_if_exist "$HOME/.secrets"
+
 if command -v direnv > /dev/null 2>&1; then
     eval "$(direnv hook bash)"
 fi
