@@ -62,11 +62,26 @@
               self.nixosModules.sde
             ];
           };
+          # Strip the nix store path prefix to get a relative path like
+          # "nixos/modules/sde/nixos/base.nix", then build a GitHub URL.
+          repoUrl = "https://github.com/s4izh/sde";
+          transformDecl = decl:
+            let
+              rel = lib.removePrefix "${toString self}/" (toString decl);
+              isLocal = rel != toString decl;
+            in
+            if isLocal then {
+              url = "${repoUrl}/blob/main/${rel}";
+              name = rel;
+            } else {
+              url = toString decl;
+              name = toString decl;
+            };
         in
         pkgs.nixosOptionsDoc {
           options = eval.options.sde;
           transformOptions = opt: opt // {
-            declarations = map (decl: lib.removePrefix "${toString self}/" (toString decl)) opt.declarations;
+            declarations = map transformDecl opt.declarations;
           };
         };
 
