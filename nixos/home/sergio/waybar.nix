@@ -189,7 +189,7 @@
           "on-click" = "pavucontrol";
         };
         "custom/power" = {
-          "format" = "";
+          "format" = "";
           "on-click" = "fuzzelpoweroffmenu";
         };
       };
