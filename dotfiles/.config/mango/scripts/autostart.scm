@@ -5,7 +5,6 @@
              (srfi srfi-1))
 
 (load (string-append (getenv "HOME") "/.local/scripts/lib/log.scm"))
-(define log (make-logger "autostart"))
 
 (define apps
   '("kanshi"
@@ -42,16 +41,50 @@
                 (else (loop (cons line apps))))))))
       '()))
 
+(define (program cmd)
+  (car (string-split cmd #\space)))
+
+;; A remove entry matches either the exact command or its program name.
+(define (removed? cmd remove)
+  (or (member cmd remove)
+      (member (program cmd) remove)))
+
 (define (apps-to-run)
   (let ((remove (read-app-list (config-file "autostart.remove"))))
-    (filter (lambda (app) (not (member app remove)))
+    (filter (lambda (app) (not (removed? app remove)))
             (append apps (read-app-list (config-file "autostart.add"))))))
 
+;; --dry-run (or SDE_AUTOSTART_DRY_RUN=1): print the effective list and exit
+;; before starting anything.
+(when (or (getenv "SDE_AUTOSTART_DRY_RUN")
+          (member "--dry-run" (command-line)))
+  (for-each (lambda (app) (display app) (newline)) (apps-to-run))
+  (exit 0))
+
+(define (autostart-log-dir)
+  (or (getenv "SDE_LOG_DIR")
+      (let ((runtime (getenv "XDG_RUNTIME_DIR")))
+        (string-append (if runtime runtime "/tmp")
+                       "/autostart-" (number->string (getuid))))))
+
+(define log-dir (autostart-log-dir))
+(define log (make-logger "autostart" log-dir))
+
+(define (shell-quote s)
+  (string-append "'" s "'"))
+
+(define (app-name cmd)
+  (car (reverse (string-split (program cmd) #\/))))
+
+(define (app-log-file cmd)
+  (string-append log-dir "/" (app-name cmd) ".log"))
+
 (define (run-bg cmd)
-  (let* ((pname (car (string-split cmd #\space))))
+  (let* ((pname (program cmd))
+         (app-log (app-log-file cmd)))
     (system (string-append "pkill " pname " > /dev/null 2>&1"))
     (log (string-append "start " cmd))
-    (system (string-append cmd " &"))
+    (system (string-append cmd " >> " (shell-quote app-log) " 2>&1 &"))
     (display (string-append "Started: " pname "\n"))))
 
 (define (run-ipc cmd)
