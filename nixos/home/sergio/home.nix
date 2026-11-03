@@ -18,6 +18,7 @@ in
     ./beets.nix
     ./theming.nix
     ./fuzzel.nix
+    ./autostart.nix
     ./work/bsc.nix
   ];
 

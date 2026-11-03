@@ -4,6 +4,9 @@
              (ice-9 rdelim)
              (srfi srfi-1))
 
+(load (string-append (getenv "HOME") "/.local/scripts/lib/log.scm"))
+(define log (make-logger "autostart"))
+
 (define apps
   '("kanshi"
     ; "waybar"
@@ -21,18 +24,43 @@
     ; "swww img ~/git/wallpapers/viktor.jpg"
     ; "nm-applet --indicator"))
 
+(define (config-file name)
+  (string-append (or (getenv "XDG_CONFIG_HOME")
+                     (string-append (getenv "HOME") "/.config"))
+                 "/sde/" name))
+
+(define (read-app-list file)
+  (if (file-exists? file)
+      (call-with-input-file file
+        (lambda (port)
+          (let loop ((apps '()))
+            (let ((line (read-line port)))
+              (cond
+                ((eof-object? line) (reverse apps))
+                ((or (string-null? line)
+                     (eqv? (string-ref line 0) #\#)) (loop apps))
+                (else (loop (cons line apps))))))))
+      '()))
+
+(define (apps-to-run)
+  (let ((remove (read-app-list (config-file "autostart.remove"))))
+    (filter (lambda (app) (not (member app remove)))
+            (append apps (read-app-list (config-file "autostart.add"))))))
+
 (define (run-bg cmd)
   (let* ((pname (car (string-split cmd #\space))))
     (system (string-append "pkill " pname " > /dev/null 2>&1"))
+    (log (string-append "start " cmd))
     (system (string-append cmd " &"))
     (display (string-append "Started: " pname "\n"))))
 
 (define (run-ipc cmd)
     (system (string-append cmd)))
 
-(for-each run-bg apps)
+(log "=== autostart begin ===")
 
-;; a switch or login activates the default polarity, put back the last one
+(for-each run-bg (apps-to-run))
+
 (run-ipc "theme-mode restore")
 
 (sleep 1)
@@ -40,6 +68,8 @@
 (run-bg "waybar")
 (run-bg "nm-applet --indicator")
 (run-bg "blueman-applet")
+
+(log "=== autostart end ===")
 
 (define (spawn-and-move app-command target-tag target-monitor)
   (system (string-append app-command " &"))

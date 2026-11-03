@@ -29,6 +29,7 @@
   home-manager.sharedModules = [
     {
       sde.theming.theme = "breeze";
+      sde.autostart.remove = [ "discord" ];
     }
   ];
 
