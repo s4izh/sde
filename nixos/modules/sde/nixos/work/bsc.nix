@@ -16,14 +16,10 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       environment.systemPackages = with pkgs; [
-        # VPN / remote access tools go here. Some are already provided by
-        # modules/vpn.nix (openfortivpn, tailscale, cloudflare-warp).
-        # openconnect
-        # openvpn
-        # sshfs
-        # remmina
-
+        thunderbird
+        openfortivpn
         # BSC-specific tooling (compilers, MPI, schedulers, ...)
+        samba jre # printing
       ];
 
       # Example VPN service. Keep credentials out of the Nix store: use a
