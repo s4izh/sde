@@ -79,7 +79,7 @@
         "ext/workspaces" = {
           "format" = "{name}";
           "on-click" = "activate";
-          "ignore-hidden" = true;
+          "ignore-hidden" = false; # show empty tags too (greyed out via .hidden)
           "sort-by-id" = true;
         };
         "hyprland/workspaces" = {
@@ -234,6 +234,10 @@
 
         #workspaces button:hover {
           background: rgba(0, 0, 0, 0.1);
+        }
+
+        #workspaces button.hidden {
+          color: #a0a0a0;
         }
 
         #workspaces button.visible:not(.focused) {
