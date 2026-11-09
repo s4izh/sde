@@ -11,9 +11,7 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
     tmux send-keys -t "$SESSION_NAME:upc" "sudo openfortivpn myupclink.upc.edu:443 --saml-login"
 
     tmux new-window -t "$SESSION_NAME" -n 'bsc' -c "$PROJECT_PATH"
-    # BSC_VPN_GATEWAY / BSC_VPN_USER come from sde-private (rc.d/private.bash);
-    # single quotes so the pane's own shell expands them.
-    tmux send-keys -t "$SESSION_NAME:bsc" 'sudo openfortivpn "${BSC_VPN_GATEWAY:?not set, see sde-private}" -u "${BSC_VPN_USER:?not set, see sde-private}"'
+    tmux send-keys -t "$SESSION_NAME:bsc" "bsc-vpn"
 
     tmux new-window -t "$SESSION_NAME" -n 'work' -c "$PROJECT_PATH"
     tmux send-keys -t "$SESSION_NAME:work" "sudo openfortivpn -c lanaccess.conf"

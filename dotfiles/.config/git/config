@@ -79,8 +79,8 @@
             echo \"No panic branches found.\"; \
         fi \
     }; f"
-[includeIf "gitdir:~/work/"]
-    path = ~/.config/work/git.inc
+[includeIf "gitdir:~/w/bsc/"]
+    path = ~/.config/w/bsc/git.inc
 [fetch]
 	prune = true
 [pull]

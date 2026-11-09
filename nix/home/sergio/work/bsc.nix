@@ -17,17 +17,6 @@ in
       # User-level BSC tools go here.
     ];
 
-    # Work git identity. dotfiles/.config/git/config includes this file for
-    # repositories under ~/work/:
-    #
-    #   [includeIf "gitdir:~/work/"]
-    #       path = ~/.config/work/git.inc
-    xdg.configFile."work/git.inc".text = ''
-      [user]
-          name = "Sergio Sanz"
-          email = "sergio.sanz.martinez@bsc.es"
-    '';
-
     xdg.configFile."shell/rc.d/bsc.bash".text = ''
       export BSC_ENV=1
       export PATH="$HOME/.opencode/bin:$PATH"
