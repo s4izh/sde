@@ -1,17 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env bash
+source "$HOME/.local/scripts/lib/sde.sh"
 
 SESSION_NAME=main
 
-tmux has-session -t $SESSION_NAME 2>/dev/null
-
-if [ $? != 0 ]
-then
-    tmux new-session -s $SESSION_NAME -d
-fi
-
-if [ -z $TMUX ]; then
-    tmux attach -t $SESSION_NAME
-else
-    tmux switch-client -t $SESSION_NAME
-fi
+tmux_has "$SESSION_NAME" || tmux new-session -s "$SESSION_NAME" -d
+tmux_go "$SESSION_NAME"
 

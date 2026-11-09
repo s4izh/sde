@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
+source "$HOME/.local/scripts/lib/sde.sh"
 
 PROJECT_PATH="$HOME/vpn"
 SESSION_NAME="vpn"
 
-if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+if ! tmux_has "$SESSION_NAME"; then
     tmux new-session -d -s "$SESSION_NAME" -n 'dashboard' -c "$PROJECT_PATH"
     tmux send-keys -t "$SESSION_NAME:dashboard" "nmcli connection show --active" C-m
 
@@ -19,8 +20,4 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
     tmux select-window -t "$SESSION_NAME:dashboard"
 fi
 
-if [[ -z $TMUX ]]; then
-    tmux attach-session -t "$SESSION_NAME"
-else
-    tmux switch-client -t "$SESSION_NAME"
-fi
+tmux_go "$SESSION_NAME"

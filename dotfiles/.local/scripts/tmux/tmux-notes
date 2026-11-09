@@ -1,16 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env bash
+source "$HOME/.local/scripts/lib/sde.sh"
 
 SESSION_NAME="notes"
 PROJECT_PATH="$HOME/notes"
 
 cd "$PROJECT_PATH" || exit
 
-tmux has-session -t $SESSION_NAME 2>/dev/null
-
-if [ $? != 0 ]          # si no hay sesion se crea
-then
-    tmux new-session -s $SESSION_NAME -d -c "$PROJECT_PATH"
-    tmux send-keys -t $SESSION_NAME "nvim index.md" C-m
+if ! tmux_has "$SESSION_NAME"; then
+    tmux new-session -s "$SESSION_NAME" -d -c "$PROJECT_PATH"
+    tmux send-keys -t "$SESSION_NAME" "nvim index.md" C-m
     # tmux new-window -n tfg -t $SESSION_NAME
     # tmux send-keys -t $SESSION_NAME "cd uni/tfg/memoria" C-m
     # tmux send-keys -t $SESSION_NAME "nvim memoria.tex" C-m
@@ -27,8 +25,4 @@ then
     # tmux send-keys -t $SESSION_NAME:3 "$EDITOR uni.md" C-m
 fi
 
-if [ -z $TMUX ]; then   # si estamos fuera de tmux hacemos attach
-    tmux attach -t $SESSION_NAME:1
-else                    # si estamos dentro solo cambiamos el cliente
-    tmux switch-client -t $SESSION_NAME:1
-fi
+tmux_go "$SESSION_NAME:1"

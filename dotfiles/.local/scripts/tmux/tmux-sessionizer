@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source "$HOME/.local/scripts/lib/sde.sh"
 
 select_project() {
     if [[ $# -eq 1 ]]; then
@@ -57,7 +58,7 @@ find_and_run_custom_handler() {
     local script
     script=$(grep "^PROJECT_PATH=\"\$HOME/$path_suffix\"" ~/.local/scripts/tmux/* 2>/dev/null | cut -d: -f1)
     if [[ -n "$script" ]]; then
-        sh "$script"
+        bash "$script"
         exit 0
     fi
 
@@ -107,15 +108,8 @@ create_or_attach_session() {
         exit 0
     fi
 
-    if ! tmux has-session -t="$session_name" 2>/dev/null; then
-        tmux new-session -ds "$session_name" -c "$target_path"
-    fi
-
-    if [[ -z $TMUX ]]; then
-        tmux attach-session -t "$session_name"
-    else
-        tmux switch-client -t "$session_name"
-    fi
+    tmux_has "$session_name" || tmux new-session -ds "$session_name" -c "$target_path"
+    tmux_go "$session_name"
 }
 
 main() {
