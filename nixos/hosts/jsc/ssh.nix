@@ -2,10 +2,13 @@
 { ... }:
 
 let
-  sergioKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIELMIuRYnGVnPQjIjWyMkrswEQGsbOXi2gf1OMNczCfk sergio.sanz.martinez@proton.me";
+  sergioKey = (import ../../keys).users.proton;
   adminKeys = [ sergioKey ];
 in
 {
+  # PC ajeno: solo las claves de abajo, no todas las de keys/users.
+  sde.sshKeys.enable = false;
+
   services.openssh.enable = true;
 
   # Solo clave para root (antes estaba en "yes", que permite root por password).

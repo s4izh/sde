@@ -24,6 +24,7 @@
     virtualization.podman.enable = true;
     latex.enable = true;
     work.bsc.enable = true;
+    sshfs.mounts.rx.host = "rx"; # ~/mnt/rx -> rx:/home/sergio
   };
 
   home-manager.sharedModules = [

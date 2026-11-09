@@ -6,6 +6,8 @@
     ./dev.nix
     ./nvim.nix
     ./vpn.nix
+    ./sshfs.nix
+    ./ssh-keys.nix
     ./virtualisation.nix
     ./latex.nix
     ./kde.nix
