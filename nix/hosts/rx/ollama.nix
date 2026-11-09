@@ -17,6 +17,7 @@ in
     host = "0.0.0.0";
     port = ollamaPort;
     loadModels = [
+      "bge-m3" # embeddings para el RAG de toolbox (~1.2 GB, cabe en VRAM sobrado)
       # "gemma2:9b"
       "qwen2.5-coder:7b" # coding / editor autocomplete (Q4_K_M, ~4.7 GB)
       "qwen3:8b" # general + agentic + tool-calling; fully in VRAM, roomy context

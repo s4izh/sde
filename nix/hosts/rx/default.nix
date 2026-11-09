@@ -32,29 +32,23 @@
     virtualization.docker.enable = true;
     virtualization.podman.enable = true;
     latex.enable = true;
+    work.bsc.enable = true;
   };
   # themes: adwaita (default) breeze gruvbox nordic catppuccin tokyonight
-  # colloid manjaro stylix
+  # colloid manjaro
   home-manager.sharedModules = [
     {
-      sde.theming.theme = "breeze";
-      # only for stylix, any file in pkgs.base16-schemes/share/themes
-      # sde.theming.stylixScheme = "catppuccin-mocha";
-      # sde.theming.stylixSchemeLight = "catppuccin-latte";
+      # Hermes (ACP) + Multica daemon, see docs/agents.md
+      sde.agents.enable = true;
 
+      sde.theming.theme = "adwaita";
       # kitty theme per mode, a file in dotfiles/.config/kitty/themes without
-      # .conf. dark = null keeps theme.conf (ignored with stylix)
+      # .conf. dark = null keeps theme.conf
       # sde.theming.kitty.dark = "gruvbox-dark-hard";
       # sde.theming.kitty.light = "Modus_Operandi";
 
       # swaylock background, null (default) generates one in the theme accent
       # sde.theming.lockImage = "~/git/wallpapers/wallhaven-q6p667.jpg";
-      #
-      # list the schemes (run from nix/):
-      #   ls $(nix build --no-link --print-out-paths .#nixosConfigurations.rx.pkgs.base16-schemes)/share/themes
-      # preview the palettes in the terminal:
-      #   d=$(nix build --no-link --print-out-paths .#nixosConfigurations.rx.pkgs.base16-schemes)/share/themes
-      #   for f in $d/*.yaml; do printf '%-36s' "$(basename $f .yaml)"; grep -oE 'base0[0-9A-F]: "#[0-9a-fA-F]{6}"' $f | grep -oE '[0-9a-fA-F]{6}' | while read h; do printf '\e[48;2;%d;%d;%dm  \e[0m' 0x${h:0:2} 0x${h:2:2} 0x${h:4:2}; done; echo; done | less -R
     }
   ];
 
@@ -87,9 +81,9 @@
     enable = true;
   };
 
-  environment.etc = {
-    "resolv.conf".text = "nameserver 8.8.8.8\n";
-  };
+  # per-link DNS (VPNs, Tailscale) on top of a global 8.8.8.8 fallback
+  services.resolved.enable = true;
+  networking.nameservers = [ "8.8.8.8" ];
 
   # monitor layout for plasma, same as the kanshi "horizontal" profile
   sde.kde.kscreenArgs = [
@@ -101,7 +95,6 @@
     "output.DP-1.mode.1920x1080@200"
     "output.DP-1.position.3840,0"
   ];
-  networking.resolvconf.enable = false;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
@@ -140,6 +133,8 @@
       "i2c"
     ];
     packages = with pkgs; [ ddcutil ];
+    # keep systemd --user (multica-daemon) running without a login session
+    linger = true;
   };
 
   boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];

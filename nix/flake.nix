@@ -7,12 +7,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hermes-agent = {
+      url = "github:NousResearch/hermes-agent";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     nixos-hardware = {
       url = "github:nixos/nixos-hardware/master";
     };
     flake-utils.url = "github:numtide/flake-utils";
-    stylix = {
-      url = "github:nix-community/stylix";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
@@ -143,6 +148,8 @@
                 };
                 modules = [
                   self.nixosModules.sde
+                  # nix-index-database, enabled from sde.base
+                  inputs.nix-index-database.nixosModules.nix-index
                 ]
                 ++ lib.optional (sde.private != null) (sde.private + "/modules/sde/nixos")
                 ++ [
