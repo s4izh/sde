@@ -102,7 +102,17 @@ Done on 2026-10-11: unused configs and ~90 scripts moved to `.archive/` (see
 
 - [ ] Set up sops-nix with age: one age key per host derived from its SSH host
       key (`ssh-to-age`, keys already in `nix/keys/hosts/`) plus my own key for
-      editing; `.sops.yaml` with the recipients. See `nix/docs/ssh.md`.
+      editing. See `nix/docs/ssh.md`. Split:
+  - **sde**: the `sops-nix` flake input (sde-private is not a flake, it cannot
+    have inputs) and the common config: import the module,
+    `sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ]`.
+  - **sde-private**: the encrypted files (`nix/secrets/*.yaml`), their
+    `.sops.yaml` and the modules that use them. Even encrypted, a public repo
+    shows secret names, which hosts use them and when they change. A host
+    without the clone has neither the secrets nor their users, so it still
+    builds.
+  - `.sops.yaml` recipients are copied by hand from `nix/keys/hosts/` through
+    `ssh-to-age`; script it if it gets tedious.
 - [ ] BSC VPN config with the password: an openfortivpn config
       (`host`, `port`, `username`, `password`) generated from a sops secret into
       `/run/secrets/`, so `vpn_manager.sh` runs `sudo openfortivpn -c <that file>`
