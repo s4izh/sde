@@ -27,7 +27,8 @@
 
 ;; Undo as a tree rather than a linear ring: C-x u opens the visualizer, where
 ;; you can move between branches created by undoing and then editing again.
-;; Not evil-specific -- evil-setup.el just points `evil-undo-system' at it.
+;; Not evil-specific. If re-enabled, point `evil-undo-system' in evil-setup.el
+;; back at it (it currently uses the built-in undo-redo).
 (use-package undo-tree
   :disabled t
   :config

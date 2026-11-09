@@ -13,6 +13,10 @@ x-scheme-handler/https=firefox.desktop
 x-scheme-handler/about=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-DIRDY3.desktop
+x-scheme-handler/mid=userapp-Thunderbird-DIRDY3.desktop
+message/rfc822=userapp-Thunderbird-DIRDY3.desktop
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-HA7CY3.desktop
 
 [Added Associations]
 text/rust=code.desktop;nvim.desktop;
@@ -20,3 +24,7 @@ application/json=nvim.desktop;
 text/plain=nvim.desktop;emacsclient-mail.desktop;
 application/pdf=com.github.xournalpp.xournalpp.desktop;
 application/x-shellscript=nvim.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-DIRDY3.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-DIRDY3.desktop;
+message/rfc822=userapp-Thunderbird-DIRDY3.desktop;
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-HA7CY3.desktop;

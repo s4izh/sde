@@ -12,7 +12,7 @@
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-i-jump t)              ; keep TAB as TAB in the terminal
-  (setq evil-undo-system 'undo-tree)         ; undo-tree itself lives in core.el
+  (setq evil-undo-system 'undo-redo)        ; built-in; undo-tree is disabled in core.el
   (setq evil-disable-insert-state-bindings t) ; insert state = plain Emacs
   (setq evil-split-window-below t)
   (setq evil-vsplit-window-right t)
