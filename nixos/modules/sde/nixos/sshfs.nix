@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  utils,
   ...
 }:
 let
@@ -107,6 +108,20 @@ in
           "ServerAliveCountMax=3"
           "ConnectTimeout=10"
         ];
+      }
+    ) cfg.mounts;
+
+    # By default, a few quick failed mounts (e.g. rx is off) hit systemd's start
+    # limit and leave the automount dead until a manual reset-failed. Drop the
+    # limit so every access just retries (each attempt gives up after ~10s).
+    systemd.units = lib.mapAttrs' (
+      name: _:
+      lib.nameValuePair "${utils.escapeSystemdPath "${home}/mnt/${name}"}.mount" {
+        overrideStrategy = "asDropin";
+        text = ''
+          [Unit]
+          StartLimitIntervalSec=0
+        '';
       }
     ) cfg.mounts;
 
