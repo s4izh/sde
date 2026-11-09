@@ -97,3 +97,15 @@ Done on 2026-10-11: unused configs and ~90 scripts moved to `.archive/` (see
 - [ ] `parts/`: finish the flake-parts migration or delete it.
 - [ ] Remove `hosts/vm`, `z390`, `thinkcenter` if they won't come back.
 - [ ] Delete the local `panic-20260313-0929` branch.
+
+## Secrets (sops)
+
+- [ ] Set up sops-nix with age: one age key per host derived from its SSH host
+      key (`ssh-to-age`, keys already in `nix/keys/hosts/`) plus my own key for
+      editing; `.sops.yaml` with the recipients. See `nix/docs/ssh.md`.
+- [ ] BSC VPN config with the password: an openfortivpn config
+      (`host`, `port`, `username`, `password`) generated from a sops secret into
+      `/run/secrets/`, so `vpn_manager.sh` runs `sudo openfortivpn -c <that file>`
+      with no prompt. Gateway/user are in sde-private (`rc.d/private.bash`);
+      the password must not go there (private repo, not encrypted). Same idea
+      for the `lanaccess.conf` VPN.
