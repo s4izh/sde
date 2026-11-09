@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Install or update the pi coding agent in the global npm prefix (~/.npm).
+set -euo pipefail
+pkg="@earendil-works/pi-coding-agent"
+before="$("$HOME/.npm/bin/pi" --version 2>/dev/null || echo none)"
+npm install -g "$pkg@${1:-latest}"
+after="$("$HOME/.npm/bin/pi" --version)"
+echo "pi: $before -> $after"

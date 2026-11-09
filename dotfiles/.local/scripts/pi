@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
-
-npx @earendil-works/pi-coding-agent@1.4.0 "$@"
+# pi coding agent, from the global npm install (prefix ~/.npm): no npm lookup on start.
+# Update with `pi-update` (or `make npm-update` in nix/).
+bin="$HOME/.npm/bin/pi"
+if [ ! -x "$bin" ]; then
+	echo "pi is not installed: run pi-update" >&2
+	exit 127
+fi
+exec "$bin" "$@"

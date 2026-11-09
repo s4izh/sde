@@ -10,7 +10,6 @@ export BROWSER="firefox"
 export READER="zathura"
 export MANPAGER="nvim +Man!"
 
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.npm/bin/:$PATH"
 
 export PATH="$HOME/.local/bin:$PATH"

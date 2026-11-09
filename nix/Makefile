@@ -57,6 +57,10 @@ build:
 update: ## Update the flake
 	nix flake update
 
+npm-update: ## Update global npm CLIs in ~/.npm (claude, claude-agent-acp, ...)
+	npm install -g $(addsuffix @latest,$(NPM_GLOBALS))
+	@npm ls -g --depth=0
+
 gc: ## Run garbage collection
 	sudo nix-store --gc
 	sudo nix-collect-garbage -d

@@ -56,3 +56,9 @@ GIT_SRCS := \
 	https://github.com/s4izh/somebar.git \
 	https://github.com/s4izh/st.git
 
+# global npm CLIs (prefix ~/.npm), updated with `make npm-update`
+NPM_GLOBALS := \
+	@anthropic-ai/claude-code \
+	@agentclientprotocol/claude-agent-acp \
+	pi-acp \
+	@earendil-works/pi-coding-agent

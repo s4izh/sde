@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Wrapper so programs expecting a `claude` binary use my personal config dir.
-exec env CLAUDE_CONFIG_DIR="$HOME/.claude-personal" npx @anthropic-ai/claude-code "$@"
-
+# Global npm install (prefix ~/.npm); update with `make npm-update` in nix/.
+exec env CLAUDE_CONFIG_DIR="$HOME/.claude-personal" "$HOME/.npm/bin/claude" "$@"
