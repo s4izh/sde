@@ -55,6 +55,30 @@ Real chain: `.bashrc` → `shell/bash_profile` → `functions`, `aliases`, `prom
 - [ ] `nix/pkgs/nvim-mnw.nix` (WIP): fix `vimPlugins`/`withAllGrammars`
       casing and wire it into the flake, or delete.
 - [ ] Write ADR for the lazy.nvim → `vim.pack` migration.
+- [ ] Standard module shape, tried first on 2 modules (git, telescope):
+
+      ```lua
+      -- lua/sergio/git.lua: every field optional
+      return {
+        plugins = { "https://github.com/tpope/vim-fugitive" },
+        group = { ["<leader>g"] = "+git" },
+        keys = { { "n", "<leader>gs", ":Ge:<CR>", "Git status" } },
+        setup = function() --[[ autocmds, options ]] end,
+      }
+      ```
+
+      A `load({ "git", ... })` (~40 lines) does one `vim.pack.add` with every
+      `plugins`, calls each `setup`, sets `keys` and passes `group` to
+      `keymaps.group()`. Maps created on events (LSP attach, fugitive/oil
+      buffers) stay in `setup` with `vim.keymap.set`; the registry picks them
+      up anyway. Moves the plugin list out of `plugins.lua` and next to its
+      config. Migrate the rest one by one if it works.
+- [ ] `sergio/config.lua`: one table with my own knobs that are not Vim
+      options and today live as locals in each module: dark/light theme and
+      transparency (`themes.lua`), completion engine (native/cmp),
+      format-on-save extensions (`lsp.lua`). Vim options stay in
+      `settings.lua`; other modules read them back with `vim.o` (as
+      `toggles.lua` does with `colorcolumn`), no copy in a struct.
 
 ## Emacs cleanup
 
