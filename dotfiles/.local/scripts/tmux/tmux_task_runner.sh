@@ -46,9 +46,15 @@ if [ "$goto_end" != true ]; then
         fi
 
     elif [ -f "Makefile" ]; then
-        TARGETS=$(awk -F: '/^[a-zA-Z0-9_-]+:/ {print $1}' Makefile)
+        # Targets documented with "## description" (the ones `make help` shows),
+        # with their description; if there are none, every target.
+        TARGETS=$(grep -E '^[a-zA-Z0-9_-]+:.*## ' Makefile \
+            | sed -E 's/^([a-zA-Z0-9_-]+):.*## (.*)/\1\t\2/' \
+            | awk -F'\t' '{printf "%-20s %s\n", $1, $2}')
+        [ -z "$TARGETS" ] && TARGETS=$(awk -F: '/^[a-zA-Z0-9_-]+:/ {print $1}' Makefile)
 
-        SELECTED=$(echo "$TARGETS" | fzf --height 40% --reverse --prompt="Elige un target de Make: ")
+        SELECTED=$(echo "$TARGETS" | fzf --nth=1 --height 40% --reverse --prompt="Elige un target de Make: ")
+        SELECTED=${SELECTED%% *}
 
         if [ -n "$SELECTED" ]; then
             clear
@@ -67,8 +73,11 @@ if [ "$goto_end" != true ]; then
     EXIT_CODE=$?
 fi
 
-if [ $EXIT_CODE -ne 0 ]; then
-    echo ""
+# Keep the pane open either way, so the end of the output can be read.
+echo ""
+if [ "$EXIT_CODE" -eq 0 ]; then
+    echo "OK, terminado."
+else
     echo "El proceso terminó con el código $EXIT_CODE."
-    read -p "Presiona ENTER para cerrar este panel..."
 fi
+read -p "Presiona ENTER para cerrar este panel..."
