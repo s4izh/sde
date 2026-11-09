@@ -1,7 +1,7 @@
 local M = {}
 
 M.opts = {
-  colorcolumn = "100"
+  colorcolumn = vim.opt.colorcolumn
 }
 
 M.toggle_line_numbers = function()

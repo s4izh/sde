@@ -39,6 +39,7 @@ vim.pack.add({
   { src = "https://github.com/navarasu/onedark.nvim" },
   { src = "https://github.com/Mofiqul/vscode.nvim" },
   { src = "https://github.com/maxmx03/solarized.nvim" },
+  { src = "https://github.com/phha/zenburn.nvim" },
 })
 
 vim.g.gruvbox_contrast_dark = "hard"
@@ -54,7 +55,7 @@ local M = {}
 
 -- colorscheme per background, :Theme changes the one of the current mode.
 -- vscode follows 'background', so the same name works for both
-local COLORS = { dark = "vscode", light = "vscode" }
+local COLORS = { dark = "gruber-darker", light = "vscode" }
 
 local is_transparent = true
 
