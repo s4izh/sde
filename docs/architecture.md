@@ -29,7 +29,7 @@ Two independent layers:
 
 | Path | Role |
 |------|------|
-| `flake.nix` | Inputs (nixpkgs unstable, home-manager, nixos-hardware, stylix) and one `nixosConfiguration` per host |
+| `flake.nix` | Inputs (nixpkgs unstable, home-manager, nixos-hardware, hermes-agent) and one `nixosConfiguration` per host |
 | `hosts/<host>/` | Per-machine entry point: imports modules, hardware config, host-only services |
 | `modules/*.nix` | Feature modules imported directly by hosts (`desktop.nix`, `dev.nix`, `music.nix`, ...) |
 | `modules/wm/` | One module per window manager (mango, river, ...) |

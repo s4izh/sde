@@ -41,17 +41,12 @@ All under `sde.theming`, set from a host through
 | Option | Default | What |
 |---|---|---|
 | `enable` | `true` | Off under Plasma/GNOME, see [Desktop environments](#desktop-environments). |
-| `theme` | `"adwaita"` | `adwaita` `breeze` `gruvbox` `nordic` `catppuccin` `tokyonight` `colloid` `manjaro` `stylix` |
+| `theme` | `"adwaita"` | `adwaita` `breeze` `gruvbox` `nordic` `catppuccin` `tokyonight` `colloid` `manjaro` |
 | `polarity` | `"dark"` | Mode a switch or login starts in. `theme-mode` flips it at runtime. |
 | `toggle` | `true` | Build both specialisations and install `theme-mode` + the watcher. |
-| `stylixScheme` | `"gruvbox-dark-medium"` | base16 scheme for `stylix`, dark mode. |
-| `stylixSchemeLight` | `"gruvbox-light-medium"` | Same, light mode. |
 | `kitty.dark` | `null` | Kitty theme for dark mode, a file in `dotfiles/.config/kitty/themes` without `.conf`. `null` keeps `theme.conf`. |
 | `kitty.light` | `"zenbones-light"` | Same, light mode. |
 | `lockImage` | `null` | swaylock background, a path read when locking. `null` generates one in the theme accent. |
-
-Listing and previewing the base16 schemes: see the comment next to
-`stylixScheme` in `hosts/rx/default.nix`.
 
 ## Themes
 
@@ -68,7 +63,6 @@ Qt setup for the current polarity (`pick dark light`).
 | tokyonight | Tokyonight-Dark / -Light | Papirus | follows GTK |
 | colloid | Colloid-Dark / -Light | Colloid | follows GTK |
 | manjaro | Matcha-dark-sea / Matcha-light-sea | Papirus-Maia | follows GTK |
-| stylix | generated from the base16 scheme | Papirus | Kvantum, generated |
 
 Qt has three shapes, chosen per theme:
 
@@ -77,11 +71,6 @@ Qt has three shapes, chosen per theme:
   `~/.config/Kvantum/` and writes `kvantum.kvconfig`.
 - **platformTheme = "gtk3"**: Qt copies the GTK theme. Used when nixpkgs has no
   matching Kvantum theme (and for the light mode of gruvbox and nordic).
-
-`stylix` is different: instead of picking packages, the Stylix home-manager
-module generates GTK, Qt/Kvantum and the colors of every home-manager-managed
-program (waybar included) from one base16 scheme. Emacs is excluded, it has its
-own theme config.
 
 ## Light/dark toggle
 
@@ -149,8 +138,8 @@ home-manager cannot write into it. Instead `kitty.conf` includes, after its own
 include ${HOME}/.local/share/kitty/sde-theme.conf
 ```
 
-`theming.nix` generates that file: the Stylix colors, the
-`sde.theming.kitty.<mode>` theme, or an empty comment (so `theme.conf` wins).
+`theming.nix` generates that file: the
+`sde.theming.kitty.<mode>` theme or an empty comment (so `theme.conf` wins).
 It always exists, so the include never fails. On `SIGUSR1` kitty re-reads its
 whole config, so running windows change colors; going back to an empty file
 restores `theme.conf`. The light kitty themes set `env THEME_IS_LIGHT=1`, the
@@ -168,7 +157,7 @@ The launcher (`SUPER+p` apps and PATH commands, `SUPER+d` apps) and the
 session menu `fuzzelpoweroffmenu` (`SUPER+SHIFT+q`, waybar's power button).
 `home/sergio/fuzzel.nix` has the layout and the menu; `theming.nix` sets the
 font, the icon theme and colors: a dark or light palette plus the theme's
-`accent`. With `stylix`, Stylix's own fuzzel target colors it instead.
+`accent`.
 
 ### swaylock
 
@@ -176,7 +165,6 @@ font, the icon theme and colors: a dark or light palette plus the theme's
 inside, and sets the background: `sde.theming.lockImage` if given, otherwise
 an image built with ImageMagick (a blurred fractal from dark to the accent, or
 from the accent to light; fixed seed, so every build gives the same image).
-With `stylix`, Stylix's swaylock target colors it instead.
 
 ### neovim and emacs
 

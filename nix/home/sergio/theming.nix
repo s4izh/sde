@@ -3,7 +3,6 @@
   pkgs,
   lib,
   sde,
-  inputs,
   ...
 }:
 let
@@ -293,14 +292,11 @@ let
           -modulate ${pick "85" "100"} $out
       '';
 
-  useStylix = cfg.theme == "stylix";
   kittyTheme = pick cfg.kitty.dark cfg.kitty.light;
   theme = themes.${cfg.theme} or { };
   kvantum = theme.qt.kvantum or null;
 in
 {
-  imports = [ inputs.stylix.homeModules.stylix ];
-
   # GTK/Qt theme and cursor for standalone WMs. Full desktop environments
   # (Plasma, GNOME) manage these themselves and break on the read-only files
   # home-manager writes, so the NixOS side turns this off through
@@ -312,27 +308,9 @@ in
   };
 
   options.sde.theming.theme = lib.mkOption {
-    type = lib.types.enum ((lib.attrNames themes) ++ [ "stylix" ]);
+    type = lib.types.enum (lib.attrNames themes);
     default = "adwaita";
-    description = ''
-      Theme used for GTK, Qt, icons and cursor. "stylix" generates everything
-      (also terminals, waybar, ...) from the base16 scheme in
-      sde.theming.stylixScheme.
-    '';
-  };
-
-  options.sde.theming.stylixScheme = lib.mkOption {
-    type = lib.types.str;
-    default = "gruvbox-dark-medium";
-    example = "catppuccin-mocha";
-    description = "File name (without .yaml) from pkgs.base16-schemes, see share/themes.";
-  };
-
-  options.sde.theming.stylixSchemeLight = lib.mkOption {
-    type = lib.types.str;
-    default = "gruvbox-light-medium";
-    example = "catppuccin-latte";
-    description = "Like stylixScheme, used when polarity is light.";
+    description = "Theme used for GTK, Qt, icons, cursor and the accent color.";
   };
 
   options.sde.theming.polarity = lib.mkOption {
@@ -383,46 +361,11 @@ in
 
   config = lib.mkMerge [
     # kitty config lives in the dotfiles, kitty.conf includes this file after
-    # its own theme.conf. it always exists so the include never fails: stylix
-    # colors, the sde.theming.kitty theme of the mode or empty to keep theme.conf
+    # its own theme.conf. it always exists so the include never fails: the
+    # sde.theming.kitty theme of the mode or empty to keep theme.conf
     {
       xdg.dataFile."kitty/sde-theme.conf".text =
-        if cfg.enable && useStylix then
-          with config.lib.stylix.colors.withHashtag;
-          ''
-            background ${base00}
-            foreground ${base05}
-            selection_background ${base05}
-            selection_foreground ${base00}
-            url_color ${base04}
-            cursor ${base05}
-            cursor_text_color ${base00}
-            active_border_color ${base03}
-            inactive_border_color ${base01}
-            active_tab_background ${base00}
-            active_tab_foreground ${base05}
-            inactive_tab_background ${base01}
-            inactive_tab_foreground ${base04}
-            tab_bar_background ${base01}
-
-            color0 ${base00}
-            color1 ${base08}
-            color2 ${base0B}
-            color3 ${base0A}
-            color4 ${base0D}
-            color5 ${base0E}
-            color6 ${base0C}
-            color7 ${base05}
-            color8 ${base03}
-            color9 ${base08}
-            color10 ${base0B}
-            color11 ${base0A}
-            color12 ${base0D}
-            color13 ${base0E}
-            color14 ${base0C}
-            color15 ${base07}
-          ''
-        else if cfg.enable && kittyTheme != null then
+        if cfg.enable && kittyTheme != null then
           "include ${config.xdg.configHome}/kitty/themes/${kittyTheme}.conf\n"
         else
           "# kitty keeps its own theme.conf\n";
@@ -476,14 +419,14 @@ in
             pick "prefer-dark" "prefer-light"
           );
 
-          # colored below, or by stylix's swaylock target
+          # colored below
           programs.swaylock.enable = true;
 
           # theme-mode reads the active polarity from here
           xdg.dataFile."sde/polarity".text = cfg.polarity + "\n";
         }
 
-        (lib.mkIf (!useStylix) {
+        {
           gtk = {
             theme = theme.gtk;
             iconTheme = theme.icons;
@@ -606,7 +549,7 @@ in
                 };
             platformTheme.name = theme.qt.platformTheme or null;
           };
-        })
+        }
 
         # plasma writes kdeglobals too, same story as the gtk settings.ini
         (lib.mkIf (cfg.theme == "breeze") {
@@ -616,7 +559,7 @@ in
           };
         })
 
-        (lib.mkIf (!useStylix && kvantum != null) {
+        (lib.mkIf (kvantum != null) {
           xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
             [General]
             theme=${kvantum.name}
@@ -647,28 +590,6 @@ in
           };
         })
 
-        (lib.mkIf useStylix {
-          stylix = {
-            enable = true;
-            base16Scheme = "${pkgs.base16-schemes}/share/themes/${pick cfg.stylixScheme cfg.stylixSchemeLight}.yaml";
-            inherit (cfg) polarity;
-            cursor = bibata // {
-              size = 24;
-            };
-            icons = {
-              enable = true;
-              package = pkgs.papirus-icon-theme;
-              dark = "Papirus-Dark";
-              light = "Papirus-Light";
-            };
-            fonts.monospace = {
-              name = "Iosevka";
-              package = pkgs.iosevka;
-            };
-            # emacs has its own theme in the emacs config
-            # targets.emacs.enable = false;
-          };
-        })
       ]
     ))
   ];
