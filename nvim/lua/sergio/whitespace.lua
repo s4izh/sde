@@ -9,7 +9,10 @@ vim.opt.listchars = {
 
 local whitespace_group = vim.api.nvim_create_augroup("WhitespaceToggle", { clear = true })
 
--- Hide whitespace in Insert mode, show it again on leaving Insert
+-- whether whitespace is shown outside Insert mode (<leader>tW)
+local show_whitespace = true
+
+-- Hide whitespace in Insert mode, show it again on leaving Insert (if enabled)
 vim.api.nvim_create_autocmd("InsertEnter", {
   group = whitespace_group,
   pattern = "*",
@@ -18,11 +21,14 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 vim.api.nvim_create_autocmd("InsertLeave", {
   group = whitespace_group,
   pattern = "*",
-  command = "set list",
+  callback = function() vim.opt.list = show_whitespace end,
 })
 
 -- <leader>tW: toggle whitespace visibility (<leader>tw is the wrap toggle)
-vim.keymap.set('n', '<leader>tW', ':set list!<CR>', { desc = 'Toggle whitespace visibility' })
+vim.keymap.set('n', '<leader>tW', function()
+  show_whitespace = not show_whitespace
+  vim.opt.list = show_whitespace
+end, { desc = 'Toggle whitespace visibility' })
 
 vim.api.nvim_create_user_command('TrimWhitespace', function()
   local save_cursor = vim.fn.getpos(".")
