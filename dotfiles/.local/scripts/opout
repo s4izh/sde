@@ -7,6 +7,42 @@ BROWSER="${BROWSER:=firefox}"
 IMAGE_VIEWER="${IMAGE_VIEWER:=sxiv}"
 
 file=$(readlink -f "$1")
+
+# Where to open: "local", or "remote" = on the host we are ssh'd from, which
+# mounts this one under ~/mnt/<host> (sde.sshfs) and listens on a socket that
+# ssh forwards here. Override with $OPOUT_MODE or ~/.cache/opout-mode
+# (auto|local|remote); auto checks whether the active tmux client (or this
+# process, outside tmux) runs under sshd.
+sock="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/sde-open.sock"
+
+under_sshd() {
+    pid=$1
+    while [ -n "$pid" ] && [ "$pid" -gt 1 ]; do
+        case "$(cat /proc/"$pid"/comm 2>/dev/null)" in
+            sshd*) return 0 ;;
+        esac
+        # field 4 of /proc/<pid>/stat is the ppid; comm (field 2) may hold spaces
+        pid=$(sed 's/.*) [A-Za-z] \([0-9]*\).*/\1/' /proc/"$pid"/stat 2>/dev/null)
+    done
+    return 1
+}
+
+mode="${OPOUT_MODE:-$(cat ~/.cache/opout-mode 2>/dev/null)}"
+if [ "${mode:-auto}" = auto ]; then
+    start=$$
+    [ -n "$TMUX" ] && start=$(tmux display -p '#{client_pid}' 2>/dev/null)
+    if under_sshd "${start:-$$}"; then mode=remote; else mode=local; fi
+fi
+
+if [ "$mode" = remote ] && [ -S "$sock" ]; then
+    case "$file" in
+        "$HOME"/*)
+            printf '%s\t%s\n' "$(hostname)" "${file#"$HOME"/}" |
+                nc -NU "$sock" 2>/dev/null && exit
+            ;;
+    esac
+fi
+
 basename="${file%.*}"
 
 case "$1" in

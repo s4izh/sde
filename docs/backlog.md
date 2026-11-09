@@ -177,3 +177,34 @@ Tasks:
       with no prompt. Gateway/user are in sde-private (`rc.d/private.bash`);
       the password must not go there (private repo, not encrypted). Same idea
       for the `lanaccess.conf` VPN.
+
+## Remote open (`ropen`)
+
+Today (2026-11-09): `opout` over ssh sends `<host>\t<path under $HOME>` to
+`/run/user/1000/sde-open.sock`. ssh forwards that socket (`RemoteForward`,
+`sde.sshfs`) to the `sde-open` socket on the laptop, which runs
+`opout ~/mnt/<host>/<path>`. `opout` decides local vs remote by checking if the
+active tmux client (or itself, outside tmux) runs under `sshd`. Override it
+with `$OPOUT_MODE` or `~/.cache/opout-mode`.
+
+Idea: turn the socket into a small generic protocol, with a `ropen` client on
+the remote side and a dispatcher on the laptop. Do it only when a second use
+shows up:
+
+- **Protocol**: one line per request, `<verb>\t<host>\t<arg>`. Verbs:
+  - `open`: a file through `~/mnt/<host>`, with `xdg-open`/mimeapps. Covers
+    any file, not just opout's tex/md/html/puml.
+  - `url`: open in the local browser. Lets `gx` in nvim, `gh pr view --web`,
+    or `$BROWSER` on the remote open locally.
+  - `copy`: put stdin on the local clipboard (`wl-copy`). An alternative to
+    OSC 52, which doesn't work everywhere (mosh, some tmux setups).
+  - `notify`: show a local notification (`notify-send`), e.g. when a long build
+    on rx finishes.
+- **Client**: `ropen <verb> <arg>` on the remote. It uses the same local/remote
+  detection as opout (move it into a shared helper) and runs the local
+  action when there is no ssh session. Setting `BROWSER=ropen-url` on remote
+  hosts gets the browser case for free.
+- **Dispatcher**: keep the `sde-open@` Accept=yes unit. Allow only known
+  verbs, map `open` paths only under mounted hosts, and refuse `..`.
+- **Optional with mango**: focus or move the opened window (`mmsg`). Not
+  needed to open it.

@@ -8,6 +8,27 @@
 let
   cfg = config.sde.sshfs;
   home = config.users.users.${cfg.user}.home;
+
+  # Socket for "open this file here" requests coming from the remote hosts.
+  # ssh forwards it (RemoteForward) to the same path on the remote, where
+  # opout writes "<hostname>\t<path relative to $HOME>" to it.
+  openSock = "/run/user/${toString cfg.uid}/sde-open.sock";
+
+  sde-open = pkgs.writeShellScript "sde-open" ''
+    IFS=$'\t' read -r host rel || exit 1
+    case "$host/$rel" in
+      */../*|../*|*/..|/*) echo "sde-open: bad path: $rel" >&2; exit 1 ;;
+    esac
+    dir="${home}/mnt/$host"
+    case " ${lib.concatStringsSep " " (lib.attrNames cfg.mounts)} " in
+      *" $host "*) ;;
+      *) echo "sde-open: no mount for $host" >&2; exit 1 ;;
+    esac
+    file="$dir/$rel"
+    echo "sde-open: $file" >&2
+    # local: never bounce the file back through a socket
+    OPOUT_MODE=local exec ${home}/.local/scripts/opout "$file"
+  '';
 in
 {
   options.sde.sshfs = {
@@ -66,67 +87,103 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.mounts != { }) {
-    system.fsPackages = [ pkgs.sshfs ];
+  config = lib.mkMerge [
+    {
+      # Let a new ssh session replace a stale forwarded socket (sde-open.sock)
+      # left behind by a previous session.
+      services.openssh.settings.StreamLocalBindUnlink = true;
+    }
+    (lib.mkIf (cfg.mounts != { }) {
+      # Forward the open socket to every mounted host, so `<leader>O` (opout) in
+      # nvim over ssh opens the file here through ~/mnt/<name>.
+      programs.ssh.extraConfig = lib.concatMapStrings (m: ''
+        Host ${m.host}
+          RemoteForward ${openSock} ${openSock}
+      '') (lib.attrValues cfg.mounts);
 
-    # Needed so the user (not only root) can access a root-mounted FUSE fs.
-    programs.fuse.userAllowOther = true;
+      systemd.user.sockets.sde-open = {
+        description = "Open files from remote hosts via ~/mnt";
+        wantedBy = [ "sockets.target" ];
+        socketConfig = {
+          ListenStream = "%t/sde-open.sock";
+          SocketMode = "0600";
+          Accept = true;
+        };
+      };
 
-    fileSystems = lib.mapAttrs' (
-      name: m:
-      lib.nameValuePair "${home}/mnt/${name}" {
-        device = "${m.remoteUser}@${m.host}:${m.path}";
-        fsType = "fuse.sshfs";
-        options = [
-          # Mount lazily on access, never block boot.
-          "noauto"
-          "nofail"
-          "_netdev"
-          "x-systemd.automount"
-          "x-systemd.idle-timeout=${m.idleTimeout}"
-          "x-systemd.mount-timeout=15s"
-          "x-systemd.after=network-online.target"
-          "x-systemd.after=tailscaled.service"
+      systemd.user.services."sde-open@" = {
+        description = "Open a file from a remote host via ~/mnt";
+        serviceConfig = {
+          ExecStart = sde-open;
+          StandardInput = "socket";
+          StandardOutput = "journal";
+          # opout backgrounds the viewer; don't kill it when this unit exits.
+          KillMode = "process";
+        };
+      };
 
-          # Files appear owned by the local user, and the kernel enforces normal
-          # permission checks on them (without default_permissions, allow_other
-          # would let any local user act as you on the remote).
-          "allow_other"
-          "default_permissions"
-          "idmap=user"
-          "uid=${toString cfg.uid}"
-          "gid=${toString cfg.gid}"
+      system.fsPackages = [ pkgs.sshfs ];
 
-          # The mount runs as root, so point ssh at the user's key. Host keys
-          # come from the system-wide known_hosts (see ssh-keys.nix).
-          "IdentityFile=${home}/.ssh/id_ed25519"
-          "BatchMode=yes"
+      # Needed so the user (not only root) can access a root-mounted FUSE fs.
+      programs.fuse.userAllowOther = true;
 
-          # Survive flaky links instead of hanging forever.
-          "reconnect"
-          "ServerAliveInterval=15"
-          "ServerAliveCountMax=3"
-          "ConnectTimeout=10"
-        ];
-      }
-    ) cfg.mounts;
+      fileSystems = lib.mapAttrs' (
+        name: m:
+        lib.nameValuePair "${home}/mnt/${name}" {
+          device = "${m.remoteUser}@${m.host}:${m.path}";
+          fsType = "fuse.sshfs";
+          options = [
+            # Mount lazily on access, never block boot.
+            "noauto"
+            "nofail"
+            "_netdev"
+            "x-systemd.automount"
+            "x-systemd.idle-timeout=${m.idleTimeout}"
+            "x-systemd.mount-timeout=15s"
+            "x-systemd.after=network-online.target"
+            "x-systemd.after=tailscaled.service"
 
-    # By default, a few quick failed mounts (e.g. rx is off) hit systemd's start
-    # limit and leave the automount dead until a manual reset-failed. Drop the
-    # limit so every access just retries (each attempt gives up after ~10s).
-    systemd.units = lib.mapAttrs' (
-      name: _:
-      lib.nameValuePair "${utils.escapeSystemdPath "${home}/mnt/${name}"}.mount" {
-        overrideStrategy = "asDropin";
-        text = ''
-          [Unit]
-          StartLimitIntervalSec=0
-        '';
-      }
-    ) cfg.mounts;
+            # Files appear owned by the local user, and the kernel enforces normal
+            # permission checks on them (without default_permissions, allow_other
+            # would let any local user act as you on the remote).
+            "allow_other"
+            "default_permissions"
+            "idmap=user"
+            "uid=${toString cfg.uid}"
+            "gid=${toString cfg.gid}"
 
-    systemd.tmpfiles.rules = [
-      "d ${home}/mnt 0755 ${cfg.user} users -"
-    ] ++ lib.mapAttrsToList (name: _: "d ${home}/mnt/${name} 0755 ${cfg.user} users -") cfg.mounts;
-  };
+            # The mount runs as root, so point ssh at the user's key. Host keys
+            # come from the system-wide known_hosts (see ssh-keys.nix).
+            "IdentityFile=${home}/.ssh/id_ed25519"
+            "BatchMode=yes"
+
+            # Survive flaky links instead of hanging forever.
+            "reconnect"
+            "ServerAliveInterval=15"
+            "ServerAliveCountMax=3"
+            "ConnectTimeout=10"
+          ];
+        }
+      ) cfg.mounts;
+
+      # By default, a few quick failed mounts (e.g. rx is off) hit systemd's start
+      # limit and leave the automount dead until a manual reset-failed. Drop the
+      # limit so every access just retries (each attempt gives up after ~10s).
+      systemd.units = lib.mapAttrs' (
+        name: _:
+        lib.nameValuePair "${utils.escapeSystemdPath "${home}/mnt/${name}"}.mount" {
+          overrideStrategy = "asDropin";
+          text = ''
+            [Unit]
+            StartLimitIntervalSec=0
+          '';
+        }
+      ) cfg.mounts;
+
+      systemd.tmpfiles.rules = [
+        "d ${home}/mnt 0755 ${cfg.user} users -"
+      ]
+      ++ lib.mapAttrsToList (name: _: "d ${home}/mnt/${name} 0755 ${cfg.user} users -") cfg.mounts;
+    })
+  ];
 }
