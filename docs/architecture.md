@@ -7,25 +7,25 @@ How the pieces of this repo fit together. Decisions and their reasons live in
 
 ```
                     ┌──────────────────────────┐
-                    │  nixos/flake.nix         │  system packages, services,
+                    │  nix/flake.nix           │  system packages, services,
                     │  (nixosConfigurations)   │  home-manager (programs only)
                     └────────────┬─────────────┘
                                  │ nixos-rebuild
                                  ▼
- dotfiles/, nvim/, emacs/ ──symlinks──▶ $HOME   (nixos/Makefile + config.mk)
+ dotfiles/, nvim/, emacs/ ──symlinks──▶ $HOME   (nix/Makefile + config.mk)
                                  ▲
  guix/, ubuntu/, wsl/ ───────────┘   same dotfiles reused on non-NixOS systems
 ```
 
 Two independent layers:
 
-1. **System layer** (`nixos/`): what is installed and which services run. Needs
+1. **System layer** (`nix/`): what is installed and which services run. Needs
    a rebuild to change.
 2. **Config layer** (`dotfiles/`, `nvim/`, `emacs/`): how programs behave. Plain
    files symlinked into `$HOME`, so edits apply immediately and work on any
    distro. See [ADR 0001](adr/0001-dotfiles-as-plain-symlinks.md).
 
-## System layer: `nixos/`
+## System layer: `nix/`
 
 | Path | Role |
 |------|------|
@@ -36,16 +36,16 @@ Two independent layers:
 | `modules/sde/nixos/` | Option-based modules (`sde.desktop.enable`, `sde.virtualization.*`, `sde.latex.enable`) |
 | `home/sergio/` | home-manager config: programs that need generated config (beets, ssh, waybar, ...) |
 | `pkgs/` | Custom packages, exposed as `packages.<system>.*` |
-| `docs/` | Docs for parts of the nixos config ([theming](../nixos/docs/theming.md)) |
+| `docs/` | Docs for parts of the nixos config ([theming](../nix/docs/theming.md)) |
 | `parts/` | Experimental flake-parts version of the flake, not in use |
 
 Every host gets a special arg `sde` with repo paths (`flakeRoot`,
-`nixosPrefix`, `scripts`) so modules can read files from outside `nixos/`
+`nixosPrefix`, `scripts`) so modules can read files from outside `nix/`
 (e.g. `dotfiles/etc/hosts`).
 
 GTK/Qt themes, icons, cursor and the light/dark toggle that kitty, waybar,
 nvim and emacs follow are described in
-[`nixos/docs/theming.md`](../nixos/docs/theming.md).
+[`nix/docs/theming.md`](../nix/docs/theming.md).
 
 The flake is evaluated from the git tree: **new files must be `git add`ed**
 before a rebuild can see them.
@@ -63,7 +63,7 @@ before a rebuild can see them.
 
 ### Symlinks
 
-`nixos/config.mk` holds `LINKS_FROM_SDE_TO_HOME`, a list of `src:dest` pairs.
+`nix/config.mk` holds `LINKS_FROM_SDE_TO_HOME`, a list of `src:dest` pairs.
 `make softlinks-create` removes the previous links (tracked in
 `~/.cache/sde/links`) and recreates them all.
 

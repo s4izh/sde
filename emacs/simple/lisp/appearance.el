@@ -41,7 +41,7 @@
   :defer t)
 
 ;; light/dark comes from ~/.local/share/sde/polarity, written by the nix
-;; theming (theme-mode in nixos/home/sergio/theming.nix). THEME_IS_LIGHT from
+;; theming (theme-mode in nix/home/sergio/theming.nix). THEME_IS_LIGHT from
 ;; the kitty theme is the fallback when the file is not there.
 (defvar ssm/polarity-file
   (expand-file-name "sde/polarity" (or (getenv "XDG_DATA_HOME") "~/.local/share")))

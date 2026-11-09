@@ -52,7 +52,7 @@ Real chain: `.bashrc` → `shell/bash_profile` → `functions`, `aliases`, `prom
 - [ ] `after/ftplugin/lua.vim` (only comments), `c.vim`/`cpp.vim` (set the
       default `commentstring`).
 - [ ] `context.lua:55-56`: leftover commented require.
-- [ ] `nixos/pkgs/nvim-mnw.nix` (WIP): fix `vimPlugins`/`withAllGrammars`
+- [ ] `nix/pkgs/nvim-mnw.nix` (WIP): fix `vimPlugins`/`withAllGrammars`
       casing and wire it into the flake, or delete.
 - [ ] Write ADR for the lazy.nvim → `vim.pack` migration.
 

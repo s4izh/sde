@@ -40,7 +40,7 @@
 
 (defvar ssm/quick-access-locations
   '(("emacs" . "~/.emacs.d/lisp")
-    ("nixos" . "~/personal/sde/nixos")
+    ("nix" . "~/personal/sde/nix")
     ("notes" . "~/notes"))
     ;; ("nvim" . "~/.config/nvim")
     ;; ("hypr" . "~/.config/hypr")

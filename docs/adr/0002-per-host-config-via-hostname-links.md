@@ -18,7 +18,7 @@ live in the main config and be overridden later.
 
 - Keep per-host files in the repo under `<config>/hosts/<hostname>.conf`, plus a
   `hosts/default.conf` fallback.
-- `nixos/config.mk` reads `hostname` and adds one link from the matching file
+- `nix/config.mk` reads `hostname` and adds one link from the matching file
   (or `default.conf`) to a fixed path, e.g. `~/.config/mango/host.conf`.
 - The main config includes that path optionally (`source-optional=./host.conf`).
 - The generated link is gitignored, since it lands inside the repo through the

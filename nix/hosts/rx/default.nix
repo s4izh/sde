@@ -50,7 +50,7 @@
       # swaylock background, null (default) generates one in the theme accent
       # sde.theming.lockImage = "~/git/wallpapers/wallhaven-q6p667.jpg";
       #
-      # list the schemes (run from nixos/):
+      # list the schemes (run from nix/):
       #   ls $(nix build --no-link --print-out-paths .#nixosConfigurations.rx.pkgs.base16-schemes)/share/themes
       # preview the palettes in the terminal:
       #   d=$(nix build --no-link --print-out-paths .#nixosConfigurations.rx.pkgs.base16-schemes)/share/themes

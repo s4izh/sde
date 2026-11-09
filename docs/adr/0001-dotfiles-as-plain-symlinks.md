@@ -13,7 +13,7 @@ The same dotfiles are also used on Ubuntu (guix home) and WSL.
 
 Keep program configs as plain files in `dotfiles/`, `nvim/` and `emacs/`, and
 symlink them into `$HOME` with `make softlinks-create`. The link list lives in
-`nixos/config.mk`.
+`nix/config.mk`.
 
 home-manager is only used for programs whose config is easier to generate from
 Nix (beets, ssh, waybar, ...). No `mkOutOfStoreSymlink` to work around the

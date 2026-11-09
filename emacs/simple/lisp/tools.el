@@ -105,7 +105,7 @@ so the name sticks until you change it again."
    "nix shell nixpkgs#zig_0_15 --command zig build --prefix %s -Doptimize=ReleaseFast -Dcpu=baseline"))
 
 ;; emacs-reader: MuPDF-backed document viewer (replaces doc-view/pdf-tools).
-;; Provided by nix (nixos/pkgs/emacs-reader.nix) because it needs a dynamic
+;; Provided by nix (nix/pkgs/emacs-reader.nix) because it needs a dynamic
 ;; module linked against MuPDF, hence :ensure nil and no :load-path.
 ;;
 ;; Its autoloads file isn't loaded by the nix emacs wrapper, so the

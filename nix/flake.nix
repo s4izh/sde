@@ -49,9 +49,20 @@
 
       sde = rec {
         flakeRoot = ../.;
-        nixosPrefix = "${flakeRoot}/nixos";
+        nixosPrefix = "${flakeRoot}/nix";
         scripts = "${flakeRoot}/dotfiles/.local/scripts";
         pkgs = forAllSystems (pkgs: system: import ./pkgs pkgs system) nixpkgs;
+
+        # Private config: the nix/ folder of a local clone of s4izh/sde-private,
+        # or null if there is none. Same layout as this folder, entry points
+        # modules/sde/nixos/default.nix and home/sergio/home.nix. Reading a path
+        # outside the flake needs --impure (the Makefile always passes it); in
+        # pure eval (no builtins.currentSystem) it is skipped.
+        private =
+          let
+            dir = "/home/sergio/personal/sde-private/nix";
+          in
+          if builtins ? currentSystem && builtins.pathExists dir then /. + dir else null;
       };
 
       sdeDocs = pkgs:
@@ -63,7 +74,7 @@
             ];
           };
           # Strip the nix store path prefix to get a relative path like
-          # "nixos/modules/sde/nixos/base.nix", then build a GitHub URL.
+          # "nix/modules/sde/nixos/base.nix", then build a GitHub URL.
           repoUrl = "https://github.com/s4izh/sde";
           transformDecl = decl:
             let
@@ -71,8 +82,8 @@
               isLocal = rel != toString decl;
             in
             if isLocal then {
-              url = "${repoUrl}/blob/main/nixos/${rel}";
-              name = "nixos/${rel}";
+              url = "${repoUrl}/blob/main/nix/${rel}";
+              name = "nix/${rel}";
             } else {
               url = toString decl;
               name = toString decl;
@@ -132,6 +143,9 @@
                 };
                 modules = [
                   self.nixosModules.sde
+                ]
+                ++ lib.optional (sde.private != null) (sde.private + "/modules/sde/nixos")
+                ++ [
                   "${sde.nixosPrefix}/hosts/${host}"
                   {
                     nix.registry.nixpkgs.flake = inputs.nixpkgs; # nix shell to use system flake

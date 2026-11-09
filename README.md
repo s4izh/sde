@@ -6,7 +6,7 @@ My development environment: system configs, dotfiles and editor setups for all m
 
 ```
 sde/
-├── nixos/      NixOS flake: hosts, modules, home-manager, custom packages
+├── nix/        Nix flake: hosts, modules, home-manager, custom packages
 ├── dotfiles/   Raw config files, symlinked into $HOME
 ├── nvim/       Neovim config (vim.pack, no plugin manager)
 ├── emacs/      Emacs configs (simple/, minimal/, old/)
@@ -17,7 +17,7 @@ sde/
 
 ## NixOS
 
-The flake lives in `nixos/`. Active hosts:
+The flake lives in `nix/`. Active hosts:
 
 | Host  | Machine                                              |
 |-------|------------------------------------------------------|
@@ -29,7 +29,7 @@ The flake lives in `nixos/`. Active hosts:
 `hosts/` but are not in the flake.
 
 ```sh
-cd nixos
+cd nix
 make help      # list all targets
 make switch    # rebuild the current host
 make update    # nix flake update
@@ -40,10 +40,10 @@ make update    # nix flake update
 Dotfiles are not managed by home-manager, they are plain symlinks so edits
 apply without a rebuild. They can be used outside NixOS.
 
-The links are listed in `nixos/config.mk`:
+The links are listed in `nix/config.mk`:
 
 ```sh
-cd nixos
+cd nix
 make softlinks-create   # (re)create every link
 make softlinks-remove   # remove them
 ```
