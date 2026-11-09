@@ -253,6 +253,7 @@ local function find_by_tags()
     :find()
 end
 
+require("sergio.keymaps").group("<leader>n", "+notes")
 vim.keymap.set("n", "<leader>nn", new_note, { desc = "denote: new note" })
 vim.keymap.set("n", "<leader>nr", rename_current, { desc = "denote: rename to match front matter" })
 vim.keymap.set("n", "<leader>nl", insert_link, { desc = "denote: insert link" })

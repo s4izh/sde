@@ -20,6 +20,9 @@ vim.pack.add({
   -- git
   { src = "https://github.com/tpope/vim-fugitive" },
 
+  -- popup with the next possible keys after <leader>, g, z... (uses each desc)
+  { src = "https://github.com/nvim-mini/mini.clue" },
+
   -- colorschemes are installed in colors.lua
 })
 

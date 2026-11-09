@@ -49,6 +49,10 @@
       "rev": "ce42f6b629beeaa00591ba73a77d3eeac4cf28ce",
       "src": "https://github.com/savq/melange-nvim"
     },
+    "mini.clue": {
+      "rev": "57f1f9542e8f7f0c3325825359939410940c55fc",
+      "src": "https://github.com/nvim-mini/mini.clue"
+    },
     "mini.icons": {
       "rev": "98faae31e9be1cc054ae63485e58ceb185efcad0",
       "src": "https://github.com/nvim-mini/mini.icons"

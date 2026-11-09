@@ -62,29 +62,34 @@ end
 --   <Tab> / <S-Tab>   jump between placeholders while a snippet is active
 --
 -- Only what has no built-in equivalent is mapped below.
+local keymaps = require("sergio.keymaps")
+keymaps.group("<leader>l", "+lsp")
+keymaps.group("<leader>lr", "+restart")
+keymaps.group("<leader>lw", "+workspace")
+
 local lsp_keymaps = {
-  { "n", "<Leader>ls", "<cmd>lsp stop<cr>" },
-  { "n", "<Leader>lrr", "<cmd>lsp restart<cr>" },
+  { "n", "<Leader>ls", "<cmd>lsp stop<cr>", "LSP: stop" },
+  { "n", "<Leader>lrr", "<cmd>lsp restart<cr>", "LSP: restart" },
   -- <C-]> also goes to the definition via tagfunc; gd is kept as the familiar key
-  { "n", "gd", vim.lsp.buf.definition },
-  { "n", "gD", vim.lsp.buf.declaration },
+  { "n", "gd", vim.lsp.buf.definition, "LSP: go to definition" },
+  { "n", "gD", vim.lsp.buf.declaration, "LSP: go to declaration" },
   -- <C-S> covers insert and select mode, but not normal mode
-  { "n", "gs", signature_help },
-  { "n", "<space>lf", function() vim.lsp.buf.format({ async = true }) end },
-  { "n", "<leader>lwa", vim.lsp.buf.add_workspace_folder },
-  { "n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder },
-  { "n", "<leader>lws", function() vim.lsp.buf.workspace_symbol() end },
+  { "n", "gs", signature_help, "LSP: signature help" },
+  { "n", "<space>lf", function() vim.lsp.buf.format({ async = true }) end, "LSP: format buffer" },
+  { "n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, "LSP: add workspace folder" },
+  { "n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, "LSP: remove workspace folder" },
+  { "n", "<leader>lws", function() vim.lsp.buf.workspace_symbol() end, "LSP: workspace symbols" },
   { "n", "<leader>lwl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end },
+  end, "LSP: list workspace folders" },
 }
 
 -- Diagnostics are not tied to a running server (they can come from other
 -- sources), so these stay global and are set once, not per attach.
-vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end)
-vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end)
-vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist)
-vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float)
+vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next diagnostic" })
+vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Diagnostics to location list" })
+vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { desc = "Show diagnostic under cursor" })
 
 -- file extensions to format on save (empty = disabled)
 local auto_format_extensions = {}
@@ -145,7 +150,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     for _, m in ipairs(lsp_keymaps) do
-      vim.keymap.set(m[1], m[2], m[3], { buffer = ev.buf })
+      vim.keymap.set(m[1], m[2], m[3], { buffer = ev.buf, desc = m[4] })
     end
 
     vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })

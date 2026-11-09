@@ -1,3 +1,6 @@
+-- keymap registry first: it wraps vim.keymap.set for everything below
+require("sergio.keymaps")
+
 -- plugins first: vim.pack.add is synchronous, so everything below can require them
 require("sergio.plugins")
 
@@ -28,3 +31,4 @@ require("sergio.denote")
 require("sergio.refs")
 require("sergio.org")
 require("sergio.context")
+require("sergio.clue")
