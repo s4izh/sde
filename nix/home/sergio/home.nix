@@ -134,7 +134,9 @@ in
         AddKeysToAgent = "yes";
         # one connection per host, kept 10m; `ssh -O exit <host>` to drop it
         ControlMaster = "auto";
-        ControlPath = "~/.ssh/cm-%C";
+        # %C = hash of local host, remote host, port, user (and ProxyJump):
+        # fixed length, so it never hits the ~108 byte unix socket path limit
+        ControlPath = "~/.ssh/sockets/%C";
         ControlPersist = "10m";
         ServerAliveInterval = 60;
         ServerAliveCountMax = 3;
@@ -152,6 +154,8 @@ in
       "config.d/*"
     ];
   };
+  # ssh does not create the ControlPath directory itself
+  home.file.".ssh/sockets/.keep".text = "";
 
   programs.emacs = {
     enable = true;
