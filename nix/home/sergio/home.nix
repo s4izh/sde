@@ -131,6 +131,12 @@ in
           TERM = "xterm-256color";
         };
         AddKeysToAgent = "yes";
+        # one connection per host, kept 10m; `ssh -O exit <host>` to drop it
+        ControlMaster = "auto";
+        ControlPath = "~/.ssh/cm-%C";
+        ControlPersist = "10m";
+        ServerAliveInterval = 60;
+        ServerAliveCountMax = 3;
       };
       # "sistemes" = {
       #   HostName = "192.168.122.10";
