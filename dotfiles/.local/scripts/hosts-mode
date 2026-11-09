@@ -3,13 +3,11 @@
 # /etc/hosts -> /etc/static/hosts -> /etc/hosts.current -> /etc/hosts.{default,focus}
 
 set -euo pipefail
+source "$HOME/.local/scripts/lib/sde.sh"
 
 CURRENT=/etc/hosts.current
 
-usage() {
-    echo "usage: $(basename "$0") [default|focus|toggle|status]" >&2
-    exit 1
-}
+usage() { die_usage "[default|focus|toggle|status]"; }
 
 status() {
     basename "$(readlink "$CURRENT")" | sed 's/^hosts\.//'
@@ -17,10 +15,7 @@ status() {
 
 link() {
     local mode="$1"
-    [ -e "/etc/hosts.$mode" ] || {
-        echo "missing /etc/hosts.$mode (rebuild needed?)" >&2
-        exit 1
-    }
+    [ -e "/etc/hosts.$mode" ] || die "missing /etc/hosts.$mode (rebuild needed?)"
     sudo ln -sfn "/etc/hosts.$mode" "$CURRENT"
     echo "hosts -> $mode"
 }
