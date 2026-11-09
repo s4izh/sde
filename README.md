@@ -12,7 +12,8 @@ sde/
 ├── emacs/      Emacs configs (simple/, minimal/, old/)
 ├── guix/       Guix modules, packages and channels
 ├── ubuntu/     Guix home setup for Ubuntu (foreign distro)
-└── wsl/        Bash setup and deploy script for WSL
+├── wsl/        Bash setup and deploy script for WSL
+└── scripts/    Scripts for working on this repo (tmux-session.sh: tmux layout, linked as .tmux)
 ```
 
 ## NixOS
