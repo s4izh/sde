@@ -6,14 +6,14 @@ select_project() {
         return
     fi
 
-    local folders=$(find ~/personal ~/personal/sde ~/uni/mei ~/uni/miri ~/git ~/devel ~/devel/lanaccess ~/.local/src -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
+    local folders=$(find ~/personal ~/personal/sde ~/uni/mei ~/uni/miri ~/git ~/w/bsc ~/.local/src -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
     local scripts=~/.local/scripts
     # local nvim=~/.config/nvim
     local notes=~/notes
     local passwords=$PASSWORD_STORE_DIR
 
     local selected
-    selected=$(printf "%s\n" "$folders" "$scripts" "$dotfiles" "$passwords" "$notes" "$nvim" "new" "vpn" | fzf)
+    selected=$(printf "%s\n" "$folders" "$scripts" "$notes" "new" "vpn" | fzf)
 
     [[ -z "$selected" ]] && exit 0
 
@@ -142,7 +142,7 @@ main() {
 
     local session_name
     session_name=$(get_session_name "$selected_path")
-    
+
     create_or_attach_session "$session_name" "$selected_path"
 }
 
