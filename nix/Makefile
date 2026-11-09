@@ -21,6 +21,10 @@ ifeq ($(GIT_SRCS),)
 endif
 
 STATE_FILE := $(HOME)/.cache/sde/links
+
+# Private config, imported by flake.nix when cloned here (keep both paths in sync).
+PRIVATE_DIR := $(HOME)/personal/sde-private
+PRIVATE_REPO := git@github.com:s4izh/sde-private.git
 SWITCH_LOG := $(HOME)/.cache/sde/switch.log
 
 # REPO_NAMES := $(notdir $(basename $(GIT_SRCS)))
@@ -44,7 +48,7 @@ switch: src-dependencies ## Switch to the flake (log in $(SWITCH_LOG))
 boot:
 	sudo nixos-rebuild boot --flake .\?submodules=1# --impure
 
-bootstrap: src-dependencies softlinks-create ## First bootstrap, specify NIX_HOSTNAME as env variable
+bootstrap: src-dependencies softlinks-create private ## First bootstrap, specify NIX_HOSTNAME as env variable
 	sudo nixos-rebuild switch --flake .#$(NIX_HOSTNAME) --impure
 
 build:
@@ -78,6 +82,16 @@ deploy-jsc: ## Deploy jsc machine
 boot-jsc: ## Boot jsc machine
 	sudo nixos-rebuild boot --flake ".#jsc" --impure \
 		--target-host root@192.168.1.133 --build-host root@192.168.1.133
+
+private: ## Clone sde-private if missing (needs a GitHub SSH key; skipped otherwise)
+	@if [ -d "$(PRIVATE_DIR)/.git" ]; then \
+		echo "sde-private: already cloned at $(PRIVATE_DIR)"; \
+	elif GIT_SSH_COMMAND="ssh -o BatchMode=yes -o ConnectTimeout=10" git ls-remote $(PRIVATE_REPO) >/dev/null 2>&1; then \
+		git clone $(PRIVATE_REPO) "$(PRIVATE_DIR)"; \
+	else \
+		echo "sde-private: no access to $(PRIVATE_REPO) (no GitHub SSH key yet?)."; \
+		echo "sde-private: building without it; run 'make private' once the key is on GitHub."; \
+	fi
 
 src-dependencies: ## Download impure source dependencies
 	@if [ ! -d $(SRC_DIR) ]; then mkdir -p $(SRC_DIR); fi
