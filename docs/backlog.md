@@ -124,6 +124,28 @@ Done on 2026-10-11: unused configs and ~90 scripts moved to `.archive/` (see
 
 ## Secrets (sops)
 
+Decisions so far (2026-11-09):
+
+- **sops + age** for secrets, not GPG: sops-nix decrypts with the host SSH key
+  through age, and age keys are one line, no keyring.
+- **What goes where**: real secrets → sops (encrypted, in sde-private);
+  not-secret-but-private config → sde-private in clear (printer, BSC hosts,
+  `rc.d/private.bash`); public config → sde. Never a password in sde-private
+  without sops.
+- **Notes repo**: encrypt with **git-agecrypt** (age, only I use it). Content is
+  encrypted but file names, folders and commit messages stay visible on the
+  remote. Add a `pre-commit` hook that rejects staged files under the
+  encrypted paths not starting with `age-encryption.org/v1` (a clone without
+  `git-agecrypt init` would commit them in clear). Alternative considered:
+  git-remote-gcrypt (hides everything, GPG).
+- **GPG**: keep it only for `pass` (and `gpg --verify` of downloads). Sign
+  commits with the SSH key if wanted (`gpg.format = ssh`). Optional later:
+  `pass` → `passage` (age) to drop the GPG key.
+- **git-crypt** in sde is set up (`dotfiles/.gitattributes`,
+  `dotfiles/.git-crypt/`) but unused: remove it.
+
+Tasks:
+
 - [ ] Set up sops-nix with age: one age key per host derived from its SSH host
       key (`ssh-to-age`, keys already in `nix/keys/hosts/`) plus my own key for
       editing. See `nix/docs/ssh.md`. Split:
@@ -146,6 +168,9 @@ Done on 2026-10-11: unused configs and ~90 scripts moved to `.archive/` (see
     decrypt with an age key derived from `ssh_host_ed25519_key`; its blog
     example derives a GPG key from `ssh_host_rsa_key`. Worst case, the Guix
     host gets its own age/GPG key as one more recipient.
+- [ ] Remove the unused git-crypt setup (`dotfiles/.gitattributes`,
+      `dotfiles/.git-crypt/`).
+- [ ] Notes repo: git-agecrypt + the plaintext-guard `pre-commit` hook.
 - [ ] BSC VPN config with the password: an openfortivpn config
       (`host`, `port`, `username`, `password`) generated from a sops secret into
       `/run/secrets/`, so `vpn_manager.sh` runs `sudo openfortivpn -c <that file>`
