@@ -20,6 +20,7 @@ in
     ./fuzzel.nix
     ./autostart.nix
     ./work/bsc.nix
+    ./agents.nix
   ]
   # private part, if ~/personal/sde-private is cloned (see sde.private in flake.nix)
   ++ (if sde.private != null then [ (sde.private + "/home/sergio/home.nix") ] else [ ]);
