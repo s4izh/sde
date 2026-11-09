@@ -25,7 +25,8 @@ The flake lives in `nixos/`. Active hosts:
 | `zen` | ASUS laptop                                          |
 | `jsc` | KDE Plasma desktop, deployed remotely                |
 
-`vm`, `z390` and `thinkcenter` are kept in `hosts/` but are not in the flake.
+`vm`, `z390` (now the same machine as `rx`) and `thinkcenter` are kept in
+`hosts/` but are not in the flake.
 
 ```sh
 cd nixos

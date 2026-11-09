@@ -60,11 +60,41 @@ function _set_prompt() {
     PS1+="\n$ \e[0m"
 }
 
+# Per-host prompt color, so it is obvious which machine a shell is on.
+# Priority: $SDE_PROMPT_COLOR (e.g. set in ~/.config/shell/rc.d/local.bash)
+#   > the table below > a color derived from the hostname (stable per host).
+# Values are basic ANSI codes (31-36) so the terminal theme maps them for
+# light and dark. Red (31) is kept for root.
+function _host_color()
+{
+    local host=${HOSTNAME%%.*}
+    case "$host" in
+        dell)        echo 36 ;;  # cyan
+        rx)          echo 32 ;;  # green
+        zen)         echo 35 ;;  # magenta
+        thinkcenter) echo 33 ;;  # yellow
+        *)
+            # unknown host (servers, clusters...): pick one of 32-36 from a hash
+            local sum
+            sum=$(printf %s "$host" | cksum)
+            echo $(( 32 + ${sum%% *} % 5 ))
+            ;;
+    esac
+}
+_SDE_HOST_COLOR=$(_host_color)
+
 function _basic_prompt()
 {
     ON_SPECIAL_ENV=$IN_NIX_SHELL$GUIX_ENVIRONMENT
+    local color=${SDE_PROMPT_COLOR:-$_SDE_HOST_COLOR}
+    [ "$EUID" -eq 0 ] && color=31
+    local ssh=""
+    # "(ssh)" marker, disabled: the tmux status bar shows it (tmux-host-status).
+    # Uncomment to show it outside tmux too; inside tmux a pane keeps the
+    # SSH_CONNECTION it was created with, so it would be stale there.
+    # [ -n "$SSH_CONNECTION" ] && [ -z "$TMUX" ] && ssh="(ssh) "
     # PS1='\u@\h \w${ON_SPECIAL_ENV:+ [env]}\n\$ '
-    PS1='\[\e[32m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\n\[\e[37m\]\$ '
+    PS1="$ssh"'\[\e['"$color"'m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\n\[\e[37m\]\$ '
     # PS1='\[\e[32m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\[\e[37m\]\n> '
     # PS1='\[\e[32m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\[\e[37m\] > '
     # PS1='\[\e[32m\]\u@\h \w${ON_SPECIAL_ENV:+ [env]}\[\e[37m\] > '

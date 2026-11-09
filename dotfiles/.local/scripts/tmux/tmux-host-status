@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Set the tmux options the status bar uses to show the host:
+#
+#   @host_color  (global)       same color as the shell prompt for this host
+#   @ssh         (per session)  1 if the last client that attached came over SSH
+#
+# Called once when tmux.conf loads (no args) and from the client-attached /
+# session-created hooks with the session name, see tmux.conf.
+
+session=$1
+
+# Host color: reuse the prompt's table, plus the per-machine override.
+SDE_PROMPT_COLOR=${SDE_PROMPT_COLOR:-}
+[ -f "$HOME/.config/shell/prompt" ] && . "$HOME/.config/shell/prompt"
+[ -f "$HOME/.config/shell/rc.d/local.bash" ] && . "$HOME/.config/shell/rc.d/local.bash"
+ansi=${SDE_PROMPT_COLOR:-${_SDE_HOST_COLOR:-37}}
+# ANSI 31-37 -> tmux colour1-7 (the terminal theme's palette, like the prompt)
+tmux set -g @host_color "colour$((ansi - 30))"
+
+# SSH flag: on attach, tmux copies SSH_CONNECTION from the client into the
+# session environment ("-SSH_CONNECTION" when the client has none).
+if [ -n "$session" ]; then
+    if tmux show-environment -t "$session" SSH_CONNECTION 2>/dev/null | grep -q '^SSH_CONNECTION='; then
+        tmux set -t "$session" @ssh 1
+    else
+        tmux set -t "$session" @ssh 0
+    fi
+fi
