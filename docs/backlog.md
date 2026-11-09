@@ -106,13 +106,22 @@ Done on 2026-10-11: unused configs and ~90 scripts moved to `.archive/` (see
   - **sde**: the `sops-nix` flake input (sde-private is not a flake, it cannot
     have inputs) and the common config: import the module,
     `sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ]`.
-  - **sde-private**: the encrypted files (`nix/secrets/*.yaml`), their
-    `.sops.yaml` and the modules that use them. Even encrypted, a public repo
+  - **sde-private**: the encrypted files (`secrets/*.yaml` at the repo root,
+    not under `nix/`, so a future `guix/` can use them too), their
+    `.sops.yaml` (also at the root) and the modules that use them. Even encrypted, a public repo
     shows secret names, which hosts use them and when they change. A host
     without the clone has neither the secrets nor their users, so it still
     builds.
   - `.sops.yaml` recipients are copied by hand from `nix/keys/hosts/` through
     `ssh-to-age`; script it if it gets tedious.
+  - Keep secret files system-neutral: one per purpose (e.g. `bsc.yaml` with
+    `vpn_password`), plain values, nothing Nix-specific. Each system renders
+    its own files from them (openfortivpn `.conf`, etc.).
+  - Guix: [sops-guix](https://github.com/fishinthecalculator/sops-guix)
+    (third-party channel, `sops-secrets-service-type`). Check whether it can
+    decrypt with an age key derived from `ssh_host_ed25519_key`; its blog
+    example derives a GPG key from `ssh_host_rsa_key`. Worst case, the Guix
+    host gets its own age/GPG key as one more recipient.
 - [ ] BSC VPN config with the password: an openfortivpn config
       (`host`, `port`, `username`, `password`) generated from a sops secret into
       `/run/secrets/`, so `vpn_manager.sh` runs `sudo openfortivpn -c <that file>`
