@@ -1,10 +1,7 @@
 -- nvim-cmp: popup completion engine, an alternative to the native completion.
 --
--- Sourcing this module (uncomment its require in init.lua) switches completion
--- from native to cmp: it sets vim.g.completion_engine = "cmp", which lsp.lua
--- checks to skip enabling native LSP completion. Comment the require out again
--- to go back to native completion.
-vim.g.completion_engine = "cmp"
+-- Loaded by init.lua when config.completion = "cmp" (config.lua); lsp.lua
+-- reads the same setting to skip native LSP completion.
 
 vim.pack.add({
   { src = "https://github.com/hrsh7th/nvim-cmp" },

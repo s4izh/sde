@@ -38,7 +38,9 @@ vim.opt.incsearch = true
 
 -- vim.opt.formatoptions:remove({ "c", "r", "o" }) -- moved to autocommands.lua
 
-vim.opt.colorcolumn = "100"
+-- colorcolumn: on/off at startup and column in config.lua
+local colorcolumn = require("sergio.config").colorcolumn
+vim.opt.colorcolumn = colorcolumn.enabled and tostring(colorcolumn.column) or ""
 
 vim.o.path = vim.o.path .. "**"
 vim.opt.tags = "./tags;tags"

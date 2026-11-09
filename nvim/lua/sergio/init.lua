@@ -10,8 +10,10 @@ require("sergio.autocommands")
 require("sergio.completions")
 require("sergio.keybinds")
 require("sergio.grep")
--- completion: native by default. Uncomment cmp to switch to nvim-cmp instead.
--- require("sergio.cmp")
+-- completion engine: config.completion ("native" or "cmp")
+if require("sergio.config").completion == "cmp" then
+  require("sergio.cmp")
+end
 require("sergio.clipboard")
 require("sergio.sudo")
 require("sergio.whitespace")

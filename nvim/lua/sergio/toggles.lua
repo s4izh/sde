@@ -1,8 +1,6 @@
 local M = {}
 
-M.opts = {
-  colorcolumn = vim.opt.colorcolumn
-}
+local config = require("sergio.config")
 
 M.toggle_line_numbers = function()
   local is_number = vim.wo.number
@@ -19,12 +17,13 @@ M.toggle_line_numbers = function()
   end
 end
 
+-- on: the column from config.lua; off: "" (also treats "0" as off)
 M.toggle_color_column = function()
-  local col = vim.opt.colorcolumn._value
-  if col == "0" then
-    vim.opt.colorcolumn = M.opts.colorcolumn
+  local col = vim.o.colorcolumn
+  if col == "" or col == "0" then
+    vim.o.colorcolumn = tostring(config.colorcolumn.column)
   else
-    vim.opt.colorcolumn = "0"
+    vim.o.colorcolumn = ""
   end
 end
 

@@ -53,19 +53,18 @@ require("rose-pine").setup({
 
 local M = {}
 
--- colorscheme per background, :Theme changes the one of the current mode.
+-- colorscheme per background and transparency come from config.lua (theme);
+-- :Theme and <leader>tt change them for the session.
 -- vscode follows 'background', so the same name works for both
-local COLORS = { dark = "gruber-darker", light = "vscode" }
-
-local is_transparent = true
+local theme = require("sergio.config").theme
 
 function M.standard(color)
-  vim.cmd.colorscheme(color or COLORS[vim.o.background])
+  vim.cmd.colorscheme(color or theme[vim.o.background])
 end
 
 function M.transparent(color)
   local fg = vim.o.background == "dark" and "white" or "black"
-  vim.cmd.colorscheme(color or COLORS[vim.o.background])
+  vim.cmd.colorscheme(color or theme[vim.o.background])
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
   vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -78,7 +77,7 @@ function M.transparent(color)
 end
 
 function M.apply(color)
-  if is_transparent then
+  if theme.transparent then
     M.transparent(color)
   else
     M.standard(color)
@@ -113,13 +112,13 @@ end
 watch_polarity()
 
 vim.keymap.set("n", "<leader>tt", function()
-  is_transparent = not is_transparent
+  theme.transparent = not theme.transparent
   M.apply()
 end, { desc = "toggle transparent background" })
 
 vim.api.nvim_create_user_command("Theme", function(opts)
   M.apply(opts.args)
-  COLORS[vim.o.background] = opts.args
+  theme[vim.o.background] = opts.args
 end, {
   nargs = 1,
   complete = function(arg_lead)

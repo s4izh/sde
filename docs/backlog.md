@@ -73,7 +73,7 @@ Real chain: `.bashrc` → `shell/bash_profile` → `functions`, `aliases`, `prom
       buffers) stay in `setup` with `vim.keymap.set`; the registry picks them
       up anyway. Moves the plugin list out of `plugins.lua` and next to its
       config. Migrate the rest one by one if it works.
-- [ ] `sergio/config.lua`: one table with my own knobs that are not Vim
+- [x] `sergio/config.lua`: one table with my own knobs that are not Vim
       options and today live as locals in each module: dark/light theme and
       transparency (`themes.lua`), completion engine (native/cmp),
       format-on-save extensions (`lsp.lua`). Vim options stay in

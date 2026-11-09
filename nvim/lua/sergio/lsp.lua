@@ -91,8 +91,7 @@ vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = tr
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Diagnostics to location list" })
 vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { desc = "Show diagnostic under cursor" })
 
--- file extensions to format on save (empty = disabled)
-local auto_format_extensions = {}
+local config = require("sergio.config")
 
 -- Inlay hints for any server that supports them: on by default, hidden in
 -- insert mode, toggled with <leader>lh.
@@ -137,7 +136,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- native LSP autocompletion (see completions.lua) + omnifunc fallback.
     -- Skipped when nvim-cmp is the active engine (see cmp.lua).
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-    if vim.g.completion_engine ~= "cmp"
+    if config.completion ~= "cmp"
       and client and client:supports_method("textDocument/completion") then
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = false })
     end
@@ -156,7 +155,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
 
     local ext = vim.fn.expand("%:e")
-    if vim.tbl_contains(auto_format_extensions, ext) then
+    if vim.tbl_contains(config.format_on_save, ext) then
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*." .. ext,
         callback = function()
