@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -x
-
 READER="${READER:=zathura}"
 BROWSER="${BROWSER:=firefox}"
 IMAGE_VIEWER="${IMAGE_VIEWER:=sxiv}"
@@ -50,7 +48,7 @@ case "$1" in
         setsid $READER "$basename".pdf >/dev/null 2>&1 &
         ;;
     *.html)
-        setsid "$BROWSER" --new--window "$basename".html >/dev/null 2>&1 &
+        setsid "$BROWSER" --new-window "$basename".html >/dev/null 2>&1 &
         ;;
     *.puml)
         setsid "$IMAGE_VIEWER" -r "$basename".png >/dev/null 2>&1 &

@@ -26,6 +26,9 @@ let
     esac
     file="$dir/$rel"
     echo "sde-open: $file" >&2
+    # The unit only gets NixOS's minimal service PATH; opout needs the viewers
+    # (and the ~/.local/scripts wrappers, e.g. zathura) from the user's PATH.
+    export PATH="${home}/.local/scripts:${home}/.local/bin:/etc/profiles/per-user/${cfg.user}/bin:/run/current-system/sw/bin:$PATH"
     # local: never bounce the file back through a socket
     OPOUT_MODE=local exec ${home}/.local/scripts/opout "$file"
   '';
