@@ -1,0 +1,40 @@
+#!/bin/sh
+# Open a file from a remote host on this machine, through its sshfs mount.
+#
+# Reads one line "<host>\t<path relative to $HOME on host>" from stdin (sent
+# by opout on the remote, over the ssh-forwarded sde-open.sock) and runs
+# opout on ~/mnt/<host>/<path>. Something must listen on the socket and run
+# this once per connection: the sde-open socket unit on NixOS (sde.sshfs), or
+# by hand elsewhere:
+#
+#   socat UNIX-LISTEN:"$XDG_RUNTIME_DIR"/sde-open.sock,fork,mode=600,unlink-early \
+#       EXEC:"$HOME"/.local/scripts/sde-open
+#
+# Try it locally: printf 'rx\tpersonal/tfm/overleaf/paper.tex\n' | sde-open
+
+IFS="$(printf '\t')" read -r host rel || exit 1
+
+case "$host" in
+    ''|*/*|.|..) echo "sde-open: bad host: $host" >&2; exit 1 ;;
+esac
+case "/$rel/" in
+    */../*|//*) echo "sde-open: bad path: $rel" >&2; exit 1 ;;
+esac
+
+# Only hosts mounted under ~/mnt; the remote hostname must match the mount name.
+dir="$HOME/mnt/$host"
+if [ ! -d "$dir" ]; then
+    echo "sde-open: no mount for $host ($dir)" >&2
+    exit 1
+fi
+
+file="$dir/$rel"
+echo "sde-open: $file" >&2
+
+# Run as a service there is only a minimal PATH; opout needs the viewers and
+# the ~/.local/scripts wrappers (e.g. zathura).
+PATH="$HOME/.local/scripts:$HOME/.local/bin:/etc/profiles/per-user/$(id -un)/bin:/run/current-system/sw/bin:$PATH"
+export PATH
+
+# local: never bounce the file back through the socket
+OPOUT_MODE=local exec opout "$file"

@@ -208,3 +208,18 @@ shows up:
   verbs, map `open` paths only under mounted hosts, and refuse `..`.
 - **Optional with mango**: focus or move the opened window (`mmsg`). Not
   needed to open it.
+
+## Generated env file for scripts
+
+Portable scripts (`dotfiles/.local/scripts`) sometimes need facts only the
+system config knows: today `sde-open` hardcodes a `PATH` and finds hosts by
+looking for `~/mnt/<host>`. When a second script needs such data, have the
+system write it to `~/.config/sde/env` (plain `sh` `KEY=value`) and let
+scripts source it with defaults if it is missing:
+
+    [ -r ~/.config/sde/env ] && . ~/.config/sde/env
+
+- NixOS: home-manager `xdg.configFile."sde/env"` (or the module itself),
+  e.g. `SDE_MOUNTS` from `sde.sshfs.mounts`, `SDE_PATH` for services.
+- Guix: Guix Home writes the same file. Elsewhere: by hand.
+- Data only, no logic: scripts stay the same on every system.

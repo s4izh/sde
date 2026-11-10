@@ -11,27 +11,10 @@ let
 
   # Socket for "open this file here" requests coming from the remote hosts.
   # ssh forwards it (RemoteForward) to the same path on the remote, where
-  # opout writes "<hostname>\t<path relative to $HOME>" to it.
+  # opout writes "<hostname>\t<path relative to $HOME>" to it; sde-open
+  # (dotfiles/.local/scripts) opens it via ~/mnt. See nix/docs/ssh.md.
   openSock = "/run/user/${toString cfg.uid}/sde-open.sock";
 
-  sde-open = pkgs.writeShellScript "sde-open" ''
-    IFS=$'\t' read -r host rel || exit 1
-    case "$host/$rel" in
-      */../*|../*|*/..|/*) echo "sde-open: bad path: $rel" >&2; exit 1 ;;
-    esac
-    dir="${home}/mnt/$host"
-    case " ${lib.concatStringsSep " " (lib.attrNames cfg.mounts)} " in
-      *" $host "*) ;;
-      *) echo "sde-open: no mount for $host" >&2; exit 1 ;;
-    esac
-    file="$dir/$rel"
-    echo "sde-open: $file" >&2
-    # The unit only gets NixOS's minimal service PATH; opout needs the viewers
-    # (and the ~/.local/scripts wrappers, e.g. zathura) from the user's PATH.
-    export PATH="${home}/.local/scripts:${home}/.local/bin:/etc/profiles/per-user/${cfg.user}/bin:/run/current-system/sw/bin:$PATH"
-    # local: never bounce the file back through a socket
-    OPOUT_MODE=local exec ${home}/.local/scripts/opout "$file"
-  '';
 in
 {
   options.sde.sshfs = {
@@ -117,7 +100,7 @@ in
       systemd.user.services."sde-open@" = {
         description = "Open a file from a remote host via ~/mnt";
         serviceConfig = {
-          ExecStart = sde-open;
+          ExecStart = "${home}/.local/scripts/sde-open";
           StandardInput = "socket";
           StandardOutput = "journal";
           # opout backgrounds the viewer; don't kill it when this unit exits.

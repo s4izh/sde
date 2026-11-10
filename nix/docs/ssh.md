@@ -1,7 +1,8 @@
 # SSH keys and remote mounts
 
-How my machines trust each other over SSH, and how another machine's home is
-mounted at `~/mnt/<name>` on demand. The code lives in
+How my machines trust each other over SSH, how another machine's home is
+mounted at `~/mnt/<name>` on demand, and how files from an ssh session open
+here. The code lives in
 [`keys/`](../keys), [`modules/sde/nixos/ssh-keys.nix`](../modules/sde/nixos/ssh-keys.nix)
 and [`modules/sde/nixos/sshfs.nix`](../modules/sde/nixos/sshfs.nix); the per-host
 choice in `hosts/<host>/default.nix`.
@@ -89,6 +90,85 @@ Good for: opening files from rx in local apps (browser, PDF viewer, image
 viewer). Not good for: git, builds, grep or LSP over a big tree — do those over
 `ssh rx` + tmux. inotify does not work over sshfs, so viewers will not
 auto-reload on changes made on rx.
+
+## Opening remote files here (`opout` over ssh)
+
+`<leader>O` in nvim (or `opout <file>`) inside `ssh rx` + tmux opens the
+compiled output (PDF, html, png) on the laptop instead of on rx. Nothing is
+copied: opout only sends the path, and the laptop opens it through `~/mnt/rx`.
+
+```
+ rx:   nvim ─▶ opout paper.tex
+                 │ "rx\tpersonal/tfm/overleaf/paper.tex"
+                 ▼
+               /run/user/1000/sde-open.sock      created by sshd for my ssh session
+                 ║ RemoteForward (in the ssh connection dell → rx)
+                 ▼
+ dell:         /run/user/1000/sde-open.sock      sde-open.socket (systemd --user)
+                 │ one sde-open@ instance per connection, line on stdin
+                 ▼
+               sde-open ─▶ OPOUT_MODE=local opout ~/mnt/rx/personal/tfm/overleaf/paper.tex
+                                                   └─ zathura reads paper.pdf over sshfs
+```
+
+The pieces:
+
+| Piece | Where | Does |
+|---|---|---|
+| `opout` | `dotfiles/.local/scripts/opout` | On rx: decides local vs remote, writes `<hostname>\t<path under $HOME>` to the socket with `nc -U`. On dell: opens the viewer. |
+| `sde-open` | `dotfiles/.local/scripts/sde-open` | On dell: reads the line, checks it (no `..`, host has a `~/mnt/<host>`), sets a usable `PATH`, runs opout on the mounted path. |
+| `RemoteForward` | `programs.ssh.extraConfig`, one `Host` per `sde.sshfs.mounts` entry | Makes every `ssh <host>` create the socket on the remote and forward it back. |
+| `StreamLocalBindUnlink yes` | sshd on every host with this module | Lets a new ssh session replace a stale socket left by an old one. Needed on the **remote** side. |
+| `sde-open.socket` / `sde-open@` | `modules/sde/nixos/sshfs.nix` | Listens on the socket and runs `sde-open` per connection (`Accept=true`). |
+
+Rules and knobs:
+
+- **Local or remote** is decided by whether the active tmux client (or opout
+  itself, outside tmux) runs under `sshd`. Force it with `OPOUT_MODE=local|remote`
+  or `echo remote > ~/.cache/opout-mode` (`auto` or empty = detect).
+- **The remote's `hostname` must equal the mount name** (`sde.sshfs.mounts.<name>`),
+  since that is what opout sends and what sde-open looks up under `~/mnt`.
+- **Only files under `$HOME`** on the remote; anything else opens on the remote.
+- **Silent fallback.** If the socket is missing or `nc` fails, opout opens the
+  file on the remote (on rx's own screen, if any) without saying so.
+- **More hosts**: add another `sde.sshfs.mounts.<name>.host = "<name>";` on the
+  laptop. That adds the mount and its `RemoteForward`; the remote only needs
+  the module's sshd setting (or `StreamLocalBindUnlink yes` by hand) and opout.
+
+### Without systemd (Guix, other distros)
+
+Only the listener is systemd-specific. Anything that accepts on the socket and
+runs `sde-open` per connection works, e.g. from the compositor's autostart or a
+Shepherd service (`make-inetd-constructor` is the `Accept=true` equivalent):
+
+```sh
+socat UNIX-LISTEN:"$XDG_RUNTIME_DIR"/sde-open.sock,fork,mode=600,unlink-early \
+    EXEC:"$HOME"/.local/scripts/sde-open
+```
+
+Plus, in `~/.ssh/config`: `Host rx` / `RemoteForward /run/user/1000/sde-open.sock
+/run/user/1000/sde-open.sock`, and an sshfs mount at `~/mnt/rx` (no automount
+without systemd: mount it at login).
+
+### When it does not open
+
+```bash
+# on rx, inside the tmux pane: what does opout decide and send?
+sh -x ~/.local/scripts/opout paper.tex    # look for mode=remote and the nc line
+ls -l /run/user/1000/sde-open.sock         # must exist, recreated by each ssh login
+
+# on dell: did the request arrive, and what did opout run?
+systemctl --user status sde-open.socket    # "Accepted:" counts connections
+journalctl --user -t sde-open -n 20        # "sde-open: <path>" lines
+printf 'rx\tpersonal/tfm/overleaf/paper.tex\n' | ~/.local/scripts/sde-open   # bypass ssh
+```
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| Opens on rx, or nothing, and `Accepted: 0` on dell | the ssh session (or its ControlMaster, `ControlPersist 10m`) was opened before the `RemoteForward` existed | `ssh -O exit rx` and reconnect |
+| `mode=local` inside an ssh session | another tmux client attached locally on rx was more recently active | `OPOUT_MODE=remote`, or `~/.cache/opout-mode` |
+| `sde-open: <path>` in the journal but no window | viewer not found or failing (output goes to `/dev/null`) | run the `printf … \| sde-open` line above in a terminal |
+| `sde-open: no mount for <host>` | rx's `hostname` differs from the mount name | rename the mount, or fix the hostname |
 
 ## Debugging
 
