@@ -110,6 +110,7 @@ button:hover {
 #pulseaudio,
 #custom-media,
 #custom-power,
+#custom-slurm,
 #custom-notification,
 #tray,
 #mode,
@@ -118,6 +119,11 @@ button:hover {
 #mpd {
     padding: 0 10px;
     color: #ffffff;
+}
+
+#custom-slurm.idle,
+#custom-slurm.error {
+    color: #7f7f7f;
 }
 
 #custom-notification.notification,

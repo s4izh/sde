@@ -40,6 +40,7 @@
           "tray"
           "pulseaudio"
           "network"
+          "custom/slurm"
           "cpu"
           "memory"
           "temperature"
@@ -63,6 +64,15 @@
           format = "{}";
           tooltip = false;
           restart-interval = 1;
+        };
+        "custom/slurm" = {
+          exec = "python3 ~/.local/scripts/slurm/slurm.py";
+          # slurm links into ~/personal/santuario; hosts without it skip the module
+          exec-if = "test -e ~/.local/scripts/slurm/slurm.py";
+          return-type = "json";
+          interval = 60;
+          signal = 8;
+          on-click = "~/.local/scripts/slurm/slurm.py --refresh >/dev/null; pkill -RTMIN+8 waybar";
         };
         # swaync: count of notifications in the panel, click shows it, right click DND
         "custom/notification" = {
@@ -245,6 +255,7 @@
         #pulseaudio,
         #custom-media,
         #custom-power,
+        #custom-slurm,
         #custom-notification,
         #tray,
         #mode,
