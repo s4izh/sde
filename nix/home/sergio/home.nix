@@ -13,6 +13,7 @@ in
   imports = [
     ./waybar.nix
     ./swaync.nix
+    ./santuario.nix
     ./river.nix
     ./notes.nix
     ./screen-control.nix

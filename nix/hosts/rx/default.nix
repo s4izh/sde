@@ -41,6 +41,9 @@
       # Hermes (ACP) + Multica daemon, see docs/agents.md
       sde.agents.enable = true;
 
+      # santuario app + slurm.py timers, see home/sergio/santuario.nix
+      sde.santuario.enable = true;
+
       sde.theming.theme = "adwaita";
       # kitty theme per mode, a file in dotfiles/.config/kitty/themes without
       # .conf. dark = null keeps theme.conf
