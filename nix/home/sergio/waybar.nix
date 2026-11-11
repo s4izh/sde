@@ -45,6 +45,7 @@
           "temperature"
           "backlight"
           "battery"
+          "custom/notification"
           "clock"
           "custom/power"
         ];
@@ -62,6 +63,26 @@
           format = "{}";
           tooltip = false;
           restart-interval = 1;
+        };
+        # swaync: count of notifications in the panel, click shows it, right click DND
+        "custom/notification" = {
+          exec = "swaync-client -swb";
+          exec-if = "which swaync-client";
+          return-type = "json";
+          format = "{icon} {text}";
+          format-icons = {
+            notification = "";
+            none = "";
+            dnd-notification = "";
+            dnd-none = "";
+            inhibited-notification = "";
+            inhibited-none = "";
+            dnd-inhibited-notification = "";
+            dnd-inhibited-none = "";
+          };
+          on-click = "swaync-client -t -sw";
+          on-click-right = "swaync-client -d -sw";
+          escape = true;
         };
         "sway/mode" = {
           "format" = ''<span style="italic">{}</span>'';
@@ -224,6 +245,7 @@
         #pulseaudio,
         #custom-media,
         #custom-power,
+        #custom-notification,
         #tray,
         #mode,
         #idle_inhibitor,

@@ -12,6 +12,7 @@ in
 {
   imports = [
     ./waybar.nix
+    ./swaync.nix
     ./river.nix
     ./notes.nix
     ./screen-control.nix

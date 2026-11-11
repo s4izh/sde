@@ -110,6 +110,7 @@ button:hover {
 #pulseaudio,
 #custom-media,
 #custom-power,
+#custom-notification,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -117,6 +118,11 @@ button:hover {
 #mpd {
     padding: 0 10px;
     color: #ffffff;
+}
+
+#custom-notification.notification,
+#custom-notification.inhibited-notification {
+    color: #d08a00;
 }
 
 #window,
