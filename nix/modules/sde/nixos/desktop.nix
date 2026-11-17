@@ -97,6 +97,7 @@ in
         graphviz
         ghostscript
         thunderbird
+        sox # voice speech
       ];
 
       programs.nix-ld.enable = true;
