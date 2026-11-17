@@ -5,7 +5,7 @@
 ;; frame is created. `tooltip-mode' is not a frame parameter, so it stays here.
 (tooltip-mode -1)
 
-(global-display-line-numbers-mode 0) ; show line numbers in the margin
+(global-display-line-numbers-mode 0) ; off by default, C-c l toggles per buffer
 (column-number-mode)                 ; show column number in the mode line
 
 ;; native emacs smooth scrolling
@@ -24,15 +24,10 @@
 (setq-default display-line-numbers-width 3)
 (setq-default display-line-numbers-grow-only t)
 
-(use-package spaceway-theme
-  :ensure nil
-  :load-path "lisp/spaceway/"
-  :config ())
-
-(use-package spaceway-light-theme
-  :ensure nil
-  :load-path "lisp/spaceway/"
-  :config ())
+;; spaceway and spaceway-light, vendored. Only made visible to `load-theme';
+;; nothing is loaded until one of them is picked.
+(add-to-list 'custom-theme-load-path
+             (expand-file-name "lisp/spaceway/" user-emacs-directory))
 
 (use-package ef-themes
   :defer t)
@@ -64,7 +59,8 @@ a moment."
   (or (ssm/read-polarity)
       (if (equal (getenv "THEME_IS_LIGHT") "1") 'light 'dark)))
 
-(setq ssm/current-theme (alist-get ssm/polarity ssm/themes))
+(defvar ssm/current-theme (alist-get ssm/polarity ssm/themes)
+  "Theme currently enabled by `ssm/load-theme'.")
 
 (defun ssm/load-theme (theme)
   "Load THEME. Picked by hand, it becomes the theme of the current polarity."

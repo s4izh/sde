@@ -21,4 +21,6 @@ agent
 minimal-emacs.d
 simple/tramp
 simple/undo-tree
+simple/eshell
 *.elc
+recentf.eld

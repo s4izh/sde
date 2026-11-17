@@ -25,23 +25,24 @@
 
 (setq create-lockfiles nil)
 
-;; Undo as a tree rather than a linear ring: C-x u opens the visualizer, where
-;; you can move between branches created by undoing and then editing again.
-;; Not evil-specific. If re-enabled, point `evil-undo-system' in evil-setup.el
-;; back at it (it currently uses the built-in undo-redo).
-(use-package undo-tree
-  :disabled t
-  :config
-  (setq undo-tree-visualizer-timestamps t
-        undo-tree-visualizer-diff t
-        ;; Keep the .~undo-tree~ history files out of the source directories.
-        undo-tree-history-directory-alist
-        `(("." . ,(expand-file-name "undo-tree" user-emacs-directory))))
-  (global-undo-tree-mode 1))
-
 (save-place-mode 1)
 (savehist-mode 1)
-(setq history-length 25)
+;; vertico sorts candidates by history, so a short one makes it forgetful.
+(setq history-length 300)
+
+;; Built-in quality of life. Keys that go with these are in keybindings.el.
+(recentf-mode 1)           ; recent files, shown by consult-buffer (C-x B)
+(repeat-mode 1)            ; C-x o o o, C-x u u u, M-g n n n: repeat the last key
+(delete-selection-mode 1)  ; typing or yanking replaces the active region
+(electric-pair-mode 1)     ; insert the closing paren/quote
+(winner-mode 1)            ; C-c <left> / C-c <right>: undo/redo window layouts
+
+(setq isearch-lazy-count t            ; "3/17" match counter in isearch
+      set-mark-command-repeat-pop t   ; C-u C-SPC, then just C-SPC to keep popping
+      tab-always-indent 'complete     ; TAB indents, then completes
+      help-window-select t            ; focus *Help* so q closes it right away
+      dired-dwim-target t             ; copy/rename targets the other dired window
+      dired-kill-when-opening-new-dired-buffer t) ; one dired buffer, not a trail
 
 (setq tramp-use-connection-sharing t)
 

@@ -12,7 +12,7 @@
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-i-jump t)              ; keep TAB as TAB in the terminal
-  (setq evil-undo-system 'undo-redo)        ; built-in; undo-tree is disabled in core.el
+  (setq evil-undo-system 'undo-redo)        ; built-in undo/redo
   (setq evil-disable-insert-state-bindings t) ; insert state = plain Emacs
   (setq evil-split-window-below t)
   (setq evil-vsplit-window-right t)
@@ -46,6 +46,21 @@
   (evil-define-key '(normal visual motion) 'global (kbd "SPC") mode-specific-map)
 
   (evil-mode 1))
+
+;; Neovim 0.11's default LSP mappings, on `eglot-mode-map' so they only exist
+;; where a server is attached. Vanilla equivalents (M-. M-, M-?) still work.
+(with-eval-after-load 'eglot
+  (evil-define-key 'normal eglot-mode-map
+    (kbd "grn") 'eglot-rename
+    (kbd "gra") 'eglot-code-actions
+    (kbd "grr") 'xref-find-references
+    (kbd "gri") 'eglot-find-implementation
+    (kbd "grt") 'eglot-find-typeDefinition
+    (kbd "gO")  'imenu                    ; document symbols
+    (kbd "gd")  'xref-find-definitions
+    (kbd "gD")  'eglot-find-declaration
+    (kbd "gs")  'eldoc                    ; signature/hover in the echo area
+    (kbd "K")   'eldoc-doc-buffer))       ; hover in a window, like nvim's K
 
 ;; gcc comments a line, gc takes a motion or a visual selection.
 (use-package evil-commentary

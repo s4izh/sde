@@ -7,10 +7,9 @@
 
 (use-package notmuch
   :ensure nil
-  :commands (notmuch notmuch-search notmuch-mua-new-mail)
-  :bind (("C-c m m" . notmuch)                ; SPC m m: hello screen
-         ("C-c m s" . notmuch-search)         ; SPC m s: search
-         ("C-c m c" . notmuch-mua-new-mail))  ; SPC m c: compose
+  :bind (("C-c m m" . notmuch)                ; hello screen
+         ("C-c m s" . notmuch-search)         ; search
+         ("C-c m c" . notmuch-mua-new-mail))  ; compose
   :custom
   ;; Same virtual folders as aerc (~/.config/aerc/bsc-queries).
   (notmuch-saved-searches

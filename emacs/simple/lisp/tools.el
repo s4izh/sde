@@ -1,7 +1,6 @@
 ;;; tools.el --- general editing/VC tools -*- lexical-binding: t; -*-
 
 (use-package magit
-  :config
   :bind (("C-x g" . magit-status)))
 
 (use-package which-key
@@ -18,20 +17,29 @@
          ("C-h k"   . helpful-key)
          ("C-h x"   . helpful-command)
          ("C-h F"   . helpful-function)   ; functions only (not macros)
-         ("C-c C-d" . helpful-at-point))) ; describe the symbol under point
+         ;; Not C-c C-d: C-c C-<letter> belongs to major modes (org-deadline).
+         ("C-c h"   . helpful-at-point))) ; describe the symbol under point
 
 ;; casual: transient (menu) UIs for modes with hard-to-remember keys. Each menu
 ;; is on C-o inside its mode; discover the rest from there. casual-suite is the
 ;; umbrella that pulls in casual + casual-avy + casual-symbol-overlay.
 (use-package casual-suite
-  :bind ((:map calc-mode-map          ("C-o" . casual-calc-tmenu))
-         (:map dired-mode-map         ("C-o" . casual-dired-tmenu))
-         (:map isearch-mode-map       ("C-o" . casual-isearch-tmenu))
-         (:map Info-mode-map          ("C-o" . casual-info-tmenu))
-         (:map ibuffer-mode-map       ("C-o" . casual-ibuffer-tmenu))
-         (:map bookmark-bmenu-mode-map ("C-o" . casual-bookmarks-tmenu))
-         (:map org-agenda-mode-map    ("C-o" . casual-agenda-tmenu))
-         (:map reb-mode-map           ("C-o" . casual-re-builder-tmenu))))
+  :defer t)
+
+;; Each key is set when the library owning the keymap loads. A `:bind (:map ...)'
+;; on casual-suite itself would wait for casual-suite to load, which nothing
+;; triggers, so the keys would never appear.
+(dolist (entry '((calc       calc-mode-map           casual-calc-tmenu)
+                 (dired      dired-mode-map          casual-dired-tmenu)
+                 (isearch    isearch-mode-map        casual-isearch-tmenu)
+                 (info       Info-mode-map           casual-info-tmenu)
+                 (ibuffer    ibuffer-mode-map        casual-ibuffer-tmenu)
+                 (bookmark   bookmark-bmenu-mode-map casual-bookmarks-tmenu)
+                 (org-agenda org-agenda-mode-map     casual-agenda-tmenu)
+                 (re-builder reb-mode-map            casual-re-builder-tmenu)))
+  (pcase-let ((`(,feature ,map ,command) entry))
+    (with-eval-after-load feature
+      (keymap-set (symbol-value map) "C-o" command))))
 
 (use-package editorconfig
   :ensure nil
@@ -82,7 +90,6 @@ so the name sticks until you change it again."
 (use-package ghostel
   :ensure nil
   :load-path "~/.local/share/ghostel/lisp"
-  :commands (ghostel ghostel-project ssm/ghostel-toggle ssm/ghostel-rename)
   ;; C-c t <key>: terminal management (creating/switching from outside a term).
   ;; In-terminal keys are ghostel's own (C-c C-j semi-char, C-c C-t copy, ...).
   :bind (("C-c t t" . ssm/ghostel-toggle)            ; show / focus / hide term
@@ -96,6 +103,9 @@ so the name sticks until you change it again."
          ("C-c t ]" . ghostel-next)                  ; cycle to next term
          ("C-c t [" . ghostel-previous))             ; cycle to previous term
   :custom
+  ;; Keys Emacs keeps instead of sending them to the terminal. The default
+  ;; list plus M-o, so `other-window' also works from inside a terminal.
+  (ghostel-keymap-exceptions '("C-c" "C-x" "C-u" "C-h" "M-x" "M-:" "C-\\" "M-o"))
   ;; The .so is our locally-built one; never try to download or compile on use.
   (ghostel-module-auto-install nil)
   (ghostel-module-directory (expand-file-name "~/.local/share/ghostel/"))

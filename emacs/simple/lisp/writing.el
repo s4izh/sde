@@ -17,7 +17,7 @@
   (org-hide-leading-stars t)
   (org-hide-emphasis-markers t)
   (org-startup-indented t)
-  (org-src-fontify-natively t)
+  (org-src-fontify-natively nil)
   (org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
   (org-capture-templates
    '(("t" "Task" entry (file+headline "~/notes/org/tasks.org" "Tasks")
@@ -44,15 +44,7 @@
 
 (add-hook 'org-mode-hook #'ssm/org-faces)
 
-(use-package olivetti
-  :disabled t
-  :hook (org-mode . olivetti-mode)
-  :config
-  ;; Set the width of the text area (can be an integer for characters, or a float for % of window)
-  (setq olivetti-body-width 110))
-
 (use-package org-superstar
-  :ensure t
   :hook (org-mode . org-superstar-mode))
   ;; :config
   ;; ;; Customize the look of your headline bullets
@@ -76,8 +68,10 @@
    ("C-c n B" . denote-link-backlinks)
    ("C-c n r" . denote-rename-file)))
 
+;; No `:after' here or on citar-denote: it would delay the `:bind' keys too,
+;; leaving them unbound until denote/citar happen to load. The bindings
+;; autoload the package, which pulls in its dependencies itself.
 (use-package denote-org
-  :after denote
   :bind
   (("C-c n i" . denote-org-dblock-insert-links)
    ("C-c n I" . denote-org-dblock-insert-missing-links)))
@@ -98,7 +92,6 @@
    ("C-c b o" . citar-open)))
 
 (use-package citar-denote
-  :after (citar denote)
   :config
   (citar-denote-mode)
   :bind
