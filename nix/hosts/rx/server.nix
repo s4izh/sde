@@ -11,6 +11,7 @@
     allowedTCPPorts = [
       3000
       443
+      7647
     ];
   };
 
@@ -25,7 +26,7 @@
   };
 
   services.caddy = {
-    enable = true;
+    enable = false;
     virtualHosts."rx.local" = {
       extraConfig = ''
         tls internal

@@ -6,6 +6,7 @@
     ./dev.nix
     ./nvim.nix
     ./vpn.nix
+    ./tailscale-serve.nix
     ./sshfs.nix
     ./ssh-keys.nix
     ./virtualisation.nix
@@ -15,6 +16,8 @@
     ./gaming.nix
     ./music.nix
     ./android.nix
+    ./dashboard.nix
+    ./opengym.nix
     ./work/bsc.nix
   ];
 }

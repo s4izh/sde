@@ -33,6 +33,11 @@
     virtualization.podman.enable = true;
     latex.enable = true;
     work.bsc.enable = true;
+    # gym tracker over tailscale serve, see modules/sde/nixos/opengym.nix
+    opengym.enable = true;
+    # index of what rx serves; what is published on the tailnet
+    # (sde.tailscaleServe.routes) is in sde-private hosts/rx
+    dashboard.enable = true;
   };
   # themes: adwaita (default) breeze gruvbox nordic catppuccin tokyonight
   # colloid manjaro

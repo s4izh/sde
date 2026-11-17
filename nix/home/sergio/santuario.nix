@@ -6,8 +6,8 @@
 }:
 # santuario app (~/personal/santuario, docs/13-app.md): slurm.py polls BSC on
 # timers and `sant serve` publishes what it writes (D20). Opt-in per host
-# with sde.santuario.enable; `tailscale serve` publishes the server (manual,
-# persistent).
+# with sde.santuario.enable; the host publishes the server on the tailnet
+# with sde.tailscaleServe (sde-private, hosts/rx).
 let
   cfg = config.sde.santuario;
   home = config.home.homeDirectory;

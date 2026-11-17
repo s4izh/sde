@@ -14,8 +14,14 @@
     };
     nixos-hardware = {
       url = "github:nixos/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
+    opengym = {
+      url = "github:DuarteSantos8/openGym?dir=contrib/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,7 +66,8 @@
 
         # Private config: the nix/ folder of a local clone of s4izh/sde-private,
         # or null if there is none. Same layout as this folder, entry points
-        # modules/sde/nixos/default.nix and home/sergio/home.nix. Reading a path
+        # modules/sde/nixos/default.nix, home/sergio/home.nix and an optional
+        # hosts/<host>/default.nix per host. Reading a path
         # outside the flake needs --impure (the Makefile always passes it); in
         # pure eval (no builtins.currentSystem) it is skipped.
         private =
@@ -150,8 +157,13 @@
                   self.nixosModules.sde
                   # nix-index-database, enabled from sde.base
                   inputs.nix-index-database.nixosModules.nix-index
+                  # services.opengym, enabled from sde.opengym
+                  inputs.opengym.nixosModules.default
                 ]
                 ++ lib.optional (sde.private != null) (sde.private + "/modules/sde/nixos")
+                ++ lib.optional (
+                  sde.private != null && builtins.pathExists (sde.private + "/hosts/${host}")
+                ) (sde.private + "/hosts/${host}")
                 ++ [
                   "${sde.nixosPrefix}/hosts/${host}"
                   {

@@ -34,6 +34,13 @@ in
       };
     };
 
+    sde.dashboard.entries.music = {
+      title = "Navidrome";
+      description = "Music library";
+      port = navidromePort;
+      https = false;
+    };
+
     systemd.tmpfiles.rules = [
       "d ${musicDir} 2775 sergio navidrome - -"
       "d ${musicDir}/playlists 2775 sergio navidrome - -"
