@@ -25,7 +25,7 @@ in
     ./agents.nix
   ]
   # private part, if ~/personal/sde-private is cloned (see sde.private in flake.nix)
-  ++ (if sde.private != null then [ (sde.private + "/home/sergio/home.nix") ] else [ ]);
+  ++ sde.privateModules [ "home/sergio/home.nix" ];
 
   # home.backupFileExtension = "backup";
 

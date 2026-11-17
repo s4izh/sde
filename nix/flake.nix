@@ -75,6 +75,13 @@
             dir = "/home/sergio/personal/sde-private/nix";
           in
           if builtins ? currentSystem && builtins.pathExists dir then /. + dir else null;
+
+        # The given paths of the private config that exist, as modules.
+        privateModules =
+          paths:
+          lib.optionals (private != null) (
+            lib.filter builtins.pathExists (map (p: private + "/${p}") paths)
+          );
       };
 
       sdeDocs = pkgs:
@@ -155,15 +162,13 @@
                 };
                 modules = [
                   self.nixosModules.sde
-                  # nix-index-database, enabled from sde.base
                   inputs.nix-index-database.nixosModules.nix-index
-                  # services.opengym, enabled from sde.opengym
                   inputs.opengym.nixosModules.default
                 ]
-                ++ lib.optional (sde.private != null) (sde.private + "/modules/sde/nixos")
-                ++ lib.optional (
-                  sde.private != null && builtins.pathExists (sde.private + "/hosts/${host}")
-                ) (sde.private + "/hosts/${host}")
+                ++ sde.privateModules [
+                  "modules/sde/nixos"
+                  "hosts/${host}"
+                ]
                 ++ [
                   "${sde.nixosPrefix}/hosts/${host}"
                   {
